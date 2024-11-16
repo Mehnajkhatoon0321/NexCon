@@ -30,6 +30,12 @@ class FTextStyle {
 
 
 
+  static const searchText = TextStyle(
+    fontFamily: 'OpenSans',
+    fontSize: 13,
+    color: Color(0x66000000),
+    fontWeight: FontWeight.w400,
+  );
 
 
   static TextStyle SplashHeadingTab = TextStyle(
@@ -209,7 +215,7 @@ class FTextStyle {
 
   static const TextStyle listTitle = TextStyle(
 
-
+letterSpacing: 1.2,
     fontFamily: 'OpenSans',
 
     fontSize: 14,fontWeight: FontWeight.w700,color: Colors.black,
@@ -227,6 +233,7 @@ class FTextStyle {
 
 
     fontFamily: "OpenSans",
+    letterSpacing: 1.0,
 
     fontSize: 15,fontWeight: FontWeight.w600,color: Colors.grey,
 
@@ -288,6 +295,7 @@ class FTextStyle {
   static  TextStyle headingMiddle = TextStyle(
       fontSize: 15
           .sp,
+      letterSpacing: 2.0,
       color: AppColors.aboutUsHeadingColor,
       fontFamily: 'OpenSans',
       fontWeight: FontWeight.w800);

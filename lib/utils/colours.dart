@@ -8,6 +8,9 @@ class AppColors extends MaterialColor {
   static const Color disableButtonColor =
   Color.fromARGB(102, 104, 30, 102);
   static const Color pink = Color(0xFFe5097f);
+  static const searchBack=Color(0xFFf0f0f0);
+  static const searchBoarder=Color(0xFFe1e1e1);
+  static const searchText=Color(0xFF606060);
   static const Color yellow = Color(0xFFfcce01);
   static const Color headingTxtColour = Color(0xFF080515);
   static const Color formFieldBorderColour = Color(0xFFE6E6E8);

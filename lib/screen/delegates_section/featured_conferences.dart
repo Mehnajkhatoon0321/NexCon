@@ -244,78 +244,102 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                             itemCount: FeaturesCategoryList.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, // Show 2 items per row
+                              crossAxisCount: 2,
+                                    mainAxisSpacing: 13,
+                                    crossAxisSpacing: 13// Show 2 items per row
                             ),
                             itemBuilder: (context, index) {
                               if (index == 5 &&
                                   FeaturesCategoryList.length > 5) {
-                                return Container(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      // Circular Image
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ConferenceCategory()),
-                                          );
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 18.0),
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              color: AppColors.appSky,
-                                              // Button color
-                                              shape: BoxShape.circle,
-                                              // Circular shape
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 6.0,
-                                                  color: Colors.grey
-                                                      .withOpacity(0.3),
-                                                  spreadRadius: 2.0,
-                                                ),
-                                              ],
-                                            ),
-                                            child: IconButton(
-                                              icon: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color: Colors.white,
-                                                size: 35,
-                                              ), // Menu icon
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ConferenceCategory()),
-                                                );
-                                              },
-                                            ),
-                                            height: 70,
-                                            width: 70,
-                                          ),
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0,right: 5),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white, // Fill color
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      border: Border.all(
+                                        color: AppColors.appSky,
+                                        width: 1.0,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5), // Shadow color with transparency
+                                          spreadRadius: 2, // Spread radius
+                                          blurRadius: 5, // Blur radius
+                                          offset: Offset(0, 3), // Shadow position (x, y)
                                         ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          // Circular Image
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ConferenceCategory()),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 18.0),
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.appSky,
+                                                  // Button color
+                                                  shape: BoxShape.circle,
+                                                  // Circular shape
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      blurRadius: 6.0,
+                                                      color: Colors.grey
+                                                          .withOpacity(0.3),
+                                                      spreadRadius: 2.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: IconButton(
+                                                  icon: Icon(
+                                                    Icons.arrow_forward_ios,
+                                                    color: Colors.white,
+                                                    size: 35,
+                                                  ), // Menu icon
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ConferenceCategory()),
+                                                    );
+                                                  },
+                                                ),
+                                                height: 70,
+                                                width: 70,
+                                              ),
+                                            ),
+                                          ),
+                                          // const SizedBox(height: 8),
+                                          // Spacing between image and text
+                                          // Text below the image
+                                          Expanded(
+                                            child: Text(
+                                              "View All",
+                                              style: FTextStyle.listTitle,
+                                              textAlign: TextAlign.center,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(height: 8),
-                                      // Spacing between image and text
-                                      // Text below the image
-                                      Text(
-                                        "View All",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14),
-                                        textAlign: TextAlign.center,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 );
                               } else {
@@ -332,33 +356,56 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                               )),
                                     );
                                   },
-                                  child: Container(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        // Circular Image
-                                        ClipOval(
-                                          child: Image.asset(
-                                            category["imageConference"],
-                                            height: 70,
-                                            width: 70,
-                                            fit: BoxFit.cover,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0,right: 5),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white, // Fill color
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        border: Border.all(
+                                          color: AppColors.appSky,
+                                          width: 1.0,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5), // Shadow color with transparency
+                                            spreadRadius: 2, // Spread radius
+                                            blurRadius: 5, // Blur radius
+                                            offset: Offset(0, 3), // Shadow position (x, y)
                                           ),
+                                        ],
+                                      ),
+
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            // Circular Image
+                                            ClipOval(
+                                              child: Image.asset(
+                                                category["imageConference"],
+                                                height: 70,
+                                                width: 70,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            // const SizedBox(height: 8),
+                                            // Spacing between image and text
+                                            // Text below the image
+                                            Expanded(
+                                              child: Text(
+                                                category["title"],
+                                               style: FTextStyle.listTitle,
+                                                textAlign: TextAlign.center,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(height: 8),
-                                        // Spacing between image and text
-                                        // Text below the image
-                                        Text(
-                                          category["title"],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14),
-                                          textAlign: TextAlign.center,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 );
@@ -392,80 +439,92 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 5.0),
-                                  child: Card(
-                                    elevation: 3,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Container(
-                                      height: 180,
-                                      // Set fixed height for each card
-                                      width: 250,
-                                      // Set fixed width for each card
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white70,
-                                        
-                                        borderRadius: BorderRadius.only(
+                                  child: Container(
+                                    height: height * 0.43,
+                                    // Set fixed height for each card
+                                    width:  height * 0.3,
+                                    // Set fixed width for each card
+                                    decoration:  BoxDecoration(
+                                      color: Colors.white,
+                                      // border: Border.all(
+                                      //   color: Colors.black,
+                                      //   width: 1.0,
+                                      // ),
+                                      borderRadius: BorderRadius.only(
 
-                                          topLeft: Radius.circular(10),
-                                          topRight: Radius.circular(10),
-                                        ),
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
                                       ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
-                                                  topRight: Radius.circular(10),
-                                                  // bottomLeft: Radius.circular(10),
-                                                  // bottomRight: Radius.circular(10),
-                                                ),
-                                                child: Image.asset(
-                                                  conference["imageConference"],
-                                                  height: 147,
-                                                  // Set image height to half of the card
-                                                  width: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                ),
+                                    ),
+
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(10),
+                                                topRight: Radius.circular(10),
+                                                // bottomLeft: Radius.circular(10),
+                                                // bottomRight: Radius.circular(10),
                                               ),
-                                              Positioned(
-                                                left: 0,
-                                                top: 4,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(60),
-                                                      bottomRight:
-                                                          Radius.circular(60),
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            7.0),
-                                                    child: Text(
-                                                      conference["upComing"],
-                                                      style:
-                                                          FTextStyle.listTitle,
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
+                                              child: Image.asset(
+                                                conference["imageConference"],
+                                                height: 147,
+                                                // Set image height to half of the card
+                                                width: double.infinity,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Positioned(
+                                              left: 0,
+                                              top: 4,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(60),
+                                                    bottomRight:
+                                                        Radius.circular(60),
                                                   ),
                                                 ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(
+                                                          7.0),
+                                                  child: Text(
+                                                    conference["upComing"],
+                                                    style:
+                                                        FTextStyle.listTitle,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
                                               ),
-                                            ],
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          decoration:  BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 1.4,
+                                            ),
+                                            borderRadius: BorderRadius.only(
+
+                                              bottomLeft: Radius.circular(10),
+                                              bottomRight: Radius.circular(10),
+                                            ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 8.0,top: 8,right: 8,bottom: 4),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -580,8 +639,8 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                               ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 );

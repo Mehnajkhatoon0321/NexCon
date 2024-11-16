@@ -29,7 +29,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
       "addressVenue":"Lucknow,,Utter Pradesh, India",
       "city":"Lucknow,,Utter Pradesh, India",
       "contactPerson":"Dr. P.M.S. Chauhan",
-      "phone":"9415106859",
+      "phone":"9695844884",
       "email":"iscbconference@gmail.com",
       "siteLink":"www.iscbconference.com"
     };
@@ -118,78 +118,53 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
     var displayType = valueType.toString().split('.').last;
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor:AppColors.appSky, // Customize app bar color
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-              size: 28,
-            ), // Menu icon
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: Text(
-            'Conference Details',
-            style: FTextStyle.HeadingTxtWhiteStyle.copyWith(fontWeight: FontWeight.w600),
-          ),
-          centerTitle: true,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor:AppColors.appSky, // Customize app bar color
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 28,
+          ), // Menu icon
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        backgroundColor: Colors.white,
-        body: Container(
-          margin: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.001,
-          ),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              stops: [0.2, 0.5, 0.95, 0.3],
-              colors: [
-                Color(0xffffffff),
-                Color(0xf5c6f6da),
-                Color(0xf5c6f6da),
-                Color(0xf5c6f6da),
-              ],
-            ),
-          ),
+        title: Text(
+          'Conference Details',
+          style: FTextStyle.HeadingTxtWhiteStyle.copyWith(fontWeight: FontWeight.w600),
+        ),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.white,
+      body: Container(
+        margin: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.001,
+        ),
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topRight,
+        //     end: Alignment.bottomLeft,
+        //     stops: [0.2, 0.5, 0.95, 0.3],
+        //     colors: [
+        //       Color(0xffffffff),
+        //       Color(0xf5c6f6da),
+        //       Color(0xf5c6f6da),
+        //       Color(0xf5c6f6da),
+        //     ],
+        //   ),
+        // ),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      featuresCategoryDetails["organizationImage"]!,
-                      height: 70,
-                      width: 90,
-                    ),
-                    const SizedBox(width: 5),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 8.0, 20.0, 10.0),
-                        child: Text(
-                          featuresCategoryDetails["title"]!,
-                          style: FTextStyle.headingMiddle,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
 
-              const Divider(color: Colors.black, thickness: 2, height: 3),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -201,7 +176,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                         children: [
                           Image.asset(
                             "assets/images/time.png",
-                            height: 60,
+                            height:45,
                             width: 50,
                           ),
                           const SizedBox(width: 5),
@@ -238,143 +213,106 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                         ],
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DelegateRegister(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        backgroundColor: AppColors.appSky,
-                        elevation: 2,
-                        minimumSize: Size(80, 30),
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                      child: Text(
-                        "Register Now",
-                        style: FTextStyle.loginBtnStyle.copyWith(fontSize: 12),
-                      ),
+                    Image.asset(
+                      featuresCategoryDetails["organizationImage"]!,
+                      height:60 ,
+                      width: 100,
                     ),
+
                   ],
                 ),
               ),
+
+              const Divider(color: Colors.black, thickness: 2, height: 3),
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.0, 0.5, 0.95, 0.95],
+                    colors: [
+                      Color(0xffffffff),
+                      Color(0xf5c6f6da),
+                      Color(0xf5c6f6da),
+                      Color(0xf5c6f6da),
+                    ],
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 8.0, 10.0, 10.0),
+                  child: Text(
+                    featuresCategoryDetails["title"]!,
+                    style: FTextStyle.headingMiddle,
+                    // maxLines: 2,
+                    // overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+
+
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      "assets/images/site.png",
-                      height: 50,
-                      width: 90,
+                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+                child: Text(
+                  featuresCategoryDetails["subTitle"]!,
+                  style: FTextStyle.listTitleSub,
+                  textAlign: TextAlign.justify,
+
+                ),
+              ),
+              SizedBox(height: 5,),
+
+              SizedBox(height: 4,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: Container(
+                  height: height*0.1,
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Fill color
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                      color: AppColors.appSky,
+                      width: 3.0,
                     ),
-                    const SizedBox(width: 5),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 8.0, 20.0, 10.0),
-                        child: Row(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1), // Shadow color with transparency
+                        spreadRadius: 2, // Spread radius
+                        blurRadius: 5, // Blur radius
+                        offset: Offset(0, 2), // Shadow position (x, y)
+                      ),
+                    ],),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Site:", style: FTextStyle.listTitle),
-                            const SizedBox(width: 5),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () async {
-                                  final url = "https://${featuresCategoryDetails["siteLink"]}/"!;
-                                  if (await canLaunchUrl(Uri.parse(url))) {
-                                    await launchUrl(Uri.parse(url));
-                                  } else {
-                                    // Handle the error if the URL cannot be opened
-                                    debugPrint("Could not launch $url");
-                                  }
-                                },
-                                child: Text(
-                                  featuresCategoryDetails["siteLink"]!,
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                    color: Colors.blue,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ),
+                            Image.asset(
+                              "assets/images/locationConference.png",
+                              height: 25,
+                              width: 40,
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const Divider(color: Colors.black, thickness: 1, height: 2),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/locationConference.png",
-                            height: 120,
-                            width: 70,
-                          ),
-                          const SizedBox(width: 5),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0.0, 8.0, 20.0, 10.0),
+                            //  const SizedBox(width: 5),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("Name of Venue :", style: FTextStyle.listTitle),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Text(
-                                          featuresCategoryDetails["nameVenue"]!,
-                                          style: FTextStyle.listTitleSub,
-                                       
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Address of Venue :", style: FTextStyle.listTitle),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Text(
-                                          featuresCategoryDetails["addressVenue"]!,
-                                          style: FTextStyle.listTitleSub,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("City :", style: FTextStyle.listTitle),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Text(
-                                          featuresCategoryDetails["city"]!,
-                                          style: FTextStyle.listTitleSub,
+
+                                      Text(
+                                      "Name of Venue  :",
+                                        style: FTextStyle.listTitle.copyWith(
+
+
+                                          // decoration: TextDecoration.underline,
                                         ),
                                       ),
                                     ],
@@ -382,16 +320,181 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                                 ],
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                        Text(
+                          featuresCategoryDetails["addressVenue"]!,
+                          style: FTextStyle.listTitleSub,
 
-                  ],
+                          overflow: TextOverflow.ellipsis,
+
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              const Divider(color: Colors.black, thickness: 1, height: 2),
 
+              SizedBox(height: 8,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: Container(
+                  height: height*0.1,
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Fill color
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                      color: AppColors.appSky,
+                      width: 3.0,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1), // Shadow color with transparency
+                        spreadRadius: 2, // Spread radius
+                        blurRadius: 5, // Blur radius
+                        offset: Offset(0, 2), // Shadow position (x, y)
+                      ),
+                    ],),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/images/locationConference.png",
+                              height: 25,
+                              width: 40,
+                            ),
+                            //  const SizedBox(width: 5),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+
+                                      Text(
+                                      "Address of Venue  :",
+                                        style: FTextStyle.listTitle.copyWith(
+
+
+                                          // decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          featuresCategoryDetails["addressVenue"]!,
+                          style: FTextStyle.listTitleSub,
+
+                          overflow: TextOverflow.ellipsis,
+
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 8,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: Container(
+                  height: height*0.1,
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Fill color
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(
+                      color: AppColors.appSky,
+                      width: 3.0,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1), // Shadow color with transparency
+                        spreadRadius: 2, // Spread radius
+                        blurRadius: 5, // Blur radius
+                        offset: Offset(0, 2), // Shadow position (x, y)
+                      ),
+                    ],),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              "assets/images/locationConference.png",
+                              height: 25,
+                              width: 40,
+                            ),
+                            //  const SizedBox(width: 5),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 0.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+
+                                      Text(
+                                      "City :",
+                                        style: FTextStyle.listTitle.copyWith(
+
+
+                                          // decoration: TextDecoration.underline,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          featuresCategoryDetails["city"]!,
+                          style: FTextStyle.listTitleSub,
+
+                          overflow: TextOverflow.ellipsis,
+
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+
+
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Contact Details :",
+                  style: FTextStyle.listTitle.copyWith(
+                      fontSize: 17
+
+                    // decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -404,17 +507,18 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                           children: [
                             Container(
                               height: 46,
-                              child: Text(
+                              child:
+                              Text(
                                 "Organized by :",
                                 style: FTextStyle.listTitle,
                               ),
                             ),
                             SizedBox(height: 5),
                             Text("Contact Person :", style: FTextStyle.listTitle),
-                            SizedBox(height: 5),
-                            Text("Phone :", style: FTextStyle.listTitle),
-                            SizedBox(height: 5),
-                            Text("Email :", style: FTextStyle.listTitle),
+                            // SizedBox(height: 5),
+                            // Text("Phone :", style: FTextStyle.listTitle),
+                            // SizedBox(height: 5),
+                            // Text("Email :", style: FTextStyle.listTitle),
                           ],
                         ),
                         const SizedBox(width: 10),
@@ -435,20 +539,20 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              SizedBox(height: 5),
-                              Text(
-                                featuresCategoryDetails["phone"]!,
-                                style: FTextStyle.listTitleSub,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                featuresCategoryDetails["email"]!,
-                                style: FTextStyle.listTitleSub,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              // SizedBox(height: 5),
+                              // Text(
+                              //   featuresCategoryDetails["phone"]!,
+                              //   style: FTextStyle.listTitleSub,
+                              //   maxLines: 3,
+                              //   overflow: TextOverflow.ellipsis,
+                              // ),
+                              // SizedBox(height: 5),
+                              // Text(
+                              //   featuresCategoryDetails["email"]!,
+                              //   style: FTextStyle.listTitleSub,
+                              //   maxLines: 3,
+                              //   overflow: TextOverflow.ellipsis,
+                              // ),
                             ],
                           ),
                         ),
@@ -457,33 +561,151 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                   ],
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    "assets/images/site.png",
+                    height: 25,
+                    width: 40,
+                  ),
+                  //  const SizedBox(width: 5),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
 
-              const Divider(color: Colors.black, thickness: 1, height: 2),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("Theme :", style: FTextStyle.listTitle),
-                    Expanded(
-                      child: Text(
-                        featuresCategoryDetails["subTitle"]!,
-                        style: FTextStyle.listTitleSub,
-
-
+                          GestureDetector(
+                            onTap: () async {
+                              final url = "https://${featuresCategoryDetails["siteLink"]}/"!;
+                              if (await canLaunchUrl(Uri.parse(url))) {
+                                await launchUrl(Uri.parse(url));
+                              } else {
+                                // Handle the error if the URL cannot be opened
+                                debugPrint("Could not launch $url");
+                              }
+                            },
+                            child: Text(
+                              featuresCategoryDetails["siteLink"]!,
+                              style: FTextStyle.listTitleSub.copyWith(
+                                color: Colors.blue,
+                                // decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
+                ],
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    "assets/images/email.png",
+                    height: 26,
+                    width: 40,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              final email = featuresCategoryDetails["email"]!;
+                              final Uri emailUri = Uri(
+                                scheme: 'mailto',
+                                path: email,
+                              );
+
+                              if (await canLaunchUrl(emailUri)) {
+                                await launchUrl(emailUri);
+                              } else {
+                                // Handle the error (e.g., show a Snackbar or Dialog)
+                                print("Could not launch email composer.");
+                              }
+                            },
+                            child: Text(
+                              featuresCategoryDetails["email"]!,
+                              style: FTextStyle.listTitleSub.copyWith(
+                                color: Colors.blue,
+                                // decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    "assets/images/phone.png",
+                    height: 26,
+                    width: 40,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                      child: Text(
+                        featuresCategoryDetails["phone"]!,
+                        style: FTextStyle.listTitleSub.copyWith(
+                          // color: Colors.blue,
+                          // decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DelegateRegister(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    backgroundColor: AppColors.appSky,
+                    elevation: 2,
+                    minimumSize: Size(130, 35),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                  ),
+                  child: Text(
+                    "Register Now",
+                    style: FTextStyle.loginBtnStyle.copyWith(fontSize: 12),
+                  ),
                 ),
               ),
-              const Divider(color: Colors.black, thickness: 1, height: 2),
             ],
           ),
         ),
-
-
       ),
+
+
     );
   }
 }
