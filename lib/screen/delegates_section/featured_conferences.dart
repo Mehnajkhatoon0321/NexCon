@@ -217,12 +217,12 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                           ),
                         ),
                         SizedBox(
-                          height: 12,
+                          height: 8,
                         ),
                         Center(
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(
-                                10.0, 0.0, 10.0, 20.0),
+                                0.0, 0.0, 0.0, 20.0),
                             child: Text(
                               "Which categories and topics conference would you like to join by registering",
                               style: FTextStyle.headingMiddle,
@@ -483,6 +483,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                               left: 0,
                                               top: 4,
                                               child: Container(
+                                                width: width/3,
                                                 decoration: BoxDecoration(
                                                   color: Colors.white,
                                                   borderRadius:
@@ -614,7 +615,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) => DelegateRegister(),
+                                                            builder: (context) => DelegateRegister(title : conference["title"]),
                                                           ),
                                                         );
                                                       },

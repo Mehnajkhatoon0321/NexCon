@@ -375,8 +375,8 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
                         itemCount: FeaturesCategoryList.length ,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3, // Show 2 items per row
-                      mainAxisSpacing: 15,
-                          crossAxisSpacing: 15
+                      mainAxisSpacing: 10,
+                          crossAxisSpacing: 10
                         ),
                         itemBuilder: (context, index) {
                           final category = FeaturesCategoryList[index];
@@ -428,7 +428,7 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
                                       Expanded(
                                         child: Text(
                                           category["title"],
-                                          style: FTextStyle.listTitle,
+                                          style: FTextStyle.listTitle.copyWith(fontSize: 12),
                                           textAlign: TextAlign.center,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,

@@ -1,12 +1,26 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:smart_conference/screen/dashbord/home_page.dart';
+import 'package:smart_conference/screen/delegates_section/registrationFeePage.dart';
+import 'package:smart_conference/screen/sideMenu/privacy_policy.dart';
+import 'package:smart_conference/screen/sideMenu/term_condition.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
+import 'package:smart_conference/utils/constant.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:smart_conference/utils/form_field_style.dart';
+import 'package:smart_conference/utils/no_space_input_formatter_class.dart';
+import 'package:smart_conference/utils/pref_utils.dart';
+import 'package:smart_conference/utils/validator_utils.dart';
+
 class DelegateRegister extends StatefulWidget {
-  const DelegateRegister({super.key});
+  String title;
+
+  DelegateRegister({required this.title, super.key});
 
   @override
   State<DelegateRegister> createState() => _DelegateRegisterState();
@@ -91,71 +105,951 @@ class _DelegateRegisterState extends State<DelegateRegister> {
       ],
     ),
   };
+  final formKey = GlobalKey<FormState>();
+  String? selectCountryNamesCategories;
+  String? selectTitleName;
+  String? genderTitleName;
+  late final TextEditingController _email = TextEditingController();
+  late final TextEditingController _first = TextEditingController();
+  late final TextEditingController _last = TextEditingController();
+  late final TextEditingController _password = TextEditingController();
+  late final TextEditingController _mobileNumber = TextEditingController();
+  late final TextEditingController _dateBirth = TextEditingController();
+  late final TextEditingController _city = TextEditingController();
+
+  late final GlobalKey<FormFieldState<String>> _emailKey =
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _countryKey =
+  GlobalKey<FormFieldState<String>>();  late final GlobalKey<FormFieldState<String>> _selectTitleKey =
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _dateBirthKey =
+  GlobalKey<FormFieldState<String>>(); late final GlobalKey<FormFieldState<String>> _cityKey =
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _firstKey =
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _lastKey =
+  GlobalKey<FormFieldState<String>>(); late final GlobalKey<FormFieldState<String>> _mobileKey =
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _passwordKey =
+  GlobalKey<FormFieldState<String>>(); late final GlobalKey<FormFieldState<String>> _genderKey =
+  GlobalKey<FormFieldState<String>>();
+  late final FocusNode _emailFocusNode = FocusNode();
+  late final FocusNode _mobileFocusNode = FocusNode();
+  late final FocusNode _firstFocusNode = FocusNode();
+  late final FocusNode _lastFocusNode = FocusNode();
+  late final FocusNode _passwordFocusNode = FocusNode();
+  late final FocusNode _dateBirthFocusNode = FocusNode();
+  late final FocusNode _cityFocusNode = FocusNode();
+  late final FocusNode _countryFocusNode = FocusNode();
+  late final FocusNode _selectTitleFocusNode = FocusNode();
+  late final FocusNode _selectGenderFocusNode = FocusNode();
+
+  bool checkboxChecked = false;
+  bool isButtonEnabled = false;
+  List<String> countryNamesCategories = [
+    'Afghanistan',
+    'Albania',
+    'Algeria',
+    'Andorra',
+    'Angola',
+    'Antigua and Barbuda',
+    'Argentina',
+    'Armenia',
+    'Australia',
+    'Austria',
+    'Azerbaijan',
+    'Bahamas',
+    'Bahrain',
+    'Bangladesh',
+    'Barbados',
+    'Belarus',
+    'Belgium',
+    'Belize',
+    'Benin',
+    'Bhutan',
+    'Bolivia',
+    'Bosnia and Herzegovina',
+    'Botswana',
+    'Brazil',
+    'Brunei',
+    'Bulgaria',
+    'Burkina Faso',
+    'Burundi',
+    'Cabo Verde',
+    'Cambodia',
+    'Cameroon',
+    'Canada',
+    'Central African Republic',
+    'Chad',
+    'Chile',
+    'China',
+    'Colombia',
+    'Comoros',
+    'Congo (Congo-Brazzaville)',
+    'Costa Rica',
+    'Croatia',
+    'Cuba',
+    'Cyprus',
+    'Czechia (Czech Republic)',
+    'Denmark',
+    'Djibouti',
+    'Dominica',
+    'Dominican Republic',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Equatorial Guinea',
+    'Eritrea',
+    'Estonia',
+    'Eswatini (fmr. "Swaziland")',
+    'Ethiopia',
+    'Fiji',
+    'Finland',
+    'France',
+    'Gabon',
+    'Gambia',
+    'Georgia',
+    'Germany',
+    'Ghana',
+    'Greece',
+    'Grenada',
+    'Guatemala',
+    'Guinea',
+    'Guinea-Bissau',
+    'Guyana',
+    'Haiti',
+    'Holy See',
+    'Honduras',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland',
+    'Israel',
+    'Italy',
+    'Jamaica',
+    'Japan',
+    'Jordan',
+    'Kazakhstan',
+    'Kenya',
+    'Kiribati',
+    'Korea (North)',
+    'Korea (South)',
+    'Kosovo',
+    'Kuwait',
+    'Kyrgyzstan',
+    'Laos',
+    'Latvia',
+    'Lebanon',
+    'Lesotho',
+    'Liberia',
+    'Libya',
+    'Liechtenstein',
+    'Lithuania',
+    'Luxembourg',
+    'Madagascar',
+    'Malawi',
+    'Malaysia',
+    'Maldives',
+    'Mali',
+    'Malta',
+    'Marshall Islands',
+    'Mauritania',
+    'Mauritius',
+    'Mexico',
+    'Micronesia',
+    'Moldova',
+    'Monaco',
+    'Mongolia',
+    'Montenegro',
+    'Morocco',
+    'Mozambique',
+    'Myanmar (Burma)',
+    'Namibia',
+    'Nauru',
+    'Nepal',
+    'Netherlands',
+    'New Zealand',
+    'Nicaragua',
+    'Niger',
+    'Nigeria',
+    'North Macedonia',
+    'Norway',
+    'Oman',
+    'Pakistan',
+    'Palau',
+    'Palestine State',
+    'Panama',
+    'Papua New Guinea',
+    'Paraguay',
+    'Peru',
+    'Philippines',
+    'Poland',
+    'Portugal',
+    'Qatar',
+    'Romania',
+    'Russia',
+    'Rwanda',
+    'Saint Kitts and Nevis',
+    'Saint Lucia',
+    'Saint Vincent and the Grenadines',
+    'Samoa',
+    'San Marino',
+    'Sao Tome and Principe',
+    'Saudi Arabia',
+    'Senegal',
+    'Serbia',
+    'Seychelles',
+    'Sierra Leone',
+    'Singapore',
+    'Slovakia',
+    'Slovenia',
+    'Solomon Islands',
+    'Somalia',
+    'South Africa',
+    'Spain',
+    'Sri Lanka',
+    'Sudan',
+    'Sudan (South)',
+    'Suriname',
+    'Sweden',
+    'Switzerland',
+    'Syria',
+    'Tajikistan',
+    'Tanzania',
+    'Thailand',
+    'Timor-Leste',
+    'Togo',
+    'Tonga',
+    'Trinidad and Tobago',
+    'Tunisia',
+    'Turkey',
+    'Turkmenistan',
+    'Tuvalu',
+    'Uganda',
+    'Ukraine',
+    'United Arab Emirates',
+    'United Kingdom',
+    'United States of America',
+    'Uruguay',
+    'Uzbekistan',
+    'Vanuatu',
+    'Venezuela',
+    'Vietnam',
+    'Yemen',
+    'Zambia',
+    'Zimbabwe',
+  ];
+
+  List<String> titleName = [
+    'Ms.',
+    'Dr.',
+    'Prof',
+    'Mr.',
+    'Other',
+
+  ];
+  List<String> sexTitleName = [
+    'Male',
+    'Female',
+
+
+  ];
+  bool passwordVisible = false;
+  bool isEmailFieldFocused = false;
+  bool isPasswordFieldFocused = false;
+  bool isFirstFieldFocused = false;
+  bool isLastFieldFocused = false;
+  bool isMobileFieldFocused = false;
+  bool isDateBirthFieldFocused = false;
+  bool isCityBirthFieldFocused = false;
+  bool isCountryFieldFocused = false;
+
+  bool isValidPass(String pass) {
+    // Check if the password is not empty and at least 8 characters long
+    if (pass.isEmpty || pass.length < 8) {
+      return false; // Invalid password
+    }
+    return true; // Valid password
+  }
+  void _selectDate(BuildContext context) async {
+    DateTime currentDate = DateTime.now();
+    DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: currentDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (selectedDate != null && selectedDate != currentDate) {
+      // Format the date to dd-MM-yyyy
+      String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+
+      setState(() {
+        _dateBirth.text = formattedDate;
+      });
+    }
+  }
+  bool isLoading = false;
+  bool rememberMe = false;
   @override
   Widget build(BuildContext context) {
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
     var displayType = valueType.toString().split('.').last;
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         body: Stack(
           children: [
             Container(
-              color: AppColors.primaryColour,
+              color: Colors.white,
             ),
             Center(
               child: Container(
                 // margin: EdgeInsets.only(
                 //     top: MediaQuery.of(context).size.height * 0.10),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [
-                          0.2,
-                          0.5,
-                          0.95,
-                          0.3
-                        ],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                        ])),
+                // decoration: BoxDecoration(
+                //     gradient: LinearGradient(
+                //         begin: Alignment.topRight,
+                //         end: Alignment.bottomLeft,
+                //         stops: [
+                //       0.2,
+                //       0.5,
+                //       0.95,
+                //       0.3
+                //     ],
+                //         colors: [
+                //       Color(0xffffffff),
+                //       Color(0xf5c6f6da),
+                //       Color(0xf5c6f6da),
+                //       Color(0xf5c6f6da),
+                //     ])),
                 child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: (displayType == 'desktop' ||  displayType == 'tablet') ? 50 : 20),
+                  padding: EdgeInsets.symmetric(
+                      horizontal:
+                          (displayType == 'desktop' || displayType == 'tablet')
+                              ? 10
+                              : 13),
                   children: [
 
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                    Container(
-                      alignment: Alignment.topCenter,
-                      child: Image.asset(
-                        'assets/images/applogo.png',
-                        width: (displayType == 'desktop' || displayType == 'tablet')
-                            ? 450.w
-                            : 250,
-                        height:
-                        (displayType == 'desktop' || displayType == 'tablet')
-                            ? 100.h
-                            : 140,
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        height: 42,
+                        width: 42,
+                        decoration: BoxDecoration(
+                          color: AppColors.appSky,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Align(
+                          alignment: Alignment.center, // Center the icon within the container
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 25,
+                              ), // Menu icon
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Center(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 20.0),
-                        child: Text(
-                          "Register Conference For Delegates",
-                          style: FTextStyle.headingMiddle,
-                          textAlign: TextAlign.center,
+                      child: Text(
+                        "Registration For Delegates",
+                        style: FTextStyle.headingMiddle.copyWith(
+                          fontSize: 16,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation2']!),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "${widget.title}",
+                      style: FTextStyle.headingMiddle.copyWith(
+                        fontSize: 17,
+                      ),
+                      textAlign: TextAlign.center,
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation2']!),
+
+                    SizedBox(
+                      height: 20,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Important Instructions:",
+                            style: FTextStyle.listTitle
+                                .copyWith(fontSize: 13, color: Colors.black),
+                          ),
+                          TextSpan(
+                            text: "Click here to view ",
+                            style: FTextStyle.listTitleSub
+                                .copyWith(fontSize: 13, color: Colors.black),
+                          ),
+                          TextSpan(
+                            text: "Registration Fee",
+                            style: FTextStyle.listTitleSub
+                                .copyWith(fontSize: 13, color: Colors.red),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // Action to view registration fee
+                                // For example, navigate to another page or open a link
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegistrationFeePage(),
+                                  ),
+                                );
+                              },
+                          ),
+                          TextSpan(
+                            text:
+                                ". After registration you will receive your login credentials on your registered email id for the conference delegate panel powered by SmartConference. Pay registration fee and submit abstract and other information through your delegate login panel only.",
+                            style: FTextStyle.listTitleSub
+                                .copyWith(fontSize: 13, color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation2']!,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, bottom: 15),
+                      child: Form(
+                        key: formKey,
+                        onChanged: () {
+                          if (ValidatorUtils.isValidEmailOrUsername(_email.text) &&
+                              isValidPass(_password.text)) {
+                            setState(() {
+                              isButtonEnabled = true;
+                            });
+                          } else {
+                            setState(() {
+                              isButtonEnabled = false;
+                            });
+                          }
+                          if (isEmailFieldFocused == true) {
+                            _emailKey.currentState!.validate();
+                          }
+                          if (isPasswordFieldFocused == true) {
+                            _passwordKey.currentState!.validate();
+                          }
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              "Select Title",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: DropdownButtonFormField<String>(
+                                key: _selectTitleKey,
+                                focusNode:
+                                _selectTitleFocusNode,
+                                value: selectTitleName,
+                                hint: const Text("Select Title",style: FTextStyle.formhintTxtStyle,),
+                                items: titleName
+                                    .map((category) => DropdownMenuItem(
+                                  value: category,
+                                  child: Text(category),
+                                ))
+                                    .toList(),
+                                onChanged: (newValue) {
+
+
+                                  setState(() {
+                                    selectTitleName = newValue;
+
+                                  });
+
+
+                                  isCountryFieldFocused=true;
+
+                                },
+                                decoration:FormFieldStyle.dropDown,
+
+                                validator: ValidatorUtils.model,
+                              ),
+                            ),
+
+                            Text(
+                              "First Name",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: TextFormField(
+                                key: _firstKey,
+                                focusNode: _firstFocusNode,
+                                keyboardType: TextInputType.name,
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter First Name"),
+                                inputFormatters: [NoSpaceFormatter()],
+                                controller: _first,
+                                validator: ValidatorUtils.firstNameValidator,
+                                onTap: () {
+                                  setState(() {
+                                    isEmailFieldFocused = false;
+                                    isPasswordFieldFocused = false;
+                                    isFirstFieldFocused=true;
+                                  });
+                                },
+                              ).animateOnPageLoad(
+                                  animationsMap['imageOnPageLoadAnimation2']!),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "Last Name",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: TextFormField(
+                                key: _lastKey,
+                                focusNode: _lastFocusNode,
+                                keyboardType: TextInputType.name,
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter Last Name"),
+                                inputFormatters: [NoSpaceFormatter()],
+                                controller: _last,
+                                validator: ValidatorUtils.lastNameValidator,
+                                onTap: () {
+                                  setState(() {
+                                    isEmailFieldFocused = false;
+                                    isPasswordFieldFocused = false;
+                                    isLastFieldFocused=true;
+                                  });
+                                },
+                              ).animateOnPageLoad(
+                                  animationsMap['imageOnPageLoadAnimation2']!),
+                            ),
+                            const SizedBox(height: 8),
+
+                            Text(
+                              "Mobile Number",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: TextFormField(
+                                key: _mobileKey,
+                                focusNode: _mobileFocusNode,
+                                keyboardType: TextInputType.number,
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter Mobile Number"),
+                                inputFormatters: [NoSpaceFormatter()],
+                                controller: _mobileNumber,
+                                validator: ValidatorUtils.phoneNumberValidator,
+                                onTap: () {
+                                  setState(() {
+                                    isEmailFieldFocused = false;
+                                    isPasswordFieldFocused = false;
+                                    isFirstFieldFocused=false;
+                                    isMobileFieldFocused=true;
+                                  });
+                                },
+                              ).animateOnPageLoad(
+                                  animationsMap['imageOnPageLoadAnimation2']!),
+                            ),
+                            const SizedBox(height: 8),
+
+
+                            Text(
+                              "Date Of Birth",
+                              style: FTextStyle.formLabelTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: TextFormField(
+                                key: _dateBirthKey,
+                                focusNode: _dateBirthFocusNode,
+                                keyboardType: TextInputType.text,
+                                decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                                  hintText: "dd-mm-yyyy",
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      Icons.calendar_today, // Calendar icon
+                                      color: Colors.grey, // Adjust color as needed
+                                    ),
+                                    onPressed: () {
+                                      // Show date picker when the icon is pressed
+                                      _selectDate(context);
+                                    },
+                                  ),
+                                ),
+                                inputFormatters: [NoSpaceFormatter()],
+                                controller: _dateBirth,
+                                validator: ValidatorUtils.dateValidator,
+                                onTap: () {
+                                  setState(() {
+
+                                  });
+                                },
+                              ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!,
+                              ),
+                            ),
+
+
+
+                            Text(
+                              "Select Gender",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: DropdownButtonFormField<String>(
+                                key: _genderKey,
+                                focusNode:
+                                _selectGenderFocusNode,
+                                value: genderTitleName,
+                                hint: const Text("Select Gender",style: FTextStyle.formhintTxtStyle,),
+                                items: sexTitleName
+                                    .map((category) => DropdownMenuItem(
+                                  value: category,
+                                  child: Text(category),
+                                ))
+                                    .toList(),
+                                onChanged: (newValue) {
+
+
+                                  setState(() {
+                                    genderTitleName = newValue;
+
+                                  });
+
+
+                                  isCountryFieldFocused=true;
+
+                                },
+                                decoration:FormFieldStyle.dropDown,
+
+                                validator: ValidatorUtils.model,
+                              ),
+                            ),
 
 
 
 
+
+
+
+
+
+                            const SizedBox(height: 8),
+
+
+                            Text(
+                              "${Constants.emailLabel}",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: TextFormField(
+                                key: _emailKey,
+                                focusNode: _emailFocusNode,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter Email"),
+                                inputFormatters: [NoSpaceFormatter()],
+                                controller: _email,
+                                validator: ValidatorUtils.emailValidator,
+                                onTap: () {
+                                  setState(() {
+                                    isEmailFieldFocused = true;
+                                    isPasswordFieldFocused = false;
+                                  });
+                                },
+                              ).animateOnPageLoad(
+                                  animationsMap['imageOnPageLoadAnimation2']!),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "Password",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                key: _passwordKey,
+                                focusNode: _passwordFocusNode,
+                                decoration: FormFieldStyle
+                                    .defaultPasswordInputDecoration
+                                    .copyWith(
+
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      passwordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.black45,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        passwordVisible = !passwordVisible;
+                                      });
+                                    },
+                                  ),
+                                  filled: true,
+                                  fillColor: AppColors.formFieldBackColour,
+                                ),
+                                controller: _password,
+                                obscureText: !passwordVisible,
+                                inputFormatters: [NoSpaceFormatter()],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a password';
+                                  }
+
+                                  if (!isValidPass(value)) {
+                                    return 'Password must be at least 8 characters';
+                                  }
+
+                                  return null; // Password is valid
+                                },
+                                onTap: () {
+                                  setState(() {
+                                    isPasswordFieldFocused = true;
+                                    isEmailFieldFocused = false;
+                                  });
+                                },
+                              ).animateOnPageLoad(
+                                  animationsMap['imageOnPageLoadAnimation2']!),
+                            ),
+                            Text(
+                              "Country",
+                              style: FTextStyle.formLabelTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: DropdownButtonFormField<String>(
+                                key: _countryKey,
+                                focusNode: _cityFocusNode,
+                                value: selectCountryNamesCategories,
+                                hint: const Text("Select country",style: FTextStyle.formhintTxtStyle,),
+                                items: countryNamesCategories
+                                    .map((category) => DropdownMenuItem(
+                                  value: category,
+                                  child: Text(category),
+                                ))
+                                    .toList(),
+                                onChanged: (newValue) {
+
+
+                                  setState(() {
+                                    selectCountryNamesCategories = newValue;
+
+                                  });
+
+
+                                  isCountryFieldFocused=true;
+
+                                },
+                                decoration:FormFieldStyle.dropDown,
+
+                                validator: ValidatorUtils.model,
+                              ),
+                            ),
+                            Text(
+                              "City",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: TextFormField(
+                                key: _cityKey,
+                                focusNode: _cityFocusNode,
+                                keyboardType: TextInputType.name,
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter City Name"),
+                                inputFormatters: [NoSpaceFormatter()],
+                                controller: _city,
+                                validator: ValidatorUtils.lastNameValidator,
+                                onTap: () {
+                                  setState(() {
+                                    isEmailFieldFocused = false;
+                                    isPasswordFieldFocused = false;
+                                    isLastFieldFocused=false;
+                                    isCityBirthFieldFocused=true;
+                                  });
+                                },
+                              ).animateOnPageLoad(
+                                  animationsMap['imageOnPageLoadAnimation2']!),
+                            ),
+                            const SizedBox(height: 8),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        checkboxChecked = !checkboxChecked;
+                                        print('Checkbox checked: $checkboxChecked');
+                            
+                                        PrefUtils.setRememberMe(checkboxChecked);
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 5),
+                                      child: IconTheme(
+                                        data: const IconThemeData(
+                                          color: AppColors.appSky,
+                                          size: 20,
+                                        ),
+                                        child: Icon(
+                                          checkboxChecked
+                                              ? Icons.check_box
+                                              : Icons.check_box_outline_blank,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                                                
+                                            TextSpan(
+                                              text: "I accept ",
+                                              style: FTextStyle.listTitleSub
+                                                  .copyWith(fontSize: 13, color: Colors.black),
+                                            ),
+                                            TextSpan(
+                                              text: "Terms & Conditions",
+                                              style: FTextStyle.listTitleSub
+                                                  .copyWith(fontSize: 13, color: Colors.red),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  // Action to view registration fee
+                                                  // For example, navigate to another page or open a link
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) => TermCondition(),
+                                                    ),
+                                                  );
+                                                },
+                                            ),
+                                            TextSpan(
+                                              text: " and ",
+                                              style: FTextStyle.listTitleSub
+                                                  .copyWith(fontSize: 13, color: Colors.black),
+                                            ),
+                                            TextSpan(
+                                              text: "Privacy Policy",
+                                              style: FTextStyle.listTitleSub
+                                                  .copyWith(fontSize: 13, color: Colors.red),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  // Action to view registration fee
+                                                  // For example, navigate to another page or open a link
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) => PrivacyPolicy(),
+                                                    ),
+                                                  );
+                                                },
+                                            ),
+                                                                
+                                          ],
+                                        ),
+                                      ).animateOnPageLoad(
+                                        animationsMap['imageOnPageLoadAnimation2']!,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                              child: ElevatedButton(
+                                onPressed: isButtonEnabled
+                                    ? () async {
+                                  setState(() {
+                                    if (formKey.currentState!.validate()) {
+                                      //
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) =>  HomePage(  selectedRole: widget.selectedRole),
+                                      //   ),
+                                      // );
+                                    } else {
+                                      // If any field is invalid, trigger validation error display
+                                      formKey.currentState!.validate();
+                                    }
+                                  });
+                                }
+                                    : null,
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    backgroundColor:
+                                    isButtonEnabled ? AppColors.appSky : Colors.white,
+                                    // Button color depending on the enabled state
+                                    minimumSize: Size(double.infinity, 50),
+                                    // Minimum height
+                                    maximumSize: Size(double.infinity, 50),
+                                    elevation: 2 // Maximum height
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Register",
+                                    style: FTextStyle.loginBtnStyle,
+                                  ),
+                                ),
+                              ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

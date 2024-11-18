@@ -532,7 +532,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              SizedBox(height: 5),
+                              SizedBox(height: 7),
                               Text(
                                 featuresCategoryDetails["contactPerson"]!,
                                 style: FTextStyle.listTitleSub,
@@ -681,7 +681,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DelegateRegister(),
+                        builder: (context) => DelegateRegister(title :  featuresCategoryDetails["title"]),
                       ),
                     );
                   },

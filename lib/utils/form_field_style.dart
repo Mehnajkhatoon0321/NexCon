@@ -156,6 +156,31 @@ class FormFieldStyle {
     contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
   );
 
+  static InputDecoration searchDecoration = InputDecoration(
+    hintText: 'Search',
+    hintStyle: FTextStyle.formhintTxtStyle,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(23.0),
+      borderSide: const BorderSide(
+          color: AppColors.appSky, width: 1.0),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(23.0),
+      borderSide: const BorderSide(
+          color: AppColors.appSky, width: 1.0),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(23.0),
+      borderSide: const BorderSide(
+          color: AppColors.appSky, width: 1.0),
+    ),
+    contentPadding: const EdgeInsets.symmetric(
+        vertical: 13.0, horizontal: 18.0),
+
+    fillColor: Colors.grey[100],
+    filled: true,
+  );
+
 
 
 

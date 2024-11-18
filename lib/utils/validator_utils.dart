@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:smart_conference/utils/constant.dart';
 
 
@@ -357,7 +358,37 @@ static  bool isValidAddress(String value) {
     }
     return null;
   }
+  static String? phoneNumberValidator(String? value) {
+    // Check if the value is empty
+    if (value == null || value.isEmpty) {
+      return "Phone number cannot be empty";
+    }
 
+    // Regular expression for phone number validation (adjust as needed for your country's format)
+    final phoneRegex = RegExp(r'^\+?[1-9]\d{1,14}$');  // International format with optional '+' and 1-15 digits
+
+    // Validate the phone number format
+    if (!phoneRegex.hasMatch(value)) {
+      return "Enter a valid phone number";
+    }
+
+    return null;
+  }
+  static String? dateValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a date.';
+    }
+
+    try {
+      // Try parsing the date using the expected format
+      final DateTime parsedDate = DateFormat('yyyy-MM-dd').parseStrict(value);
+
+    } catch (e) {
+      return 'Invalid date format. Use yyyy-MM-dd.';
+    }
+
+    return null;
+  }
   //Contact us validation
   static String? messageValidator(String? value) {
     if (value == null || value.isEmpty) {

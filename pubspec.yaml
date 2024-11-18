@@ -40,6 +40,7 @@ dependencies:
   flutter_animate:
   fluttertoast:
   url_launcher:
+  intl:
 
 
 dev_dependencies:
