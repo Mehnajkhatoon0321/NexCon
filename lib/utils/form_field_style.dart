@@ -29,14 +29,14 @@ class FormFieldStyle {
               Radius.circular(28),
           ),
           borderSide: BorderSide(
-            color: AppColors.formFieldBorderColour,
+            color: AppColors.boarderColour,
           )),
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(
               Radius.circular(28),
           ),
           borderSide: BorderSide(
-            color: AppColors.formFieldBorderColour,
+            color: AppColors.boarderColour,
           )),
       errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(

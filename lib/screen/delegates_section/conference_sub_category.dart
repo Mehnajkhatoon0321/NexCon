@@ -131,8 +131,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
-
+      // backgroundColor: Colors.white,
+      backgroundColor: AppColors.formFieldBackColour,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -176,8 +176,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                // Enable scroll for the GridView if necessary
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.66,
-                  crossAxisSpacing: 2// Two columns
+                  childAspectRatio: 0.73,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 5// Two columns
                 ),
                 itemCount: FeaturesList.length,
 
@@ -187,7 +188,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Container(
 
-                       height: height * 0.47, // Set fixed height for each card
+                       height: height * 0.45, // Set fixed height for each card
                       // width: height * 0.3, // Set fixed width for each card
                       decoration: BoxDecoration(
 
@@ -195,6 +196,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
+                          bottomRight:Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
                         ),
                       ),
                       child: Column(
@@ -209,7 +212,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                 ),
                                 child: Image.asset(
                                   conference["imageConference"],
-                                  height: height * 0.11, // Set image height to half of the card
+                                  height: height * 0.12, // Set image height to half of the card
                                   width: double.infinity,
                                   fit: BoxFit.cover,
                                 ),
@@ -266,38 +269,38 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                     ),
                                   ),
                                   Container(
-                                    height: 40,
+                                    height: 55,
                                     child: Text(
                                       conference["subtitle"],
                                       style: FTextStyle
                                           .listTitleSub
                                           .copyWith(fontSize: 13),
-                                      maxLines: 2,
+                                      maxLines: 3,
                                       overflow:
                                       TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        conference["organizationImage"],
-                                        height: 40,
-                                        width: 40,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Expanded(
-                                        child: Text(
-                                          conference["organizationText"],
-                                          style: FTextStyle.listTitleSub.copyWith(
-                                            fontSize: 13,
-                                            color: Colors.black,
-                                          ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Image.asset(
+                                  //       conference["organizationImage"],
+                                  //       height: 40,
+                                  //       width: 40,
+                                  //     ),
+                                  //     const SizedBox(width: 4),
+                                  //     Expanded(
+                                  //       child: Text(
+                                  //         conference["organizationText"],
+                                  //         style: FTextStyle.listTitleSub.copyWith(
+                                  //           fontSize: 13,
+                                  //           color: Colors.black,
+                                  //         ),
+                                  //         maxLines: 2,
+                                  //         overflow: TextOverflow.ellipsis,
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -336,7 +339,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                           padding: EdgeInsets.symmetric(horizontal: 10),
                                         ),
                                         child: Text(
-                                          "Register Now",
+                                          "Register",
                                           style: FTextStyle.loginBtnStyle.copyWith(fontSize: 12),
                                         ),
                                       ),

@@ -200,8 +200,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    height: 42,
-                    width: 42,
+                    height: 40,
+                    width: 40,
                     decoration: BoxDecoration(
                       color: AppColors.appSky,
                       borderRadius: BorderRadius.all(Radius.circular(25)),

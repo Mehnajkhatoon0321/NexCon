@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_conference/screen/authFlow/selection_role.dart';
 import 'package:smart_conference/screen/dashbord/home_page.dart';
 import 'package:smart_conference/screen/delegates_section/registrationFeePage.dart';
 import 'package:smart_conference/screen/sideMenu/privacy_policy.dart';
@@ -380,11 +381,11 @@ class _DelegateRegisterState extends State<DelegateRegister> {
       context: context,
       initialDate: currentDate,
       firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
+      lastDate: currentDate, // Prevent future date selection
     );
 
     if (selectedDate != null && selectedDate != currentDate) {
-      // Format the date to dd-MM-yyyy
+      // Format the date to yyyy-MM-dd
       String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
 
       setState(() {
@@ -392,6 +393,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
       });
     }
   }
+
   bool isLoading = false;
   bool rememberMe = false;
   @override
@@ -411,22 +413,22 @@ class _DelegateRegisterState extends State<DelegateRegister> {
               child: Container(
                 // margin: EdgeInsets.only(
                 //     top: MediaQuery.of(context).size.height * 0.10),
-                // decoration: BoxDecoration(
-                //     gradient: LinearGradient(
-                //         begin: Alignment.topRight,
-                //         end: Alignment.bottomLeft,
-                //         stops: [
-                //       0.2,
-                //       0.5,
-                //       0.95,
-                //       0.3
-                //     ],
-                //         colors: [
-                //       Color(0xffffffff),
-                //       Color(0xf5c6f6da),
-                //       Color(0xf5c6f6da),
-                //       Color(0xf5c6f6da),
-                //     ])),
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: [
+                      0.2,
+                      0.5,
+                      0.5,
+                      0.3
+                    ],
+                        colors: [
+                      Color(0xffffffff),
+                      Color(0xf9c6f6da),
+                      Color(0xffc6f6da),
+                      Color(0xffc6f6da),
+                    ])),
                 child: ListView(
                   padding: EdgeInsets.symmetric(
                       horizontal:
@@ -464,7 +466,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 25,
                     ),
                     Center(
                       child: Text(
@@ -489,15 +491,18 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                         animationsMap['imageOnPageLoadAnimation2']!),
 
                     SizedBox(
-                      height: 20,
+                      height: 35,
                     ),
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: "Important Instructions:",
+
                             style: FTextStyle.listTitle
-                                .copyWith(fontSize: 13, color: Colors.black),
+                                .copyWith(fontSize: 13, color: Colors.black,),
+
+
                           ),
                           TextSpan(
                             text: "Click here to view ",
@@ -532,11 +537,11 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                       animationsMap['imageOnPageLoadAnimation2']!,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20, bottom: 15),
+                      padding: const EdgeInsets.only(top: 5, bottom: 15),
                       child: Form(
                         key: formKey,
                         onChanged: () {
-                          if (ValidatorUtils.isValidEmailOrUsername(_email.text) &&
+                          if (ValidatorUtils.isValidEmail(_email.text) &&
                               isValidPass(_password.text)) {
                             setState(() {
                               isButtonEnabled = true;
@@ -609,7 +614,10 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 key: _firstKey,
                                 focusNode: _firstFocusNode,
                                 keyboardType: TextInputType.name,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter First Name"),
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(
+                                    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                                    fillColor: AppColors.formFieldBackColour,hintText: "Enter First Name"
+                                ),
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _first,
                                 validator: ValidatorUtils.firstNameValidator,
@@ -636,7 +644,8 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 key: _lastKey,
                                 focusNode: _lastFocusNode,
                                 keyboardType: TextInputType.name,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter Last Name"),
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(
+                                    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter Last Name"),
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _last,
                                 validator: ValidatorUtils.lastNameValidator,
@@ -664,7 +673,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 key: _mobileKey,
                                 focusNode: _mobileFocusNode,
                                 keyboardType: TextInputType.number,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter Mobile Number"),
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith( contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter Mobile Number"),
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _mobileNumber,
                                 validator: ValidatorUtils.phoneNumberValidator,
@@ -781,7 +790,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 key: _emailKey,
                                 focusNode: _emailFocusNode,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter Email"),
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith( contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter Email"),
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _email,
                                 validator: ValidatorUtils.emailValidator,
@@ -811,6 +820,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                     .defaultPasswordInputDecoration
                                     .copyWith(
 
+                                  contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       passwordVisible
@@ -897,7 +907,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 key: _cityKey,
                                 focusNode: _cityFocusNode,
                                 keyboardType: TextInputType.name,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(fillColor: AppColors.formFieldBackColour,hintText: "Enter City Name"),
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith( contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter City Name"),
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _city,
                                 validator: ValidatorUtils.lastNameValidator,
@@ -1002,7 +1012,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 18.0),
                               child: ElevatedButton(
@@ -1046,6 +1056,45 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 animationsMap['imageOnPageLoadAnimation2']!,
                               ),
                             ),
+                            const SizedBox(height: 20),
+                            Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Existing One's ? ",
+                                    style: FTextStyle.listTitleSub.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: Colors.black
+                                    ),
+                                  ),
+                                  Center(
+                                    child: GestureDetector(
+                                      onTap: () {
+
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                              const RoleSelectionScreen(),
+                                            ),
+                                          );
+
+                                      },
+                                      child: Text(
+                                        "Login",
+                                        style: FTextStyle.listTitleSub.copyWith(
+                                            color: AppColors.appSky,
+                                            fontWeight: FontWeight.w800),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.08),
                           ],
                         ),
                       ),

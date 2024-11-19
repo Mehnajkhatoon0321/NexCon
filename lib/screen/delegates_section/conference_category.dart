@@ -230,6 +230,7 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
+          backgroundColor: AppColors.formFieldBackColour,
           appBar: AppBar(
             backgroundColor:AppColors.appSky, // Customize app bar color
             leading: IconButton(
@@ -249,7 +250,7 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
             centerTitle: true,
           ),
           // backgroundColor:      Color(0xf5c6f6da),
-          backgroundColor: Colors.white,
+
           body:Center(
             child: Container(
               // decoration: BoxDecoration(
