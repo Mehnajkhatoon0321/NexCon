@@ -278,6 +278,11 @@ letterSpacing: 1.2,
       color: AppColors.aboutUsHeadingColor,
       fontFamily: 'OpenSans',
       fontWeight: FontWeight.w500);
+  static  TextStyle subtitle = TextStyle(
+      fontSize: 12.sp,
+      color: AppColors.aboutUsHeadingColor,
+      fontFamily: 'OpenSans',
+      fontWeight: FontWeight.w500);
 
 
 
