@@ -10,7 +10,8 @@ import 'package:smart_conference/utils/form_field_style.dart';
 class SubCategoryScreen extends StatefulWidget {
   String id;
   String  name;
-   SubCategoryScreen({super.key,required this.id,required this.name});
+  String selected;
+   SubCategoryScreen({super.key,required this.id,required this.name,required this.selected});
 
   @override
   State<SubCategoryScreen> createState() => _SubCategoryScreenState();
@@ -309,7 +310,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => ConferenceCategoryDetails(),
+                                              builder: (context) => ConferenceCategoryDetails(selectedRole: widget.selected,),
                                             ),
                                           );
 
@@ -325,7 +326,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => DelegateRegister(title : conference["title"]),
+                                              builder: (context) => DelegateRegister(title : conference["title"],selectedRole: widget.selected,),
                                             ),
                                           );
                                         },

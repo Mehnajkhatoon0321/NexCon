@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/delegates_section/bank_details.dart';
-import 'package:smart_conference/screen/delegates_section/delegates_category_page.dart';
-import 'package:smart_conference/screen/delegates_section/fee_page.dart';
-import 'package:smart_conference/screen/delegates_section/my_conference.dart';
 import 'package:smart_conference/screen/guest_flow/side_menu_navbar.dart';
 
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
-class HomeDelegates extends StatefulWidget {
+class OrganizerHomePage extends StatefulWidget {
   final String selectedRole;
-  const HomeDelegates({required this.selectedRole,super.key});
+  const OrganizerHomePage({required this.selectedRole,super.key});
 
   @override
-  State<HomeDelegates> createState() => _HomeDelegatesState();
+  State<OrganizerHomePage> createState() => _OrganizerHomePageState();
 }
 
-class _HomeDelegatesState extends State<HomeDelegates> {
+class _OrganizerHomePageState extends State<OrganizerHomePage> {
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -97,27 +93,6 @@ class _HomeDelegatesState extends State<HomeDelegates> {
       ],
     ),
   };
-  int _selectedIndex = 0;
-  final List<Widget> _pages = [
-    MyConferencePage(),
-    DelegatesCategoryPage(),
-    FeePage(),
-    BankDetailsPage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-  List<Map<dynamic, String>> navBarList=[
-
-    {"title": "My Conference", "image": "assets/images/conference.png"},
-    {"title": "Delegates Category", "image": "assets/images/category.png"},
-    {"title": "Fee", "image": "assets/images/fee.png"},
-    {"title": "Bank Details", "image": "assets/images/bankDetails.png"},
-
-  ];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -146,27 +121,20 @@ class _HomeDelegatesState extends State<HomeDelegates> {
       drawer: SideMenuScreen(selectedRole: widget.selectedRole),
 
       backgroundColor: Colors.white,
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 28),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Dashboard Page',style: FTextStyle.preHeadingBoldStyle,).animateOnPageLoad(
+                animationsMap['imageOnPageLoadAnimation2']!),
 
-        items: navBarList
-            .map(
-              (item) => BottomNavigationBarItem(
-            icon: Image.asset(
-              item['image']!,
-              width: 27,
-              height: 30,
-            ),
-            label: item['title'],
-          ),
-        )
-            .toList(),
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: AppColors.primaryColour,
-        unselectedItemColor: Colors.grey,
+
+
+          ],
+        ),
       ),
-
     );
   }
 

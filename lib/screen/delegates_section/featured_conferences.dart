@@ -11,7 +11,8 @@ import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 
 class FeaturedConferences extends StatefulWidget {
-  const FeaturedConferences({super.key});
+  final String selectedRole;
+  const FeaturedConferences({required this.selectedRole,super.key});
 
   @override
   State<FeaturedConferences> createState() => _FeaturedConferencesState();
@@ -287,7 +288,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ConferenceCategory()),
+                                                      ConferenceCategory(selectedRole: widget.selectedRole,)),
                                             );
                                           },
                                           child: Padding(
@@ -320,7 +321,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            ConferenceCategory()),
+                                                            ConferenceCategory(selectedRole: widget.selectedRole,)),
                                                   );
                                                 },
                                               ),
@@ -355,7 +356,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                     MaterialPageRoute(
                                         builder: (context) => SubCategoryScreen(
                                               id: category["id"],
-                                              name: category["title"],
+                                              name: category["title"], selected: widget.selectedRole,
                                             )),
                                   );
                                 },
@@ -601,7 +602,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                                         context,
                                                         MaterialPageRoute(
                                                           builder: (context) =>
-                                                              ConferenceCategoryDetails(),
+                                                              ConferenceCategoryDetails(selectedRole: widget.selectedRole,),
                                                         ),
                                                       );
                                                     },
@@ -637,8 +638,10 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                                         MaterialPageRoute(
                                                           builder: (context) =>
                                                               DelegateRegister(
+
                                                                   title: conference[
-                                                                      "title"]),
+                                                                      "title"], selectedRole: widget.selectedRole,),
+
                                                         ),
                                                       );
                                                     },

@@ -9,6 +9,7 @@ import 'package:smart_conference/utils/constant.dart';
 
 
 class ValidatorUtils {
+
   static bool isValidEmailOrUsername(String value) {
     // Check if it's a valid email address
     if (isValidEmail(value)) {
@@ -22,7 +23,13 @@ class ValidatorUtils {
 
     return false; // Invalid email or username
   }
-
+static   bool isValidPass(String pass) {
+  // Check if the password is not empty and at least 8 characters long
+  if (pass.isEmpty || pass.length < 8) {
+    return false; // Invalid password
+  }
+  return true; // Valid password
+}
 
 
   static bool isValidEmail(String email) {

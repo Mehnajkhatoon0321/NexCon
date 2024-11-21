@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_conference/screen/authFlow/delegate_register.dart';
+
+import 'package:smart_conference/screen/delegates_section/delegates_home_page.dart';
 import 'package:smart_conference/screen/delegates_section/featured_conferences.dart';
 import 'package:smart_conference/screen/authFlow/forgot_password.dart';
 import 'package:smart_conference/screen/authFlow/organizer_register.dart';
-import 'package:smart_conference/screen/dashbord/home_page.dart';
+
+import 'package:smart_conference/screen/organizer_section/organizer_home_page.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/constant.dart';
@@ -121,13 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isEmailFieldFocused = false;
   bool isPasswordFieldFocused = false;
 
-  bool isValidPass(String pass) {
-    // Check if the password is not empty and at least 8 characters long
-    if (pass.isEmpty || pass.length < 8) {
-      return false; // Invalid password
-    }
-    return true; // Valid password
-  }
+
 
   bool isLoading = false;
   bool rememberMe = false;
@@ -172,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: Center(
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
@@ -202,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     height: 40,
                     width: 40,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppColors.appSky,
                       borderRadius: BorderRadius.all(Radius.circular(25)),
                     ),
@@ -211,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4.0),
                         child: IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white,
                             size: 25,
@@ -254,7 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     key: formKey,
                     onChanged: () {
                       if (ValidatorUtils.isValidEmailOrUsername(_email.text) &&
-                          isValidPass(_password.text)) {
+                          ValidatorUtils.isValidPass(_password.text)) {
                         setState(() {
                           isButtonEnabled = true;
                         });
@@ -337,7 +333,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               return 'Please enter a password';
                             }
 
-                            if (!isValidPass(value)) {
+                            if (!ValidatorUtils.isValidPass(value)) {
                               return 'Password must be at least 8 characters';
                             }
 
@@ -418,35 +414,47 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: ElevatedButton(
-                    onPressed: isButtonEnabled
-                        ? () async {
-                      setState(() {
-                        if (formKey.currentState!.validate()) {
-
+                    onPressed: (){
+                      if (formKey.currentState!.validate()) {
+                        // All fields are valid, proceed with submission
+                        setState(() {
+                          isLoading = true; // Start loading
+                        });
+                        if (widget.selectedRole == 'isselect organizer') {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>  HomePage(  selectedRole: widget.selectedRole),
+                              builder: (context) =>
+                               OrganizerHomePage(selectedRole: widget.selectedRole,),
                             ),
                           );
                         } else {
-                          // If any field is invalid, trigger validation error display
-                          formKey.currentState!.validate();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  HomeDelegates( selectedRole: widget.selectedRole,),
+                            ),
+                          );
                         }
-                      });
-                    }
-                        : null,
+
+                      } else {
+                        // If any field is invalid, trigger validation error display
+                        formKey.currentState!.validate();
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        backgroundColor:
-                            isButtonEnabled ? AppColors.appSky : Colors.white,
+                        backgroundColor: isButtonEnabled
+                            ? AppColors.primaryColour
+                            : AppColors.formFieldBorderColour,
                         // Button color depending on the enabled state
-                        minimumSize: Size(double.infinity, 50),
+                        minimumSize: const Size(double.infinity, 50),
                         // Minimum height
-                        maximumSize: Size(double.infinity, 50),
-                        elevation: 2 // Maximum height
+                        maximumSize: const Size(double.infinity, 50),
+                        // elevation: 1 // Maximum height
                         ),
                     child: Center(
                       child: Text(
@@ -487,7 +495,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const FeaturedConferences(),
+                                       FeaturedConferences( selectedRole: widget.selectedRole,),
                                 ),
                               );
                             }

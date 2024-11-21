@@ -7,7 +7,8 @@ import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'dart:async';
 class ConferenceCategory extends StatefulWidget {
-  const ConferenceCategory({super.key});
+final  String selectedRole;
+  const ConferenceCategory({required this.selectedRole,super.key});
 
   @override
   State<ConferenceCategory> createState() => _ConferenceCategoryState();
@@ -386,7 +387,7 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>SubCategoryScreen(id: category["id"], name: category["title"],)
+                                    builder: (context) =>SubCategoryScreen(id: category["id"], name: category["title"],selected: widget.selectedRole,)
                                 ),
                               );
                             },

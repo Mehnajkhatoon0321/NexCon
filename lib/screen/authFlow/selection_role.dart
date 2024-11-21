@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_conference/screen/authFlow/login_screen.dart';
-import 'package:smart_conference/screen/dashbord/home_page.dart';
+import 'package:smart_conference/screen/guest_flow/home_page.dart';
+
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
@@ -273,7 +274,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => HomePage(selectedRole: ""),
+                                          builder: (context) => HomePage(selectedRole: "guestFlow"),
                                         ),
                                       );
                                     },

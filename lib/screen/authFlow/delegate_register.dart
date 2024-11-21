@@ -4,27 +4,27 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_conference/screen/authFlow/selection_role.dart';
-import 'package:smart_conference/screen/dashbord/home_page.dart';
-import 'package:smart_conference/screen/delegates_section/registrationFeePage.dart';
+import 'package:smart_conference/screen/guest_flow/home_page.dart';
+import 'package:smart_conference/screen/authFlow/registrationFeePage.dart';
+import 'package:smart_conference/screen/delegates_section/delegates_home_page.dart';
 import 'package:smart_conference/screen/sideMenu/privacy_policy.dart';
 import 'package:smart_conference/screen/sideMenu/term_condition.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/constant.dart';
+import 'package:smart_conference/utils/custom_popup.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'package:smart_conference/utils/form_field_style.dart';
 import 'package:smart_conference/utils/no_space_input_formatter_class.dart';
 import 'package:smart_conference/utils/pref_utils.dart';
 import 'package:smart_conference/utils/validator_utils.dart';
-
 class DelegateRegister extends StatefulWidget {
-  String title;
-
-  DelegateRegister({required this.title, super.key});
-
-  @override
-  State<DelegateRegister> createState() => _DelegateRegisterState();
+final  String title;
+final  String selectedRole;
+const DelegateRegister({required this.title,required this.selectedRole, super.key});
+@override
+State<DelegateRegister> createState() => _DelegateRegisterState();
 }
 
 class _DelegateRegisterState extends State<DelegateRegister> {
@@ -109,6 +109,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
   final formKey = GlobalKey<FormState>();
   String? selectCountryNamesCategories;
   String? selectTitleName;
+  String? selectCategoryName;
   String? genderTitleName;
   late final TextEditingController _email = TextEditingController();
   late final TextEditingController _first = TextEditingController();
@@ -119,21 +120,27 @@ class _DelegateRegisterState extends State<DelegateRegister> {
   late final TextEditingController _city = TextEditingController();
 
   late final GlobalKey<FormFieldState<String>> _emailKey =
-  GlobalKey<FormFieldState<String>>();
+      GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _countryKey =
-  GlobalKey<FormFieldState<String>>();  late final GlobalKey<FormFieldState<String>> _selectTitleKey =
-  GlobalKey<FormFieldState<String>>();
+      GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _selectTitleKey =
+      GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _selectCategoryKey =
+      GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _dateBirthKey =
-  GlobalKey<FormFieldState<String>>(); late final GlobalKey<FormFieldState<String>> _cityKey =
-  GlobalKey<FormFieldState<String>>();
+      GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _cityKey =
+      GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _firstKey =
-  GlobalKey<FormFieldState<String>>();
+      GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _lastKey =
-  GlobalKey<FormFieldState<String>>(); late final GlobalKey<FormFieldState<String>> _mobileKey =
-  GlobalKey<FormFieldState<String>>();
+      GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _mobileKey =
+      GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _passwordKey =
-  GlobalKey<FormFieldState<String>>(); late final GlobalKey<FormFieldState<String>> _genderKey =
-  GlobalKey<FormFieldState<String>>();
+      GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _genderKey =
+      GlobalKey<FormFieldState<String>>();
   late final FocusNode _emailFocusNode = FocusNode();
   late final FocusNode _mobileFocusNode = FocusNode();
   late final FocusNode _firstFocusNode = FocusNode();
@@ -143,221 +150,19 @@ class _DelegateRegisterState extends State<DelegateRegister> {
   late final FocusNode _cityFocusNode = FocusNode();
   late final FocusNode _countryFocusNode = FocusNode();
   late final FocusNode _selectTitleFocusNode = FocusNode();
+  late final FocusNode _selectCategoryFocusNode = FocusNode();
   late final FocusNode _selectGenderFocusNode = FocusNode();
 
   bool checkboxChecked = false;
   bool isButtonEnabled = false;
-  List<String> countryNamesCategories = [
-    'Afghanistan',
-    'Albania',
-    'Algeria',
-    'Andorra',
-    'Angola',
-    'Antigua and Barbuda',
-    'Argentina',
-    'Armenia',
-    'Australia',
-    'Austria',
-    'Azerbaijan',
-    'Bahamas',
-    'Bahrain',
-    'Bangladesh',
-    'Barbados',
-    'Belarus',
-    'Belgium',
-    'Belize',
-    'Benin',
-    'Bhutan',
-    'Bolivia',
-    'Bosnia and Herzegovina',
-    'Botswana',
-    'Brazil',
-    'Brunei',
-    'Bulgaria',
-    'Burkina Faso',
-    'Burundi',
-    'Cabo Verde',
-    'Cambodia',
-    'Cameroon',
-    'Canada',
-    'Central African Republic',
-    'Chad',
-    'Chile',
-    'China',
-    'Colombia',
-    'Comoros',
-    'Congo (Congo-Brazzaville)',
-    'Costa Rica',
-    'Croatia',
-    'Cuba',
-    'Cyprus',
-    'Czechia (Czech Republic)',
-    'Denmark',
-    'Djibouti',
-    'Dominica',
-    'Dominican Republic',
-    'Ecuador',
-    'Egypt',
-    'El Salvador',
-    'Equatorial Guinea',
-    'Eritrea',
-    'Estonia',
-    'Eswatini (fmr. "Swaziland")',
-    'Ethiopia',
-    'Fiji',
-    'Finland',
-    'France',
-    'Gabon',
-    'Gambia',
-    'Georgia',
-    'Germany',
-    'Ghana',
-    'Greece',
-    'Grenada',
-    'Guatemala',
-    'Guinea',
-    'Guinea-Bissau',
-    'Guyana',
-    'Haiti',
-    'Holy See',
-    'Honduras',
-    'Hungary',
-    'Iceland',
-    'India',
-    'Indonesia',
-    'Iran',
-    'Iraq',
-    'Ireland',
-    'Israel',
-    'Italy',
-    'Jamaica',
-    'Japan',
-    'Jordan',
-    'Kazakhstan',
-    'Kenya',
-    'Kiribati',
-    'Korea (North)',
-    'Korea (South)',
-    'Kosovo',
-    'Kuwait',
-    'Kyrgyzstan',
-    'Laos',
-    'Latvia',
-    'Lebanon',
-    'Lesotho',
-    'Liberia',
-    'Libya',
-    'Liechtenstein',
-    'Lithuania',
-    'Luxembourg',
-    'Madagascar',
-    'Malawi',
-    'Malaysia',
-    'Maldives',
-    'Mali',
-    'Malta',
-    'Marshall Islands',
-    'Mauritania',
-    'Mauritius',
-    'Mexico',
-    'Micronesia',
-    'Moldova',
-    'Monaco',
-    'Mongolia',
-    'Montenegro',
-    'Morocco',
-    'Mozambique',
-    'Myanmar (Burma)',
-    'Namibia',
-    'Nauru',
-    'Nepal',
-    'Netherlands',
-    'New Zealand',
-    'Nicaragua',
-    'Niger',
-    'Nigeria',
-    'North Macedonia',
-    'Norway',
-    'Oman',
-    'Pakistan',
-    'Palau',
-    'Palestine State',
-    'Panama',
-    'Papua New Guinea',
-    'Paraguay',
-    'Peru',
-    'Philippines',
-    'Poland',
-    'Portugal',
-    'Qatar',
-    'Romania',
-    'Russia',
-    'Rwanda',
-    'Saint Kitts and Nevis',
-    'Saint Lucia',
-    'Saint Vincent and the Grenadines',
-    'Samoa',
-    'San Marino',
-    'Sao Tome and Principe',
-    'Saudi Arabia',
-    'Senegal',
-    'Serbia',
-    'Seychelles',
-    'Sierra Leone',
-    'Singapore',
-    'Slovakia',
-    'Slovenia',
-    'Solomon Islands',
-    'Somalia',
-    'South Africa',
-    'Spain',
-    'Sri Lanka',
-    'Sudan',
-    'Sudan (South)',
-    'Suriname',
-    'Sweden',
-    'Switzerland',
-    'Syria',
-    'Tajikistan',
-    'Tanzania',
-    'Thailand',
-    'Timor-Leste',
-    'Togo',
-    'Tonga',
-    'Trinidad and Tobago',
-    'Tunisia',
-    'Turkey',
-    'Turkmenistan',
-    'Tuvalu',
-    'Uganda',
-    'Ukraine',
-    'United Arab Emirates',
-    'United Kingdom',
-    'United States of America',
-    'Uruguay',
-    'Uzbekistan',
-    'Vanuatu',
-    'Venezuela',
-    'Vietnam',
-    'Yemen',
-    'Zambia',
-    'Zimbabwe',
-  ];
 
-  List<String> titleName = [
-    'Ms.',
-    'Dr.',
-    'Prof',
-    'Mr.',
-    'Other',
 
-  ];
+
   List<String> sexTitleName = [
     'Male',
     'Female',
-
-
   ];
+
   bool passwordVisible = false;
   bool isEmailFieldFocused = false;
   bool isPasswordFieldFocused = false;
@@ -367,35 +172,10 @@ class _DelegateRegisterState extends State<DelegateRegister> {
   bool isDateBirthFieldFocused = false;
   bool isCityBirthFieldFocused = false;
   bool isCountryFieldFocused = false;
-
-  bool isValidPass(String pass) {
-    // Check if the password is not empty and at least 8 characters long
-    if (pass.isEmpty || pass.length < 8) {
-      return false; // Invalid password
-    }
-    return true; // Valid password
-  }
-  void _selectDate(BuildContext context) async {
-    DateTime currentDate = DateTime.now();
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: currentDate,
-      firstDate: DateTime(1900),
-      lastDate: currentDate, // Prevent future date selection
-    );
-
-    if (selectedDate != null && selectedDate != currentDate) {
-      // Format the date to yyyy-MM-dd
-      String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
-
-      setState(() {
-        _dateBirth.text = formattedDate;
-      });
-    }
-  }
-
+  bool isCategoryFieldFocused = false;
   bool isLoading = false;
   bool rememberMe = false;
+
   @override
   Widget build(BuildContext context) {
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
@@ -411,9 +191,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
             ),
             Center(
               child: Container(
-                // margin: EdgeInsets.only(
-                //     top: MediaQuery.of(context).size.height * 0.10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
@@ -436,23 +214,23 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                               ? 10
                               : 13),
                   children: [
-
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Container(
                         height: 42,
                         width: 42,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: AppColors.appSky,
                           borderRadius: BorderRadius.all(Radius.circular(25)),
                         ),
                         child: Align(
-                          alignment: Alignment.center, // Center the icon within the container
+                          alignment: Alignment.center,
+                          // Center the icon within the container
                           child: Padding(
                             padding: const EdgeInsets.only(left: 4.0),
                             child: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.white,
                                 size: 25,
@@ -489,8 +267,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                       textAlign: TextAlign.center,
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation2']!),
-
-                    SizedBox(
+                    const SizedBox(
                       height: 35,
                     ),
                     RichText(
@@ -498,11 +275,10 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                         children: [
                           TextSpan(
                             text: "Important Instructions:",
-
-                            style: FTextStyle.listTitle
-                                .copyWith(fontSize: 13, color: Colors.black,),
-
-
+                            style: FTextStyle.listTitle.copyWith(
+                              fontSize: 13,
+                              color: Colors.black,
+                            ),
                           ),
                           TextSpan(
                             text: "Click here to view ",
@@ -542,7 +318,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                         key: formKey,
                         onChanged: () {
                           if (ValidatorUtils.isValidEmail(_email.text) &&
-                              isValidPass(_password.text)) {
+                              ValidatorUtils.isValidPass(_password.text)) {
                             setState(() {
                               isButtonEnabled = true;
                             });
@@ -563,7 +339,41 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(
-                              height: 15,
+                              height: 20,
+                            ),
+                            Text(
+                              "Delegate Category *",
+                              style: FTextStyle.SubHeadingTxtStyle,
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation2']!),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: DropdownButtonFormField<String>(
+                                key: _selectCategoryKey,
+                                focusNode: _selectCategoryFocusNode,
+                                value: selectCategoryName,
+                                menuMaxHeight: 300,
+                                hint: const Text(
+                                  "Select Category",
+                                  style: FTextStyle.formhintTxtStyle,
+                                ),
+                                items: Constants.categoryName
+                                    .map((category) => DropdownMenuItem(
+                                          value: category,
+                                          child: Text(category),
+                                        ))
+                                    .toList(),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    selectCategoryName = newValue;
+                                  });
+
+                                  isCategoryFieldFocused = true;
+                                },
+                                decoration: FormFieldStyle.dropDown,
+                                validator: ValidatorUtils.model,
+                              ),
                             ),
                             Text(
                               "Select Title",
@@ -571,61 +381,62 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: DropdownButtonFormField<String>(
                                 key: _selectTitleKey,
-                                focusNode:
-                                _selectTitleFocusNode,
+                                focusNode: _selectTitleFocusNode,
                                 value: selectTitleName,
-                                hint: const Text("Select Title",style: FTextStyle.formhintTxtStyle,),
-                                items: titleName
+                                hint: const Text(
+                                  "Select Title",
+                                  style: FTextStyle.formhintTxtStyle,
+                                ),
+                                items: Constants.titleName
                                     .map((category) => DropdownMenuItem(
-                                  value: category,
-                                  child: Text(category),
-                                ))
+                                          value: category,
+                                          child: Text(category),
+                                        ))
                                     .toList(),
                                 onChanged: (newValue) {
-
-
                                   setState(() {
                                     selectTitleName = newValue;
-
                                   });
 
-
-                                  isCountryFieldFocused=true;
-
+                                  isCountryFieldFocused = true;
                                 },
-                                decoration:FormFieldStyle.dropDown,
-
+                                decoration: FormFieldStyle.dropDown,
                                 validator: ValidatorUtils.model,
                               ),
                             ),
-
                             Text(
                               "First Name",
                               style: FTextStyle.SubHeadingTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
-
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: TextFormField(
                                 key: _firstKey,
                                 focusNode: _firstFocusNode,
                                 keyboardType: TextInputType.name,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(
-                                    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-                                    fillColor: AppColors.formFieldBackColour,hintText: "Enter First Name"
-                                ),
-                                inputFormatters: [NoSpaceFormatter()],
+                                decoration: FormFieldStyle
+                                    .defaultemailDecoration
+                                    .copyWith(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 12, horizontal: 10),
+                                        fillColor:
+                                            AppColors.formFieldBackColour,
+                                        hintText: "Enter First Name"),
+
                                 controller: _first,
                                 validator: ValidatorUtils.firstNameValidator,
                                 onTap: () {
                                   setState(() {
                                     isEmailFieldFocused = false;
                                     isPasswordFieldFocused = false;
-                                    isFirstFieldFocused=true;
+                                    isFirstFieldFocused = true;
                                   });
                                 },
                               ).animateOnPageLoad(
@@ -637,43 +448,57 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                               style: FTextStyle.SubHeadingTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
-
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: TextFormField(
                                 key: _lastKey,
                                 focusNode: _lastFocusNode,
                                 keyboardType: TextInputType.name,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(
-                                    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter Last Name"),
-                                inputFormatters: [NoSpaceFormatter()],
+                                decoration: FormFieldStyle
+                                    .defaultemailDecoration
+                                    .copyWith(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 12, horizontal: 10),
+                                        fillColor:
+                                            AppColors.formFieldBackColour,
+                                        hintText: "Enter Last Name"),
+
                                 controller: _last,
                                 validator: ValidatorUtils.lastNameValidator,
                                 onTap: () {
                                   setState(() {
                                     isEmailFieldFocused = false;
                                     isPasswordFieldFocused = false;
-                                    isLastFieldFocused=true;
+                                    isLastFieldFocused = true;
                                   });
                                 },
                               ).animateOnPageLoad(
                                   animationsMap['imageOnPageLoadAnimation2']!),
                             ),
                             const SizedBox(height: 8),
-
                             Text(
                               "Mobile Number",
                               style: FTextStyle.SubHeadingTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
-
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: TextFormField(
                                 key: _mobileKey,
                                 focusNode: _mobileFocusNode,
                                 keyboardType: TextInputType.number,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith( contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter Mobile Number"),
+                                decoration: FormFieldStyle
+                                    .defaultemailDecoration
+                                    .copyWith(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 12, horizontal: 10),
+                                        fillColor:
+                                            AppColors.formFieldBackColour,
+                                        hintText: "Enter Mobile Number"),
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _mobileNumber,
                                 validator: ValidatorUtils.phoneNumberValidator,
@@ -681,37 +506,39 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                   setState(() {
                                     isEmailFieldFocused = false;
                                     isPasswordFieldFocused = false;
-                                    isFirstFieldFocused=false;
-                                    isMobileFieldFocused=true;
+                                    isFirstFieldFocused = false;
+                                    isMobileFieldFocused = true;
                                   });
                                 },
                               ).animateOnPageLoad(
                                   animationsMap['imageOnPageLoadAnimation2']!),
                             ),
                             const SizedBox(height: 8),
-
-
                             Text(
                               "Date Of Birth",
                               style: FTextStyle.formLabelTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: TextFormField(
                                 key: _dateBirthKey,
                                 focusNode: _dateBirthFocusNode,
                                 keyboardType: TextInputType.text,
-                                decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                                decoration: FormFieldStyle
+                                    .defaultAddressInputDecoration
+                                    .copyWith(
                                   hintText: "dd-mm-yyyy",
                                   suffixIcon: IconButton(
                                     icon: const Icon(
                                       Icons.calendar_today, // Calendar icon
-                                      color: Colors.grey, // Adjust color as needed
+                                      color:
+                                          Colors.grey, // Adjust color as needed
                                     ),
                                     onPressed: () {
                                       // Show date picker when the icon is pressed
-                                      _selectDate(context);
+                                      CustomPopUp.selectDate(context,_dateBirth);
                                     },
                                   ),
                                 ),
@@ -719,78 +546,67 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 controller: _dateBirth,
                                 validator: ValidatorUtils.dateValidator,
                                 onTap: () {
-                                  setState(() {
-
-                                  });
+                                  setState(() {});
                                 },
                               ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!,
                               ),
                             ),
-
-
-
                             Text(
                               "Select Gender",
                               style: FTextStyle.SubHeadingTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: DropdownButtonFormField<String>(
                                 key: _genderKey,
-                                focusNode:
-                                _selectGenderFocusNode,
+                                focusNode: _selectGenderFocusNode,
                                 value: genderTitleName,
-                                hint: const Text("Select Gender",style: FTextStyle.formhintTxtStyle,),
+                                hint: const Text(
+                                  "Select Gender",
+                                  style: FTextStyle.formhintTxtStyle,
+                                ),
                                 items: sexTitleName
                                     .map((category) => DropdownMenuItem(
-                                  value: category,
-                                  child: Text(category),
-                                ))
+                                          value: category,
+                                          child: Text(category),
+                                        ))
                                     .toList(),
                                 onChanged: (newValue) {
-
-
                                   setState(() {
                                     genderTitleName = newValue;
-
                                   });
 
-
-                                  isCountryFieldFocused=true;
-
+                                  isCountryFieldFocused = true;
                                 },
-                                decoration:FormFieldStyle.dropDown,
-
+                                decoration: FormFieldStyle.dropDown,
                                 validator: ValidatorUtils.model,
                               ),
                             ),
-
-
-
-
-
-
-
-
-
                             const SizedBox(height: 8),
-
-
                             Text(
                               "${Constants.emailLabel}",
                               style: FTextStyle.SubHeadingTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
-
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: TextFormField(
                                 key: _emailKey,
                                 focusNode: _emailFocusNode,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith( contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter Email"),
+                                decoration: FormFieldStyle
+                                    .defaultemailDecoration
+                                    .copyWith(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 12, horizontal: 10),
+                                        fillColor:
+                                            AppColors.formFieldBackColour,
+                                        hintText: "Enter Email"),
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _email,
                                 validator: ValidatorUtils.emailValidator,
@@ -809,9 +625,9 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                               style: FTextStyle.SubHeadingTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
-
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: TextFormField(
                                 keyboardType: TextInputType.visiblePassword,
                                 key: _passwordKey,
@@ -819,8 +635,8 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 decoration: FormFieldStyle
                                     .defaultPasswordInputDecoration
                                     .copyWith(
-
-                                  contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 10),
                                   suffixIcon: IconButton(
                                     icon: Icon(
                                       passwordVisible
@@ -845,7 +661,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                     return 'Please enter a password';
                                   }
 
-                                  if (!isValidPass(value)) {
+                                  if (!ValidatorUtils.isValidPass(value)) {
                                     return 'Password must be at least 8 characters';
                                   }
 
@@ -866,32 +682,30 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: DropdownButtonFormField<String>(
                                 key: _countryKey,
                                 focusNode: _cityFocusNode,
                                 value: selectCountryNamesCategories,
-                                hint: const Text("Select country",style: FTextStyle.formhintTxtStyle,),
-                                items: countryNamesCategories
+                                hint: const Text(
+                                  "Select country",
+                                  style: FTextStyle.formhintTxtStyle,
+                                ),
+                                items: Constants.countryNamesCategories
                                     .map((category) => DropdownMenuItem(
-                                  value: category,
-                                  child: Text(category),
-                                ))
+                                          value: category,
+                                          child: Text(category),
+                                        ))
                                     .toList(),
                                 onChanged: (newValue) {
-
-
                                   setState(() {
                                     selectCountryNamesCategories = newValue;
-
                                   });
 
-
-                                  isCountryFieldFocused=true;
-
+                                  isCountryFieldFocused = true;
                                 },
-                                decoration:FormFieldStyle.dropDown,
-
+                                decoration: FormFieldStyle.dropDown,
                                 validator: ValidatorUtils.model,
                               ),
                             ),
@@ -900,23 +714,31 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                               style: FTextStyle.SubHeadingTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
-
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: TextFormField(
                                 key: _cityKey,
                                 focusNode: _cityFocusNode,
                                 keyboardType: TextInputType.name,
-                                decoration: FormFieldStyle.defaultemailDecoration.copyWith( contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),fillColor: AppColors.formFieldBackColour,hintText: "Enter City Name"),
-                                inputFormatters: [NoSpaceFormatter()],
+                                decoration: FormFieldStyle
+                                    .defaultemailDecoration
+                                    .copyWith(
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 12, horizontal: 10),
+                                        fillColor:
+                                            AppColors.formFieldBackColour,
+                                        hintText: "Enter City Name"),
+                            
                                 controller: _city,
                                 validator: ValidatorUtils.lastNameValidator,
                                 onTap: () {
                                   setState(() {
                                     isEmailFieldFocused = false;
                                     isPasswordFieldFocused = false;
-                                    isLastFieldFocused=false;
-                                    isCityBirthFieldFocused=true;
+                                    isLastFieldFocused = false;
+                                    isCityBirthFieldFocused = true;
                                   });
                                 },
                               ).animateOnPageLoad(
@@ -933,9 +755,11 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                     onTap: () {
                                       setState(() {
                                         checkboxChecked = !checkboxChecked;
-                                        print('Checkbox checked: $checkboxChecked');
-                            
-                                        PrefUtils.setRememberMe(checkboxChecked);
+                                        print(
+                                            'Checkbox checked: $checkboxChecked');
+
+                                        PrefUtils.setRememberMe(
+                                            checkboxChecked);
                                       });
                                     },
                                     child: Padding(
@@ -958,24 +782,26 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                       child: RichText(
                                         text: TextSpan(
                                           children: [
-                                                                
                                             TextSpan(
                                               text: "I accept ",
                                               style: FTextStyle.listTitleSub
-                                                  .copyWith(fontSize: 13, color: Colors.black),
+                                                  .copyWith(
+                                                      fontSize: 13,
+                                                      color: Colors.black),
                                             ),
                                             TextSpan(
                                               text: "Terms & Conditions",
                                               style: FTextStyle.listTitleSub
-                                                  .copyWith(fontSize: 13, color: Colors.red),
+                                                  .copyWith(
+                                                      fontSize: 13,
+                                                      color: Colors.red),
                                               recognizer: TapGestureRecognizer()
                                                 ..onTap = () {
-                                                  // Action to view registration fee
-                                                  // For example, navigate to another page or open a link
                                                   Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (context) => TermCondition(),
+                                                      builder: (context) =>
+                                                          const TermCondition(),
                                                     ),
                                                   );
                                                 },
@@ -983,12 +809,16 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                             TextSpan(
                                               text: " and ",
                                               style: FTextStyle.listTitleSub
-                                                  .copyWith(fontSize: 13, color: Colors.black),
+                                                  .copyWith(
+                                                      fontSize: 13,
+                                                      color: Colors.black),
                                             ),
                                             TextSpan(
                                               text: "Privacy Policy",
                                               style: FTextStyle.listTitleSub
-                                                  .copyWith(fontSize: 13, color: Colors.red),
+                                                  .copyWith(
+                                                      fontSize: 13,
+                                                      color: Colors.red),
                                               recognizer: TapGestureRecognizer()
                                                 ..onTap = () {
                                                   // Action to view registration fee
@@ -996,56 +826,63 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                                   Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (context) => PrivacyPolicy(),
+                                                      builder: (context) =>
+                                                          const PrivacyPolicy(),
                                                     ),
                                                   );
                                                 },
                                             ),
-                                                                
                                           ],
                                         ),
                                       ).animateOnPageLoad(
-                                        animationsMap['imageOnPageLoadAnimation2']!,
+                                        animationsMap[
+                                            'imageOnPageLoadAnimation2']!,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.03),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18.0),
                               child: ElevatedButton(
                                 onPressed: isButtonEnabled
                                     ? () async {
-                                  setState(() {
-                                    if (formKey.currentState!.validate()) {
-                                      //
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) =>  HomePage(  selectedRole: widget.selectedRole),
-                                      //   ),
-                                      // );
-                                    } else {
-                                      // If any field is invalid, trigger validation error display
-                                      formKey.currentState!.validate();
-                                    }
-                                  });
-                                }
+                                        setState(() {
+                                          if (formKey.currentState!
+                                              .validate()) {
+
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>  HomeDelegates(  selectedRole: widget.selectedRole),
+                                              ),
+                                            );
+                                          } else {
+                                            formKey.currentState!.validate();
+                                          }
+                                        });
+                                      }
                                     : null,
                                 style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                     ),
-                                    backgroundColor:
-                                    isButtonEnabled ? AppColors.appSky : Colors.white,
+                                    backgroundColor: isButtonEnabled
+                                        ? AppColors.appSky
+                                        : Colors.white,
                                     // Button color depending on the enabled state
-                                    minimumSize: Size(double.infinity, 50),
+                                    minimumSize:
+                                        const Size(double.infinity, 50),
                                     // Minimum height
-                                    maximumSize: Size(double.infinity, 50),
+                                    maximumSize:
+                                        const Size(double.infinity, 50),
                                     elevation: 2 // Maximum height
-                                ),
+                                    ),
                                 child: Center(
                                   child: Text(
                                     "Register",
@@ -1065,23 +902,20 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                   Text(
                                     "Existing One's ? ",
                                     style: FTextStyle.listTitleSub.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                      color: Colors.black
-                                    ),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        color: Colors.black),
                                   ),
                                   Center(
                                     child: GestureDetector(
                                       onTap: () {
-
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                              const RoleSelectionScreen(),
-                                            ),
-                                          );
-
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const RoleSelectionScreen(),
+                                          ),
+                                        );
                                       },
                                       child: Text(
                                         "Login",
@@ -1094,7 +928,9 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.08),
                           ],
                         ),
                       ),

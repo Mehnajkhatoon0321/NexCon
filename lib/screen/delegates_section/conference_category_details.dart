@@ -8,7 +8,8 @@ import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'package:url_launcher/url_launcher.dart';
 class ConferenceCategoryDetails extends StatefulWidget {
-  const ConferenceCategoryDetails({super.key});
+ final String selectedRole;
+  const ConferenceCategoryDetails({required this.selectedRole,super.key});
 
   @override
   State<ConferenceCategoryDetails> createState() => _ConferenceCategoryDetailsState();
@@ -675,13 +676,13 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding:  EdgeInsets.all(18.0),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DelegateRegister(title :  featuresCategoryDetails["title"]),
+                        builder: (context) => DelegateRegister(title :featuresCategoryDetails["title"],selectedRole:widget.selectedRole),
                       ),
                     );
                   },
