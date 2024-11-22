@@ -5,11 +5,10 @@ import 'package:smart_conference/screen/delegates_section/delegates_category_pag
 import 'package:smart_conference/screen/delegates_section/fee_page.dart';
 import 'package:smart_conference/screen/delegates_section/my_conference.dart';
 import 'package:smart_conference/screen/guest_flow/side_menu_navbar.dart';
-
 import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
+
 class HomeDelegates extends StatefulWidget {
   final String selectedRole;
   const HomeDelegates({required this.selectedRole,super.key});
@@ -97,36 +96,45 @@ class _HomeDelegatesState extends State<HomeDelegates> {
       ],
     ),
   };
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
-  final List<Widget> _pages = [
-    MyConferencePage(),
-    DelegatesCategoryPage(),
-    FeePage(),
-    BankDetailsPage(),
+
+  final List<Map<String, dynamic>> _navBarItems = [
+    {"title": "My Conference", "icon": Icons.event},
+    {"title": "Delegates", "icon": Icons.people},
+    {"title": "Fee", "icon": Icons.attach_money},
+    {"title": "Bank Details", "icon": Icons.account_balance},
   ];
 
+  // Pages corresponding to each nav item
+  Widget _getPage(int index) {
+    switch (index) {
+      case 0:
+        return MyConferencePage();
+      case 1:
+        return DelegatesCategoryPage();
+      case 2:
+        return FeePage();
+      case 3:
+        return BankDetailsPage();
+      default:
+        return MyConferencePage();
+    }
+  }
+
+  // Update selected index when nav item is tapped
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-  List<Map<dynamic, String>> navBarList=[
 
-    {"title": "My Conference", "image": "assets/images/conference.png"},
-    {"title": "Delegates Category", "image": "assets/images/category.png"},
-    {"title": "Fee", "image": "assets/images/fee.png"},
-    {"title": "Bank Details", "image": "assets/images/bankDetails.png"},
-
-  ];
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: AppColors.appSky, // Customize app bar color
+        backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
           icon: const Icon(
             Icons.menu,
@@ -137,37 +145,48 @@ class _HomeDelegatesState extends State<HomeDelegates> {
             _scaffoldKey.currentState!.openDrawer(); // Open the drawer
           },
         ),
-        title: Text(
-          'Delegate',
+        title:Text(
+          _navBarItems[_selectedIndex]['title'],
           style: FTextStyle.HeadingTxtWhiteStyle,
-        ), // Title of the app bar
+        ),
         centerTitle: true,
       ),
       drawer: SideMenuScreen(selectedRole: widget.selectedRole),
-
       backgroundColor: Colors.white,
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
 
-        items: navBarList
+      body: _getPage(_selectedIndex),  // Dynamic page loading
+      bottomNavigationBar: BottomNavigationBar(
+        items: _navBarItems
             .map(
               (item) => BottomNavigationBarItem(
-            icon: Image.asset(
-              item['image']!,
-              width: 27,
-              height: 30,
+            icon: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: _selectedIndex == _navBarItems.indexOf(item)
+                    ?AppColors.primaryColour.withOpacity(0.1)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                item['icon'],
+                size: 30,
+                color: _selectedIndex == _navBarItems.indexOf(item)
+                    ?AppColors.primaryColour
+                    : Colors.grey,
+              ),
             ),
             label: item['title'],
           ),
         )
             .toList(),
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
         selectedItemColor: AppColors.primaryColour,
         unselectedItemColor: Colors.grey,
+        onTap: _onItemTapped,
+        showUnselectedLabels: true,
+        backgroundColor: Colors.white,
+        elevation: 8,
       ),
-
     );
   }
-
 }

@@ -9,6 +9,6 @@ class MyConferencePage extends StatefulWidget {
 class _MyConferencePageState extends State<MyConferencePage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container();
   }
 }
