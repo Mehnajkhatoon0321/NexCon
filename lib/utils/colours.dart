@@ -12,6 +12,9 @@ class AppColors extends MaterialColor {
   static const searchBoarder=Color(0xFFe1e1e1);
   static const searchText=Color(0xFF606060);
   static const Color yellow = Color(0xFFfcce01);
+  static const Color yellowLight = Color(0xFFFFDC98);
+  static const Color yellowLightMore = Color(0xFFFFF7E6);
+  static const Color orangeLightMore = Color(0xFFFF8D70);
   static const Color headingTxtColour = Color(0xFF080515);
   static const Color formFieldBorderColour = Color(0xFFE6E6E8);
   static const Color formFieldBackColour = Color(0xFFF3F2F3);

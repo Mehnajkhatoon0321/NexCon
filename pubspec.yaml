@@ -41,6 +41,8 @@ dependencies:
   fluttertoast:
   url_launcher:
   intl:
+  shimmer:
+  view_more: ^0.0.2
 
 
 

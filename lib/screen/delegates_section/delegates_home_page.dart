@@ -103,22 +103,22 @@ class _HomeDelegatesState extends State<HomeDelegates> {
     {"title": "My Conference", "icon": Icons.event},
     {"title": "Delegates", "icon": Icons.people},
     {"title": "Fee", "icon": Icons.attach_money},
-    {"title": "Bank Details", "icon": Icons.account_balance},
+    {"title": "Bank Data", "icon": Icons.account_balance},
   ];
 
   // Pages corresponding to each nav item
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return MyConferencePage();
+        return const MyConferencePage();
       case 1:
-        return DelegatesCategoryPage();
+        return const DelegatesCategoryPage();
       case 2:
-        return FeePage();
+        return const FeePage();
       case 3:
-        return BankDetailsPage();
+        return const BankDetailsPage();
       default:
-        return MyConferencePage();
+        return const MyConferencePage();
     }
   }
 
@@ -127,6 +127,41 @@ class _HomeDelegatesState extends State<HomeDelegates> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height*0.08,
+      decoration: const BoxDecoration(
+        color: AppColors.primaryColour,// Use the theme's primary color
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),  // Rounded top-left corner
+          topRight: Radius.circular(25), // Rounded top-right corner
+        ),
+      ),
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.transparent, // Make the background transparent
+        selectedItemColor: Colors.white, // Selected icon color
+        unselectedItemColor: Colors.grey, // Unselected icon color
+        showUnselectedLabels: true,
+        items: _navBarItems
+            .map(
+              (item) => BottomNavigationBarItem(
+            icon: Icon(
+              item['icon'],
+              size: 30,
+              color: _selectedIndex == _navBarItems.indexOf(item)
+                  ?Colors.white
+                  : Colors.grey,
+            ),
+            label: item['title'],
+          ),
+        )
+            .toList(),
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
+    );
   }
 
   @override
@@ -155,38 +190,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
       backgroundColor: Colors.white,
 
       body: _getPage(_selectedIndex),  // Dynamic page loading
-      bottomNavigationBar: BottomNavigationBar(
-        items: _navBarItems
-            .map(
-              (item) => BottomNavigationBarItem(
-            icon: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: _selectedIndex == _navBarItems.indexOf(item)
-                    ?AppColors.primaryColour.withOpacity(0.1)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(
-                item['icon'],
-                size: 30,
-                color: _selectedIndex == _navBarItems.indexOf(item)
-                    ?AppColors.primaryColour
-                    : Colors.grey,
-              ),
-            ),
-            label: item['title'],
-          ),
-        )
-            .toList(),
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryColour,
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
-        showUnselectedLabels: true,
-        backgroundColor: Colors.white,
-        elevation: 8,
-      ),
+      bottomNavigationBar: buildMyNavBar(context),
     );
   }
 }
