@@ -358,7 +358,8 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                   "Select Category",
                                   style: FTextStyle.formhintTxtStyle,
                                 ),
-                                items: Constants.categoryName
+                                items:
+                                Constants.categoryName
                                     .map((category) => DropdownMenuItem(
                                           value: category,
                                           child: Text(category),

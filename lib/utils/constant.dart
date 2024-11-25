@@ -315,6 +315,7 @@ static const List<String> categoryName = [
   "Foreign/ NRI Research Student (Non-Member)",
   "Accompanying Person",
   "Foreign/ NRI Accompanying Person",
+  '	Indian Student/ Research Scholar'
 ];
   
 

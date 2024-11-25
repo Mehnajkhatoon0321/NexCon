@@ -134,10 +134,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
       "title": "30th ISCB International Conference (ISCBC-2025)",
     },
 
-    {
-      "id":"2",
-      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-    },
+
   ];
   final controller = ScrollController();
   final TextEditingController controllerText = TextEditingController();
@@ -267,7 +264,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
               ),
             ),
 
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Expanded(
 
               child: isInitialLoading && data.isEmpty
@@ -335,147 +332,63 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
                     style: FTextStyle.listTitle),
 
               )
-                  : ListView.builder(
-                controller: controller,
-                itemCount: data.length +1,
-
-                // Add one for the loading indicator
+                  :ListView.builder(
+                itemCount: data.length,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemBuilder: (context, index) {
-                  if (index < data.length) {
-                    final item = data[index];
-                    return GestureDetector(
-                      onTap: () {
-                        // Handle tap event if needed
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.03,
-                            vertical: 5),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                margin: const EdgeInsets.all(2),
-                                padding: const EdgeInsets.all(6),
-                                decoration: BoxDecoration(
-                                  color: index % 2 == 0
-                                      ?AppColors.yellowLightMore
-                                      : AppColors.formFieldBackColour,
-                                  borderRadius:
-                                  BorderRadius.circular(0),
-                                  boxShadow:  [
-                                    BoxShadow(
-                                      color:
-                                      index % 2 == 0
-                                           ?AppColors.yellowLightMore:AppColors.formFieldBackColour,
-                                      spreadRadius: 1.5,
-                                      blurRadius: 0.2,
-                                      offset: Offset(0, 0.9),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.end,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.center, // Align items to the center vertically
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start, // Align to center vertically
-                                              children: [
-                                                const Text(
-                                                  "Sr. No. : ",
-                                                  style: FTextStyle.listTitle,
-                                                ),
-                                                Text(
-                                                  "${index + 1}",
-                                                  style: FTextStyle.listTitleSub,
-                                                ),
-                                              ],
-                                            ).animateOnPageLoad(
-                                              animationsMap['imageOnPageLoadAnimation2']!,
-                                            ),
-                                            Container(
-                                              child: IconButton(
-                                                icon: Icon(
-                                                  Icons.remove_red_eye,
-                                                  color: Colors.black87,
-                                                  size: 28,
-                                                ), // Eye icon
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(builder: (context) =>  ViewBankDetails()),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        )
-,
-
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .start,
-                                          children: [
-                                            const Text(
-                                                "",
-                                                style: FTextStyle
-                                                    .listTitle),
-                                            Expanded(
-                                                child: Text(
-                                                  "${item["title"]}",
-                                                  style: FTextStyle
-                                                      .listTitleSub,
-                                                  maxLines: 2,
-                                                )),
-                                          ],
-                                        ).animateOnPageLoad(
-                                            animationsMap['imageOnPageLoadAnimation2']!),
-
-
-                                      ],
-                                    ).animateOnPageLoad(animationsMap[
-                                    'imageOnPageLoadAnimation2']!),
-                                  ],
-                                ),
-                              ).animateOnPageLoad(
-                                  animationsMap['imageOnPageLoadAnimation2']!),
-                            ),
-                          ],
-                        ),
+                  final item = data[index];
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const ViewBankDetails()));
+                    },
+                    child: Container(
+                      height: height*0.12,
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: index % 2 == 0
+                            ? const Color(0xFFFFF7E6)
+                            : const Color(0xFFFF8D70).withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
-                    );
-                  }
-                  // if (hasMoreData && index == data.length) {
-                  //   return const Center(
-                  //       child: CircularProgressIndicator());
-                  // }
-                  // else if (data.length > 7 && index == data.length) {
-                  //   // Show the "No more data." text if we are at the end and there are more than 10 items
-                  //   return const Center(
-                  //     child: Text("No more data.", style: FTextStyle.listTitle),
-                  //   );
-                  // }
-                  // If there's no more data to load, show a message
-                  // return const Center(
-                  //     child: Text("No more data.",
-                  //         style: FTextStyle.listTitle));
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              item['title']!,
+                              maxLines: 3,
+                              style: const TextStyle(
+                                fontSize: 16,
+
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const Icon(Icons.arrow_forward_ios,
+                              color: Color(0xFF0db050)),
+                        ],
+                      ),
+                    ).animate().fadeIn(duration: 300.ms).slideX(
+                      begin: 0.2,
+                      curve: Curves.easeOut,
+                    ),
+                  );
                 },
               ),
+
             ),
-            const SizedBox(height: 20),
           ],
         ),
+
+
       ),
     );
   }
