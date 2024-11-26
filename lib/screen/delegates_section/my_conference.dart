@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 class MyConferencePage extends StatefulWidget {
   const MyConferencePage({super.key});

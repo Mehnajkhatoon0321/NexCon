@@ -192,7 +192,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                           child: Container(
                             height: 42,
                             width: 42,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: AppColors.appSky,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(25)),
@@ -203,7 +203,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 4.0),
                                 child: IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.arrow_back_ios,
                                     color: Colors.white,
                                     size: 25,
@@ -217,7 +217,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Center(
@@ -233,18 +233,18 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                       ).animateOnPageLoad(
                           animationsMap['imageOnPageLoadAnimation2']!),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Container(
                         height: height * 0.30,
                         child: GridView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           // Horizontal scroll
                           itemCount: FeaturesCategoryList.length,
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   mainAxisSpacing: 13,
                                   crossAxisSpacing: 13 // Show 2 items per row
@@ -270,7 +270,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                         // Spread radius
                                         blurRadius: 5,
                                         // Blur radius
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // Shadow position (x, y)
                                       ),
                                     ],
@@ -311,7 +311,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                                 ],
                                               ),
                                               child: IconButton(
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.arrow_forward_ios,
                                                   color: Colors.white,
                                                   size: 30,
@@ -333,7 +333,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                         // const SizedBox(height: 8),
                                         // Spacing between image and text
                                         // Text below the image
-                                        Expanded(
+                                        const Expanded(
                                           child: Text(
                                             "View All",
                                             style: FTextStyle.listTitle,
@@ -379,7 +379,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                           // Spread radius
                                           blurRadius: 5,
                                           // Blur radius
-                                          offset: Offset(
+                                          offset: const Offset(
                                               0, 3), // Shadow position (x, y)
                                         ),
                                       ],
@@ -452,7 +452,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                   // Set fixed height for each card
                                   width: height * 0.3,
                                   // Set fixed width for each card
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.white,
                                     // border: Border.all(
                                     //   color: Colors.black,
@@ -493,7 +493,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                             top: 4,
                                             child: Container(
                                               width: width / 3,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Colors.white,
                                                 borderRadius: BorderRadius.only(
                                                   topRight: Radius.circular(60),
@@ -523,7 +523,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                             color: Colors.black,
                                             width: 1.4,
                                           ),
-                                          borderRadius: BorderRadius.only(
+                                          borderRadius: const BorderRadius.only(
                                             bottomLeft: Radius.circular(10),
                                             bottomRight: Radius.circular(10),
                                           ),
@@ -617,9 +617,9 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                                       backgroundColor:
                                                           AppColors.appSky,
                                                       elevation: 2,
-                                                      minimumSize: Size(80, 30),
+                                                      minimumSize: const Size(80, 30),
                                                       // Set minimum width and height
-                                                      padding: EdgeInsets.symmetric(
+                                                      padding: const EdgeInsets.symmetric(
                                                           horizontal:
                                                               10), // Adjust padding
                                                     ),
@@ -656,9 +656,9 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                                       backgroundColor:
                                                           AppColors.appSky,
                                                       elevation: 2,
-                                                      minimumSize: Size(80, 30),
+                                                      minimumSize: const Size(80, 30),
                                                       // Set minimum width and height
-                                                      padding: EdgeInsets.symmetric(
+                                                      padding: const EdgeInsets.symmetric(
                                                           horizontal:
                                                               10), // Adjust padding
                                                     ),

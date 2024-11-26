@@ -223,7 +223,7 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                         const SizedBox(width: 16),
                         GestureDetector(
                           onTap: () {
-                            _showRejectDialog(
+                            _showEditDialog(
                               context,
                               item['id'], // Pass the selected ID for identification
                                   () {
@@ -280,42 +280,44 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
       //     .add(GetBillingListHandler("", pageNo, pageSize));
     });
   }
-
-  void _showRejectDialog(
+  void _showEditDialog(
       BuildContext context,
       int selectedIds, // Pass the selected ID for identifying the category
       Function refreshCallback,
-      String initialCategory, // Pass the initial category when opening the dialog
-      )
-  {
+      String? initialCategory, // Pass the initial category, allowing null
+      ) {
     final formKey = GlobalKey<FormState>();
-    final TextEditingController editController = TextEditingController();
-    bool isButtonEnabled = false; // Initialize button state
-    String? selectedCategory = initialCategory; // Use passed initial category
+    String? selectedCategory = initialCategory;
 
     // Ensure the category list has unique values
     final List<String> uniqueCategoryList = [
       ...Set<String>.from(Constants.categoryName)
     ];
 
+    bool isButtonEnabled = uniqueCategoryList.isNotEmpty;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            // Add listener to monitor dropdown value changes
             return AlertDialog(
               backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
+                borderRadius: BorderRadius.circular(20.0),
               ),
               title: const Text(
                 "Delegate Category",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
               ),
-              content: SingleChildScrollView( // Wrap the content in a scroll view to avoid overflow
+              content: SingleChildScrollView(
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8, // Adjust width to 80% of screen
+                  width: MediaQuery.of(context).size.width * 0.9,
                   child: Form(
                     key: formKey,
                     child: Column(
@@ -323,83 +325,125 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Delegate Category *",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        const SizedBox(height: 10),
-                        // Dropdown for Category Selection
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),// Add padding
-                          child: DropdownButtonFormField<String>(
-                            value: selectedCategory,
-                            // Set selected category value
-                            hint: const Text("Select category"),
-                            items: uniqueCategoryList
-                                .map((category) => DropdownMenuItem(
-                              value: category,
-                              child: Container(width: 200,
-                                  child: Text(category)),
-                            ))
-                                .toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                selectedCategory = newValue; // Update selected value
-                                isButtonEnabled = newValue != null && newValue.isNotEmpty;
-                              });
-                            },
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                              border: OutlineInputBorder(),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Please select a category.";
-                              }
-                              return null;
-                            },
+                          "Choose a Category",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
                           ),
                         ),
-                      ],
+                        const SizedBox(height: 12),
+                        // Dropdown for Category Selection
+                    DropdownButtonFormField<String>(
+                      value: selectedCategory,
+                      hint: Text(
+                        "Select a category",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      items: uniqueCategoryList.map((category) {
+                        return DropdownMenuItem(
+                          value: category,
+                          child: Container(
+                            constraints: const BoxConstraints(maxWidth: 200), // Set maximum width
+                            child: Text(
+                              category,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.black87,
+                              ),
+                              // overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          selectedCategory = newValue; // Update selected value
+                          isButtonEnabled = true; // Always enable when dropdown is not empty
+                        });
+                      },
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 12,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please select a category.";
+                        }
+                        return null;
+                      },
+                    ),
+
+                    ],
                     ),
                   ),
                 ),
               ),
               actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // Close dialog
-                  },
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Cancel Button
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close dialog
+                      },
+                      child: Text(
+                        "Cancel",
+                        overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+                        softWrap: true, // Enable text wrapping
 
-                  isButtonEnabled
-                      ? () async {
-                    setState(() {
-                      if (formKey.currentState!
-                          .validate()) {
-                        print("Selected Category: $selectedCategory");
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ),
+                    // Update Button
+                    ElevatedButton(
+                      onPressed: isButtonEnabled
+                          ? () async {
+                        if (formKey.currentState!.validate()) {
+                          print("Selected Category: $selectedCategory");
 
-                        // Refresh the UI after updating the category
-                        refreshCallback();
-                        Navigator.of(context).pop();
-
-                      } else {
-                        formKey.currentState!.validate();
+                          // Refresh the UI after updating the category
+                          refreshCallback();
+                          Navigator.of(context).pop();
+                        }
                       }
-                    });
-                  }
-                      : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: isButtonEnabled
-                        ? AppColors.appSky
-                        : Colors.white70,// Disable if button not enabled
-                  ),
-                  child: const Text("Update"),
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isButtonEnabled
+                            ? AppColors.primaryColour
+                            : Colors.grey[300],
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 30,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        "Update",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: isButtonEnabled ? Colors.white : Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             );
@@ -408,6 +452,7 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
       },
     );
   }
+
 
 
 }

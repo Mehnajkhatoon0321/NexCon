@@ -6,6 +6,8 @@ import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'dart:async';
+
+import 'package:smart_conference/utils/form_field_style.dart';
 class ConferenceCategory extends StatefulWidget {
 final  String selectedRole;
   const ConferenceCategory({required this.selectedRole,super.key});
@@ -334,26 +336,7 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
                         ),
                         child: TextFormField(
                           controller: controllerText,
-                          decoration: InputDecoration(
-                            hintText: 'Search',
-                            hintStyle: FTextStyle.formhintTxtStyle,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(23.0),
-                              borderSide: const BorderSide(
-                                  color: AppColors.appSky, width: 1.0),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(23.0),
-                              borderSide: const BorderSide(
-                                  color: AppColors.appSky, width: 1.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(23.0),
-                              borderSide: const BorderSide(
-                                  color: AppColors.appSky, width: 1.0),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 13.0, horizontal: 18.0),
+                          decoration: FormFieldStyle.searchDecoration.copyWith(
                             suffixIcon: _isTextEmpty
                                 ? const Icon(Icons.search,
                                 color: AppColors.appSky)
@@ -362,14 +345,11 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
                                   color: AppColors.appSky),
                               onPressed: _clearText,
                             ),
-                            fillColor: Colors.grey[100],
-                            filled: true,
                           ),
                           onChanged:_onSearchChanged,
                         ),
                       ),
                     ),
-
                     SizedBox(height: 10,),
                     Expanded(
                       child: GridView.builder(

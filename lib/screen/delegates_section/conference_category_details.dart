@@ -540,20 +540,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              // SizedBox(height: 5),
-                              // Text(
-                              //   featuresCategoryDetails["phone"]!,
-                              //   style: FTextStyle.listTitleSub,
-                              //   maxLines: 3,
-                              //   overflow: TextOverflow.ellipsis,
-                              // ),
-                              // SizedBox(height: 5),
-                              // Text(
-                              //   featuresCategoryDetails["email"]!,
-                              //   style: FTextStyle.listTitleSub,
-                              //   maxLines: 3,
-                              //   overflow: TextOverflow.ellipsis,
-                              // ),
+
                             ],
                           ),
                         ),
