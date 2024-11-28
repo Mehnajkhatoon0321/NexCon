@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:smart_conference/screen/delegates_section/pay_registaration_fee.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
+import 'package:smart_conference/utils/common_popups.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'package:smart_conference/utils/form_field_style.dart';
 class FeePage extends StatefulWidget {
@@ -14,7 +16,7 @@ class FeePage extends StatefulWidget {
 
 class _FeePageState extends State<FeePage> {
   List<dynamic> feeList = [
-    {
+    {'title':"30th ISCB International Conference (ISCBC-2025)",
       'paymentMode': "PhonePay",
       'tnNumber': "2343546446",
       'tnDate': "2023-12-10",
@@ -24,10 +26,28 @@ class _FeePageState extends State<FeePage> {
       'downloadReceipt': "assets/images/payment.png"
     },
     {
+      'title':"4th International Science Communication Conference & 24th Indian Science Communication Conference",
       'paymentMode': "PhonePay",
       'tnNumber': "2343546446",
       'tnDate': "2023-12-10",
+      'bankName': "HDFC fgdfgfffgfhgfhgfhgfhfghgfhgghbfghgfhg",
+      'amount': "23424343",
+      'status': "Success",
+      'downloadReceipt': "assets/images/payment.png"
+    },{'title':"30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "COD",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
       'bankName': "HDFC",
+      'amount': "23424343",
+      'status': "Pending",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    {'title':"30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC fgdfgfffgfhgfhgfhgfhfghgfhgghbfghgfhg",
       'amount': "23424343",
       'status': "Success",
       'downloadReceipt': "assets/images/payment.png"
@@ -141,120 +161,137 @@ class _FeePageState extends State<FeePage> {
 
 
             const SizedBox(height: 10,),
-            Expanded(
-              child: ListView.builder(
-                itemCount: feeList.length,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemBuilder: (context, index) {
-                  final item = feeList[index];
-                  return Container(
-                    height: 160,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: index % 2 == 0
-                          ? const Color(0xFFFFF7E6) // Light yellow
-                          : const Color(0xFFFF8D70).withOpacity(0.1), // Light coral
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+      Expanded(
+        child: ListView.builder(
+          itemCount: feeList.length,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemBuilder: (context, index) {
+            final item = feeList[index];
+            return Container(
+              height: height*0.3,
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.all( 16),
+              decoration: BoxDecoration(
+                color: index % 2 == 0
+                    ? const Color(0xFFFFF7E6) // Light yellow
+                    : const Color(0xFFFF8D70).withOpacity(0.1), // Light coral
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  // Left Column: Payment Details
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Left Column: Text Info
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                item['paymentMode'],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'TN Number: ${item['tnNumber']}',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Date: ${item['tnDate']}',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Status: ${item['status']}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: item['status'] == "Success"
-                                      ? Colors.green
-                                      : Colors.orange,
-                                ),
-                              ),
-                            ],
+                        Text(
+                          item['title'],
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          'Payment Mode: ${item['paymentMode']}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.style
+                        ),
+ Text(
+                          'TN Number: ${item['tnNumber']}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.style
+                        ),
+
+                        Text(
+                          'Date: ${item['tnDate']}',
+                          style:FTextStyle.style,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+
+                        Container(
+                          width: screenWidth/2,
+                          child: Text(
+                            'Amount: ${item['amount']}',
+                            style: FTextStyle.style
+                              ,  maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
 
-                        // Right Side: Image and Actions
-                        // Action Buttons (Edit & Delete)
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Bank Name: ',
+                                style:FTextStyle.style,
+
+                            ),
+                            Container(
+                              width: screenWidth/2,
+                              child: Text(
+                                item['bankName'],
+                                style: FTextStyle.style,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+
                         Row(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                // Handle Edit action
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                margin: const EdgeInsets.only(right: 8),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF0db050), // Green background
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
+                            const Text(
+                              'Status: ',
+                                style: FTextStyle.listTitle
+                            ),
+                            Text(
+                              item['status'],
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: item['status'] == "Success"
+                                    ? Colors.green
+                                    : Colors.orange,
                               ),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                             const Text(
+                              'Download Receipt: ',
+                              style:FTextStyle.listTitle
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Handle Delete action
+                                // Handle Download Receipt
                               },
                               child: Container(
-                                height: 40,
-                                width: 40,
+                                height: 25,
+                                width: 25,
+                                margin: const EdgeInsets.only(bottom: 8),
                                 decoration: BoxDecoration(
-                                  color: Colors.red, // Red background for Delete
+                                  color: Colors.blue, // Blue for download
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
                                     BoxShadow(
@@ -265,9 +302,9 @@ class _FeePageState extends State<FeePage> {
                                   ],
                                 ),
                                 child: const Icon(
-                                  Icons.delete,
+                                  Icons.download,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 15,
                                 ),
                               ),
                             ),
@@ -275,14 +312,92 @@ class _FeePageState extends State<FeePage> {
                         ),
                       ],
                     ),
-                  );
-                },
+                  ),
+                  // Right Column: Action Buttons
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  PayRegistrationFee(bankName: item['bankName'], tnNumber: item['tnNumber'], date: item['tnDate'], amount: item['amount'], image: item['downloadReceipt'], title: item['title'], paymentMode: item['paymentMode'],)),
+                          );
+                        },
+                        child: Container(
+                          height: 35,
+                          width: 35,
+                          margin: const EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0db050), // Green for edit
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          CommonPopups
+                              .showDeleteCustomPopup(
+                            context,
+                            "Are you sure you want to delete?",
+                                () {
+                              // BlocProvider.of<
+                              //     AllRequesterBloc>(
+                              //     context)
+                              //     .add(DeleteBillingHandlers(
+                              //     data[index]
+                              //     [
+                              //     'id']));
+                            },
+                          );
+                        },
+                        child: Container(
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            color: Colors.red, // Red for delete
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            )
+            );
+          },
+        ),
+      ),
 
 
 
-          ],
+
+      ],
         ),
       ),
     );

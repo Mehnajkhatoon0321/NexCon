@@ -317,7 +317,7 @@ static const List<String> categoryName = [
   "Foreign/ NRI Accompanying Person",
   '	Indian Student/ Research Scholar'
 ];
-  
+
 
 static const   List<String> titleName = [
   'Ms.',

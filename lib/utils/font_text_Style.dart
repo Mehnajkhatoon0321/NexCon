@@ -212,6 +212,10 @@ class FTextStyle {
       color: AppColors.FormFieldHintColour,
       fontFamily: 'OpenSans',
       fontWeight: FontWeight.w400);
+  static const TextStyle style = TextStyle(
+    fontSize: 14,
+    color: Colors.black54,
+  );
 
   static const TextStyle listTitle = TextStyle(
 

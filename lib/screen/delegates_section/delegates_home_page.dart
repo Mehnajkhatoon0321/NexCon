@@ -4,8 +4,10 @@ import 'package:smart_conference/screen/delegates_section/bank_details.dart';
 import 'package:smart_conference/screen/delegates_section/delegates_category_page.dart';
 import 'package:smart_conference/screen/delegates_section/fee_page.dart';
 import 'package:smart_conference/screen/delegates_section/my_conference.dart';
+import 'package:smart_conference/screen/delegates_section/pay_registaration_fee.dart';
 import 'package:smart_conference/screen/guest_flow/side_menu_navbar.dart';
 import 'package:smart_conference/utils/colours.dart';
+import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 
@@ -166,6 +168,10 @@ class _HomeDelegatesState extends State<HomeDelegates> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
+    var displayType = valueType.toString().split('.').last;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -185,7 +191,55 @@ class _HomeDelegatesState extends State<HomeDelegates> {
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
+
+        actions:_selectedIndex==2 ? [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: (displayType == 'desktop' || displayType == 'tablet')
+                  ? 70
+                  : 37,
+              child: ElevatedButton(
+                  onPressed: () async {
+
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>PayRegistrationFee(bankName: '', date: '', amount: '', image: '', tnNumber: '', title: '', paymentMode: '',)
+                        ),
+
+                    );
+                    //     .then((result) {
+                    //   // Handle the result from the edit screen
+                    //   if (result[0]) {
+                    //     data.clear();
+                    //     pageNo = 1;
+                    //     hasMoreData = true;
+                    //     totalPages = 0;
+                    //     BlocProvider.of<AllRequesterBloc>(context)
+                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                    //   }
+                    // }
+                    // );
+
+                    // );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(26),
+                      ),
+                      backgroundColor: Colors.white),
+                  child: Text(
+                    "Pay Register",
+                    style: FTextStyle.loginBtnStyle
+                        .copyWith(color: AppColors.primaryColour,fontSize: 12),
+                  )),
+            ),
+          )
+        ]:[],
       ),
+
       drawer: SideMenuScreen(selectedRole: widget.selectedRole),
       backgroundColor: Colors.white,
 

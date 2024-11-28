@@ -406,7 +406,96 @@ static  bool isValidAddress(String value) {
     }
     return null;
   }
+  static String? transactionIdValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Transaction ID cannot be empty";
+    }
+    if (value.length != 10) {
+      return "Transaction ID must be exactly 10 characters";
+    }
+    return null;
+  }
+  static String? transactionNumberValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Transaction Number cannot be empty";
+    }
+    if (value.length != 10) {
+      return "Check if the transaction number has exactly 10 digits and is numeric";
+    }
+    return null;
+  }
 
+  // Validate Amount (it should be greater than 0)
+  static String? amountValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Amount cannot be empty";
+    }
+    final double? amount = double.tryParse(value);
+    if (amount == null || amount <= 0) {
+      return "Amount must be a positive number greater than zero";
+    }
+    return null;
+  }
+
+  // Validate Transaction Date (it should not be empty and must be a valid date)
+  static String? transactionDateValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Transaction date cannot be empty";
+    }
+    // Check if the date format is valid (simple example using DateTime parsing)
+    try {
+      DateTime.parse(value);
+    } catch (e) {
+      return "Invalid date format. Please use YYYY-MM-DD.";
+    }
+    return null;
+  }
+  static bool isValidTransactionId(String transactionId) {
+    // Check if the transaction ID is empty or does not have exactly 10 characters
+    if (transactionId.isEmpty || transactionId.length != 10) {
+      return false;
+    }
+    return true;
+  }
+
+  // Validate Amount (it should be greater than 0)
+  static bool isValidAmount(String amount) {
+    if (amount.isEmpty) {
+      return false;
+    }
+    final double? parsedAmount = double.tryParse(amount);
+    // Check if the parsed amount is valid and greater than 0
+    if (parsedAmount == null || parsedAmount <= 0) {
+      return false;
+    }
+    return true;
+  }
+
+  // Validate Transaction Date (it should not be empty and must be a valid date)
+  static bool isValidTransactionDate(String transactionDate) {
+    if (transactionDate.isEmpty) {
+      return false;
+    }
+    // Check if the date is valid by trying to parse it
+    try {
+      DateTime.parse(transactionDate);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
+  // Validate Transaction Number (it should be numeric and exactly 10 digits)
+  static bool isValidTransactionNumber(String transactionNumber) {
+    if (transactionNumber.isEmpty) {
+      return false;
+    }
+    // Check if the transaction number has exactly 10 digits and is numeric
+    if (transactionNumber.length != 10 || !RegExp(r'^[0-9]+$').hasMatch(transactionNumber)) {
+      return false;
+    }
+    return true;
+  }
   static bool isValidMessage(String message) {
     if (message.isEmpty) {
       return false;
@@ -416,6 +505,12 @@ static  bool isValidAddress(String value) {
     }
 
     return true;
+  }
+  static String? uploadValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Upload file is required';
+    }
+    return null;
   }
 
   static int calculateAge(DateTime birthDate) {
