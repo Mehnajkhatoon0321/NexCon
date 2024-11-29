@@ -137,7 +137,7 @@ class FTextStyle {
 
   //16 normal
   static TextStyle formErrorTxtStyle = TextStyle(
-    fontSize: 12.sp,
+    fontSize: 10.sp,
     color: AppColors.FormFielderrorColour,
     fontFamily: 'OpenSans',
   );

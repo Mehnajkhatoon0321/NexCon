@@ -228,7 +228,13 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
             onChanged: () {
               if (ValidatorUtils.isValidTransactionNumber(
                       _transactionNumber.text) &&
-                  ValidatorUtils.isValidAmount(_paymentAmountNumber.text)) {
+                  ValidatorUtils.isValidAmount(_paymentAmountNumber.text)
+                  && ValidatorUtils.isValidTransactionDate(_dateBirth.text)
+                  && ValidatorUtils.isValidBankName(_bank.text)
+                  && ValidatorUtils.isValidCouponCode(_codeNumber.text )&&checkboxChecked
+
+
+              ) {
                 setState(() {
                   isButtonEnabled = true;
                 });
@@ -243,6 +249,14 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
               if (isPaymentFocused == true) {
                 _paymentAmountKey.currentState!.validate();
               }
+              if (_dateBirthFocusNode == true) {
+                _dateBirthKey.currentState!.validate();
+              }
+              if (_codeNumberFocusNode == true) {
+                _codeNumberKey.currentState!.validate();
+              } if (_uploadNameNode == true) {
+                _uploadNameKey.currentState!.validate();
+              }
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,12 +267,11 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
+                SizedBox(height: 5,),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Container(
-                    // Ensure the container width is constrained properly
                     width: double.infinity,
-                    // Expand to full width of parent container
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(28.0),
@@ -270,11 +283,9 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                         key: _selectCategoryKey,
                         focusNode: _selectCategoryFocusNode,
                         isExpanded: true,
-                        // Make the DropdownButton expand to fill the width of the container
                         value: conferenceNames.contains(selectCategoryName)
                             ? selectCategoryName
                             : null,
-
                         hint: const Text(
                           "Select Conference ",
                           style: FTextStyle.formhintTxtStyle,
@@ -284,8 +295,8 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                         onChanged: (String? eventValue) {
                           setState(() {
                             selectCategoryName = eventValue;
-                            selectedConferenceId =
-                                conferenceNameList.firstWhere(
+                            _hasPressedSaveButton = true; // Mark interaction as occurred
+                            selectedConferenceId = conferenceNameList.firstWhere(
                                     (item) => item['name'] == eventValue)['id'];
                           });
                         },
@@ -301,21 +312,24 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                   ),
                 ),
 
+// Show error message if dropdown is not selected and Save button is pressed
                 if (_hasPressedSaveButton && (selectCategoryName == null || selectCategoryName!.isEmpty))
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 6.0),
+                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
                     child: Text(
                       "Please select a category",
                       style: FTextStyle.formErrorTxtStyle,
                     ),
                   ),
+                SizedBox(height: 10,),
                 Text(
                   "Payment Mode",
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
+                SizedBox(height: 5,),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Container(
                     // Ensure the container width is constrained properly
                     width: double.infinity,
@@ -363,12 +377,13 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
 
                 if (hasPaymentButton && (selectPaymentName == null || selectPaymentName!.isEmpty))
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 6.0),
+                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
                     child: Text(
                       "Please select a payment mode",
                       style: FTextStyle.formErrorTxtStyle,
                     ),
                   ),
+                SizedBox(height: 10,),
                 Text(
                   "Cheque/ Draft/ Transaction Number",
                   style: FTextStyle.SubHeadingTxtStyle,
@@ -416,6 +431,11 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                           color: Colors.grey, // Adjust color as needed
                         ),
                         onPressed: () {
+                          setState(() {
+                            isDateBirthFieldFocused = true;
+                          });
+
+
                           // Show date picker when the icon is pressed
                           CustomPopUp.selectDate(context, _dateBirth);
                         },
@@ -423,14 +443,18 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                     ),
                     inputFormatters: [NoSpaceFormatter()],
                     controller: _dateBirth,
-                    validator: ValidatorUtils.dateValidator,
+                    validator:  ValidatorUtils.transactionDateValidator,
                     onTap: () {
-                      setState(() {});
+                      setState(() {
+                        isDateBirthFieldFocused = true;
+
+                      });
                     },
                   ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!,
                   ),
                 ),
+
                 const SizedBox(height: 8),
                 Text(
                   "Bank Name",
@@ -449,7 +473,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                         fillColor: AppColors.formFieldBackColour,
                         hintText: "Enter Bank Name"),
                     controller: _bank,
-                    validator: ValidatorUtils.lastNameValidator,
+                    validator: ValidatorUtils.bankNameValidator,
                     onTap: () {
                       setState(() {
 
@@ -478,7 +502,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                         hintText: "Enter Coupon Code (if any)"),
                     inputFormatters: [NoSpaceFormatter()],
                     controller: _codeNumber,
-                    validator: ValidatorUtils.amountValidator,
+                    validator: ValidatorUtils.couponCodeValidator,
                     onTap: () {
                       setState(() {});
                     },
@@ -558,14 +582,16 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                       isUploadFocused = true;
                     });
                   },
-                  onEditingComplete: () {
-                    setState(() {
-                      isUploadFocused = false;
-                    });
-                  },
+                    onEditingComplete: () {
+                      setState(() {
+                        isUploadFocused = false;
+                      });
+                    }
+
                 ).animateOnPageLoad(
                   animationsMap['imageOnPageLoadAnimation2']!,
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -578,7 +604,6 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                             checkboxChecked = !checkboxChecked;
                             print('Checkbox checked: $checkboxChecked');
 
-                            PrefUtils.setRememberMe(checkboxChecked);
                           });
                         },
                         child: Padding(
@@ -677,6 +702,10 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                       } else {
                         // If any field is invalid, trigger validation error display
                         formKey.currentState!.validate();
+                        setState(() {
+                          _hasPressedSaveButton = true; /// Start loading
+                          hasPaymentButton = true;
+                        });
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -694,7 +723,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                     ),
                     child: Center(
                       child: Text(
-                        "Log in",
+                        "Submit",
                         style: FTextStyle.loginBtnStyle,
                       ),
                     ),

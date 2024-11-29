@@ -7,6 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_conference/screen/authFlow/my_profile.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
@@ -252,6 +253,7 @@ class _EditProfileState extends State<EditProfile> {
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
+
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -352,7 +354,7 @@ class _EditProfileState extends State<EditProfile> {
                                         ),
                                         child: Icon(
                                           Icons.remove,
-                                          color: AppColors.primaryColourDark,
+                                          color: AppColors.primaryColour,
                                           size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                         ),
                                       ),
@@ -399,7 +401,7 @@ class _EditProfileState extends State<EditProfile> {
                                       ),
                                       child: Icon(
                                         Icons.edit,
-                                        color: AppColors.primaryColourDark,
+                                        color: AppColors.primaryColour,
                                         size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                       ),
                                     ),
@@ -680,13 +682,13 @@ class _EditProfileState extends State<EditProfile> {
               Padding(
                 padding: const EdgeInsets.only(top: 23.0),
                 child: SizedBox(
-                  height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 46,
+                  height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 40,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const EditProfile(),
+                          builder: (context) => const MyProfile(),
                         ),
                       );
                     },
@@ -694,7 +696,7 @@ class _EditProfileState extends State<EditProfile> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      backgroundColor: AppColors.primaryColourDark,
+                      backgroundColor: AppColors.primaryColour,
                     ),
                     child: Text(
                       "Update",

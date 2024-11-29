@@ -89,6 +89,20 @@ class _AbstractScreenState extends State<AbstractScreen> {
       ],
     ),
   };
+
+  Map<String , dynamic> abstractList={
+    "proposal_type":"paper",
+    "conferenceSelect":"30th ISCB International Conference (ISCBC-2025)",
+    "dateSubmission":"2024-12-01",
+    "status":"pending",
+    "remark":"paper submission",
+
+
+
+
+
+
+  };
   @override
   Widget build(BuildContext context) {
 

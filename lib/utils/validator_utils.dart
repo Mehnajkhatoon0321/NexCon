@@ -436,6 +436,31 @@ static  bool isValidAddress(String value) {
     }
     return null;
   }
+  static String? bankNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Bank name cannot be empty";
+    }
+    if (value.length < 2) {
+      return "Bank name must be at least 2 characters long";
+    }
+    if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
+      return "Bank name can only contain letters and spaces";
+    }
+    return null;
+  }
+
+  static String? couponCodeValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Coupon code cannot be empty";
+    }
+    if (value.length < 5) {
+      return "Coupon code must be at least 5 characters long";
+    }
+    if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(value)) {
+      return "Coupon code can only contain letters and numbers";
+    }
+    return null;
+  }
 
   // Validate Transaction Date (it should not be empty and must be a valid date)
   static String? transactionDateValidator(String? value) {
@@ -466,6 +491,34 @@ static  bool isValidAddress(String value) {
     final double? parsedAmount = double.tryParse(amount);
     // Check if the parsed amount is valid and greater than 0
     if (parsedAmount == null || parsedAmount <= 0) {
+      return false;
+    }
+    return true;
+  }
+  static bool isValidBankName(String bankName) {
+    if (bankName.isEmpty) {
+      return false;
+    }
+    // Check if the bank name contains only letters and spaces
+    if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(bankName)) {
+      return false;
+    }
+    // Check if the bank name is at least 2 characters long
+    if (bankName.length < 2) {
+      return false;
+    }
+    return true;
+  }
+  static bool isValidCouponCode(String couponCode) {
+    if (couponCode.isEmpty) {
+      return false;
+    }
+    // Check if the coupon code contains only alphanumeric characters and is at least 5 characters long
+    if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(couponCode)) {
+      return false;
+    }
+    // Check if the coupon code is at least 5 characters long
+    if (couponCode.length < 5) {
       return false;
     }
     return true;

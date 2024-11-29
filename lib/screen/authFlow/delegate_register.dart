@@ -547,7 +547,9 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                                 controller: _dateBirth,
                                 validator: ValidatorUtils.dateValidator,
                                 onTap: () {
-                                  setState(() {});
+                                  setState(() {
+
+                                  });
                                 },
                               ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!,
