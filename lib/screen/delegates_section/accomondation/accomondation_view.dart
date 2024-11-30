@@ -316,13 +316,23 @@ class _AccommodationViewState extends State<AccommodationView> {
               )
                   :
 
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
+              Column(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: [0.0, 0.5, 0.95, 0.95],
+                        colors: [
+                          Color(0xffffffff),
+                          Color(0xf5c6f6da),
+                          Color(0xf5c6f6da),
+                          Color(0xf5c6f6da),
+                        ],
+                      ),
+                    ),
+                    child: Text(
                       activeConferenceList['title'],
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -332,119 +342,210 @@ class _AccommodationViewState extends State<AccommodationView> {
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 2),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'No. of persons: ${activeConferenceList['numberPerson']}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                        Text(
-                          'No. of Days: ${activeConferenceList['numberDays']}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                      ],
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'From Date: ${activeConferenceList["fromDate"]}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                        Text(
-                          'To Date: ${activeConferenceList['toDate']}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                      ],
-                    ),
-
-                    Text(
-                      'Amount: ${activeConferenceList['amount']}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-                    Text(
-                      'Payment Mode: ${activeConferenceList["paymentMode"]}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Bank Name: ', style: FTextStyle.style),
-                        Expanded(
-                          child: Text(
-                            activeConferenceList["bankName"],
-                            style: FTextStyle.style,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                      'No. of persons: ', style: FTextStyle.listTitle),
+                                  Text(
+                                      activeConferenceList['numberPerson'],
+                                      style:FTextStyle.listTitleSub
+                                  ),
+                                ],
+                              ),
+                            ), Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                      'No. of Days:', style: FTextStyle.listTitle),
+                                  Text(
+                                      activeConferenceList['numberDays'],
+                                      style:FTextStyle.listTitleSub
+                                  ),
+                                ],
+                              ),
+                            ),
+
+
+
+                          ],
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                      'From Date: ', style: FTextStyle.listTitle),
+                                  Text(
+                                      activeConferenceList['fromDate'],
+                                      style:FTextStyle.listTitleSub
+                                  ),
+                                ],
+                              ),
+                            ), Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                      'To Date: ', style: FTextStyle.listTitle),
+                                  Text(
+                                      activeConferenceList['toDate'],
+                                      style:FTextStyle.listTitleSub
+                                  ),
+                                ],
+                              ),
+                            ),
+
+
+                          ],
+                        ),
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                  'Amount: ', style: FTextStyle.listTitle),
+                              Text(
+                                  activeConferenceList['amount'],
+                                  style:FTextStyle.listTitleSub
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    Text(
-                      'Date of Payment: ${activeConferenceList['tnDate']}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                            'Booking Status: ', style: FTextStyle.listTitle),
-                        Text(
-                          activeConferenceList['bookingStatus'],
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: activeConferenceList['bookingStatus'] == "Success"
-                                ? Colors.green
-                                : Colors.orange,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                  'Payment Mode: ', style: FTextStyle.listTitle),
+                              Text(
+                                  activeConferenceList['paymentMode'],
+                                  style:FTextStyle.listTitleSub
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                            'Fee Status: ', style: FTextStyle.listTitle),
-                        Text(
-                          activeConferenceList['feeStatus'],
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: activeConferenceList['feeStatus'] == "Success"
-                                ? Colors.green
-                                : Colors.orange,
+
+
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Bank Name: ', style: FTextStyle.listTitle),
+                              Expanded(
+                                child: Text(
+                                  activeConferenceList["bankName"],
+                                  style: FTextStyle.style,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
+
+
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                  'Date of Payment: ', style: FTextStyle.listTitle),
+                              Text(
+                                activeConferenceList['tnDate'],
+                                style:FTextStyle.style
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                  'Booking Status: ', style: FTextStyle.listTitle),
+                              Text(
+                                activeConferenceList['bookingStatus'],
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: activeConferenceList['bookingStatus'] == "Success"
+                                      ? Colors.green
+                                      : Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            children: [
+                              const Text(
+                                  'Fee Status: ', style: FTextStyle.listTitle),
+                              Text(
+                                activeConferenceList['feeStatus'],
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: activeConferenceList['feeStatus'] == "Success"
+                                      ? Colors.green
+                                      : Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+
+
                       ],
                     ),
-
-
-
-                  ],
-                ),
+                  ),
+                ],
               ),
 
             ),

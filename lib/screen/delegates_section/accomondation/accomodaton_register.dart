@@ -210,7 +210,7 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
           },
         ),
         title: Text(
-          'Pay Registration Fee',
+          'Accommodation Apply',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
