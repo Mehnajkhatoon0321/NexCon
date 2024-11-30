@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_conference/screen/authFlow/login_screen.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/constant.dart';
@@ -10,7 +11,8 @@ import 'package:smart_conference/utils/form_field_style.dart';
 import 'package:smart_conference/utils/no_space_input_formatter_class.dart';
 import 'package:smart_conference/utils/validator_utils.dart';
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({super.key});
+final  String selectedRole;
+  const ChangePassword({required this.selectedRole,super.key});
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -23,7 +25,6 @@ class _ChangePasswordState extends State<ChangePassword> {
   GlobalKey<FormFieldState<String>>();
   bool isEmailFieldFocused = false;
   bool isLoading = false;
-  final FocusNode _emailFocusNode = FocusNode();
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -103,11 +104,42 @@ class _ChangePasswordState extends State<ChangePassword> {
     ),
   };
   final formKey = GlobalKey<FormState>();
+  bool oldPasswordVisible = true; // Initial password visibility state
+  bool newPasswordVisible = true; // Initial password visibility state
+  bool confirmPasswordVisible = true; // Initial password visibility state
+
+  final GlobalKey<FormFieldState<String>> _oldPasswordKey =  GlobalKey<FormFieldState<String>>();
+  final GlobalKey<FormFieldState<String>> _newPasswordKey =  GlobalKey<FormFieldState<String>>();
+  final GlobalKey<FormFieldState<String>> _confirmPasswordKey = GlobalKey<FormFieldState<String>>();
+
+  final TextEditingController _oldPassword = TextEditingController();
+  final TextEditingController _newPassword = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
+
+  bool isOldPasswordFieldFocused = true;
+  bool isNewPasswordFieldFocused = false;
+  bool isConfirmPasswordFieldFocused = false;
+
+  final  FocusNode _oldPasswordFocusNode = FocusNode();
+  final FocusNode _newPasswordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
+
+
+  @override
+  void dispose() {
+    _oldPassword.dispose();
+    _newPassword.dispose();
+    _confirmPassword.dispose();
+    _oldPasswordFocusNode.dispose();
+    _newPasswordFocusNode.dispose();
+    _confirmPasswordFocusNode.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
     var displayType = valueType.toString().split('.').last;
-    print('displayType>> $displayType');
+    // print('displayType>> $displayType');
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
@@ -118,9 +150,10 @@ class _ChangePasswordState extends State<ChangePassword> {
             ),
             Center(
               child: Container(
+
                 // margin: EdgeInsets.only(
                 //     top: MediaQuery.of(context).size.height * 0.10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
@@ -136,11 +169,39 @@ class _ChangePasswordState extends State<ChangePassword> {
                           Color(0xf5c6f6da),
                           Color(0xf5c6f6da),
                         ])),
+
+
                 child: ListView(
                   padding: EdgeInsets.symmetric(horizontal: (displayType == 'desktop' ||  displayType == 'tablet') ? 50 : 20),
                   children: [
-
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.13),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: const BoxDecoration(
+                          color: AppColors.appSky,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Align(
+                          alignment: Alignment.center, // Center the icon within the container
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 25,
+                              ), // Menu icon
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     Container(
                       alignment: Alignment.topCenter,
                       child: Image.asset(
@@ -163,14 +224,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     'imageOnPageLoadAnimation2']!),
 
                     const SizedBox(height:30),
-                    // Center(
-                    //   child: Text(
-                    //     Constants.ForgotPassSubTxt,
-                    //     style: FTextStyle.formSubheadingTxtStyle,
-                    //     textAlign: TextAlign.center, // Aligning text to center
-                    //   ),
-                    // ).animateOnPageLoad(animationsMap[
-                    // 'imageOnPageLoadAnimation2']!),
+
 
                     Padding(
                       padding: const EdgeInsets.only(top:40,bottom:15),
@@ -193,28 +247,158 @@ class _ChangePasswordState extends State<ChangePassword> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+
                               Text(
-                                "Email/UserName",
+                                Constants.oldPassLabel,
                                 style: FTextStyle.formLabelTxtStyle,
-                              ).animateOnPageLoad(animationsMap[
-                              'imageOnPageLoadAnimation2']!),
-                              const SizedBox(height: 10,),
-                              TextFormField(
-                                  keyboardType: TextInputType.emailAddress,
-                                  key: _emailKey,
-                                  focusNode: _emailFocusNode,
-                                  decoration: FormFieldStyle
-                                      .defaultemailDecoration,
-                                  inputFormatters: [NoSpaceFormatter()],
-                                  controller: _email,
-                                  validator: ValidatorUtils.emailOrUsernameValidator,
-                                  onTap: () {
-                                    setState(() {
-                                      isEmailFieldFocused = true;
-                                    });
-                                  }
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                key: _oldPasswordKey,
+                                focusNode: _oldPasswordFocusNode,
+                                decoration:
+                                FormFieldStyle.defaultPasswordInputDecoration.copyWith(
+                                    hintText: "Enter old password",
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        oldPasswordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: AppColors.FormFieldHintColour,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          oldPasswordVisible = !oldPasswordVisible;
+                                        });
+                                      },
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white),
+                                controller: _oldPassword,
+                                obscureText: oldPasswordVisible,
+                                inputFormatters: [NoSpaceFormatter()],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Please enter password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                onTap: () {
+                                  setState(() {
+                                    isOldPasswordFieldFocused = true;
+                                    isNewPasswordFieldFocused = false;
+                                    isConfirmPasswordFieldFocused = false;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Text(
+                                Constants.newPassLabel,
+                                style: FTextStyle.formLabelTxtStyle,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                key: _newPasswordKey,
+                                focusNode: _newPasswordFocusNode,
+                                decoration:
+                                FormFieldStyle.defaultPasswordInputDecoration.copyWith(
+                                    hintText: "Enter new password",
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        newPasswordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: AppColors.FormFieldHintColour,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          newPasswordVisible = !newPasswordVisible;
+                                        });
+                                      },
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white),
+                                controller: _newPassword,
+                                obscureText: newPasswordVisible,
+                                inputFormatters: [NoSpaceFormatter()],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Please enter password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                onTap: () {
+                                  setState(() {
+                                    isOldPasswordFieldFocused = false;
+                                    isNewPasswordFieldFocused = true;
+                                    isConfirmPasswordFieldFocused = false;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Text(
+                                Constants.confirmPassLabel,
+                                style: FTextStyle.formLabelTxtStyle,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              TextFormField(
+                                keyboardType: TextInputType.visiblePassword,
+                                key: _confirmPasswordKey,
+                                focusNode: _confirmPasswordFocusNode,
+                                decoration:
+                                FormFieldStyle.defaultPasswordInputDecoration
+                                    .copyWith(
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        newPasswordVisible
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: AppColors.FormFieldHintColour,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          newPasswordVisible = !newPasswordVisible;
+                                        });
+                                      },
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white),
+                                controller: _confirmPassword,
+                                obscureText: newPasswordVisible,
+                                inputFormatters: [NoSpaceFormatter()],
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Please enter password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                onTap: () {
+                                  setState(() {
+                                    isOldPasswordFieldFocused = false;
+                                    isNewPasswordFieldFocused = false;
+                                    isConfirmPasswordFieldFocused = true;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+
                             ],
                           )
                       ),
@@ -224,35 +408,36 @@ class _ChangePasswordState extends State<ChangePassword> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 18.0),
                       child: ElevatedButton(
-                        onPressed: isButtonEnabled
-                            ? () async {
+                        onPressed: ()  {
                           setState(() {
                             if (formKey.currentState!.validate()) {
 
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>  HomePage(  selectedRole: widget.selectedRole),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>  LoginScreen(
+                                      selectedRole:widget.selectedRole
+                                  ),
+                                ),
+                              );
                             } else {
                               // If any field is invalid, trigger validation error display
                               formKey.currentState!.validate();
                             }
                           });
                         }
-                            : null,
+                           ,
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
                             backgroundColor:
-                            isButtonEnabled ? AppColors.appSky : Colors.white,
+                            isButtonEnabled ? AppColors.primaryColour :  AppColors.formFieldBorderColour,
                             // Button color depending on the enabled state
-                            minimumSize: Size(double.infinity, 50),
+                            minimumSize: const Size(double.infinity, 50),
                             // Minimum height
-                            maximumSize: Size(double.infinity, 50),
-                            elevation: 2 // Maximum height
+                            maximumSize: const Size(double.infinity, 50),
+                            // elevation: 2 // Maximum height
                         ),
                         child: Center(
                           child: Text(
@@ -265,26 +450,6 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                     ),
 
-                    const SizedBox(height:20),
-
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Go back to",
-                            style: FTextStyle.formLabelTxtStyle,
-                          ),
-                          Text(
-                            Constants.signintoAccountTxt,
-                            style: FTextStyle.authlogin_signupTxtStyle,
-                          ),
-                        ],
-                      ),
-                    ),
                     const SizedBox(height: 50,)
                   ],
                 ),

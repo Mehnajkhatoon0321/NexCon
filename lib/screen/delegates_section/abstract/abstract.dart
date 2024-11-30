@@ -2,21 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/delegates_section/paper_register.dart';
+import 'package:smart_conference/screen/delegates_section/abstract/abstaction_register.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/common_popups.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'package:smart_conference/utils/form_field_style.dart';
-class PaperDelegates extends StatefulWidget {
-  const PaperDelegates({super.key});
+class AbstractScreen extends StatefulWidget {
+  const AbstractScreen({super.key});
 
   @override
-  State<PaperDelegates> createState() => _PaperDelegatesState();
+  State<AbstractScreen> createState() => _AbstractScreenState();
 }
 
-class _PaperDelegatesState extends State<PaperDelegates>  {
+class _AbstractScreenState extends State<AbstractScreen> {
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -99,12 +99,12 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
   List<dynamic>  abstractList=[
     {
       "id":"1",
-      "proposal_type":"paper",
+    "proposal_type":"paper",
       "paperTitle":"Chemistry  Management",
-      "conferenceSelect":"30th ISCB International Conference (ISCBC-2025)",
-      "dateSubmission":"2024-12-01",
-      "status":"pending",
-      "remark":"Paper submission",
+    "conferenceSelect":"30th ISCB International Conference (ISCBC-2025)",
+    "dateSubmission":"2024-12-01",
+    "status":"pending",
+    "remark":"Paper submission",
 
 
 
@@ -112,7 +112,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
 
 
 
-    },
+  },
 
     {
       "paperTitle":"Math Management",
@@ -216,7 +216,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
             },
           ),
           title: Text(
-            'Paper',
+            'Abstract',
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
@@ -234,8 +234,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>const PaperRegister()
-                        ),
+                            builder: (context) =>const AbstractionRegister()
+                       ),
 
                       );
                       //     .then((result) {
@@ -408,7 +408,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                                     onTap: () {
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) =>PaperRegister()
+                                          MaterialPageRoute(builder: (context) =>AbstractionRegister()
                                           )
                                       );
                                     },

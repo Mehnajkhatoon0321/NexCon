@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_conference/screen/authFlow/change_password.dart';
 import 'package:smart_conference/screen/authFlow/login_screen.dart';
 import 'package:smart_conference/screen/authFlow/selection_role.dart';
-import 'package:smart_conference/screen/delegates_section/abstract.dart';
-import 'package:smart_conference/screen/delegates_section/accomodation.dart';
+import 'package:smart_conference/screen/delegates_section/abstract/abstract.dart';
+import 'package:smart_conference/screen/delegates_section/accomondation/accomodation.dart';
 import 'package:smart_conference/screen/delegates_section/conference_category.dart';
 import 'package:smart_conference/screen/delegates_section/featured_conferences.dart';
 import 'package:smart_conference/screen/delegates_section/my_receipt.dart';
@@ -124,7 +124,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                       case 'Change Password':
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const ChangePassword()),
+                          MaterialPageRoute(builder: (context) =>  ChangePassword(selectedRole: widget.selectedRole,)),
                         );
                         break;
                         case 'Abstract':

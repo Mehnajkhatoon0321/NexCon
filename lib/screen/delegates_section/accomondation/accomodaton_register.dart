@@ -4,21 +4,17 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/delegates_section/fee_page.dart';
+import 'package:smart_conference/screen/delegates_section/accomondation/accomodation.dart';
 import 'package:smart_conference/screen/sideMenu/privacy_policy.dart';
 import 'package:smart_conference/screen/sideMenu/term_condition.dart';
 import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/constant.dart';
 import 'package:smart_conference/utils/custom_popup.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'package:smart_conference/utils/form_field_style.dart';
 import 'package:smart_conference/utils/no_space_input_formatter_class.dart';
-import 'package:smart_conference/utils/pref_utils.dart';
 import 'package:smart_conference/utils/validator_utils.dart';
-
-class PayRegistrationFee extends StatefulWidget {
+class AccommodationRegister extends StatefulWidget {
   final String tnNumber;
   final String date;
   final String amount;
@@ -27,21 +23,21 @@ class PayRegistrationFee extends StatefulWidget {
   final String title;
   final String paymentMode;
 
-  const PayRegistrationFee(
+  const AccommodationRegister(
       {required this.bankName,
-      required this.date,
-      required this.amount,
-      required this.image,
-      required this.tnNumber,
-      super.key,
-      required this.title,
-      required this.paymentMode});
+        required this.date,
+        required this.amount,
+        required this.image,
+        required this.tnNumber,
+        super.key,
+        required this.title,
+        required this.paymentMode});
 
   @override
-  State<PayRegistrationFee> createState() => _PayRegistrationFeeState();
+  State<AccommodationRegister> createState() => _AccommodationRegisterState();
 }
 
-class _PayRegistrationFeeState extends State<PayRegistrationFee> {
+class _AccommodationRegisterState extends State<AccommodationRegister> {
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -132,20 +128,20 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
     {"name": '30th ISCB International Conference (ISCBC-2025)', "id": "1"},
     {
       "name":
-          '4th International Science Communication Conference & 24th Indian Science Communication Conference',
+      '4th International Science Communication Conference & 24th Indian Science Communication Conference',
       "id": "2"
     },
   ];
   late final FocusNode _uploadNameNode = FocusNode();
   late List<String> conferenceNames =
-      conferenceNameList.map<String>((item) => item['name']!).toList();
+  conferenceNameList.map<String>((item) => item['name']!).toList();
 
   List<Map<String, String>> paymentModeList = [
     {"name": 'Bank Transfer (NEFT/ IMPS/ UPI/ SWIFT)', "id": "1"},
     {"name": 'Online', "id": "2"},
   ];
   late List<String> paymentNames =
-      paymentModeList.map<String>((item) => item['name']!).toList();
+  paymentModeList.map<String>((item) => item['name']!).toList();
 
   String? selectCountryNamesCategories;
   String? selectPaymentName;
@@ -153,36 +149,36 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
   bool isButtonEnabled = false; // Tracks button state
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  late final TextEditingController _transactionNumber = TextEditingController();
+  late final TextEditingController _paperTitle = TextEditingController();
   late final TextEditingController _bank = TextEditingController();
   late final TextEditingController _paymentAmountNumber = TextEditingController();
   late final TextEditingController _codeNumber = TextEditingController();
-  late final TextEditingController _dateBirth = TextEditingController();
+  late final TextEditingController _dateSubmisision = TextEditingController();
   late final TextEditingController uploadName = TextEditingController();
   late final GlobalKey<FormFieldState<String>> _uploadNameKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _selectPaymentKey =
-      GlobalKey<FormFieldState<String>>();
+  GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _selectCategoryKey =
-      GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _dateBirthKey =
-      GlobalKey<FormFieldState<String>>();
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _dateOfSubmission =
+  GlobalKey<FormFieldState<String>>();
 
-  late final GlobalKey<FormFieldState<String>> _transactionNumberKey =
-      GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _papertTtileKey =
+  GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _bankKey =
-      GlobalKey<FormFieldState<String>>();
+  GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _paymentAmountKey =
-      GlobalKey<FormFieldState<String>>();
+  GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _codeNumberKey =
-      GlobalKey<FormFieldState<String>>();
+  GlobalKey<FormFieldState<String>>();
 
   late final FocusNode _paymentAmountFocusNode = FocusNode();
   late final FocusNode _codeNumberFocusNode = FocusNode();
-  late final FocusNode _transactionNumberFocusNode = FocusNode();
+  late final FocusNode _papertTtileFocusNode = FocusNode();
   late final FocusNode _bankFocusNode = FocusNode();
 
-  late final FocusNode _dateBirthFocusNode = FocusNode();
+  late final FocusNode _dateFocusNode = FocusNode();
 
   late final FocusNode _selectPaymentFocusNode = FocusNode();
   late final FocusNode _selectCategoryFocusNode = FocusNode();
@@ -192,7 +188,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
   bool isTransactionFocused = false;
   bool isPaymentFocused = false;
 
-  bool isDateBirthFieldFocused = false;
+  bool isDateFieldFocused = false;
   bool isCategoryFieldFocused = false;
   bool isLoading = false;
   bool rememberMe = false;
@@ -228,9 +224,9 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
             key: formKey,
             onChanged: () {
               if (ValidatorUtils.isValidTransactionNumber(
-                      _transactionNumber.text) &&
+                  _paperTitle.text) &&
                   ValidatorUtils.isValidAmount(_paymentAmountNumber.text)
-                  && ValidatorUtils.isValidTransactionDate(_dateBirth.text)
+                  && ValidatorUtils.isValidTransactionDate(_dateSubmisision.text)
                   && ValidatorUtils.isValidBankName(_bank.text)
                   && ValidatorUtils.isValidCouponCode(_codeNumber.text )&&checkboxChecked
 
@@ -245,13 +241,13 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                 });
               }
               if (isTransactionFocused == true) {
-                _transactionNumberKey.currentState!.validate();
+                _papertTtileKey.currentState!.validate();
               }
               if (isPaymentFocused == true) {
                 _paymentAmountKey.currentState!.validate();
               }
-              if (_dateBirthFocusNode == true) {
-                _dateBirthKey.currentState!.validate();
+              if (_dateFocusNode == true) {
+                _dateOfSubmission.currentState!.validate();
               }
               if (_codeNumberFocusNode == true) {
                 _codeNumberKey.currentState!.validate();
@@ -318,13 +314,13 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
                     child: Text(
-                      "Please select a category",
+                      "Please select a category conference",
                       style: FTextStyle.formErrorTxtStyle,
                     ),
                   ),
                 SizedBox(height: 10,),
                 Text(
-                  "Payment Mode",
+                  "Proposal Type",
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
@@ -352,7 +348,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                             : null,
 
                         hint: const Text(
-                          "Select Payment: ",
+                          "Proposal Type: ",
                           style: FTextStyle.formhintTxtStyle,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -361,7 +357,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                           setState(() {
                             selectPaymentName = eventValue;
                             selectedPaymentId = paymentModeList.firstWhere(
-                                (item) => item['name'] == eventValue)['id'];
+                                    (item) => item['name'] == eventValue)['id'];
                           });
                         },
                         items: paymentNames
@@ -380,28 +376,28 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
                     child: Text(
-                      "Please select a payment mode",
+                      "Please select a proposal type",
                       style: FTextStyle.formErrorTxtStyle,
                     ),
                   ),
                 SizedBox(height: 10,),
                 Text(
-                  "Cheque/ Draft/ Transaction Number",
+                  "Paper Title",
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
-                    key: _transactionNumberKey,
-                    focusNode: _transactionNumberFocusNode,
+                    key: _papertTtileKey,
+                    focusNode: _papertTtileFocusNode,
                     keyboardType: TextInputType.name,
                     decoration: FormFieldStyle.defaultemailDecoration.copyWith(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 10),
                         fillColor: AppColors.formFieldBackColour,
-                        hintText: "Enter Cheque/ Draft/ Transaction Number"),
-                    controller: _transactionNumber,
+                        hintText: "Enter Paper Title"),
+                    controller: _paperTitle,
                     validator: ValidatorUtils.transactionNumberValidator,
                     onTap: () {
                       setState(() {
@@ -413,18 +409,18 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Cheque/ Draft/ Transaction Date",
+                  "Date of Submission",
                   style: FTextStyle.formLabelTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
-                    key: _dateBirthKey,
-                    focusNode: _dateBirthFocusNode,
+                    key: _dateOfSubmission,
+                    focusNode: _dateFocusNode,
                     keyboardType: TextInputType.text,
                     decoration:
-                        FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                    FormFieldStyle.defaultAddressInputDecoration.copyWith(
                       hintText: "dd-mm-yyyy",
                       suffixIcon: IconButton(
                         icon: const Icon(
@@ -433,21 +429,21 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                         ),
                         onPressed: () {
                           setState(() {
-                            isDateBirthFieldFocused = true;
+                            isDateFieldFocused = true;
                           });
 
 
                           // Show date picker when the icon is pressed
-                          CustomPopUp.selectDate(context, _dateBirth);
+                          CustomPopUp.selectDate(context, _dateSubmisision);
                         },
                       ),
                     ),
                     inputFormatters: [NoSpaceFormatter()],
-                    controller: _dateBirth,
+                    controller: _dateSubmisision,
                     validator:  ValidatorUtils.transactionDateValidator,
                     onTap: () {
                       setState(() {
-                        isDateBirthFieldFocused = true;
+                        isDateFieldFocused = true;
 
                       });
                     },
@@ -548,41 +544,41 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  readOnly: true,
-                  key: _uploadNameKey,
-                  focusNode: _uploadNameNode,
-                  decoration: FormFieldStyle.defaultemailDecoration.copyWith(
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 10),
-                    fillColor: AppColors.formFieldBackColour,
-                    hintText: "Upload File",
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.attach_file),
-                      onPressed: () async {
-                        final result = await FilePicker.platform.pickFiles();
-                        if (result != null && result.files.isNotEmpty) {
-                          setState(() {
-                            fileName1 = result.files.single.name;
-                            imagesId = File(result.files.single.path!);
-                            isImageUploaded = true;
-                            uploadName.text = fileName1!;
-                          });
-                        }
-                      },
+                    readOnly: true,
+                    key: _uploadNameKey,
+                    focusNode: _uploadNameNode,
+                    decoration: FormFieldStyle.defaultemailDecoration.copyWith(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 10),
+                      fillColor: AppColors.formFieldBackColour,
+                      hintText: "Upload File",
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.attach_file),
+                        onPressed: () async {
+                          final result = await FilePicker.platform.pickFiles();
+                          if (result != null && result.files.isNotEmpty) {
+                            setState(() {
+                              fileName1 = result.files.single.name;
+                              imagesId = File(result.files.single.path!);
+                              isImageUploaded = true;
+                              uploadName.text = fileName1!;
+                            });
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  controller: uploadName,
-                  validator: ValidatorUtils.uploadValidator,
-                  onChanged: (text) {
-                    setState(() {
-                      isButtonEnabled = ValidatorUtils.isValidCommon(text);
-                    });
-                  },
-                  onTap: () {
-                    setState(() {
-                      isUploadFocused = true;
-                    });
-                  },
+                    controller: uploadName,
+                    validator: ValidatorUtils.uploadValidator,
+                    onChanged: (text) {
+                      setState(() {
+                        isButtonEnabled = ValidatorUtils.isValidCommon(text);
+                      });
+                    },
+                    onTap: () {
+                      setState(() {
+                        isUploadFocused = true;
+                      });
+                    },
                     onEditingComplete: () {
                       setState(() {
                         isUploadFocused = false;
@@ -642,7 +638,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const TermCondition(),
+                                          const TermCondition(),
                                         ),
                                       );
                                     },
@@ -664,7 +660,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const PrivacyPolicy(),
+                                          const PrivacyPolicy(),
                                         ),
                                       );
                                     },
@@ -696,7 +692,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                FeePage(),
+                                AccommodationScreen(),
                           ),
                         );
 
