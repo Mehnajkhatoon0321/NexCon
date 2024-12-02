@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:smart_conference/screen/authFlow/delegate_register.dart';
-import 'package:smart_conference/screen/delegates_section/conference_category_details.dart';
+import 'package:smart_conference/screen/delegates_section/delegates_register_process/conference_category_details.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';

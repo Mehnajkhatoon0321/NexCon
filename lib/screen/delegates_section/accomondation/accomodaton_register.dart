@@ -118,6 +118,7 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
   };
   String? selectedConferenceId;
   String? selectedPaymentId;
+  String? selectedTopicId;
   bool isUploadFocused = false;
   bool isImageUploaded = false;
   String? fileName1;
@@ -140,11 +141,22 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
     {"name": 'Bank Transfer (NEFT/ IMPS/ UPI/ SWIFT)', "id": "1"},
     {"name": 'Online', "id": "2"},
   ];
+
+
   late List<String> paymentNames =
   paymentModeList.map<String>((item) => item['name']!).toList();
+  List<Map<String, String>> topicModeList = [
+    {"name": 'Chemistry', "id": "1"},
+    {"name": 'Math', "id": "2"},
+  ];
+
+
+  late List<String> topicNames =
+  topicModeList.map<String>((item) => item['name']!).toList();
 
   String? selectCountryNamesCategories;
   String? selectPaymentName;
+  String? selectTopicName;
   String? selectCategoryName;
   bool isButtonEnabled = false; // Tracks button state
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -154,14 +166,24 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
   late final TextEditingController _paymentAmountNumber = TextEditingController();
   late final TextEditingController _codeNumber = TextEditingController();
   late final TextEditingController _dateSubmisision = TextEditingController();
+  late final TextEditingController _dateOutSubmissionController = TextEditingController();
+  late final TextEditingController _dateBirth = TextEditingController();
+  late final GlobalKey<FormFieldState<String>> _transactionNumberKey =
+  GlobalKey<FormFieldState<String>>();
   late final TextEditingController uploadName = TextEditingController();
   late final GlobalKey<FormFieldState<String>> _uploadNameKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _selectPaymentKey =
+  GlobalKey<FormFieldState<String>>();    late final GlobalKey<FormFieldState<String>> _selectTopicKey =
+  GlobalKey<FormFieldState<String>>();
+
+  late final GlobalKey<FormFieldState<String>> _dateBirthKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _selectCategoryKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _dateOfSubmission =
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _dateOutSubmission =
   GlobalKey<FormFieldState<String>>();
 
   late final GlobalKey<FormFieldState<String>> _papertTtileKey =
@@ -172,15 +194,18 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _codeNumberKey =
   GlobalKey<FormFieldState<String>>();
-
+  late final TextEditingController _transactionNumber = TextEditingController();
   late final FocusNode _paymentAmountFocusNode = FocusNode();
   late final FocusNode _codeNumberFocusNode = FocusNode();
   late final FocusNode _papertTtileFocusNode = FocusNode();
   late final FocusNode _bankFocusNode = FocusNode();
-
+  late final FocusNode _transactionNumberFocusNode = FocusNode();
   late final FocusNode _dateFocusNode = FocusNode();
+  late final FocusNode _dateOutFocusNode = FocusNode();
+  late final FocusNode _dateBirthFocusNode = FocusNode();
 
   late final FocusNode _selectPaymentFocusNode = FocusNode();
+  late final FocusNode _selectTopicFocusNode = FocusNode();
   late final FocusNode _selectCategoryFocusNode = FocusNode();
 
   bool checkboxChecked = false;
@@ -190,6 +215,7 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
 
   bool isDateFieldFocused = false;
   bool isCategoryFieldFocused = false;
+  bool isDateBirthFieldFocused = false;
   bool isLoading = false;
   bool rememberMe = false;
 
@@ -320,7 +346,188 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
                   ),
                 SizedBox(height: 10,),
                 Text(
-                  "Proposal Type",
+                  "Select Category",
+                  style: FTextStyle.SubHeadingTxtStyle,
+                ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimation2']!),
+                SizedBox(height: 5,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Container(
+                    // Ensure the container width is constrained properly
+                    width: double.infinity,
+                    // Expand to full width of parent container
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(28.0),
+                      border: Border.all(color: AppColors.boarderColour),
+                      color: AppColors.formFieldBackColour,
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        key: _selectTopicKey,
+                        focusNode: _selectTopicFocusNode,
+                        isExpanded: true,
+                        // Make the DropdownButton expand to fill the width of the container
+                        value: topicModeList.contains(selectTopicName)
+                            ? selectTopicName
+                            : null,
+
+                        hint: const Text(
+                          "Select Category: ",
+                          style: FTextStyle.formhintTxtStyle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        onChanged: (String? eventValue) {
+                          setState(() {
+                            selectTopicName = eventValue;
+                            selectedTopicId = topicModeList.firstWhere(
+                                    (item) => item['name'] == eventValue)['id'];
+                          });
+                        },
+                        items: topicNames
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+
+                if (hasPaymentButton && (selectPaymentName == null || selectPaymentName!.isEmpty))
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
+                    child: Text(
+                      "Please select a  category",
+                      style: FTextStyle.formErrorTxtStyle,
+                    ),
+                  ),
+                SizedBox(height: 10,),
+
+                Text(
+                  "Check-In Date & Time: ",
+                  style: FTextStyle.formLabelTxtStyle,
+                ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimation2']!),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    key: _dateOfSubmission,
+                    focusNode: _dateFocusNode,
+                    keyboardType: TextInputType.text,
+                    decoration:
+                    FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                      hintText: "dd-mm-yyyy  hh:mm AM",
+                      suffixIcon: IconButton(
+                        icon: const Icon(
+                          Icons.calendar_today, // Calendar icon
+                          color: Colors.grey, // Adjust color as needed
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isDateFieldFocused = true;
+                          });
+
+
+                          // Show date picker when the icon is pressed
+                          CustomPopUp.selectDateAndTime(context, _dateSubmisision);
+                        },
+                      ),
+                    ),
+                    inputFormatters: [NoSpaceFormatter()],
+                    controller: _dateSubmisision,
+                    validator:  ValidatorUtils.transactionDateValidator,
+                    onTap: () {
+                      setState(() {
+                        isDateFieldFocused = true;
+
+                      });
+                    },
+                  ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimation2']!,
+                  ),
+                ),
+
+                SizedBox(height: 10,),
+
+                Text(
+                  "Check-Out Date & Time : ",
+                  style: FTextStyle.formLabelTxtStyle,
+                ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimation2']!),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    key: _dateOutSubmission,
+                    focusNode: _dateOutFocusNode,
+                    keyboardType: TextInputType.text,
+                    decoration:
+                    FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                      hintText: "dd-mm-yyyy  hh:mm AM",
+                      suffixIcon: IconButton(
+                        icon: const Icon(
+                          Icons.calendar_today, // Calendar icon
+                          color: Colors.grey, // Adjust color as needed
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isDateFieldFocused = true;
+                          });
+
+
+                          // Show date picker when the icon is pressed
+                          CustomPopUp.selectDateAndTime(context, _dateOutSubmissionController);
+                        },
+                      ),
+                    ),
+                    inputFormatters: [NoSpaceFormatter()],
+                    controller: _dateOutSubmissionController,
+                    validator:  ValidatorUtils.transactionDateValidator,
+                    onTap: () {
+                      setState(() {
+                        isDateFieldFocused = true;
+
+                      });
+                    },
+                  ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimation2']!,
+                  ),
+                ),
+                Text(
+                  "No. of persons",
+                  style: FTextStyle.SubHeadingTxtStyle,
+                ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimation2']!),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: TextFormField(
+                    key: _papertTtileKey,
+                    focusNode: _papertTtileFocusNode,
+                    keyboardType: TextInputType.name,
+                    decoration: FormFieldStyle.defaultemailDecoration.copyWith(
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 10),
+                        fillColor: AppColors.formFieldBackColour,
+                        hintText: "Enter No. of persons "),
+                    controller: _paperTitle,
+                    validator: ValidatorUtils.transactionNumberValidator,
+                    onTap: () {
+                      setState(() {
+                        isTransactionFocused = true;
+                      });
+                    },
+                  ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation2']!),
+                ),
+                const SizedBox(height: 8),
+
+
+                Text(
+                  "Payment Mode",
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
@@ -348,7 +555,7 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
                             : null,
 
                         hint: const Text(
-                          "Proposal Type: ",
+                          "Select Payment: ",
                           style: FTextStyle.formhintTxtStyle,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -376,28 +583,28 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
                     child: Text(
-                      "Please select a proposal type",
+                      "Please select a payment mode",
                       style: FTextStyle.formErrorTxtStyle,
                     ),
                   ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 8),
                 Text(
-                  "Paper Title",
+                  "Cheque/ Draft/ Transaction Number",
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextFormField(
-                    key: _papertTtileKey,
-                    focusNode: _papertTtileFocusNode,
+                    key: _transactionNumberKey,
+                    focusNode: _transactionNumberFocusNode,
                     keyboardType: TextInputType.name,
                     decoration: FormFieldStyle.defaultemailDecoration.copyWith(
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 10),
                         fillColor: AppColors.formFieldBackColour,
-                        hintText: "Enter Paper Title"),
-                    controller: _paperTitle,
+                        hintText: "Enter Cheque/ Draft/ Transaction Number"),
+                    controller: _transactionNumber,
                     validator: ValidatorUtils.transactionNumberValidator,
                     onTap: () {
                       setState(() {
@@ -409,15 +616,15 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Date of Submission",
+                  "Cheque/ Draft/ Transaction Date",
                   style: FTextStyle.formLabelTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
-                    key: _dateOfSubmission,
-                    focusNode: _dateFocusNode,
+                    key: _dateBirthKey,
+                    focusNode: _dateBirthFocusNode,
                     keyboardType: TextInputType.text,
                     decoration:
                     FormFieldStyle.defaultAddressInputDecoration.copyWith(
@@ -429,111 +636,27 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
                         ),
                         onPressed: () {
                           setState(() {
-                            isDateFieldFocused = true;
+                            isDateBirthFieldFocused = true;
                           });
 
 
                           // Show date picker when the icon is pressed
-                          CustomPopUp.selectDate(context, _dateSubmisision);
+                          CustomPopUp.selectDate(context, _dateBirth);
                         },
                       ),
                     ),
                     inputFormatters: [NoSpaceFormatter()],
-                    controller: _dateSubmisision,
+                    controller: _dateBirth,
                     validator:  ValidatorUtils.transactionDateValidator,
                     onTap: () {
                       setState(() {
-                        isDateFieldFocused = true;
+                        isDateBirthFieldFocused = true;
 
                       });
                     },
                   ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!,
                   ),
-                ),
-
-                const SizedBox(height: 8),
-                Text(
-                  "Bank Name",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    key: _bankKey,
-                    focusNode: _bankFocusNode,
-                    keyboardType: TextInputType.name,
-                    decoration: FormFieldStyle.defaultemailDecoration.copyWith(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 10),
-                        fillColor: AppColors.formFieldBackColour,
-                        hintText: "Enter Bank Name"),
-                    controller: _bank,
-                    validator: ValidatorUtils.bankNameValidator,
-                    onTap: () {
-                      setState(() {
-
-                      });
-                    },
-                  ).animateOnPageLoad(
-                      animationsMap['imageOnPageLoadAnimation2']!),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Coupon Code (if any)",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    readOnly: true,
-                    key: _codeNumberKey,
-                    focusNode: _codeNumberFocusNode,
-                    keyboardType: TextInputType.number,
-                    decoration: FormFieldStyle.defaultemailDecoration.copyWith(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 10),
-                        fillColor: AppColors.formFieldBackColour,
-                        hintText: "Enter Coupon Code (if any)"),
-                    inputFormatters: [NoSpaceFormatter()],
-                    controller: _codeNumber,
-                    validator: ValidatorUtils.couponCodeValidator,
-                    onTap: () {
-                      setState(() {});
-                    },
-                  ).animateOnPageLoad(
-                      animationsMap['imageOnPageLoadAnimation2']!),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Pay Amount ",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    readOnly: true,
-                    key: _paymentAmountKey,
-                    focusNode: _paymentAmountFocusNode,
-                    keyboardType: TextInputType.number,
-                    decoration: FormFieldStyle.defaultemailDecoration.copyWith(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 10),
-                        fillColor: AppColors.formFieldBackColour,
-                        hintText: "Enter Pay Amount"),
-                    inputFormatters: [NoSpaceFormatter()],
-                    controller: _paymentAmountNumber,
-                    validator: ValidatorUtils.amountValidator,
-                    onTap: () {
-                      setState(() {
-                        isPaymentFocused = true;
-                      });
-                    },
-                  ).animateOnPageLoad(
-                      animationsMap['imageOnPageLoadAnimation2']!),
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -624,47 +747,11 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: "I accept ",
+                                  text: "Please upload scan/print copy of Cheque/ Draft/ Bank Transfer Receipt/ Cash Deposit Receipt",
                                   style: FTextStyle.listTitleSub.copyWith(
                                       fontSize: 13, color: Colors.black),
                                 ),
-                                TextSpan(
-                                  text: "Terms & Conditions",
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                      fontSize: 13, color: Colors.red),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                          const TermCondition(),
-                                        ),
-                                      );
-                                    },
-                                ),
-                                TextSpan(
-                                  text: " and ",
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                      fontSize: 13, color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: "Privacy Policy",
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                      fontSize: 13, color: Colors.red),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      // Action to view registration fee
-                                      // For example, navigate to another page or open a link
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                          const PrivacyPolicy(),
-                                        ),
-                                      );
-                                    },
-                                ),
+
                               ],
                             ),
                           ).animateOnPageLoad(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_conference/screen/authFlow/splash_screen.dart';
+import 'package:smart_conference/utils/shared_preference.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-
+  await Prefs.init();
   runApp(const MyApp());
 }
 

@@ -319,6 +319,8 @@ class _AccommodationViewState extends State<AccommodationView> {
               Column(
                 children: [
                   Container(
+                    height: height*0.06,
+                    width: screenWidth,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topRight,
@@ -332,14 +334,13 @@ class _AccommodationViewState extends State<AccommodationView> {
                         ],
                       ),
                     ),
-                    child: Text(
-                      activeConferenceList['title'],
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                    child: Center(
+                      child: Text(
+                        activeConferenceList['title'],
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: FTextStyle.listTitle,
+                        textAlign:TextAlign.center,
                       ),
                     ),
                   ),

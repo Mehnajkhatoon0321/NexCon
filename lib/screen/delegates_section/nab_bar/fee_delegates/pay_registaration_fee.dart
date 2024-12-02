@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/delegates_section/fee_page.dart';
+import 'package:smart_conference/screen/delegates_section/nab_bar/fee_delegates/fee_page.dart';
 import 'package:smart_conference/screen/sideMenu/privacy_policy.dart';
 import 'package:smart_conference/screen/sideMenu/term_condition.dart';
 import 'package:smart_conference/utils/colours.dart';

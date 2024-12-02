@@ -4,10 +4,10 @@ import 'package:smart_conference/screen/authFlow/login_screen.dart';
 import 'package:smart_conference/screen/authFlow/selection_role.dart';
 import 'package:smart_conference/screen/delegates_section/abstract/abstract.dart';
 import 'package:smart_conference/screen/delegates_section/accomondation/accomodation.dart';
-import 'package:smart_conference/screen/delegates_section/conference_category.dart';
+import 'package:smart_conference/screen/delegates_section/delegates_register_process/conference_category.dart';
 import 'package:smart_conference/screen/delegates_section/featured_conferences.dart';
-import 'package:smart_conference/screen/delegates_section/my_receipt.dart';
-import 'package:smart_conference/screen/delegates_section/paper_delegates.dart';
+import 'package:smart_conference/screen/delegates_section/delegates_side_menu/my_receipt.dart';
+import 'package:smart_conference/screen/delegates_section/paper_delegates/paper_delegates.dart';
 import 'package:smart_conference/screen/sideMenu/about.dart';
 import 'package:smart_conference/screen/sideMenu/contact.dart';
 import 'package:smart_conference/screen/sideMenu/how_works.dart';
@@ -17,6 +17,7 @@ import 'package:smart_conference/screen/sideMenu/plan_pricing.dart';
 import 'package:smart_conference/screen/sideMenu/services.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:smart_conference/utils/pref_utils.dart';
 class SideMenuScreen extends StatefulWidget {
   final String selectedRole;
   const SideMenuScreen({required this.selectedRole,super.key});
@@ -273,10 +274,17 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                         ),
                         child: const Text("OK", style: TextStyle(color: Colors.white)),
                         onPressed: () {
+                          PrefUtils.setIsLogin(false);
+                          PrefUtils.setToken("");
+                          // Save user
+                          PrefUtils.setUserEmailLogin("");
+                          // Save  role
+                          // PrefUtils.setUserId(0);
 
+                          PrefUtils.setUserPassword("");
                           Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(builder: (context) => LoginScreen(selectedRole: widget.selectedRole)),
+                            MaterialPageRoute(builder: (context) => RoleSelectionScreen()),
                                 (route) => false, // This will remove all previous routes
                           ); // Close the dialog
                           _isLogoutDialogVisible = false; // Reset the flag

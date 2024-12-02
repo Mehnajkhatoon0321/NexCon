@@ -421,6 +421,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           isLoading = true; // Start loading
                         });
                         if (widget.selectedRole == 'isselect organizer') {
+                          setState(() {
+                            PrefUtils.setIsLogin(true);
+                            PrefUtils.setRoleSelection(widget.selectedRole);
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -429,6 +433,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           );
                         } else {
+                          setState(() {
+                            PrefUtils.setIsLogin(true);
+                            PrefUtils.setRoleSelection("");
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -483,6 +491,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: GestureDetector(
                           onTap: () {
                             if (widget.selectedRole == 'isselect organizer') {
+                              setState(() {
+                                PrefUtils.setIsLogin(true);
+                                PrefUtils.setRoleSelection(widget.selectedRole);
+                              });
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -490,7 +502,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                       const OrganizerRegister(),
                                 ),
                               );
-                            } else {
+                            }
+
+                            else {
+                              setState(() {
+                                setState(() {
+                                  PrefUtils.setIsLogin(true);
+                                  PrefUtils.setRoleSelection("");
+                                });
+                              });
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

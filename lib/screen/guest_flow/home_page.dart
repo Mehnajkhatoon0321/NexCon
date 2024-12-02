@@ -14,6 +14,7 @@ import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:smart_conference/utils/pref_utils.dart';
 class HomePage extends StatefulWidget {
   final  String selectedRole;
   const HomePage({super.key,required this.selectedRole});
@@ -290,10 +291,17 @@ class _HomePageState extends State<HomePage>
                       ),
                       child: const Text("OK", style: TextStyle(color: Colors.white)),
                       onPressed: () {
+                        PrefUtils.setIsLogin(false);
+                        PrefUtils.setToken("");
+                        // Save user
+                        PrefUtils.setUserEmailLogin("");
+                        // Save  role
+                        // PrefUtils.setUserId(0);
 
+                        PrefUtils.setUserPassword("");
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginScreen(selectedRole: widget.selectedRole)),
+                          MaterialPageRoute(builder: (context) => RoleSelectionScreen()),
                               (route) => false, // This will remove all previous routes
                         ); // Close the dialog
                         _isLogoutDialogVisible = false; // Reset the flag

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:smart_conference/screen/delegates_section/pay_registaration_fee.dart';
+import 'package:smart_conference/screen/delegates_section/nab_bar/fee_delegates/pay_registaration_fee.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/common_popups.dart';

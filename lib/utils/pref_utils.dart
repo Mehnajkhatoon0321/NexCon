@@ -14,6 +14,14 @@ class PrefUtils {
     final String? value = Prefs.prefs?.getString(SharedPrefsKeys.token);
     return value ?? '';
   }
+static void setRoleSelection(String value) {
+    Prefs.prefs?.setString(SharedPrefsKeys.roleSelection, value);
+  }
+
+  static String getRoleSelection() {
+    final String? value = Prefs.prefs?.getString(SharedPrefsKeys.roleSelection);
+    return value ?? '';
+  }
 
 
 
@@ -46,12 +54,23 @@ class PrefUtils {
     return value ?? '';
   }
 
+  static void setIsLogin(bool value) {
+    Prefs.prefs?.setBool(SharedPrefsKeys.isLogin, value);
+  }
+
+  static bool getIsLogin() {
+    final bool? value = Prefs.prefs?.getBool(SharedPrefsKeys.isLogin);
+    return value ?? false;
+  }
+
 }
 
 class SharedPrefsKeys {
 
   static const token = 'token';
+  static const roleSelection = 'roleSelection';
   static const rememberMe = 'rememberMe';
   static const userPassword = 'userPassword';
   static const userEmailLogin = 'userEmailLogin';
+  static const isLogin = 'isLogin';
 }

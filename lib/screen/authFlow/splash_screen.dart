@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_conference/screen/authFlow/selection_role.dart';
+import 'package:smart_conference/screen/delegates_section/delegates_home_page.dart';
+import 'package:smart_conference/screen/organizer_section/organizer_home_page.dart';
 
 
 import 'dart:async';
 
 import 'package:smart_conference/utils/commonFunction.dart';
+import 'package:smart_conference/utils/pref_utils.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -55,14 +58,43 @@ class _SplashScreenState extends State<SplashScreen> {
 
     );
   }
+  void navigateUser(BuildContext context) {
+    bool isLoggedIn = PrefUtils.getIsLogin();
+    String roleSelection = PrefUtils.getRoleSelection();
+    print("isLoggedIn: $isLoggedIn, roleSelection: $roleSelection");
 
-  navigateUser(BuildContext context) {
-
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (BuildContext context) {
-        return const RoleSelectionScreen();
-      }),
-          (route) => false,
-    );
+    if (isLoggedIn == true) {
+      if (roleSelection == "isselect organizer") {
+        print("Navigating to OrganizerHomePage");
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (BuildContext context) => OrganizerHomePage(
+              selectedRole: roleSelection,
+            ),
+          ),
+              (route) => false,
+        );
+      } else if (roleSelection==""){
+        print("Navigating to HomeDelegates");
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (BuildContext context) => HomeDelegates(
+              selectedRole: roleSelection,
+            ),
+          ),
+              (route) => false,
+        );
+      }
+    } else {
+      print("Navigating to RoleSelectionScreen");
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (BuildContext context) => const RoleSelectionScreen(),
+        ),
+            (route) => false,
+      );
+    }
   }
+
+
 }
