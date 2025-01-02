@@ -31,6 +31,51 @@ class _ContactScreenState extends State<ContactScreen> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          Container(
+
+            color: Colors.black54,
+
+              child: Text("Sales:",style: FTextStyle.listTitleSub,)
+
+
+          ),
+          Container(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Phone: ",style: FTextStyle.listTitleSub,),
+                    Text("+91 8090367090",style: FTextStyle.listTitleSub,),
+                  ],
+
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Email: ",style: FTextStyle.listTitleSub,),
+                    Text("ravi@smartconference.in",style: FTextStyle.listTitleSub,),
+                  ],
+
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Email: ",style: FTextStyle.listTitleSub,),
+                    Text("ravi@smartconference.in",style: FTextStyle.listTitleSub,),
+                  ],
+
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

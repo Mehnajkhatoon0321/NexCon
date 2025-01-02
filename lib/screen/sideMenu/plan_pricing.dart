@@ -31,6 +31,11 @@ class _PlanPricingScreenState extends State<PlanPricingScreen> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
+      body: Column(
+        children: [
+
+        ],
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -254,7 +255,8 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
                                       "CONTINUE",
-                                      style: FTextStyle.listTitleBig.copyWith(color: Colors.white, letterSpacing: 1.0),
+                                      style: FTextStyle.listTitleBig.
+                                      copyWith(color: Colors.white, letterSpacing: 1.0),
                                     ),
                                   ),
                                 ),
