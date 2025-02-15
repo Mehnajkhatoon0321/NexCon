@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_conference/screen/authFlow/login_screen.dart';
+import 'package:smart_conference/screen/authFlow/selection_role.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/constant.dart';
@@ -282,7 +283,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 inputFormatters: [NoSpaceFormatter()],
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return "Please enter password";
+                                    return "Please enter old password .";
                                   } else {
                                     return null;
                                   }
@@ -332,7 +333,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 inputFormatters: [NoSpaceFormatter()],
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return "Please enter password";
+                                    return "Please enter new password .";
                                   } else {
                                     return null;
                                   }
@@ -364,25 +365,25 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     .copyWith(
                                     suffixIcon: IconButton(
                                       icon: Icon(
-                                        newPasswordVisible
+                                        confirmPasswordVisible
                                             ? Icons.visibility_off
                                             : Icons.visibility,
                                         color: AppColors.FormFieldHintColour,
                                       ),
                                       onPressed: () {
                                         setState(() {
-                                          newPasswordVisible = !newPasswordVisible;
+                                          confirmPasswordVisible = !confirmPasswordVisible;
                                         });
                                       },
                                     ),
                                     filled: true,
                                     fillColor: Colors.white),
                                 controller: _confirmPassword,
-                                obscureText: newPasswordVisible,
+                                obscureText: confirmPasswordVisible,
                                 inputFormatters: [NoSpaceFormatter()],
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return "Please enter password";
+                                    return "Please enter confirm password .";
                                   } else {
                                     return null;
                                   }
@@ -415,8 +416,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>  LoginScreen(
-                                      selectedRole:widget.selectedRole
+                                  builder: (context) =>  RoleSelectionScreen(
+                                      // selectedRole:widget.selectedRole
                                   ),
                                 ),
                               );

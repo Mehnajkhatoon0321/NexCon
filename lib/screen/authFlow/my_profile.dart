@@ -3,6 +3,7 @@ import 'package:smart_conference/screen/authFlow/edit_profile.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class MyProfile extends StatefulWidget {
@@ -149,13 +150,16 @@ class _MyProfileState extends State<MyProfile> {
                                 style: FTextStyle.Faqssubtitle,
                               ),
                             ),
+
                             Expanded(
                               flex: 2,
-                              child: Text(
-                                entry.value.toString(),
-                                style: FTextStyle.formhintTxtStyle,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
+                              child: GestureDetector(
+                                child: Text(
+                                  entry.value.toString(),
+                                  style: FTextStyle.formhintTxtStyle,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                ),
                               ),
                             ),
                           ],
@@ -165,32 +169,7 @@ class _MyProfileState extends State<MyProfile> {
                   )
 
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 23.0),
-                //   child: SizedBox(
-                //     height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 40,
-                //     child: ElevatedButton(
-                //       onPressed: () {
-                //         Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => const EditProfile(),
-                //           ),
-                //         );
-                //       },
-                //       style: ElevatedButton.styleFrom(
-                //         shape: RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.circular(12),
-                //         ),
-                //         backgroundColor: AppColors.primaryColour,
-                //       ),
-                //       child: Text(
-                //         "Edit Profile",
-                //         style: FTextStyle.loginBtnStyle,
-                //       ),
-                //     ),
-                //   ),
-                // ),
+
               ],
             ),
           )

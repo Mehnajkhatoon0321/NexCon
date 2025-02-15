@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:smart_conference/screen/delegates_section/nab_bar/fee_delegates/fee_page.dart';
-import 'package:smart_conference/screen/sideMenu/privacy_policy.dart';
-import 'package:smart_conference/screen/sideMenu/term_condition.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/privacy_policy.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/term_condition.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/constant.dart';
@@ -268,7 +268,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Container(
@@ -322,13 +322,13 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                       style: FTextStyle.formErrorTxtStyle,
                     ),
                   ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Text(
                   "Payment Mode",
                   style: FTextStyle.SubHeadingTxtStyle,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Container(
@@ -384,7 +384,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                       style: FTextStyle.formErrorTxtStyle,
                     ),
                   ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Text(
                   "Cheque/ Draft/ Transaction Number",
                   style: FTextStyle.SubHeadingTxtStyle,
@@ -696,7 +696,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                FeePage(),
+                                const FeePage(),
                           ),
                         );
 

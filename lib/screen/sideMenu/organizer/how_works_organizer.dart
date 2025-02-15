@@ -41,6 +41,7 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
               "How it works for Conference Organizers",
               style: FTextStyle.preHeadingBoldStyle,
             ),
+            SizedBox(height: 20,),
             Text(
               'Our Conference Management System provides an easy-to-use interface for registration, allowing returning participants to register without creating a new account. We offer abstract submission with customizable submission forms and file uploads. Our submission form allows the entry of proposal type, keywords, topics, preferred sessions, authors, and presenters. The system facilitates the review of abstracts and full papers, and sends system-generated emails to participants upon acceptance or rejection of their papers, along with remarks provided by the reviewers.\n\n'
                   'Additionally, we offer services such as registration fee payment, accommodation booking, travel information updates, and more. Our system enables conference administrators to set up a detailed conference schedule and program. As a conference organizer, you can manage multiple conferences through a single organizer account.\n\n'

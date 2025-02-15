@@ -53,9 +53,13 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
           end: const Offset(0.0, 0.0),
         ),
       ],
+
+
+      
     ),
     'columnOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
+
       effects: [
         FadeEffect(
           curve: Curves.easeInOut,

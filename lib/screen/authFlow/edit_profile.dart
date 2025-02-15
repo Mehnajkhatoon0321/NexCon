@@ -329,6 +329,7 @@ class _EditProfileState extends State<EditProfile> {
                                         : null,
                                   ),
                                 ),
+
                                 if (profileImage.isNotEmpty)
                                   Positioned(
                                     bottom: 0,

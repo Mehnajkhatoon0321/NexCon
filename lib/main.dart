@@ -6,7 +6,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Prefs.init();
-  runApp(const MyApp());
+
+  (const MyApp());
 }
 
 
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-// This widget is the root of your application.
+
+
 
 }

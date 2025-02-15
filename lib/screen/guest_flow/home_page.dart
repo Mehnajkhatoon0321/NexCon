@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:smart_conference/screen/authFlow/login_screen.dart';
 import 'package:smart_conference/screen/authFlow/selection_role.dart';
-import 'package:smart_conference/screen/sideMenu/about.dart';
-import 'package:smart_conference/screen/sideMenu/conference.dart';
-import 'package:smart_conference/screen/sideMenu/contact.dart';
-import 'package:smart_conference/screen/sideMenu/how_works.dart';
-import 'package:smart_conference/screen/sideMenu/plan_pricing.dart';
-import 'package:smart_conference/screen/sideMenu/services.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/about.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/conference.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/contact.dart';
+import 'package:smart_conference/screen/sideMenu/organizer/how_works_organizer.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/plan_pricing.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/services.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/commonFunction.dart';
 import 'package:smart_conference/utils/flutter_flow_animations.dart';
@@ -165,10 +165,10 @@ class _HomePageState extends State<HomePage>
               return Column(
                 children: [
                   ListTile(
-                    leading: Icon(item['icon'],color: AppColors.aboutUsHeadingColor
+                    leading: Icon(item['icon'],color:  AppColors.aboutUsHeadingColor
 
                       ,),
-                    title: Text(item['subtitle'], style: FTextStyle.FaqsTxtStyle),
+                    title: Text(item['subtitle'], style:FTextStyle.drawerText.copyWith(fontSize: 14),),
                     onTap: () {
                       Navigator.pop(context); // Close the drawer
 
@@ -249,6 +249,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+
   void _showLogDialog(int index) {
     if (_isLogoutDialogVisible) return; // Prevent showing multiple dialogs
 
@@ -258,58 +259,63 @@ class _HomePageState extends State<HomePage>
       context: context,
       builder: (BuildContext context) {
         return Dialog(
+          backgroundColor: AppColors.greyLight,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Are you sure you want to logout?", style: FTextStyle.preHeadingStyle),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: AppColors.formFieldBackColour,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+            padding:  EdgeInsets.all(16.0),
+            child: Container(
+              color: AppColors.greyLight,
+              height: MediaQuery.of(context).size.height*0.15,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Are you sure you want to logout?", style: FTextStyle.preHeadingStyle),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.04),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: AppColors.boarderColour,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
                         ),
+                        child: const Text("Cancel", style: TextStyle(color: Colors.black)),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          _isLogoutDialogVisible = false; // Reset the flag when closed
+                        },
                       ),
-                      child: const Text("Cancel", style: TextStyle(color: Colors.black)),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        _isLogoutDialogVisible = false; // Reset the flag when closed
-                      },
-                    ),
-                    const SizedBox(width: 8),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: AppColors.primaryColourDark,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+                      const SizedBox(width: 10),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: AppColors.primaryColour,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
                         ),
-                      ),
-                      child: const Text("OK", style: TextStyle(color: Colors.white)),
-                      onPressed: () {
-                        PrefUtils.setIsLogin(false);
-                        PrefUtils.setToken("");
-                        // Save user
-                        PrefUtils.setUserEmailLogin("");
-                        // Save  role
-                        // PrefUtils.setUserId(0);
+                        child: const Text("OK", style: TextStyle(color: Colors.white)),
+                        onPressed: () {
+                          PrefUtils.setIsLogin(false);
+                          PrefUtils.setToken("");
+                          // Save user
+                          PrefUtils.setUserEmailLogin("");
+                          // Save  role
+                          // PrefUtils.setUserId(0);
 
-                        PrefUtils.setUserPassword("");
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => RoleSelectionScreen()),
-                              (route) => false, // This will remove all previous routes
-                        ); // Close the dialog
-                        _isLogoutDialogVisible = false; // Reset the flag
-                      },
-                    ),
-                  ],
-                ),
-              ],
+                          PrefUtils.setUserPassword("");
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => RoleSelectionScreen()),
+                                (route) => false, // This will remove all previous routes
+                          ); // Close the dialog
+                          _isLogoutDialogVisible = false; // Reset the flag
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );

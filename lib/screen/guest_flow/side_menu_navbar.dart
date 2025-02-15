@@ -6,15 +6,16 @@ import 'package:smart_conference/screen/delegates_section/abstract/abstract.dart
 import 'package:smart_conference/screen/delegates_section/accomondation/accomodation.dart';
 import 'package:smart_conference/screen/delegates_section/delegates_register_process/conference_category.dart';
 import 'package:smart_conference/screen/delegates_section/featured_conferences.dart';
-import 'package:smart_conference/screen/delegates_section/delegates_side_menu/my_receipt.dart';
+
 import 'package:smart_conference/screen/delegates_section/paper_delegates/paper_delegates.dart';
-import 'package:smart_conference/screen/sideMenu/about.dart';
-import 'package:smart_conference/screen/sideMenu/contact.dart';
-import 'package:smart_conference/screen/sideMenu/how_works.dart';
-import 'package:smart_conference/screen/sideMenu/how_works_delegates.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/about.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/contact.dart';
+import 'package:smart_conference/screen/sideMenu/delegates_side_menu/my_receipt.dart';
+import 'package:smart_conference/screen/sideMenu/organizer/how_works_organizer.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/how_works_delegates.dart';
 import 'package:smart_conference/screen/authFlow/my_profile.dart';
-import 'package:smart_conference/screen/sideMenu/plan_pricing.dart';
-import 'package:smart_conference/screen/sideMenu/services.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/plan_pricing.dart';
+import 'package:smart_conference/screen/sideMenu/common_section/services.dart';
 import 'package:smart_conference/utils/colours.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'package:smart_conference/utils/pref_utils.dart';
@@ -229,7 +230,6 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
     );
 
   }
-
   void _showLogDialog(int index) {
     if (_isLogoutDialogVisible) return; // Prevent showing multiple dialogs
 
@@ -239,21 +239,23 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
+          backgroundColor: AppColors.greyLight,
           child: Padding(
             padding:  EdgeInsets.all(16.0),
             child: Container(
+              color: AppColors.greyLight,
               height: MediaQuery.of(context).size.height*0.15,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text("Are you sure you want to logout?", style: FTextStyle.preHeadingStyle),
-                   SizedBox(height: MediaQuery.of(context).size.height*0.04),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.04),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: AppColors.formFieldBackColour,
+                          backgroundColor: AppColors.boarderColour,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                           ),

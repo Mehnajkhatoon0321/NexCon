@@ -321,7 +321,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const ViewBankDetails()));
                     },
                     child: Container(
-                      height: height*0.12,
+                      // height: height*0.12,
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(

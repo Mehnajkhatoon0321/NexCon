@@ -8,7 +8,8 @@ import 'package:smart_conference/utils/common_popups.dart';
 import 'package:smart_conference/utils/font_text_Style.dart';
 import 'package:smart_conference/utils/form_field_style.dart';
 class FeePage extends StatefulWidget {
-  const FeePage({super.key});
+  const
+  FeePage({super.key});
 
   @override
   State<FeePage> createState() => _FeePageState();
