@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_conference/screen/authFlow/login_screen.dart';
-import 'package:smart_conference/screen/authFlow/selection_role.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/constant.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
-import 'package:smart_conference/utils/form_field_style.dart';
-import 'package:smart_conference/utils/no_space_input_formatter_class.dart';
-import 'package:smart_conference/utils/validator_utils.dart';
+import 'package:nexcon/screen/authFlow/selection_role.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/constant.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+import 'package:nexcon/utils/no_space_input_formatter_class.dart';
+import 'package:nexcon/utils/validator_utils.dart';
+
+import '../../utils/form_field_style.dart';
+
 class ChangePassword extends StatefulWidget {
 final  String selectedRole;
   const ChangePassword({required this.selectedRole,super.key});

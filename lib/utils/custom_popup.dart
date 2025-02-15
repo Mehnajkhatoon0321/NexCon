@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_conference/utils/colours.dart';
+import 'package:nexcon/utils/colours.dart';
+
 
 class CustomPopUp {
   // Static method to select a date with custom calendar colors

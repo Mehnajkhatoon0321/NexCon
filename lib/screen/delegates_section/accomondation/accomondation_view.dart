@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
-import 'package:smart_conference/utils/form_field_style.dart';
+
 class AccommodationView extends StatefulWidget {
 final  String id ;
   const AccommodationView({

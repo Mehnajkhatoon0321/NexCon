@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:smart_conference/screen/delegates_section/accomondation/accomodaton_register.dart';
-import 'package:smart_conference/screen/delegates_section/accomondation/accomondation_view.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/common_popups.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:nexcon/screen/delegates_section/accomondation/accomodaton_register.dart';
+import 'package:nexcon/screen/delegates_section/accomondation/accomondation_view.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/common_popups.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+
 class AccommodationScreen extends StatefulWidget {
   const AccommodationScreen({super.key});
 

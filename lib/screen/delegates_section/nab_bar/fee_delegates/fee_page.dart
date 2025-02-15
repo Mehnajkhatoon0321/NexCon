@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:smart_conference/screen/delegates_section/nab_bar/fee_delegates/pay_registaration_fee.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/common_popups.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
-import 'package:smart_conference/utils/form_field_style.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/fee_delegates/pay_registaration_fee.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/common_popups.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+import 'package:nexcon/utils/form_field_style.dart';
+
 class FeePage extends StatefulWidget {
   const
   FeePage({super.key});

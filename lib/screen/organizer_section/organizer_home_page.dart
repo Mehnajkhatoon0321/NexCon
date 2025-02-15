@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/guest_flow/side_menu_navbar.dart';
+import 'package:nexcon/screen/guest_flow/side_menu_navbar.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
 
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
 class OrganizerHomePage extends StatefulWidget {
   final String selectedRole;
   const OrganizerHomePage({required this.selectedRole,super.key});

@@ -1,4 +1,4 @@
-package com.conference.smart_conference
+package com.example.nexcon
 
 import io.flutter.embedding.android.FlutterActivity
 

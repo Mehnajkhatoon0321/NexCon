@@ -2,9 +2,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/constant.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/constant.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+
 
 
 

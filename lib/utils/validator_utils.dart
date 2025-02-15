@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_conference/utils/constant.dart';
+import 'package:nexcon/utils/constant.dart';
+
 
 
 

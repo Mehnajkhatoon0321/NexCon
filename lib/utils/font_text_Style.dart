@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_conference/utils/colours.dart';
+import 'package:nexcon/utils/colours.dart';
+
 
 
 

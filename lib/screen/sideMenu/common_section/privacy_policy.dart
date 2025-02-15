@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+
 class PrivacyPolicy extends StatefulWidget {
   const PrivacyPolicy({super.key});
 

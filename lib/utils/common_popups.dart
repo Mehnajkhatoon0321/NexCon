@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nexcon/utils/DeletePopupManager.dart';
+import 'package:nexcon/utils/commonFunction.dart';
 
-import 'package:smart_conference/utils/DeletePopupManager.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
+
 
 import 'colours.dart';
 import 'font_text_Style.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+
 class PaperRegister extends StatefulWidget {
   const PaperRegister({super.key});
 

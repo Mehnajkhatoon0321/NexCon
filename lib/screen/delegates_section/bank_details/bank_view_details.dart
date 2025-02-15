@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+
 class ViewBankDetails extends StatefulWidget {
   const ViewBankDetails({super.key});
 

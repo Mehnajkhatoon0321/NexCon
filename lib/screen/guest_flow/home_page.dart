@@ -2,19 +2,19 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/authFlow/login_screen.dart';
-import 'package:smart_conference/screen/authFlow/selection_role.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/about.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/conference.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/contact.dart';
-import 'package:smart_conference/screen/sideMenu/organizer/how_works_organizer.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/plan_pricing.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/services.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
-import 'package:smart_conference/utils/pref_utils.dart';
+import 'package:nexcon/screen/authFlow/selection_role.dart';
+import 'package:nexcon/screen/sideMenu/common_section/about.dart';
+import 'package:nexcon/screen/sideMenu/common_section/conference.dart';
+import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
+import 'package:nexcon/screen/sideMenu/common_section/plan_pricing.dart';
+import 'package:nexcon/screen/sideMenu/common_section/services.dart';
+import 'package:nexcon/screen/sideMenu/organizer/how_works_organizer.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+import 'package:nexcon/utils/pref_utils.dart';
+
 class HomePage extends StatefulWidget {
   final  String selectedRole;
   const HomePage({super.key,required this.selectedRole});

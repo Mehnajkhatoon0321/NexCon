@@ -2,20 +2,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_conference/screen/authFlow/selection_role.dart';
-import 'package:smart_conference/screen/organizer_section/organizer_home_page.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/privacy_policy.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/term_condition.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/constant.dart';
-import 'package:smart_conference/utils/custom_popup.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
-import 'package:smart_conference/utils/form_field_style.dart';
-import 'package:smart_conference/utils/no_space_input_formatter_class.dart';
-import 'package:smart_conference/utils/pref_utils.dart';
-import 'package:smart_conference/utils/validator_utils.dart';
+import 'package:nexcon/screen/authFlow/selection_role.dart';
+import 'package:nexcon/screen/organizer_section/organizer_home_page.dart';
+import 'package:nexcon/screen/sideMenu/common_section/privacy_policy.dart';
+import 'package:nexcon/screen/sideMenu/common_section/term_condition.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/constant.dart';
+import 'package:nexcon/utils/custom_popup.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+import 'package:nexcon/utils/form_field_style.dart';
+import 'package:nexcon/utils/no_space_input_formatter_class.dart';
+import 'package:nexcon/utils/pref_utils.dart';
+import 'package:nexcon/utils/validator_utils.dart';
+
 class OrganizerRegister extends StatefulWidget {
   const OrganizerRegister({super.key});
 

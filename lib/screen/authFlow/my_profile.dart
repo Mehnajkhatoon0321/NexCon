@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smart_conference/screen/authFlow/edit_profile.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:nexcon/screen/authFlow/edit_profile.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/delegates_section/bank_details/bank_details.dart';
-import 'package:smart_conference/screen/delegates_section/nab_bar/delegates_category_page.dart';
-import 'package:smart_conference/screen/delegates_section/nab_bar/fee_delegates/fee_page.dart';
-import 'package:smart_conference/screen/delegates_section/nab_bar/my_conference.dart';
-import 'package:smart_conference/screen/delegates_section/nab_bar/fee_delegates/pay_registaration_fee.dart';
-import 'package:smart_conference/screen/guest_flow/side_menu_navbar.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
+import 'package:nexcon/screen/delegates_section/bank_details/bank_details.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/delegates_category_page.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/fee_delegates/fee_page.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/fee_delegates/pay_registaration_fee.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/my_conference.dart';
+import 'package:nexcon/screen/guest_flow/side_menu_navbar.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+
 
 class HomeDelegates extends StatefulWidget {
   final String selectedRole;

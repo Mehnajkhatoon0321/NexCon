@@ -1,7 +1,9 @@
 
 
 
-import 'package:smart_conference/utils/shared_preference.dart';
+
+
+import 'package:nexcon/utils/shared_preference.dart';
 
 class PrefUtils {
 

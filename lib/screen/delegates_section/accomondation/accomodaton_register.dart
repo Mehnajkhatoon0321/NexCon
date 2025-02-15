@@ -4,16 +4,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_conference/screen/delegates_section/accomondation/accomodation.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/privacy_policy.dart';
-import 'package:smart_conference/screen/sideMenu/common_section/term_condition.dart';
-import 'package:smart_conference/utils/colours.dart';
-import 'package:smart_conference/utils/custom_popup.dart';
-import 'package:smart_conference/utils/flutter_flow_animations.dart';
-import 'package:smart_conference/utils/font_text_Style.dart';
-import 'package:smart_conference/utils/form_field_style.dart';
-import 'package:smart_conference/utils/no_space_input_formatter_class.dart';
-import 'package:smart_conference/utils/validator_utils.dart';
+import 'package:nexcon/screen/delegates_section/accomondation/accomodation.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/custom_popup.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
+import 'package:nexcon/utils/form_field_style.dart';
+import 'package:nexcon/utils/no_space_input_formatter_class.dart';
+import 'package:nexcon/utils/validator_utils.dart';
+
 class AccommodationRegister extends StatefulWidget {
   final String tnNumber;
   final String date;

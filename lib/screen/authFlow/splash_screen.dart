@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smart_conference/screen/authFlow/selection_role.dart';
-import 'package:smart_conference/screen/delegates_section/delegates_home_page.dart';
-import 'package:smart_conference/screen/organizer_section/organizer_home_page.dart';
+import 'package:nexcon/screen/authFlow/selection_role.dart';
+import 'package:nexcon/screen/delegates_section/delegates_home_page.dart';
+import 'package:nexcon/screen/organizer_section/organizer_home_page.dart';
+
 
 
 import 'dart:async';
 
-import 'package:smart_conference/utils/commonFunction.dart';
-import 'package:smart_conference/utils/pref_utils.dart';
+import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/pref_utils.dart';
+
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
