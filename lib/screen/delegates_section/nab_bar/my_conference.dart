@@ -257,9 +257,9 @@ class _MyConferencePageState extends State<MyConferencePage> {
           itemBuilder: (context, index) {
             final item = activeConferenceList[index];
             return Container(
-              height: height * 0.16,
+              // height: height * 0.16,
               margin: const EdgeInsets.symmetric(vertical: 8),
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(26),
               decoration: BoxDecoration(
                 color: index % 2 == 0
                     ? const Color(0xFFFFF7E6)
@@ -413,9 +413,9 @@ class _MyConferencePageState extends State<MyConferencePage> {
       itemBuilder: (context, index) {
         final item = inactiveConferenceList[index];
         return Container(
-          height: height * 0.16,
+          // height: height * 0.16,
           margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(26),
           decoration: BoxDecoration(
             color: index % 2 == 0
                 ? const Color(0xFFFFF7E6)
