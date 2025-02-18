@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage>
     {'subtitle': 'Conferences', 'icon': Icons.night_shelter},
     {'subtitle': 'Contact', 'icon': Icons.contact_phone_rounded},
     {'subtitle': 'Login', 'icon': Icons.login},
-    {'subtitle': 'Logout', 'icon': Icons.logout},
+
   ];
   @override
   Widget build(BuildContext context) {
@@ -214,9 +214,7 @@ class _HomePageState extends State<HomePage>
                             MaterialPageRoute(builder: (context) => const RoleSelectionScreen()),
                           );
                           break;
-                        case 'Logout':
-                          _showLogDialog(-1);
-                          break;
+
                         default:
                         // Handle default case if needed
                           break;

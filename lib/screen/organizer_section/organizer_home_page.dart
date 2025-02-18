@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/screen/guest_flow/side_menu_navbar.dart';
+import 'package:nexcon/screen/organizer_section/abstract_and_paper/abstract_organizer/abstract_organizer.dart';
+import 'package:nexcon/screen/organizer_section/abstract_and_paper/paper_organizer/paper_organizer.dart';
+import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer.dart';
+import 'package:nexcon/screen/organizer_section/mydashboard_organizer/my_dashboard_organizer.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
@@ -98,6 +102,73 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
     ),
   };
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
+
+  final List<Map<String, dynamic>> _navBarItems = [
+    {"title": "Organizer Dashboard", "icon": Icons.dashboard},
+    {"title": "My Conference", "icon": Icons.event},
+    {"title": "Abstract", "icon": Icons.padding_rounded},
+    {"title": "Paper", "icon": Icons.book},
+  ];
+
+  // Pages corresponding to each nav item
+  Widget _getPage(int index) {
+    switch (index) {
+
+      case 0:
+        return const MyDashboardOrganizer();
+      case 1:
+        return const MyConferenceOrganizer();
+      case 2:
+        return const AbstractOrganizer();
+      case 3:
+        return const PaperOrganizer();
+      default:
+        return const MyDashboardOrganizer();
+    }
+  }
+
+  // Update selected index when nav item is tapped
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height*0.08,
+      decoration: const BoxDecoration(
+        color: AppColors.primaryColour,// Use the theme's primary color
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25),  // Rounded top-left corner
+          topRight: Radius.circular(25), // Rounded top-right corner
+        ),
+      ),
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.transparent, // Make the background transparent
+        selectedItemColor: Colors.white, // Selected icon color
+        unselectedItemColor: Colors.grey, // Unselected icon color
+        showUnselectedLabels: true,
+        items: _navBarItems
+            .map(
+              (item) => BottomNavigationBarItem(
+            icon: Icon(
+              item['icon'],
+              size: 30,
+              color: _selectedIndex == _navBarItems.indexOf(item)
+                  ?Colors.white
+                  : Colors.grey,
+            ),
+            label: item['title'],
+          ),
+        )
+            .toList(),
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
@@ -116,8 +187,8 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
             _scaffoldKey.currentState!.openDrawer(); // Open the drawer
           },
         ),
-        title: Text(
-          'Delegate',
+        title:Text(
+          _navBarItems[_selectedIndex]['title'],
           style: FTextStyle.HeadingTxtWhiteStyle,
         ), // Title of the app bar
         centerTitle: true,
@@ -125,20 +196,8 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
       drawer: SideMenuScreen(selectedRole: widget.selectedRole),
 
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 28),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Dashboard Page',style: FTextStyle.preHeadingBoldStyle,).animateOnPageLoad(
-                animationsMap['imageOnPageLoadAnimation2']!),
-
-
-
-          ],
-        ),
-      ),
+      body: _getPage(_selectedIndex),  // Dynamic page loading
+      bottomNavigationBar: buildMyNavBar(context),
     );
   }
 

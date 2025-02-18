@@ -190,7 +190,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Container(
 
-                       height: height * 0.45, // Set fixed height for each card
+                       // height: height * 0.45, // Set fixed height for each card
                       // width: height * 0.3, // Set fixed width for each card
                       decoration: BoxDecoration(
 

@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/delegates_section/accomondation/accomodaton_register.dart';
@@ -352,7 +353,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
 
 
           return Container(
-            height: height * 0.24,
+            // height: height * 0.24,
             margin: const EdgeInsets.symmetric(vertical: 8),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -669,7 +670,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
 
 
           return Container(
-            height: height * 0.24,
+            // height: height * 0.24,
             margin: const EdgeInsets.symmetric(vertical: 8),
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(

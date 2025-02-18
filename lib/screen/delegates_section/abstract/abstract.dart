@@ -315,7 +315,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                 itemBuilder: (context, index) {
                   final item = abstractList[index];
                   return Container(
-                    height: height*0.27,
+                    // height: height*0.27,
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     padding: const EdgeInsets.all( 16),
                     decoration: BoxDecoration(

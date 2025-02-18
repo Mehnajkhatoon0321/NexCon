@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 class AbstractView extends StatefulWidget {
-  String id ;
+  String id;
    AbstractView({required this.id,super.key});
 
   @override
