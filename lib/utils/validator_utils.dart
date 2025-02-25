@@ -97,6 +97,97 @@ static   bool isValidPass(String pass) {
     }
     return null;
   }
+  static String? nameOrganizationValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter the organization name.";
+    }
+    if (value.length < 3 || value.length > 60) {
+      return "Please write organization name must be between 3 and 60 characters.";
+    }
+    return null;
+  }
+ static String? nameConferenceValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter the conference name.";
+    }
+    if (value.length < 3 || value.length > 60) {
+      return "Please write conference name must be between 3 and 60 characters.";
+    }
+    return null;
+  }
+  static String? gstVatValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter your GST/VAT number.";
+    }
+    if (value.length < 10 || value.length > 15) {
+      return "GST/VAT number must be between 10 and 15 characters.";
+    }
+    if (!RegExp(r'^[A-Z0-9]+$').hasMatch(value)) {
+      return "GST/VAT number must contain only uppercase letters and numbers.";
+    }
+    return null;
+  }
+  static String? venueNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter the venue name.";
+    }
+    if (value.length < 3 || value.length > 60) {
+      return "Venue name must be between 3 and 60 characters.";
+    }
+    return null;
+  }
+  static String? addressVenueValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter the venue address.";
+    }
+    if (value.length < 5 || value.length > 100) {
+      return "Venue Address must be between 5 and 100 characters.";
+    }
+    return null;
+  }
+  static String? organizerNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter the name of the Organizer/Association/Society.";
+    }
+    if (value.length < 3 || value.length > 60) {
+      return "Name must be between 3 and 60 characters.";
+    }
+    return null;
+  }
+  static String? contactPersonValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter the contact person's name.";
+    }
+    if (value.length < 3 || value.length > 50) {
+      return "Contact person's name must be between 3 and 50 characters.";
+    }
+    if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value)) {
+      return "Contact person's name must contain only letters and spaces.";
+    }
+    return null;
+  }
+
+  static String? conferenceThemeValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter the conference theme.";
+    }
+    if (value.length < 3 || value.length > 100) {
+      return "Conference theme must be between 3 and 100 characters.";
+    }
+    return null;
+  }
+  static String? websiteLinkValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return null; // Allow empty input (not mandatory)
+    }
+    // Regular expression to validate URLs
+    final urlPattern = r'^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(\.[a-zA-Z]{2,})+)(\/\S*)?$';
+    if (!RegExp(urlPattern).hasMatch(value)) {
+      return "Please enter a valid website URL (e.g., https://example.com).";
+    }
+    return null;
+  }
+
 
   static String? weightValidator(String? value) {
     if (value == null || value.isEmpty) {

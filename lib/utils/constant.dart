@@ -326,5 +326,6 @@ static const   List<String> titleName = [
   'Mr.',
   'Other',
 ];
+  static const  List<String> cityNamesCategories = ["City1","City"];
 
 }

@@ -202,11 +202,11 @@ class FormFieldStyle {
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(28)),
-      borderSide: BorderSide(color: Colors.red),
+      borderSide: BorderSide(color:AppColors.formFieldBackColour),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(28)),
-      borderSide: BorderSide(color: Colors.red),
+      borderSide: BorderSide(color: AppColors.formFieldBackColour),
     ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(color: AppColors.formFieldBorderColour),
@@ -217,6 +217,6 @@ class FormFieldStyle {
     fillColor: AppColors.formFieldBackColour,
     hintText: "Select Product Category",
     hintStyle:FTextStyle.formhintTxtStyle,
-    errorStyle: TextStyle(color: Colors.red),
+    errorStyle: TextStyle(color: AppColors.formFieldBackColour),
   );
 }

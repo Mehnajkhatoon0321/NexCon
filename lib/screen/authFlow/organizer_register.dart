@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:nexcon/screen/authFlow/organization_register_details.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
 import 'package:nexcon/screen/organizer_section/organizer_home_page.dart';
 import 'package:nexcon/screen/sideMenu/common_section/privacy_policy.dart';
@@ -105,6 +107,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   };
   final formKey = GlobalKey<FormState>();
   String? selectCountryNamesCategories;
+  String? selectCityNamesCategories;
   String? selectTitleName;
   String? selectCategoryName;
   String? genderTitleName;
@@ -120,16 +123,14 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _countryKey =
   GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _selectTitleKey =
-  GlobalKey<FormFieldState<String>>();
+
   late final GlobalKey<FormFieldState<String>> _dateBirthKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _cityKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _firstKey =
   GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _lastKey =
-  GlobalKey<FormFieldState<String>>();
+
   late final GlobalKey<FormFieldState<String>> _mobileKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _passwordKey =
@@ -139,11 +140,12 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   late final FocusNode _emailFocusNode = FocusNode();
   late final FocusNode _mobileFocusNode = FocusNode();
   late final FocusNode _firstFocusNode = FocusNode();
-  late final FocusNode _lastFocusNode = FocusNode();
+
   late final FocusNode _passwordFocusNode = FocusNode();
   late final FocusNode _dateBirthFocusNode = FocusNode();
   late final FocusNode _cityFocusNode = FocusNode();
-  late final FocusNode _selectTitleFocusNode = FocusNode();
+  late final FocusNode _countryFocusNode = FocusNode();
+
   late final FocusNode _selectGenderFocusNode = FocusNode();
   bool checkboxChecked = false;
   bool isButtonEnabled = false;
@@ -203,6 +205,33 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                   children: [
 
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: const BoxDecoration(
+                          color: AppColors.appSky,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: Align(
+                          alignment: Alignment.center, // Center the icon within the container
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 25,
+                              ), // Menu icon
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     Container(
                       alignment: Alignment.topCenter,
                       child: Image.asset(
@@ -227,17 +256,20 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                       ),
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation2']!),
-                    SizedBox(height: 10,),
-                    Text(
-                      "Organizer Profile",
-                      style: FTextStyle.headingMiddle.copyWith(
-                        fontSize: 15,
-                      ),
-                      textAlign: TextAlign.start,
-                    ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation2']!),
+                    SizedBox(height: 20,),
                     Padding(
-                      padding: const EdgeInsets.only(top: 5, bottom: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: Text(
+                        "Organizer Profile**",
+                        style: FTextStyle.headingMiddle.copyWith(
+                          fontSize: 15,color: Colors.red
+                        ),
+                        textAlign: TextAlign.start,
+                      ).animateOnPageLoad(
+                          animationsMap['imageOnPageLoadAnimation2']!),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 0, bottom: 15),
                       child: Form(
                         key: formKey,
                         onChanged: () {
@@ -289,14 +321,18 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                                     hintText: "Enter Organization Name"),
 
                                 controller: _first,
-                                validator: ValidatorUtils.firstNameValidator,
-                                onTap: () {
+                                validator: ValidatorUtils.nameOrganizationValidator,
+                                onChanged: (value) {
                                   setState(() {
-                                    isEmailFieldFocused = false;
-                                    isPasswordFieldFocused = false;
-                                    isFirstFieldFocused = true;
+                                    // Validate only the name field
+                                    _firstKey.currentState?.validate();
                                   });
                                 },
+                                onFieldSubmitted: (_) {
+                                  _firstFocusNode.unfocus();
+                                  FocusScope.of(context).requestFocus(_mobileFocusNode);
+                                },
+
                               ).animateOnPageLoad(
                                   animationsMap['imageOnPageLoadAnimation2']!),
                             ),
@@ -326,13 +362,15 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                                 inputFormatters: [NoSpaceFormatter()],
                                 controller: _mobileNumber,
                                 validator: ValidatorUtils.phoneNumberValidator,
-                                onTap: () {
+                                onChanged: (value) {
                                   setState(() {
-                                    isEmailFieldFocused = false;
-                                    isPasswordFieldFocused = false;
-                                    isFirstFieldFocused = false;
-                                    isMobileFieldFocused = true;
+                                    // Validate only the email field
+                                    _mobileKey.currentState?.validate();
                                   });
+                                },
+                                onFieldSubmitted: (_) {
+                                  _mobileFocusNode.unfocus();
+                                  FocusScope.of(context).requestFocus(_dateBirthFocusNode);
                                 },
                               ).animateOnPageLoad(
                                   animationsMap['imageOnPageLoadAnimation2']!),
@@ -343,39 +381,45 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                               style: FTextStyle.formLabelTxtStyle,
                             ).animateOnPageLoad(
                                 animationsMap['imageOnPageLoadAnimation2']!),
+
                             Padding(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 10.0),
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
                               child: TextFormField(
                                 key: _dateBirthKey,
                                 focusNode: _dateBirthFocusNode,
                                 keyboardType: TextInputType.text,
-                                decoration: FormFieldStyle
-                                    .defaultAddressInputDecoration
-                                    .copyWith(
+                                readOnly: true, // Prevent manual input
+                                decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
                                   hintText: "dd-mm-yyyy",
                                   suffixIcon: IconButton(
                                     icon: const Icon(
                                       Icons.calendar_today, // Calendar icon
-                                      color:
-                                      Colors.grey, // Adjust color as needed
+                                      color: Colors.grey,   // Adjust color as needed
                                     ),
-                                    onPressed: () {
-                                      // Show date picker when the icon is pressed
-                                      CustomPopUp.selectDate(context,_dateBirth);
+                                    onPressed: () async {
+                                      DateTime? selectedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2100),
+                                      );
+
+                                      if (selectedDate != null) {
+                                        setState(() {
+                                          _dateBirth.text = DateFormat('dd-MM-yyyy').format(selectedDate);
+                                          _dateBirthKey.currentState?.validate(); // Remove validation error after selection
+                                        });
+                                      }
                                     },
                                   ),
                                 ),
-                                inputFormatters: [NoSpaceFormatter()],
                                 controller: _dateBirth,
-                                validator: ValidatorUtils.dateValidator,
-                                onTap: () {
-                                  setState(() {
-
-                                  });
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Please select a date.";
+                                  }
+                                  return null;
                                 },
-                              ).animateOnPageLoad(
-                                animationsMap['imageOnPageLoadAnimation2']!,
                               ),
                             ),
                             Text(
@@ -404,104 +448,42 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                                   setState(() {
                                     genderTitleName = newValue;
                                   });
-
-                                  isCountryFieldFocused = true;
+                                  _genderKey.currentState?.validate(); // Validate only this field
                                 },
                                 decoration: FormFieldStyle.dropDown,
                                 validator: ValidatorUtils.model,
                               ),
                             ),
+
                             const SizedBox(height: 8),
-                            Text(
-                              "${Constants.emailLabel}",
-                              style: FTextStyle.SubHeadingTxtStyle,
-                            ).animateOnPageLoad(
-                                animationsMap['imageOnPageLoadAnimation2']!),
+                            Text("${Constants.emailLabel}", style: FTextStyle.SubHeadingTxtStyle),
                             Padding(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
                               child: TextFormField(
                                 key: _emailKey,
                                 focusNode: _emailFocusNode,
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: FormFieldStyle
-                                    .defaultemailDecoration
-                                    .copyWith(
-                                    contentPadding:
-                                    const EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 10),
-                                    fillColor:
-                                    AppColors.formFieldBackColour,
-                                    hintText: "Enter Email"),
-                                inputFormatters: [NoSpaceFormatter()],
                                 controller: _email,
+                                decoration: FormFieldStyle.defaultemailDecoration.copyWith(
+                                  contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                                  fillColor: AppColors.formFieldBackColour,
+                                  hintText: "Enter Email",
+                                ),
                                 validator: ValidatorUtils.emailValidator,
-                                onTap: () {
+                                onChanged: (value) {
                                   setState(() {
-                                    isEmailFieldFocused = true;
-                                    isPasswordFieldFocused = false;
+                                    // Validate only the email field
+                                    _emailKey.currentState?.validate();
                                   });
                                 },
-                              ).animateOnPageLoad(
-                                  animationsMap['imageOnPageLoadAnimation2']!),
+                                onFieldSubmitted: (_) {
+                                  _emailFocusNode.unfocus();
+                                  FocusScope.of(context).requestFocus(_passwordFocusNode);
+                                },
+                              ),
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              "Password",
-                              style: FTextStyle.SubHeadingTxtStyle,
-                            ).animateOnPageLoad(
-                                animationsMap['imageOnPageLoadAnimation2']!),
-                            Padding(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 8.0),
-                              child: TextFormField(
-                                keyboardType: TextInputType.visiblePassword,
-                                key: _passwordKey,
-                                focusNode: _passwordFocusNode,
-                                decoration: FormFieldStyle
-                                    .defaultPasswordInputDecoration
-                                    .copyWith(
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 10),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      passwordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                      color: Colors.black45,
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        passwordVisible = !passwordVisible;
-                                      });
-                                    },
-                                  ),
-                                  filled: true,
-                                  fillColor: AppColors.formFieldBackColour,
-                                ),
-                                controller: _password,
-                                obscureText: !passwordVisible,
-                                inputFormatters: [NoSpaceFormatter()],
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter a password';
-                                  }
 
-                                  if (!ValidatorUtils.isValidPass(value)) {
-                                    return 'Password must be at least 8 characters';
-                                  }
-
-                                  return null; // Password is valid
-                                },
-                                onTap: () {
-                                  setState(() {
-                                    isPasswordFieldFocused = true;
-                                    isEmailFieldFocused = false;
-                                  });
-                                },
-                              ).animateOnPageLoad(
-                                  animationsMap['imageOnPageLoadAnimation2']!),
-                            ),
                             Text(
                               "Country",
                               style: FTextStyle.formLabelTxtStyle,
@@ -512,10 +494,10 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                               const EdgeInsets.symmetric(vertical: 10.0),
                               child: DropdownButtonFormField<String>(
                                 key: _countryKey,
-                                focusNode: _cityFocusNode,
+                                focusNode: _countryFocusNode,
                                 value: selectCountryNamesCategories,
                                 hint: const Text(
-                                  "Select country",
+                                  "Select Country",
                                   style: FTextStyle.formhintTxtStyle,
                                 ),
                                 items: Constants.countryNamesCategories
@@ -528,8 +510,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                                   setState(() {
                                     selectCountryNamesCategories = newValue;
                                   });
-
-                                  isCountryFieldFocused = true;
+                                  _countryKey.currentState?.validate(); // Validate only this field
                                 },
                                 decoration: FormFieldStyle.dropDown,
                                 validator: ValidatorUtils.model,
@@ -542,181 +523,109 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                                 animationsMap['imageOnPageLoadAnimation2']!),
                             Padding(
                               padding:
-                              const EdgeInsets.symmetric(vertical: 8.0),
-                              child: TextFormField(
+                              const EdgeInsets.symmetric(vertical: 10.0),
+                              child: DropdownButtonFormField<String>(
                                 key: _cityKey,
                                 focusNode: _cityFocusNode,
-                                keyboardType: TextInputType.name,
-                                decoration: FormFieldStyle
-                                    .defaultemailDecoration
-                                    .copyWith(
-                                    contentPadding:
-                                    const EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 10),
-                                    fillColor:
-                                    AppColors.formFieldBackColour,
-                                    hintText: "Enter City Name"),
-
-                                controller: _city,
-                                validator: ValidatorUtils.lastNameValidator,
-                                onTap: () {
+                                value: selectCityNamesCategories,
+                                hint: const Text(
+                                  "Select City",
+                                  style: FTextStyle.formhintTxtStyle,
+                                ),
+                                items: Constants.cityNamesCategories
+                                    .map((category) => DropdownMenuItem(
+                                  value: category,
+                                  child: Text(category),
+                                ))
+                                    .toList(),
+                                onChanged: (cityValue) {
                                   setState(() {
-                                    isEmailFieldFocused = false;
-                                    isPasswordFieldFocused = false;
-                                    isLastFieldFocused = false;
-                                    isCityBirthFieldFocused = true;
+                                    selectCityNamesCategories = cityValue;
                                   });
+                                  _cityKey.currentState?.validate(); // Validate only this field
                                 },
-                              ).animateOnPageLoad(
-                                  animationsMap['imageOnPageLoadAnimation2']!),
-                            ),
-                            const SizedBox(height: 8),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        checkboxChecked = !checkboxChecked;
-                                        print(
-                                            'Checkbox checked: $checkboxChecked');
-
-                                        PrefUtils.setRememberMe(
-                                            checkboxChecked);
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 5),
-                                      child: IconTheme(
-                                        data: const IconThemeData(
-                                          color: AppColors.appSky,
-                                          size: 20,
-                                        ),
-                                        child: Icon(
-                                          checkboxChecked
-                                              ? Icons.check_box
-                                              : Icons.check_box_outline_blank,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      child: RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: "I accept ",
-                                              style: FTextStyle.listTitleSub
-                                                  .copyWith(
-                                                  fontSize: 13,
-                                                  color: Colors.black),
-                                            ),
-                                            TextSpan(
-                                              text: "Terms & Conditions",
-                                              style: FTextStyle.listTitleSub
-                                                  .copyWith(
-                                                  fontSize: 13,
-                                                  color: Colors.red),
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                      const TermCondition(),
-                                                    ),
-                                                  );
-                                                },
-                                            ),
-                                            TextSpan(
-                                              text: " and ",
-                                              style: FTextStyle.listTitleSub
-                                                  .copyWith(
-                                                  fontSize: 13,
-                                                  color: Colors.black),
-                                            ),
-                                            TextSpan(
-                                              text: "Privacy Policy",
-                                              style: FTextStyle.listTitleSub
-                                                  .copyWith(
-                                                  fontSize: 13,
-                                                  color: Colors.red),
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  // Action to view registration fee
-                                                  // For example, navigate to another page or open a link
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                      const PrivacyPolicy(),
-                                                    ),
-                                                  );
-                                                },
-                                            ),
-                                          ],
-                                        ),
-                                      ).animateOnPageLoad(
-                                        animationsMap[
-                                        'imageOnPageLoadAnimation2']!,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                decoration: FormFieldStyle.dropDown,
+                                validator: ValidatorUtils.model,
                               ),
                             ),
+
+
                             SizedBox(
                                 height:
                                 MediaQuery.of(context).size.height * 0.03),
+                            // Padding(
+                            //   padding:
+                            //   const EdgeInsets.symmetric(horizontal: 18.0),
+                            //   child: ElevatedButton(
+                            //     onPressed: isButtonEnabled
+                            //         ? () async {
+                            //       setState(() {
+                            //         if (formKey.currentState!
+                            //             .validate()) {
+                            //
+                            //           Navigator.push(
+                            //             context,
+                            //             MaterialPageRoute(
+                            //               builder: (context) =>  OrganizerHomePage(selectedRole: '',  ),
+                            //             ),
+                            //           );
+                            //         } else {
+                            //           formKey.currentState!.validate();
+                            //         }
+                            //       });
+                            //     }
+                            //         : null,
+                            //     style: ElevatedButton.styleFrom(
+                            //         shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(30),
+                            //         ),
+                            //         backgroundColor: isButtonEnabled
+                            //             ? AppColors.appSky
+                            //             : Colors.white,
+                            //         // Button color depending on the enabled state
+                            //         minimumSize:
+                            //         const Size(double.infinity, 50),
+                            //         // Minimum height
+                            //         maximumSize:
+                            //         const Size(double.infinity, 50),
+                            //         elevation: 2 // Maximum height
+                            //     ),
+                            //     child: Center(
+                            //       child: Text(
+                            //         "Register",
+                            //         style: FTextStyle.loginBtnStyle,
+                            //       ),
+                            //     ),
+                            //   ).animateOnPageLoad(
+                            //     animationsMap['imageOnPageLoadAnimation2']!,
+                            //   ),
+                            // ),
                             Padding(
-                              padding:
-                              const EdgeInsets.symmetric(horizontal: 18.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 18.0),
                               child: ElevatedButton(
-                                onPressed: isButtonEnabled
-                                    ? () async {
-                                  setState(() {
-                                    if (formKey.currentState!
-                                        .validate()) {
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
 
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>  OrganizerHomePage(selectedRole: '',  ),
-                                        ),
-                                      );
-                                    } else {
-                                      formKey.currentState!.validate();
-                                    }
-                                  });
-                                }
-                                    : null,
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>  OrganizationRegisterDetails(nameOrganization: _first.text.toString(),
+                                          email: _email.text.toString() , city: selectCityNamesCategories.toString(),
+                                          country: selectCountryNamesCategories.toString(), dateBirth: _dateBirth.text.toString(), gender: genderTitleName.toString(), mobileNumber: _mobileNumber.text.toString(), ),
+                                      ),
+                                    );
+                                    print("Form is valid, proceed with submission.");
+                                  } else {
+                                    // Form is invalid
+                                    print("Form is invalid, please fill all required fields.");
+                                  }
+                                },
                                 style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    backgroundColor: isButtonEnabled
-                                        ? AppColors.appSky
-                                        : Colors.white,
-                                    // Button color depending on the enabled state
-                                    minimumSize:
-                                    const Size(double.infinity, 50),
-                                    // Minimum height
-                                    maximumSize:
-                                    const Size(double.infinity, 50),
-                                    elevation: 2 // Maximum height
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                                  backgroundColor:  AppColors.appSky ,
+                                  minimumSize: const Size(double.infinity, 50),
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    "Register",
-                                    style: FTextStyle.loginBtnStyle,
-                                  ),
-                                ),
-                              ).animateOnPageLoad(
-                                animationsMap['imageOnPageLoadAnimation2']!,
+                                child: Center(child: Text("Submit", style: FTextStyle.loginBtnStyle)),
                               ),
                             ),
                             const SizedBox(height: 20),

@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.nexcon"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = '27.2.9519653'
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

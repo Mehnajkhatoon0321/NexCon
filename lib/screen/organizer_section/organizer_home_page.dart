@@ -144,7 +144,8 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
           topRight: Radius.circular(25), // Rounded top-right corner
         ),
       ),
-      child: BottomNavigationBar(
+      child:
+      BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent, // Make the background transparent
         selectedItemColor: Colors.white, // Selected icon color
