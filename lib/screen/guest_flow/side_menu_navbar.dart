@@ -6,6 +6,7 @@ import 'package:nexcon/screen/delegates_section/abstract/abstract.dart';
 import 'package:nexcon/screen/delegates_section/accomondation/accomodation.dart';
 import 'package:nexcon/screen/delegates_section/featured_conferences.dart';
 import 'package:nexcon/screen/delegates_section/paper_delegates/paper_delegates.dart';
+import 'package:nexcon/screen/organizer_section/accommodation/accomodation.dart';
 import 'package:nexcon/screen/sideMenu/common_section/about.dart';
 import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
 import 'package:nexcon/screen/sideMenu/common_section/how_works_delegates.dart';
@@ -60,6 +61,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
         {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
         {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
         {'icon': Icons.event, 'subtitle': 'Conferences'},
+        {'icon': Icons.home_filled, 'subtitle': 'Accommodation Organizer'},
         {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
         {'icon': Icons.password, 'subtitle': 'Change Password'},
@@ -73,6 +75,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
         {'icon': Icons.summarize, 'subtitle': 'Abstract'},
         {'icon': Icons.padding_rounded, 'subtitle': 'Paper'},
         {'icon': Icons.home_filled, 'subtitle': 'Accommodation'},
+
         {'icon': Icons.receipt_long, 'subtitle': 'My Receipt'},
         {'icon': Icons.info, 'subtitle': 'About'},
         {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
@@ -144,10 +147,16 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                           context,
                           MaterialPageRoute(builder: (context) => const PaperDelegates()),
                         );
-                        break;  case 'Accommodation':
+                        break;
+                        case 'Accommodation':
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const AccommodationScreen()),
+                        );
+                        case 'Accommodation Organizer':
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AccommodationOrganizationScreen()),
                         );
                         break;
                         case 'My profile':

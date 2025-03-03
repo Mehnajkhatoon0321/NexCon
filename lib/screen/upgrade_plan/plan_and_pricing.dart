@@ -174,11 +174,10 @@ class PricingScreen extends StatelessWidget {
   }
 
   Widget _tableCellText(String text, bool isHeader, {Color color = Colors.black}) {
-    return Center(
-
-      child: Container(
-        width: 180,
-        height: 90,
+    return SizedBox(
+      width: 180,
+      height: 90,
+      child: Center(
         child: Text(
           text,
           style:isHeader ? FTextStyle.listTitle :FTextStyle.Faqssubtitle,
@@ -189,10 +188,10 @@ class PricingScreen extends StatelessWidget {
     );
   }
   Widget _tableCellBasicText(String text, bool isHeader, {Color color = Colors.black}) {
-    return Center(
-      child: Container(
-        width: 120,
-        height: 120,
+    return SizedBox(
+      width: 120,
+      height: 120,
+      child: Center(
         child: Text(
           text,
           style:isHeader ? FTextStyle.listTitle :FTextStyle.Faqssubtitle,

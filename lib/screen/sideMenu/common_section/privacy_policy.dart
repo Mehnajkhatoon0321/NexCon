@@ -188,7 +188,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
               child: DataTable(
                 columns: <DataColumn>[
                   DataColumn(
-                    label: Container(
+                    label: SizedBox(
                       width: 150, // Fixed width for the column
                       child: Text(
                         'Name',
@@ -198,7 +198,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                     ),
                   ),
                   DataColumn(
-                    label: Container(
+                    label: SizedBox(
                       width: 200, // Fixed width for the column
                       child: Text(
                         'Purpose',
@@ -208,7 +208,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                     ),
                   ),
                   DataColumn(
-                    label: Container(
+                    label: SizedBox(
                       width: 180, // Fixed width for the column
                       child: Text(
                         'Processing Location',
@@ -218,7 +218,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                     ),
                   ),
                   DataColumn(
-                    label: Container(
+                    label: SizedBox(
                       width: 250, // Fixed width for the column
                       child: Text(
                         'Applicable Services',
@@ -231,7 +231,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 rows: tableData.map((row) {
                   return DataRow(cells: [
                     DataCell(
-                      Container(
+                      SizedBox(
                         width: 150, // Fixed width for each cell
                         child: Text(
                           row['Name'] ?? '',
@@ -241,7 +241,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       ),
                     ),
                     DataCell(
-                      Container(
+                      SizedBox(
                         width: 200, // Fixed width for each cell
                         child: Text(
                           row['Purpose'] ?? '',
@@ -251,7 +251,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       ),
                     ),
                     DataCell(
-                      Container(
+                      SizedBox(
                         width: 180, // Fixed width for each cell
                         child: Text(
                           row['Processing Location'] ?? '',
@@ -261,7 +261,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       ),
                     ),
                     DataCell(
-                      Container(
+                      SizedBox(
                         width: 250, // Fixed width for each cell
                         child: Text(
                           row['Applicable Services'] ?? '',

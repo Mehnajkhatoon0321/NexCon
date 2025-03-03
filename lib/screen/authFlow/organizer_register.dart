@@ -5,18 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:nexcon/screen/authFlow/organization_register_details.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
-import 'package:nexcon/screen/organizer_section/organizer_home_page.dart';
-import 'package:nexcon/screen/sideMenu/common_section/privacy_policy.dart';
-import 'package:nexcon/screen/sideMenu/common_section/term_condition.dart';
+
+
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/constant.dart';
-import 'package:nexcon/utils/custom_popup.dart';
+
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/no_space_input_formatter_class.dart';
-import 'package:nexcon/utils/pref_utils.dart';
+
 import 'package:nexcon/utils/validator_utils.dart';
 
 class OrganizerRegister extends StatefulWidget {

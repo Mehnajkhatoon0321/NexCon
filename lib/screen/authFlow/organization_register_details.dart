@@ -987,8 +987,8 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                     onTap: () {
                                       setState(() {
                                         checkboxChecked = !checkboxChecked;
-                                        print(
-                                            'Checkbox checked: $checkboxChecked');
+                                        // print(
+                                        //     'Checkbox checked: $checkboxChecked');
 
                                         PrefUtils.setRememberMe(
                                             checkboxChecked);
@@ -1157,10 +1157,10 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                       ),
                                     );
 
-                                    print("Form is valid, proceed with submission.");
+                                    // print("Form is valid, proceed with submission.");
                                   } else {
                                     // Form is invalid
-                                    print("Form is invalid, please fill all required fields.");
+                                    // print("Form is invalid, please fill all required fields.");
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(

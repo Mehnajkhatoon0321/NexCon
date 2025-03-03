@@ -64,11 +64,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigateUser(BuildContext context) {
     bool isLoggedIn = PrefUtils.getIsLogin();
     String roleSelection = PrefUtils.getRoleSelection();
-    print("isLoggedIn: $isLoggedIn, roleSelection: $roleSelection");
+    // print("isLoggedIn: $isLoggedIn, roleSelection: $roleSelection");
 
     if (isLoggedIn == true) {
       if (roleSelection == "isselect organizer") {
-        print("Navigating to OrganizerHomePage");
+        // print("Navigating to OrganizerHomePage");
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (BuildContext context) => OrganizerHomePage(
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       }
     } else {
-      print("Navigating to RoleSelectionScreen");
+      // print("Navigating to RoleSelectionScreen");
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (BuildContext context) => const RoleSelectionScreen(),

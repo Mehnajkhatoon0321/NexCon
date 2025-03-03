@@ -275,6 +275,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Text(
                           "${Constants.emailLabel}/UserName",
+
                           style: FTextStyle.formLabelTxtStyle,
                         ).animateOnPageLoad(
                             animationsMap['imageOnPageLoadAnimation2']!),
@@ -360,7 +361,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             setState(() {
                               checkboxChecked = !checkboxChecked;
-                              print('Checkbox checked: $checkboxChecked');
+                              // print('Checkbox checked: $checkboxChecked');
 
                               PrefUtils.setRememberMe(checkboxChecked);
                             });

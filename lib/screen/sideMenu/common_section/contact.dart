@@ -178,139 +178,105 @@ class _ContactScreenState extends State<ContactScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-              child: Container(
-        
-                // color: Colors.black54,black54
-        
-                  child: Text("Sales:",style: FTextStyle.headingMiddle,)
-        
-        
-              ),
+              child: Text("Sales:",style: FTextStyle.headingMiddle,),
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Phone: ",style: FTextStyle.listTitleSub,),
-                        Text("+91 8090367090",style: FTextStyle.listTitle,),
-                      ],
-        
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Email: ",style: FTextStyle.listTitleSub,),
-                        Text("ravi@smartconference.in",style: FTextStyle.listTitle,),
-                      ],
-        
-                    ),
-        
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Phone: ",style: FTextStyle.listTitleSub,),
+                      Text("+91 8090367090",style: FTextStyle.listTitle,),
+                    ],
+
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Email: ",style: FTextStyle.listTitleSub,),
+                      Text("ravi@smartconference.in",style: FTextStyle.listTitle,),
+                    ],
+
+                  ),
+
+                ],
               ),
             ),
             Divider(height: 1,thickness: 1.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-              child: Container(
-        
-                // color: Colors.black54,black54
-        
-                  child: Text("Support:",style: FTextStyle.headingMiddle,)
-        
-        
-              ),
+              child: Text("Support:",style: FTextStyle.headingMiddle,),
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Phone: ",style: FTextStyle.listTitleSub,),
-                        Text("+91 9935237183",style: FTextStyle.listTitle,),
-                      ],
-        
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Email: ",style: FTextStyle.listTitleSub,),
-                        Text("support@smartconference.in",style: FTextStyle.listTitle,),
-                      ],
-        
-                    ),
-        
-        
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Phone: ",style: FTextStyle.listTitleSub,),
+                      Text("+91 9935237183",style: FTextStyle.listTitle,),
+                    ],
+
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Email: ",style: FTextStyle.listTitleSub,),
+                      Text("support@smartconference.in",style: FTextStyle.listTitle,),
+                    ],
+
+                  ),
+
+
+                ],
               ),
             ),
             Divider(height: 1,thickness: 1.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-              child: Container(
-        
-                // color: Colors.black54,black54
-        
-                  child: Text("Corporate Office:",style: FTextStyle.headingMiddle,)
-        
-        
-              ),
+              child: Text("Corporate Office:",style: FTextStyle.headingMiddle,),
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('B2-1211, DLF My Pad,\nVibhuti Khand, Gomti Nagar\nLucknow - 226010 (U.P.)\nIndia',style: FTextStyle.listTitleSub,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Phone: ",style: FTextStyle.listTitleSub,),
-                        Text("+91 9935237183",style: FTextStyle.listTitle,),
-                      ],
-        
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Email: ",style: FTextStyle.listTitleSub,),
-                        Text("support@smartconference.in",style: FTextStyle.listTitle,),
-                      ],
-        
-                    ),
-        
-        
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('B2-1211, DLF My Pad,\nVibhuti Khand, Gomti Nagar\nLucknow - 226010 (U.P.)\nIndia',style: FTextStyle.listTitleSub,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Phone: ",style: FTextStyle.listTitleSub,),
+                      Text("+91 9935237183",style: FTextStyle.listTitle,),
+                    ],
+
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Email: ",style: FTextStyle.listTitleSub,),
+                      Text("support@smartconference.in",style: FTextStyle.listTitle,),
+                    ],
+
+                  ),
+
+
+                ],
               ),
             ),
             Divider(height: 1,thickness: 1.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-              child: Container(
-        
-                // color: Colors.black54,black54
-        
-                  child: Text("Regd. Office:",style: FTextStyle.headingMiddle,)
-        
-        
-              ),
+              child: Text("Regd. Office:",style: FTextStyle.headingMiddle,),
             ),
             Container(
               child: Padding(
@@ -444,7 +410,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     ),
 
                     // Email Field
-                    Text("${Constants.emailLabel}", style: FTextStyle.SubHeadingTxtStyle),
+                    Text(Constants.emailLabel, style: FTextStyle.SubHeadingTxtStyle),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
