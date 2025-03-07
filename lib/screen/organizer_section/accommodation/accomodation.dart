@@ -106,52 +106,7 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: (displayType == 'desktop' || displayType == 'tablet')
-                  ? 70
-                  : 37,
-              child: ElevatedButton(
-                  onPressed: () async {
 
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>const AccommodationRegister(bankName: '', date: '', amount: '', image: '', tnNumber: '', title: '', paymentMode: '',)
-                      ),
-
-                    );
-                    //     .then((result) {
-                    //   // Handle the result from the edit screen
-                    //   if (result[0]) {
-                    //     data.clear();
-                    //     pageNo = 1;
-                    //     hasMoreData = true;
-                    //     totalPages = 0;
-                    //     BlocProvider.of<AllRequesterBloc>(context)
-                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                    //   }
-                    // }
-                    // );
-
-                    // );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                      backgroundColor: Colors.white),
-                  child: Text(
-                    "Apply",
-                    style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
-                  )),
-            ),
-          )
-        ],
       ),
 
       body: Column(
@@ -276,6 +231,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'paymentMode': "PhonePay",
         'tnNumber': "2343546446",
         'tnDate': "2023-12-10",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'bankName': "HDFC",
         'amount': "23424343",
         'bookingStatus': "Pending",
@@ -291,6 +249,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'paymentMode': "PhonePay",
         'tnNumber': "2343546446",
         'tnDate': "2023-12-10",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'bankName': "HDFC ",
         'amount': "23424343",
         'status': "Success",
@@ -304,6 +265,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'title': "30th ISCB International Conference (ISCBC-2025)",
         'paymentMode': "COD",
         'tnNumber': "2343546446",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
@@ -320,6 +284,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'paymentMode': "PhonePay",
         'tnNumber': "2343546446",
         'tnDate': "2023-12-10",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'bankName': "HDFC",
         'amount': "23424343",
         'bookingStatus': "Success",
@@ -594,6 +561,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'paymentMode': "PhonePay",
         'tnNumber': "2343546446",
         'tnDate': "2023-12-10",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'bankName': "HDFC ",
         'amount': "23424343",
         'status': "Success",
@@ -609,6 +579,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'paymentMode': "PhonePay",
         'tnNumber': "2343546446",
         'tnDate': "2023-12-10",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'bankName': "HDFC",
         'amount': "23424343",
         'bookingStatus': "Pending",
@@ -623,6 +596,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'title': "30th ISCB International Conference (ISCBC-2025)",
         'paymentMode': "COD",
         'tnNumber': "2343546446",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
@@ -639,6 +615,9 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
         'paymentMode': "PhonePay",
         'tnNumber': "2343546446",
         'tnDate': "2023-12-10",
+        "delegateName":"Mahi",
+        "accommodationCategory":"accommodationCategory",
+        "transactionNumber":"1323434453454",
         'bankName': "HDFC",
         'amount': "23424343",
         'bookingStatus': "Success",
@@ -766,7 +745,7 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -803,85 +782,85 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          AccommodationRegister(
-                                            bankName: bankName,
-                                            tnNumber: item['tnNumber'] ?? 'N/A',
-                                            date: tnDate,
-                                            amount: amount,
-                                            image: item['downloadReceipt'],
-                                            title: title,
-                                            paymentMode: paymentMode,
-                                          ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  height: 35,
-                                  width: 35,
-
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF0db050),
-                                    // Green for edit
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 6,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10,),
-                              GestureDetector(
-                                onTap: () {
-                                  CommonPopups.showDeleteCustomPopup(
-                                    context,
-                                    "Are you sure you want to delete?",
-                                        () {
-                                      // Handle delete logic
-                                    },
-                                  );
-                                },
-                                child: Container(
-                                  height: 35,
-                                  width: 35,
-                                  decoration: BoxDecoration(
-                                    color: Colors.red, // Red for delete
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 6,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.delete,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.end,
+                          //   crossAxisAlignment: CrossAxisAlignment.end,
+                          //   children: [
+                          //     GestureDetector(
+                          //       onTap: () {
+                          //         Navigator.push(
+                          //           context,
+                          //           MaterialPageRoute(
+                          //             builder: (context) =>
+                          //                 AccommodationRegister(
+                          //                   bankName: bankName,
+                          //                   tnNumber: item['tnNumber'] ?? 'N/A',
+                          //                   date: tnDate,
+                          //                   amount: amount,
+                          //                   image: item['downloadReceipt'],
+                          //                   title: title,
+                          //                   paymentMode: paymentMode,
+                          //                 ),
+                          //           ),
+                          //         );
+                          //       },
+                          //       child: Container(
+                          //         height: 35,
+                          //         width: 35,
+                          //
+                          //         decoration: BoxDecoration(
+                          //           color: const Color(0xFF0db050),
+                          //           // Green for edit
+                          //           borderRadius: BorderRadius.circular(8),
+                          //           boxShadow: [
+                          //             BoxShadow(
+                          //               color: Colors.black.withOpacity(0.1),
+                          //               blurRadius: 6,
+                          //               offset: const Offset(0, 2),
+                          //             ),
+                          //           ],
+                          //         ),
+                          //         child: const Icon(
+                          //           Icons.edit,
+                          //           color: Colors.white,
+                          //           size: 20,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     SizedBox(width: 10,),
+                          //     GestureDetector(
+                          //       onTap: () {
+                          //         CommonPopups.showDeleteCustomPopup(
+                          //           context,
+                          //           "Are you sure you want to delete?",
+                          //               () {
+                          //             // Handle delete logic
+                          //           },
+                          //         );
+                          //       },
+                          //       child: Container(
+                          //         height: 35,
+                          //         width: 35,
+                          //         decoration: BoxDecoration(
+                          //           color: Colors.red, // Red for delete
+                          //           borderRadius: BorderRadius.circular(8),
+                          //           boxShadow: [
+                          //             BoxShadow(
+                          //               color: Colors.black.withOpacity(0.1),
+                          //               blurRadius: 6,
+                          //               offset: const Offset(0, 2),
+                          //             ),
+                          //           ],
+                          //         ),
+                          //         child: const Icon(
+                          //           Icons.delete,
+                          //           color: Colors.white,
+                          //           size: 20,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
 
