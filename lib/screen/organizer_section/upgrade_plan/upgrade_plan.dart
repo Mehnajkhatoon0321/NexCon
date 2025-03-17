@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/upgrade_plan/plan_and_pricing.dart';
+import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
+
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 class UpgradePlan extends StatefulWidget {

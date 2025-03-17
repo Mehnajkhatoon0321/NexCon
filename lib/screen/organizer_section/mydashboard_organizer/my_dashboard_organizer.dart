@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_edit.dart';
-import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_view.dart';
-import 'package:nexcon/screen/upgrade_plan/upgrade_plan.dart';
+import 'package:nexcon/screen/organizer_section/upgrade_plan/upgrade_plan.dart';
+
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 class MyDashboardOrganizer extends StatefulWidget {

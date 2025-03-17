@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/font_text_Style.dart';
-class AbstractOrganizerEdit extends StatefulWidget {
-  String conferenceName;
-  String  abstractSession;
-   AbstractOrganizerEdit({required this.conferenceName,required this.abstractSession,super.key});
+
+import '../../../../../utils/colours.dart';
+import '../../../../../utils/font_text_Style.dart';
+class RegistrationDeadlines extends StatefulWidget {
+  const RegistrationDeadlines({super.key});
 
   @override
-  State<AbstractOrganizerEdit> createState() => _AbstractOrganizerEditState();
+  State<RegistrationDeadlines> createState() => _RegistrationDeadlinesState();
 }
 
-class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
+class _RegistrationDeadlinesState extends State<RegistrationDeadlines> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,7 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
           },
         ),
         title: Text(
-          'Abstract Organizer',
+          'Registration Submission Deadlines',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
@@ -38,7 +37,6 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
 
         ],
       ),
-
     );
   }
 }

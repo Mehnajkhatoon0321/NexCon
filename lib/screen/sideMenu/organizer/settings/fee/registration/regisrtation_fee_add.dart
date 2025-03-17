@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
-class AbstractOrganizerEdit extends StatefulWidget {
-  String conferenceName;
-  String  abstractSession;
-   AbstractOrganizerEdit({required this.conferenceName,required this.abstractSession,super.key});
+class RegistrationFeeAdd extends StatefulWidget {
+  const RegistrationFeeAdd({super.key});
 
   @override
-  State<AbstractOrganizerEdit> createState() => _AbstractOrganizerEditState();
+  State<RegistrationFeeAdd> createState() => _RegistrationFeeAddState();
 }
 
-class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
+class _RegistrationFeeAddState extends State<RegistrationFeeAdd> {
   @override
   Widget build(BuildContext context) {
+    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
+    var displayType = valueType
+        .toString()
+        .split('.')
+        .last;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
-      backgroundColor: AppColors.formFieldBackColour,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
@@ -28,15 +38,12 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
           },
         ),
         title: Text(
-          'Abstract Organizer',
+          'Registration Fee',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-      ),
-      body: Column(
-        children: [
 
-        ],
+
       ),
 
     );

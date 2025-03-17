@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/font_text_Style.dart';
-class AbstractOrganizerEdit extends StatefulWidget {
-  String conferenceName;
-  String  abstractSession;
-   AbstractOrganizerEdit({required this.conferenceName,required this.abstractSession,super.key});
+
+import '../../../../../../utils/colours.dart';
+import '../../../../../../utils/font_text_Style.dart';
+class BankDetails extends StatefulWidget {
+  const BankDetails({super.key});
 
   @override
-  State<AbstractOrganizerEdit> createState() => _AbstractOrganizerEditState();
+  State<BankDetails> createState() => _BankDetailsState();
 }
 
-class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
+class _BankDetailsState extends State<BankDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,7 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
           },
         ),
         title: Text(
-          'Abstract Organizer',
+          'Bank Details',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
@@ -38,7 +37,6 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
 
         ],
       ),
-
     );
   }
 }

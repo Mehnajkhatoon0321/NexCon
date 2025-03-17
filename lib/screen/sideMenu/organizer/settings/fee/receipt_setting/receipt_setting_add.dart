@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/font_text_Style.dart';
-class AbstractOrganizerEdit extends StatefulWidget {
-  String conferenceName;
-  String  abstractSession;
-   AbstractOrganizerEdit({required this.conferenceName,required this.abstractSession,super.key});
+
+import '../../../../../../utils/colours.dart';
+import '../../../../../../utils/font_text_Style.dart';
+class ReceiptSettingAdd extends StatefulWidget {
+  const ReceiptSettingAdd({super.key});
 
   @override
-  State<AbstractOrganizerEdit> createState() => _AbstractOrganizerEditState();
+  State<ReceiptSettingAdd> createState() => _ReceiptSettingAddState();
 }
 
-class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
+class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: AppColors.formFieldBackColour,
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
@@ -28,7 +27,7 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
           },
         ),
         title: Text(
-          'Abstract Organizer',
+          'Receipt Setting Add',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
@@ -38,7 +37,6 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
 
         ],
       ),
-
     );
   }
 }

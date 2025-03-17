@@ -9,6 +9,14 @@ class DelegatesRegistration extends StatefulWidget {
 class _DelegatesRegistrationState extends State<DelegatesRegistration> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            
+          ],
+        ),
+      ),
+    );
   }
 }

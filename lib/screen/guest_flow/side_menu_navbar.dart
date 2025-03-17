@@ -15,10 +15,33 @@ import 'package:nexcon/screen/sideMenu/common_section/how_works_delegates.dart';
 import 'package:nexcon/screen/sideMenu/common_section/plan_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/services.dart';
 import 'package:nexcon/screen/sideMenu/delegates_side_menu/my_receipt.dart';
+import 'package:nexcon/screen/sideMenu/organizer/attendance/manual_attendance.dart';
+import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_attendance.dart';
 import 'package:nexcon/screen/sideMenu/organizer/how_works_organizer.dart';
+import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/manage_program.dart';
+import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/print_program.dart';
+
+import 'package:nexcon/screen/sideMenu/organizer/program_shedule/schedule/manage_schedule.dart';
+import 'package:nexcon/screen/sideMenu/organizer/program_shedule/schedule/print_schedule.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/accomodation_category/accommodation_category.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/coupon_code/coupon_code.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/abstract_submission_deadlines.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/accommodation_deadlines.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/paper_submission_deadlines.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/registration_deadlines.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/registration_fee_deadlines.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/delegate_category/delegate_category.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/fee/accomodation/accomodation.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/fee/bank_details/bank_details.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/fee/receipt_setting/receipt_setting.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/fee/registration/registration_fee.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/reports/reports.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/setcheckout-setcheckin/setcheckout.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/pref_utils.dart';
+
+
 
 class SideMenuScreen extends StatefulWidget {
   final String selectedRole;
@@ -28,7 +51,8 @@ class SideMenuScreen extends StatefulWidget {
   State<SideMenuScreen> createState() => _SideMenuScreenState();
 }
 
-class _SideMenuScreenState extends State<SideMenuScreen> {
+class _SideMenuScreenState extends State<SideMenuScreen>
+{
   bool _isLogoutDialogVisible = false;
   final List<Map<String, dynamic>> listItem = [
     {'icon': Icons.person, 'subtitle': 'My profile'},
@@ -45,7 +69,8 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
 
   ];
 
-
+  String? expandedItem;
+  String? expandedSubItem;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -73,6 +98,15 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
           ]
         },
         {
+          'icon': Icons.library_books_sharp,
+          'subtitle': 'Attendance',
+          'title': [
+            {'icon': Icons.punch_clock, 'subtitle': 'Manual Attendance'},
+            {'icon': Icons.report, 'subtitle': 'QR Attendance'},
+          ]
+        },
+
+        {
           'icon': Icons.timelapse_rounded,
           'subtitle': 'Schedule & Program',
           'title': [
@@ -84,9 +118,44 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                 {'icon': Icons.perm_contact_cal, 'subsection': 'Print Schedule'}
               ]
             },
-            {'icon': Icons.perm_contact_cal, 'subtitle': 'Program'}
+            {'icon': Icons.perm_contact_cal, 'subtitle': 'Program', 'sub': [
+              {'icon': Icons.person, 'subsection': 'Manage Program'},
+              {'icon': Icons.perm_contact_cal, 'subsection': 'Print Program'}
+            ]}
           ]
         },
+        {
+          'icon': Icons.settings,
+          'subtitle': 'Setting',
+          'title': [
+            {'icon': Icons.category, 'subtitle': 'Delegate Category'},
+            {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Category'},
+            {'icon': Icons.timelapse_rounded, 'subtitle': 'Deadlines', 'sub': [
+              {'icon': Icons.person, 'subsection': 'Total Registration'},
+              {'icon': Icons.app_registration, 'subsection': 'Registration Fee'},
+              {'icon': Icons.book, 'subsection': 'Abstract Submission'},
+              {'icon': Icons.book_outlined, 'subsection': 'Paper Submission'},
+              {'icon': Icons.add_home, 'subsection': 'Accommodation'},
+
+            ]},
+            { 'icon': Icons.cases_sharp,'subtitle': 'Fee', 'sub': [
+              {'icon': Icons.app_registration, 'subsection': 'Registration Fee'},
+                {'icon': Icons.home_work_rounded, 'subsection': 'Accommodation Fee'},
+                {'icon': Icons.person, 'subsection': 'Bank Details'},
+                {'icon': Icons.app_registration, 'subsection': 'Receipt Setting'},
+
+              ]},
+
+            {'icon': Icons.discount, 'subtitle': 'Coupons'},
+            {'icon': Icons.punch_clock, 'subtitle': 'Set-Check-In/Check-Out'},
+            {'icon': Icons.report, 'subtitle': 'Reports'},
+
+
+
+
+          ]
+        },
+
         {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
         {'icon': Icons.password, 'subtitle': 'Change Password'},
@@ -131,67 +200,105 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
           ...filteredList.map((item) {
             // Check if the item has a 'title' (nested items)
             if (item['title'] != null) {
-              return ExpansionTile(
-                leading: Icon(
-                  item['icon'],
-                  size: 20,
-                  color: AppColors.aboutUsHeadingColor,
-                ),
-                title: Text(
-                  item['subtitle'],
-                  style: FTextStyle.drawerText.copyWith(fontSize: 14),
-                ),
-                children: item['title'].map<Widget>((childItem) {
-                  // Check if the childItem has a 'sub' (nested inside 'title')
-                  if (childItem['sub'] != null) {
-                    return ExpansionTile(
-                      leading: Icon(
-                        childItem['icon'],
-                        size: 20,
-                        color: AppColors.aboutUsHeadingColor,
-                      ),
-                      title: Text(
-                        childItem['subtitle'],
-                        style: FTextStyle.drawerText.copyWith(fontSize: 14),
-                      ),
-                      children: childItem['sub'].map<Widget>((subItem) {
-                        return ListTile(
-                          dense: true,
-                          leading: Icon(
-                            subItem['icon'],
-                            size: 20,
-                            color: AppColors.aboutUsHeadingColor,
+              return Container(
+                color: expandedItem== item['subtitle']? Colors.green[50]
+                    : Colors.white,
+                child: ExpansionTile(
+
+                  leading:
+                  Icon(
+                    item['icon'],
+                    size: 20,
+                    color: expandedItem== item['subtitle']? Colors.green
+                      : AppColors.aboutUsHeadingColor,
+                  ),
+
+                  title: Text(
+                    item['subtitle'],
+                    style: FTextStyle.drawerText.copyWith(
+                      fontSize: 14,
+                      fontWeight: expandedItem == item['subtitle']
+                          ? FontWeight.bold
+                          : FontWeight.bold,
+                      color: expandedItem == item['subtitle']
+                          ?  Colors.green
+                          : AppColors.aboutUsHeadingColor,
+                    ),
+                  ),
+                  onExpansionChanged: (isExpanded) {
+                    setState(() {
+                      expandedItem = isExpanded ? item['subtitle'] : null;
+                    });
+                  },
+                  children: item['title'].map<Widget>((childItem) {
+                    // Check if the childItem has a 'sub' (nested inside 'title')
+                    if (childItem['sub'] != null) {
+                      return ExpansionTile(
+                        leading: Icon(
+                          childItem['icon'],
+                          size: 20,
+                          color: expandedSubItem== item['subtitle']? Colors.green[300]
+                              :  AppColors.aboutUsHeadingColor,
+                        ),
+                        title: Text(
+                          childItem['subtitle'],
+                          style: FTextStyle.drawerText.copyWith(
+                            fontSize: 14,
+                            fontWeight: expandedSubItem == item['subtitle']
+                                ? FontWeight.bold
+                                : FontWeight.bold,
+                            color: expandedSubItem == item['subtitle']
+                                ?  Colors.green[300]
+                                : AppColors.aboutUsHeadingColor,
                           ),
-                          title: Text(
-                            subItem['subsection'],
-                            style: FTextStyle.drawerText.copyWith(fontSize: 14),
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                            _handleNavigation(subItem['subsection']);
-                          },
-                        );
-                      }).toList(),
-                    );
-                  } else {
-                    return ListTile(
-                      dense: true,
-                      leading: Icon(
-                        childItem['icon'],
-                        size: 20,
-                        color: AppColors.aboutUsHeadingColor,
-                      ),
-                      title: Text(
-                        childItem['subtitle'],
-                        style: FTextStyle.drawerText.copyWith(fontSize: 14),
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        _handleNavigation(childItem['subtitle']);
-                      },
-                    );
-                  }
-                }).toList(),
+                        ),
+                        onExpansionChanged: (isExpanded) {
+                          setState(() {
+                            expandedSubItem = isExpanded ? item['subtitle'] : null;
+                          });
+                        },
+                        children: childItem['sub'].map<Widget>((subItem) {
+                          return Container(
+                            color: expandedSubItem == item['subtitle']? Colors.green[200] :Colors.green[30],
+                            child: ListTile(
+                              dense: true,
+                              leading: Icon(
+                                subItem['icon'],
+                                size: 20,
+                                color: AppColors.aboutUsHeadingColor,
+                              ),
+                              title: Text(
+                                subItem['subsection'],
+                                style: FTextStyle.drawerText.copyWith(fontSize: 14),
+                              ),
+                              onTap: () {
+                                Navigator.pop(context);
+                                _subSectionHandleNavigation(subItem['subsection']);
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    } else {
+                      return ListTile(
+                        dense: true,
+                        leading: Icon(
+                          childItem['icon'],
+                          size: 20,
+                          color: AppColors.aboutUsHeadingColor,
+                        ),
+                        title: Text(
+                          childItem['subtitle'],
+                          style: FTextStyle.drawerText.copyWith(fontSize: 14),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          _subtitleHandleNavigation(childItem['subtitle']);
+                        },
+                      );
+                    }
+                  }).toList(),
+                ),
               );
             } else {
               return ListTile(
@@ -332,6 +439,150 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
           MaterialPageRoute(builder: (context) =>  FreeRegistration()),
         );
         break;
+
+        case 'Manual Attendance':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  ManualAttendance()),
+        );
+        break;
+        case 'QR Attendance':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  QrAttendance()),
+        );
+        break;
+
+        //Deadline-Subtitle
+      case 'Delegate Category':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  DelegateCategory()),
+        );
+        break;
+
+        case 'Accommodation Category':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  AccommodationCategory()),
+        );
+        break;
+   case 'Coupons':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  CouponCode()),
+        );
+        break;
+   case 'Set-Check-In/Check-Out':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  SetCheckOut()),
+        );
+        break;
+   case 'Reports':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  Reports()),
+        );
+        break;
+
+
+
+
+
+
+
+
+    }
+  }
+  void _subSectionHandleNavigation(String subtitle)
+  {
+    switch (subtitle) {
+      case 'Manage Schedule':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  ManageSchedule()),
+        );
+        break;
+      case 'Print Schedule':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  PrintSchedule()),
+        );
+        break;
+      case 'Manage Program':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  ManageProgram()),
+        );
+        break;
+        case 'Print Program':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  PrintProgram()),
+        );
+        break;
+//deadlines
+
+      case 'Total Registration':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  RegistrationDeadlines()),
+        );
+        break;
+
+      case 'Registration Fee':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  RegistrationFeeDeadlines()),
+        );
+        break;
+      case 'Abstract Submission':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  AbstractSubmissionDeadlines()),
+        );
+        break;
+      case 'Paper Submission':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  PaperSubmissionDeadlines()),
+        );
+        break;
+
+
+      case 'Accommodation':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  AccommodationDeadlines()),
+        );
+        break;
+
+        //fee
+
+      case 'Registration Fee':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  RegistrationFee()),
+        );
+        break;
+      case 'Accommodation Fee':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  Accommodation()),
+        );
+        break;
+      case 'Bank Details':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  BankDetails()),
+        );
+        break;case 'Receipt Setting':
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>  ReceiptSetting()),
+      );
+      break;
 
     }
   }

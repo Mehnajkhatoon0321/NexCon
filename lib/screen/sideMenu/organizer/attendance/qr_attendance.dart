@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
-class AbstractOrganizerEdit extends StatefulWidget {
-  String conferenceName;
-  String  abstractSession;
-   AbstractOrganizerEdit({required this.conferenceName,required this.abstractSession,super.key});
+class QrAttendance extends StatefulWidget {
+  const QrAttendance({super.key});
 
   @override
-  State<AbstractOrganizerEdit> createState() => _AbstractOrganizerEditState();
+  State<QrAttendance> createState() => _QrAttendanceState();
 }
 
-class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
+class _QrAttendanceState extends State<QrAttendance> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +26,7 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
           },
         ),
         title: Text(
-          'Abstract Organizer',
+          'QR Attendance',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
