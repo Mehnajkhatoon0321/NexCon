@@ -36,7 +36,7 @@ class _MyConferenceOrganizerViewState extends State<MyConferenceOrganizerView> {
       ),
       backgroundColor: Colors.white,
       body: Center(
-        child: Text('Conference ID: ${widget.id}'), // Example usage of the id
+        child: Text('Conference ID: ${widget.id}'), 
       ),
     );
   }

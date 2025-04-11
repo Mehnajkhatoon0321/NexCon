@@ -390,25 +390,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ForgotPassword(
-                              selectedRole: widget.selectedRole,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Forgot Password ?",
-                        style: FTextStyle.listTitleSub.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            color: Colors.black),
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => ForgotPassword(
+                    //           selectedRole: widget.selectedRole,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: Text(
+                    //     "Forgot Password ?",
+                    //     style: FTextStyle.listTitleSub.copyWith(
+                    //         fontWeight: FontWeight.w600,
+                    //         fontSize: 15,
+                    //         color: Colors.black),
+                    //   ),
+                    // ),
                   ],
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.1),

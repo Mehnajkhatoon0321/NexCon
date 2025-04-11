@@ -6,7 +6,6 @@ import 'package:nexcon/screen/organizer_section/abstract_and_paper/paper_organiz
 import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer.dart';
 import 'package:nexcon/screen/organizer_section/mydashboard_organizer/my_dashboard_organizer.dart';
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
@@ -90,6 +89,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
           duration: 600.ms,
           begin: const Offset(40.0, 0.0),
           end: const Offset(0.0, 0.0),
+
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -142,8 +142,11 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(25),  // Rounded top-left corner
           topRight: Radius.circular(25), // Rounded top-right corner
+
         ),
+
       ),
+
       child:
       BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -156,7 +159,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
               (item) => BottomNavigationBarItem(
             icon: Icon(
               item['icon'],
-              size: 30,
+              size: 25,
               color: _selectedIndex == _navBarItems.indexOf(item)
                   ?Colors.white
                   : Colors.grey,
@@ -172,8 +175,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
