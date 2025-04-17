@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nexcon/screen/authFlow/organizer_register.dart';
+import 'package:nexcon/screen/authFlow/selection_role.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
@@ -42,7 +44,7 @@ class PricingScreen extends StatelessWidget {
                   DataColumn(label: _tableHeaderText("PRO")),
                   DataColumn(label: _tableHeaderText("ELITE")),
                 ],
-                rows: _pricingRows(),
+                rows: _pricingRows(context),
               ),
             ),
             SizedBox(height: 20),
@@ -91,7 +93,7 @@ class PricingScreen extends StatelessWidget {
     );
   }
 
-  List<DataRow> _pricingRows() {
+  List<DataRow> _pricingRows(BuildContext context) {
     return  [
     _buildRow("Smart Conference Service Fee", "Nil", "INR 50*", "Request A Quote", isHeader: true),
     _buildRow("FREE Conference Listing", "✔️", "✔️", "✔️"),
@@ -128,26 +130,33 @@ class PricingScreen extends StatelessWidget {
     _buildRow("Conference Registration Desk Management***", "", "", "✔️"),
     _buildRow("Conference Kit***", "", "", "✔️"),
     _buildRow("Online Marketing (Facebook, Twitter, Linkedin, Google Adwords, Email Marketing, Newsletters etc.)", "", "", "✔️"),
-      _buildRowWithButtons()
+      _buildRowWithButtons(context)
     ];
   }
-  DataRow _buildRowWithButtons() {
+  DataRow _buildRowWithButtons(context) {
     return DataRow(
       cells: [
         DataCell(Text("")),
-        DataCell(_registerButton("Basic")),
-        DataCell(_registerButton("Pro")),
-        DataCell(_registerButton("Elite")),
+        DataCell(_registerButton("Basic",context) ),
+        DataCell(_registerButton("Pro",context)),
+        DataCell(_registerButton("Elite",context)),
       ],
     );
   }
 
-  Widget _registerButton(String plan) {
+  Widget _registerButton(String plan,context ) {
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: ElevatedButton(
           onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                const OrganizerRegister(),
+              ),
+            );
 
           },
           style: ElevatedButton.styleFrom(
@@ -202,110 +211,4 @@ class PricingScreen extends StatelessWidget {
     );
   }
 
-// class PricingScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor:AppColors.appSky, // Customize app bar color
-//         leading: IconButton(
-//           icon: const Icon(
-//             Icons.arrow_back_ios,
-//             color: Colors.white,
-//             size: 28,
-//           ), // Menu icon
-//           onPressed: () {
-//             Navigator.pop(context);
-//           },
-//         ),
-//         title: Text(
-//           'Plan and Pricing',
-//           style: FTextStyle.HeadingTxtWhiteStyle,
-//         ),
-//         centerTitle: true,
-//       ),
-//       backgroundColor: Colors.white,
-//       body: SingleChildScrollView(
-//         padding: EdgeInsets.symmetric(horizontal: 16,vertical: 2),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//
-//             SizedBox(height: 16),
-//             SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: DataTable(
-//                 border: TableBorder.all(),
-//                 columns: [
-//                   DataColumn(label: Text("Service", style: TextStyle(fontWeight: FontWeight.bold))),
-//                   DataColumn(label: Text("BASIC", style: TextStyle(fontWeight: FontWeight.bold))),
-//                   DataColumn(label: Text("PRO", style: TextStyle(fontWeight: FontWeight.bold))),
-//                   DataColumn(label: Text("ELITE", style: TextStyle(fontWeight: FontWeight.bold))),
-//                 ],
-//                 rows: [
-//                   _buildRow("Smart Conference Service Fee", "Nil", "INR 50*", "Request A Quote", isHeader: true),
-//                   _buildRow("FREE Conference Listing", "✔️", "✔️", "✔️"),
-//                   _buildRow("Single Login for Multiple Conferences", "✔️", "✔️", "✔️"),
-//                   _buildRow("Featured Conference Listing", "", "✔️", "✔️"),
-//                   _buildRow("Email Alerts for New Conferences", "", "✔️", "✔️"),
-//                   _buildRow("Monthly Email Reminders", "", "✔️", "✔️"),
-//                   _buildRow("Organizer's Profile", "✔️", "✔️", "✔️"),
-//                   _buildRow("Delegate Registration", "", "✔️", "✔️"),
-//                   _buildRow("Registration Form API", "", "✔️", "✔️"),
-//                   _buildRow("Abstract Submission", "", "✔️", "✔️"),
-//                   _buildRow("Review of Abstracts & Papers", "", "✔️", "✔️"),
-//                   _buildRow("Full Paper Submission", "", "✔️", "✔️"),
-//                   _buildRow("Accommodation Booking", "", "✔️", "✔️"),
-//                   _buildRow("Accommodation Fee Payment", "", "✔️", "✔️"),
-//                   _buildRow("Create Fee Discount Coupons", "", "✔️", "✔️"),
-//                   _buildRow("Fee Payment Receipts for Delegates", "", "✔️", "✔️"),
-//                   _buildRow("Travel Information", "", "✔️", "✔️"),
-//                   _buildRow("Minute-to-minute Conference Programme", "", "✔️", "✔️"),
-//                   _buildRow("Automatic Email Reminders to Delegates", "", "✔️", "✔️"),
-//                   _buildRow("Automatic SMS Reminders to Delegates", "", "✔️", "✔️"),
-//                   _buildRow("Online Reports", "", "✔️", "✔️"),
-//                   _buildRow("Export Reports in Excel", "", "✔️", "✔️"),
-//                   _buildRow("e-Wallet", "", "✔️", "✔️"),
-//                   _buildRow("Smart Conference Payment Gateway**", "", "✔️", "✔️"),
-//                   _buildRow("Smart Conference Payment Gateway Options**", "", "Debit & Credit Card (Domestic & International), NetBanking, PayPal", "Debit & Credit Card (Domestic & International), NetBanking, PayPal"),
-//                   _buildRow("Personal Payment Gateway Setup", "", "✔️", "✔️"),
-//                   _buildRow("Multiple Currency Processing (INR, USD, EURO & GBP)", "", "✔️", "✔️"),
-//                   _buildRow("Print Conference Ticket", "", "✔️", "✔️"),
-//                   _buildRow("Email Support", "✔️", "✔️", "✔️"),
-//                   _buildRow("Phone Support", "", "✔️", "✔️"),
-//                   _buildRow("Data Backup", "", "✔️", "✔️"),
-//                   _buildRow("Live Webcast", "", "✔️", "✔️"),
-//                   _buildRow("Conference Registration Desk Management***", "", "", "✔️"),
-//                   _buildRow("Conference Kit***", "", "", "✔️"),
-//                   _buildRow("Online Marketing (Facebook, Twitter, Linkdin, Google Adwords, Email Marketing, Newsletters etc.)", "", "", "✔️"),
-//                 ],
-//               ),
-//             ),
-//             SizedBox(height: 20),
-//             Center(
-//               child: ElevatedButton(
-//                 onPressed: () {},
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: Colors.red,
-//                   padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-//                 ),
-//                 child: Text("Subscribe", style: TextStyle(color: Colors.white)),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-//
-//   DataRow _buildRow(String title, String basic, String pro, String elite, {bool isHeader = false}) {
-//     return DataRow(
-//       cells: [
-//         DataCell(Text(title, style: TextStyle(fontWeight: isHeader ? FontWeight.bold : FontWeight.normal),maxLines: 2,)),
-//         DataCell(Text(basic, style: TextStyle(fontWeight: isHeader ? FontWeight.bold : FontWeight.normal))),
-//         DataCell(Text(pro, style: TextStyle(fontWeight: isHeader ? FontWeight.bold : FontWeight.normal, color: isHeader ? Colors.red : Colors.black))),
-//         DataCell(Text(elite, style: TextStyle(fontWeight: isHeader ? FontWeight.bold : FontWeight.normal))),
-//       ],
-//     );
-//   }
-// }
+

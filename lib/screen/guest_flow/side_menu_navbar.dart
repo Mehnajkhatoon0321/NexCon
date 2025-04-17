@@ -9,6 +9,7 @@ import 'package:nexcon/screen/delegates_section/paper_delegates/paper_delegates.
 import 'package:nexcon/screen/organizer_section/accommodation/accomodation.dart';
 import 'package:nexcon/screen/organizer_section/registreation_all_types/delegates_registration.dart';
 import 'package:nexcon/screen/organizer_section/registreation_all_types/free_registration.dart';
+import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/about.dart';
 import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
 import 'package:nexcon/screen/sideMenu/common_section/how_works_delegates.dart';
@@ -397,7 +398,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
       case 'Plans & Pricing':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PlanPricingScreen()),
+          MaterialPageRoute(builder: (context) =>  PricingScreen()),
         );
         break;
       case 'Conferences':

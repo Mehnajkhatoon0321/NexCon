@@ -9,12 +9,20 @@ class AccommodationCategory extends StatefulWidget {
 }
 
 class _AccommodationCategoryState extends State<AccommodationCategory> {
-  @override
+ List<Map<dynamic,String>> list=[
+{
+  "title":"18th Indian Science Communication Congress (ISCC-2018)",
+  "accomandation":""
+},
+{
+
+ }
+
+];
 
   @override
   Widget build(BuildContext context) {
-    var
-     height = MediaQuery.of(context).size.height;
+    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -37,6 +45,13 @@ class _AccommodationCategoryState extends State<AccommodationCategory> {
         ),
         centerTitle: true,
 
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+        ],
       ),
     );
   }
