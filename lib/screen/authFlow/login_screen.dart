@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nexcon/screen/authFlow/forgot_password.dart';
 import 'package:nexcon/screen/authFlow/organizer_register.dart';
 import 'package:nexcon/screen/delegates_section/delegates_home_page.dart';
 import 'package:nexcon/screen/delegates_section/featured_conferences.dart';
