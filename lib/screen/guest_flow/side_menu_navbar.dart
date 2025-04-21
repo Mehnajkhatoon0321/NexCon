@@ -7,8 +7,6 @@ import 'package:nexcon/screen/delegates_section/accomondation/accomodation.dart'
 import 'package:nexcon/screen/delegates_section/featured_conferences.dart';
 import 'package:nexcon/screen/delegates_section/paper_delegates/paper_delegates.dart';
 import 'package:nexcon/screen/organizer_section/accommodation/accomodation.dart';
-import 'package:nexcon/screen/organizer_section/registreation_all_types/delegates_registration.dart';
-import 'package:nexcon/screen/organizer_section/registreation_all_types/free_registration.dart';
 import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/about.dart';
 import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
@@ -24,6 +22,8 @@ import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/print_p
 
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/schedule/manage_schedule.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/schedule/print_schedule.dart';
+import 'package:nexcon/screen/sideMenu/organizer/registreation_all_types/delegates_registration.dart';
+import 'package:nexcon/screen/sideMenu/organizer/registreation_all_types/free_registration.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/accomodation_category/accommodation_category.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/coupon_code/coupon_code.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/abstract_submission_deadlines.dart';

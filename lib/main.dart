@@ -8,6 +8,7 @@ void main() async {
   await Prefs.init();
 
   runApp(const MyApp());
+
 }
 
 

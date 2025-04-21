@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
-import '../../../utils/colours.dart';
 import 'delegates_registration_view.dart';
 class DelegatesRegistration extends StatefulWidget {
   const DelegatesRegistration({super.key});
@@ -79,7 +79,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
         .size
         .width;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF9F9F9),
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
@@ -216,6 +216,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
   Widget _buildActiveSegment(double height, double width) {
     List<dynamic> activeConferenceList = [
       {
+        'title': "30th ISCB International Conference (ISCBC-2025)",
         "registrationNo":"1",
         'bookingStatus': "Approved",
         "delegatesName":"Delegates Name",
@@ -228,6 +229,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
 
       },
       {
+        'title': "30th ISCB International Conference (ISCBC-2025)",
         "registrationNo":"2",
         'bookingStatus': "Approved",
         "delegatesName":"Delegates Name",
@@ -272,7 +274,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            item['delegatesCategory']!,
+                            item['title']!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: FTextStyle.listTitle
@@ -344,7 +346,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                             Text(
                               bookingStatus,
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: bookingStatus == "Approved"
                                     ? Colors.green
@@ -377,7 +379,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        DelegatesRegistrationView(id: item['id'],
+                                        DelegatesRegistrationView(id: item['id'].toString(),
 
                                         ),
                                   ),
@@ -425,6 +427,8 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
   Widget _buildInActiveSegment(double height, double width) {
     List<dynamic> inactiveConferenceList = [
       {
+        "id":"1",
+        'title': "30th ISCB International Conference (ISCBC-2025)",
         "registrationNo":"1",
         'bookingStatus': "Approved",
         "delegatesName":"Delegates Name",
@@ -437,6 +441,8 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
 
       },
       {
+        "id":"2",
+        'title': "30th ISCB International Conference (ISCBC-2025)",
         "registrationNo":"2",
         'bookingStatus': "Approved",
         "delegatesName":"Delegates Name",
@@ -483,11 +489,12 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            item['delegatesCategory']!,
+                            item['title']!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: FTextStyle.listTitle
                         ),
+
                         const SizedBox(height: 6),
                         Row(
                           children: [
@@ -555,7 +562,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                             Text(
                               bookingStatus,
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: bookingStatus == "Approved"
                                     ? Colors.green
