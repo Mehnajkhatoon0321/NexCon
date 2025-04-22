@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/authFlow/edit_profile.dart';
+import 'package:nexcon/screen/authFlow/delegate_my_profile/edit_profile.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/font_text_Style.dart';

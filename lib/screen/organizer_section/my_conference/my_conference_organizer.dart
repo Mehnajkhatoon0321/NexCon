@@ -465,7 +465,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
   Widget _buildInActiveSegment(double height, double width) {
     List<dynamic> inactiveConferenceList = [
       {"id":"1",
-          'bookingStatus': "Approved",
+        'bookingStatus': "Approved",
         "conferenceId": "1232343543",
         "conferenceName": "4th International Science Communication Conference",
         "fromDate": "2024-12-19",

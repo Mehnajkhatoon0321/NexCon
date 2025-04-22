@@ -7,7 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:nexcon/screen/authFlow/my_profile.dart';
+import 'package:nexcon/screen/authFlow/organizer_my_profile/my_profile_organizer.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
@@ -15,15 +15,14 @@ import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/no_space_input_formatter_class.dart';
 import 'package:nexcon/utils/validator_utils.dart';
-
-class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+class EditProfileOrganizer extends StatefulWidget {
+  const EditProfileOrganizer({super.key});
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<EditProfileOrganizer> createState() => _EditProfileOrganizerState();
 }
 
-class _EditProfileState extends State<EditProfile> {
+class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   late final formKey = GlobalKey<FormState>();
 
   late final TextEditingController customerPrice = TextEditingController();
@@ -450,49 +449,7 @@ class _EditProfileState extends State<EditProfile> {
                         ).animateOnPageLoad(
                             animationsMap['imageOnPageLoadAnimation2']!),
                       ),
-                      Text(
-                        "Designation",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: DropdownButtonFormField<String>(
-                          key: _productCategoryKey,
-                          focusNode: _productCategoryNode,
-                          value: selectedProductCategory,
-                          hint: const Text("Select designation",style: FTextStyle.formhintTxtStyle,),
-                          items: productCategories
-                              .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category),
-                          ))
-                              .toList(),
-                          onChanged: (newValue) {
 
-
-                            setState(() {
-                              selectedProductCategory = newValue;
-
-                            });
-
-
-                            isProductCategoryFieldFocused=true;
-                            isBrandFieldFocused=false;
-                            isModelFieldFocused = false;
-                            isCustomerPriceFieldFocused = false;
-                            isDealerFocused = false;
-                            isDescriptionFieldFocused = false;
-                            isWarrantyFieldFocused = false;
-                            isGstFieldFocused = false;
-                            isRemarkFieldFocused = false;
-
-                          },
-                          decoration:FormFieldStyle.dropDown,
-
-                          validator: ValidatorUtils.model,
-                        ),
-                      ),
                       Text(
                         "Email",
                         style: FTextStyle.formLabelTxtStyle,
@@ -558,81 +515,6 @@ class _EditProfileState extends State<EditProfile> {
                         ).animateOnPageLoad(
                             animationsMap['imageOnPageLoadAnimation2']!),
                       ),
-                      Text(
-                        "Date Of Birth",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: TextFormField(
-                          key: _modelKey,
-                          focusNode: _modelNode,
-                          keyboardType: TextInputType.text,
-                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                            hintText: "dd-mm-yyyy",
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                Icons.calendar_today, // Calendar icon
-                                color: Colors.grey, // Adjust color as needed
-                              ),
-                              onPressed: () {
-                                // Show date picker when the icon is pressed
-                                _selectDate(context);
-                              },
-                            ),
-                          ),
-                          inputFormatters: [NoSpaceFormatter()],
-                          controller: remark,
-                          validator: ValidatorUtils.dateValidator,
-                          onTap: () {
-                            setState(() {
-                              isProductCategoryFieldFocused=false;
-                              isBrandFieldFocused=false;
-                              isModelFieldFocused = true;
-                              isCustomerPriceFieldFocused = false;
-                              isDealerFocused = false;
-                              isDescriptionFieldFocused = false;
-                              isWarrantyFieldFocused = false;
-                              isGstFieldFocused = false;
-                              isRemarkFieldFocused = false;
-                            });
-                          },
-                        ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!,
-                        ),
-                      ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -690,7 +572,7 @@ class _EditProfileState extends State<EditProfile> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MyProfile(),
+                          builder: (context) => const MyProfileOrganizer(),
                         ),
                       );
                     },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/authFlow/change_password.dart';
-import 'package:nexcon/screen/authFlow/my_profile.dart';
+import 'package:nexcon/screen/authFlow/delegate_my_profile/my_profile.dart';
+import 'package:nexcon/screen/authFlow/organizer_my_profile/my_profile_organizer.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
 import 'package:nexcon/screen/delegates_section/abstract/abstract.dart';
 import 'package:nexcon/screen/delegates_section/accomondation/accomodation.dart';
@@ -84,7 +85,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     } else if (widget.selectedRole == 'isselect organizer') {
       // Show only organizer-related items
       filteredList = [
-        {'icon': Icons.person, 'subtitle': 'My profile'},
+        {'icon': Icons.person, 'subtitle': 'My Profile Details'},
         {'icon': Icons.info, 'subtitle': 'About'},
         {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
         {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
@@ -365,10 +366,10 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const AccommodationOrganizationScreen()),
         );
         break;
-      case 'My profile':
+      case 'My Profile Details':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const MyProfile()),
+          MaterialPageRoute(builder: (context) =>  MyProfileOrganizer()),
         );
         break;
       case 'About':

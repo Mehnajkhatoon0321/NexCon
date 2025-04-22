@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
+import 'package:shimmer/shimmer.dart';
 class MyConferenceOrganizerView extends StatefulWidget {
   final String id;  // Add the id property
 
@@ -12,33 +17,284 @@ class MyConferenceOrganizerView extends StatefulWidget {
 }
 
 class _MyConferenceOrganizerViewState extends State<MyConferenceOrganizerView> {
+  Map<String, dynamic> activeConferenceList =
+  {
+    "id":"1",
+    "registrationN0":"1",
+    'title': "30th ISCB International Conference (ISCBC-2025)",
+    'paymentMode': "PhonePay",
+    'tnNumber': "2343546446",
+    'tnDate': "2023-12-10",
+
+    'bookingStatus': "Pending",
+    'feeDate': "23-11-2025",
+    "fromDate": "23-11-2025",
+    "toDate": "24-12-2025",
+  }
+
+  ;
+
+
+  final animationsMap = {
+    'columnOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: const Offset(0.0, 20.0),
+          end: const Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: const Offset(0.0, 20.0),
+          end: const Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 400.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 400.ms,
+          duration: 600.ms,
+          begin: const Offset(0.0, 20.0),
+          end: const Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'imageOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: const Offset(40.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
+
+
+
+
+
+  bool isLoading = false;
+
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    // BlocProvider.of<AllRequesterBloc>(context)
+    //     .add(GetBillingListHandler("", pageNo, pageSize));
+
+  }
+  Map<String, dynamic> errorServerMessage = {};
+  String? errorMessage;
+
+  Timer? _debounce;
+
   @override
   Widget build(BuildContext context) {
-    // You can now use widget.id to access the passed id
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor:AppColors.appSky, // Customize app bar color
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-            size: 28,
-          ), // Menu icon
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    var height = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF9F9F9),
+        appBar: AppBar(
+          backgroundColor: AppColors.appSky,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+              size: 26,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: Text(
+            'Conference Details',
+            style: FTextStyle.HeadingTxtWhiteStyle,
+          ),
+          centerTitle: true,
         ),
-        title: Text(
-          'Conference View',
-          style: FTextStyle.HeadingTxtWhiteStyle,
+        body: Column(
+          children: [
+            Expanded(
+              child: isLoading && activeConferenceList.isEmpty
+                  ? Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Container(
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 6,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+                  : (errorMessage != null || errorServerMessage.isNotEmpty)
+                  ? Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    " errorMessage ?? errorServerMessag",
+                    style: FTextStyle.listTitle,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+                  : (activeConferenceList.isEmpty)
+                  ? const Center(
+                child: Text("No data available.", style: FTextStyle.listTitle),
+              )
+                  : ListView(
+                // padding: const EdgeInsets.all(16),
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    width: screenWidth,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: [0.0, 0.5, 0.95],
+                        colors: [
+                          Color(0xffffffff),
+                          Color(0xf5c6f6da),
+                          Color(0xf5c6f6da),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        activeConferenceList['title'],
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  _buildDetailTile("Registration No.", activeConferenceList['registrationN0']),
+                  _buildDetailTile("From Date", activeConferenceList['fromDate']),
+                  _buildDetailTile("To Date", activeConferenceList['toDate']),
+
+                  _buildDetailTile("Booking Status", activeConferenceList['bookingStatus'],
+                      valueColor: activeConferenceList['bookingStatus'] == "Success"
+                          ? Colors.green
+                          : Colors.orange),
+
+                ],
+              ),
+            ),
+          ],
         ),
-        centerTitle: true,
-      ),
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Text('Conference ID: ${widget.id}'), 
       ),
     );
   }
+
+  Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 4,
+            child: Text(
+              "$title:",
+              style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 6,
+            child: Text(
+              value,
+              style: valueColor != null
+                  ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
+                  : FTextStyle.listTitleSub,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
 }
 
