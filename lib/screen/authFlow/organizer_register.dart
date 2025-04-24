@@ -122,11 +122,11 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _countryKey =
   GlobalKey<FormFieldState<String>>();
-
-  late final GlobalKey<FormFieldState<String>> _dateBirthKey =
-  GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _cityKey =
   GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _dateBirthKey =
+  GlobalKey<FormFieldState<String>>();
+
   late final GlobalKey<FormFieldState<String>> _firstKey =
   GlobalKey<FormFieldState<String>>();
 

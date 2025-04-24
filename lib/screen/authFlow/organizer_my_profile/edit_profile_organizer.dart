@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:nexcon/screen/authFlow/organizer_my_profile/my_profile_organizer.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
@@ -25,24 +26,26 @@ class EditProfileOrganizer extends StatefulWidget {
 class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   late final formKey = GlobalKey<FormState>();
 
-  late final TextEditingController customerPrice = TextEditingController();
+  late final TextEditingController name = TextEditingController();
+  late final TextEditingController organizationNamePrice = TextEditingController();
 
   late final TextEditingController productCategory = TextEditingController();
 
-  late final TextEditingController descriptions = TextEditingController();
+  late final TextEditingController _addressKey = TextEditingController();
   late final TextEditingController warranty = TextEditingController();
   late final TextEditingController gst = TextEditingController();
   late final TextEditingController mobile = TextEditingController();
   late final TextEditingController remark = TextEditingController();
-  late final GlobalKey<FormFieldState<String>> _modelKey =
+
+  late final GlobalKey<FormFieldState<String>> _nameKey =
   GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _customerPriceKey =
+  late final GlobalKey<FormFieldState<String>> _organizationNamePriceKey =
   GlobalKey<FormFieldState<String>>();
 
   late final GlobalKey<FormFieldState<String>> _productCategoryKey =
   GlobalKey<FormFieldState<String>>();
 
-  late final GlobalKey<FormFieldState<String>> _descriptionsKey =
+  late final GlobalKey<FormFieldState<String>> __addressKeyKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _warrantyKey =
   GlobalKey<FormFieldState<String>>();
@@ -51,18 +54,22 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   late final GlobalKey<FormFieldState<String>> _mobileKey =
   GlobalKey<FormFieldState<String>>();
 
-  late final FocusNode _modelNode = FocusNode();
-  late final FocusNode _customerPriceNode = FocusNode();
 
-  late final FocusNode _productCategoryNode = FocusNode();
+  late final FocusNode _nameNode = FocusNode();
+  late final FocusNode _organizationNameNode = FocusNode();
 
 
-  late final FocusNode _descriptionNode = FocusNode();
+
+
+  late final FocusNode _addressNode = FocusNode();
 
   late final FocusNode _gstNode = FocusNode();
   late final FocusNode _mobileNode = FocusNode();
 
-
+  late final GlobalKey<FormFieldState<String>> _countryKey =
+  GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> _cityKey =
+  GlobalKey<FormFieldState<String>>();
 
 
   bool isButtonEnabled = false;
@@ -74,7 +81,8 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
 
   var profileUpdate = false;
   bool isModelFieldFocused = false;
-  bool isCustomerPriceFieldFocused = false;
+  bool isNameFieldFocused = false;
+  bool isOrganizationNameFieldFocused = false;
   bool isDealerFocused = false;
   bool isProductCategoryFieldFocused = false;
   bool isDayTypesFieldFocused = false;
@@ -88,6 +96,8 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   String cameraSelectedImage = '';
   String gallerySelectedImage = '';
   String selectionImageType = '';
+  late final FocusNode _cityFocusNode = FocusNode();
+  late final FocusNode _countryFocusNode = FocusNode();
   final ImagePicker _imagePicker = ImagePicker();
   String? userImage = '';
   var isRemarkEnabled = true;
@@ -95,7 +105,8 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   var selfiImg = '';
   List<int> profileImage = [];
   List<int> Images = [];
-
+  String? selectCountryNamesCategories;
+  String? selectCityNamesCategories;
   List<String> productCategories = [
     'Application Developer',
     'Web Developer',
@@ -201,24 +212,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
       ],
     ),
   };
-  void _selectDate(BuildContext context) async {
-    DateTime currentDate = DateTime.now();
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: currentDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
-    );
 
-    if (selectedDate != null && selectedDate != currentDate) {
-      // Format the date to dd-MM-yyyy
-      String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
-
-      setState(() {
-        remark.text = formattedDate;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -270,9 +264,11 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                         selectedProductCategory!.isNotEmpty &&
                         ValidatorUtils.isValidTransactionDate(remark.text) &&
 
-                        ValidatorUtils.isValidCommon(customerPrice.text) &&
+                        ValidatorUtils.isValidCommon(name.text)&&
+
+                        ValidatorUtils.isValidCommon(organizationNamePrice.text) &&
                         ValidatorUtils.isValidCommon(gst.text) &&
-                        ValidatorUtils.isValidCommon(descriptions.text)
+                        ValidatorUtils.isValidCommon(_addressKey.text)
                     ) {
                       setState(() {
                         isButtonEnabled = true;
@@ -289,12 +285,12 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
 
                     if (isWarrantyFieldFocused == true) {
                       _warrantyKey.currentState!.validate();
-                    } if (isCustomerPriceFieldFocused == true) {
-                      _customerPriceKey.currentState!.validate();
+                    } if (isNameFieldFocused == true) {
+                      _nameKey.currentState!.validate();
                     } if (isGstFieldFocused == true) {
                       _gstKey.currentState!.validate();
                     } if (isDescriptionFieldFocused == true) {
-                      _descriptionsKey.currentState!.validate();
+                      __addressKeyKey.currentState!.validate();
                     }
 
 
@@ -417,6 +413,40 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                         ),
                       ),
                       Text(
+                        "Organization Name",
+                        style: FTextStyle.formLabelTxtStyle,
+                      ).animateOnPageLoad(
+                          animationsMap['imageOnPageLoadAnimation2']!),
+                      const SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _organizationNamePriceKey,
+                          focusNode: _organizationNameNode,
+                          keyboardType: TextInputType.text,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(hintText: "Enter organization name"),
+
+                          controller: organizationNamePrice,
+                          validator: ValidatorUtils.model,
+                          onTap: () {
+                            setState(() {
+                              isProductCategoryFieldFocused=false;
+                              isBrandFieldFocused=false;
+                              isModelFieldFocused = false;
+                              isWarrantyFieldFocused = false;
+                              isNameFieldFocused = false;
+                              isOrganizationNameFieldFocused = true;
+                              isDealerFocused = false;
+                              isDescriptionFieldFocused = false;
+                            
+                              isRemarkFieldFocused = false;
+                            });
+                          },
+                        ).animateOnPageLoad(
+                            animationsMap['imageOnPageLoadAnimation2']!),
+                      ),
+
+                      Text(
                         "Name",
                         style: FTextStyle.formLabelTxtStyle,
                       ).animateOnPageLoad(
@@ -425,12 +455,12 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: TextFormField(
-                          key: _customerPriceKey,
-                          focusNode: _customerPriceNode,
+                          key: _nameKey,
+                          focusNode: _nameNode,
                           keyboardType: TextInputType.text,
                           decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(hintText: "Enter name"),
 
-                          controller: customerPrice,
+                          controller: name,
                           validator: ValidatorUtils.model,
                           onTap: () {
                             setState(() {
@@ -438,7 +468,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                               isBrandFieldFocused=false;
                               isModelFieldFocused = false;
                               isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = true;
+                              isNameFieldFocused = true;
                               isDealerFocused = false;
                               isDescriptionFieldFocused = false;
 
@@ -471,7 +501,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                               isBrandFieldFocused=false;
                               isModelFieldFocused = false;
                               isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = false;
+                              isNameFieldFocused = false;
                               isDealerFocused = false;
                               isDescriptionFieldFocused = false;
 
@@ -482,6 +512,72 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                         ).animateOnPageLoad(
                             animationsMap['imageOnPageLoadAnimation2']!),
                       ),
+
+                      Text(
+                        "Country",
+                        style: FTextStyle.formLabelTxtStyle,
+                      ).animateOnPageLoad(
+                          animationsMap['imageOnPageLoadAnimation2']!),
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(vertical: 10.0),
+                        child: DropdownButtonFormField<String>(
+                          key: _countryKey,
+                          focusNode: _countryFocusNode,
+                          value: selectCountryNamesCategories,
+                          hint: const Text(
+                            "Select Country",
+                            style: FTextStyle.formhintTxtStyle,
+                          ),
+                          items: Constants.countryNamesCategories
+                              .map((category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category),
+                          ))
+                              .toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectCountryNamesCategories = newValue;
+                            });
+                            _countryKey.currentState?.validate(); // Validate only this field
+                          },
+                          decoration: FormFieldStyle.dropDown,
+                          validator: ValidatorUtils.model,
+                        ),
+                      ),
+                      Text(
+                        "City",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ).animateOnPageLoad(
+                          animationsMap['imageOnPageLoadAnimation2']!),
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(vertical: 10.0),
+                        child: DropdownButtonFormField<String>(
+                          key: _cityKey,
+                          focusNode: _cityFocusNode,
+                          value: selectCityNamesCategories,
+                          hint: const Text(
+                            "Select City",
+                            style: FTextStyle.formhintTxtStyle,
+                          ),
+                          items: Constants.cityNamesCategories
+                              .map((category) => DropdownMenuItem(
+                            value: category,
+                            child: Text(category),
+                          ))
+                              .toList(),
+                          onChanged: (cityValue) {
+                            setState(() {
+                              selectCityNamesCategories = cityValue;
+                            });
+                            _cityKey.currentState?.validate(); // Validate only this field
+                          },
+                          decoration: FormFieldStyle.dropDown,
+                          validator: ValidatorUtils.model,
+                        ),
+                      ),
+
                       Text(
                         "Mobile Number",
                         style: FTextStyle.formLabelTxtStyle,
@@ -503,7 +599,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                               isBrandFieldFocused=false;
                               isModelFieldFocused = false;
                               isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = false;
+                              isNameFieldFocused = false;
                               isDealerFocused = false;
                               isDescriptionFieldFocused = false;
                               isMobileFieldFocused = true;
@@ -529,15 +625,15 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: TextFormField(
-                          key: _descriptionsKey,
-                          focusNode: _descriptionNode,
+                          key: __addressKeyKey,
+                          focusNode: _addressNode,
                           keyboardType: TextInputType.multiline,
                           maxLines: 4, // Allows for multiple lines
                           decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
                             hintText: "Enter address",
                           ),
                           inputFormatters: [NoSpaceFormatter()],
-                          controller: descriptions,
+                          controller: _addressKey,
                           validator: ValidatorUtils.model,
                           onTap: () {
                             setState(() {
@@ -545,7 +641,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                               isBrandFieldFocused = false;
                               isModelFieldFocused = false;
                               isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = false;
+                              isNameFieldFocused = false;
                               isDealerFocused = false;
                               isDescriptionFieldFocused = true;
                               isGstFieldFocused = false;

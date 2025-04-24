@@ -14,14 +14,15 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
 
   Map<String, dynamic> profileData = {
     "Organization Name": "Webgrade Technology",
-    "Name": "Ms Mehnaj Khatoon",
+    "Name": "Ms Mehnaj  Khatoon",
     "Email": "mehnaj0321@gmail.com",
     "Country": "India",
-    "State": "India",
+    "State": "Uttar Pradesh",
     "City": "Lucknow",
-    "Address for Correspondence": "DLF my pad India",
     "Mobile": "9695844884",
-    "GST/VST": "213",
+    "GST/VST": "2135",
+    "Address for Correspondence": "DLF my pad India",
+
   };
 
   @override
@@ -73,21 +74,20 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
                               builder: (context) =>
                                   EditProfileOrganizer()       ),
 
+                        ).then((result) {
+                          // Handle the result from the edit screen
+                          if (result[0]) {
+                            // data.clear();
+                            // pageNo = 1;
+                            // hasMoreData = true;
+                            // totalPages = 0;
+                            // BlocProvider.of<AllRequesterBloc>(context)
+                            //     .add(AddCartDetailHandler("", pageNo, pageSize));
+                          }
+                        }
                         );
-                        //     .then((result) {
-                        //   // Handle the result from the edit screen
-                        //   if (result[0]) {
-                        //     data.clear();
-                        //     pageNo = 1;
-                        //     hasMoreData = true;
-                        //     totalPages = 0;
-                        //     BlocProvider.of<AllRequesterBloc>(context)
-                        //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                        //   }
-                        // }
-                        // );
 
-                        // );
+
                       },
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

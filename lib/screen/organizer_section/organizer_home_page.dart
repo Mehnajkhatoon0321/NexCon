@@ -4,6 +4,7 @@ import 'package:nexcon/screen/guest_flow/side_menu_navbar.dart';
 import 'package:nexcon/screen/organizer_section/abstract_and_paper/abstract_organizer/abstract_organizer.dart';
 import 'package:nexcon/screen/organizer_section/abstract_and_paper/paper_organizer/paper_organizer.dart';
 import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer.dart';
+import 'package:nexcon/screen/organizer_section/my_order/my_order.dart';
 import 'package:nexcon/screen/organizer_section/mydashboard_organizer/my_dashboard_organizer.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
@@ -107,8 +108,9 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
   final List<Map<String, dynamic>> _navBarItems = [
     {"title": "Organizer Dashboard", "icon": Icons.dashboard},
     {"title": "My Conference", "icon": Icons.event},
-    {"title": "Abstract", "icon": Icons.padding_rounded},
+
     {"title": "Paper", "icon": Icons.book},
+    {"title": "My Order", "icon": Icons.padding_rounded},
   ];
 
   // Pages corresponding to each nav item
@@ -119,9 +121,9 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
         return const MyDashboardOrganizer();
       case 1:
         return const MyConferenceOrganizer();
-      case 2:
-        return const AbstractOrganizer();
       case 3:
+        return const MyOrder();
+      case 2:
         return const PaperOrganizer();
       default:
         return const MyDashboardOrganizer();
