@@ -95,10 +95,11 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.all(20.0),
             child: Container(
 
               width: double.infinity, // Makes the container take full width
@@ -130,7 +131,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                         Text(
                           "Total Conferences",
                           style: FTextStyle.authlogin_signupTxtStyle.copyWith(
-                              color: AppColors.formFieldHintColour, fontSize: 18),
+                              color: AppColors.formFieldHintColour, fontSize: 14),
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 10),
@@ -138,7 +139,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                           "200",
                           style: FTextStyle.authlogin_signupTxtStyle.copyWith(
                             color: AppColors.primaryColourDark,
-                            fontSize: 20,
+                            fontSize: 14,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -161,7 +162,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0), // Add horizontal padding
+            padding: const EdgeInsets.symmetric(horizontal: 20.0), // Add horizontal padding
             child: Container(
 
               width: double.infinity, // Makes the container take full width
@@ -193,7 +194,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                         Text(
                           "Total Registrations",
                           style: FTextStyle.authlogin_signupTxtStyle.copyWith(
-                              color: AppColors.formFieldHintColour, fontSize: 18),
+                              color: AppColors.formFieldHintColour, fontSize: 14),
                           overflow: TextOverflow.ellipsis,
                         ),
 
@@ -202,7 +203,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                           "500",
                           style: FTextStyle.authlogin_signupTxtStyle.copyWith(
                             color: AppColors.primaryColour,
-                            fontSize: 20,
+                            fontSize: 14,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -221,8 +222,9 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                 ],
               ),
             ),
-          ),Padding(
-            padding: const EdgeInsets.all(18.0),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Container(
 
               width: double.infinity, // Makes the container take full width
@@ -254,7 +256,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                         Text(
                           "Credit Balance",
                           style: FTextStyle.authlogin_signupTxtStyle.copyWith(
-                              color: AppColors.formFieldHintColour, fontSize: 18),
+                              color: AppColors.formFieldHintColour, fontSize: 14),
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 10),
@@ -262,7 +264,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                           "200",
                           style: FTextStyle.authlogin_signupTxtStyle.copyWith(
                             color: AppColors.primaryColourDark,
-                            fontSize: 20,
+                            fontSize: 14,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -306,7 +308,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                       color: AppColors.primaryColour,
                       spreadRadius: 1,
                       blurRadius: 3,
-                      offset: Offset(0, 0.5),
+                      offset: Offset(0, 0.2),
                     ),
                   ],
                   borderRadius: BorderRadius.circular(12),
@@ -323,7 +325,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                           Text(
                             "Upgrade Membership",
                             style: FTextStyle.authlogin_signupTxtStyle.copyWith(
-                                color: AppColors.formFieldHintColour, fontSize: 18),
+                                color: AppColors.formFieldHintColour, fontSize: 14),
                             overflow: TextOverflow.ellipsis,
                           ),
 
@@ -332,7 +334,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                             "500",
                             style: FTextStyle.authlogin_signupTxtStyle.copyWith(
                               color: AppColors.primaryColour,
-                              fontSize: 20,
+                              fontSize: 14,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -354,8 +356,8 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
             ),
           ),
 Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: Text("My Active Conferences",style: FTextStyle.headingMiddle,),
+  padding: const EdgeInsets.all(18.0),
+  child: Text("My Active Conferences",style: FTextStyle.listTitle.copyWith(fontSize: 19),),
 ),
     Expanded(
       child: ListView.builder(

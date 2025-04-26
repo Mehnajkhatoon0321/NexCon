@@ -161,7 +161,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
               (item) => BottomNavigationBarItem(
             icon: Icon(
               item['icon'],
-              size: 25,
+              size: 22,
               color: _selectedIndex == _navBarItems.indexOf(item)
                   ?Colors.white
                   : Colors.grey,
@@ -194,7 +194,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
         ),
         title:Text(
           _navBarItems[_selectedIndex]['title'],
-          style: FTextStyle.HeadingTxtWhiteStyle,
+          style: FTextStyle.HeadingTxtWhiteStyle.copyWith(fontSize: 18),
         ), // Title of the app bar
         centerTitle: true,
       ),

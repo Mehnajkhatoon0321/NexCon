@@ -141,6 +141,7 @@ class _MyOrderViewState extends State<MyOrderView> {
           ),
           title: Text(
             'My Order Details',
+
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
@@ -244,7 +245,7 @@ class _MyOrderViewState extends State<MyOrderView> {
       ),
     );
   }
-
+//details
   Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
