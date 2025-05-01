@@ -79,7 +79,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
         .size
         .width;
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
@@ -181,31 +181,39 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
   }
 
   // Toggle Button Widget
+  // Toggle Button Widget
   Widget _buildToggleButton(String text, int index) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _onButtonPressed(index),
-        child: Container(
-          padding: const EdgeInsets.all(12.0),
-          decoration: BoxDecoration(
-            color: _selectedIndex == index
-                ? AppColors.primaryColour
-                : AppColors.formFieldBackColour,
-            borderRadius: BorderRadius.circular(8),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryColour, // Green 0DB050
+              AppColors.secondaryColour, // Blue 023E8A
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: _selectedIndex == index
-                    ? Colors.white
-                    : AppColors.primaryColour,
-                fontSize: _selectedIndex == index
-                    ?17:15,
-                fontWeight:_selectedIndex == index
-                    ? FontWeight.w500 :FontWeight.w600,
-              ),
-            ),
+          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
       ),
@@ -218,8 +226,9 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
       {
         'title': "30th ISCB International Conference (ISCBC-2025)",
         "registrationNo":"1",
+        "id":"1",
         'bookingStatus': "Approved",
-        "delegatesName":"Delegates Name",
+        "delegatesName":" Name",
         "delegatesCategory": "Delegates Category",
         "registrationDate": "2024-12-19",
         "country":"India",
@@ -229,10 +238,11 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
 
       },
       {
+        "id":"2",
         'title': "30th ISCB International Conference (ISCBC-2025)",
         "registrationNo":"2",
         'bookingStatus': "Approved",
-        "delegatesName":"Delegates Name",
+        "delegatesName":" Name",
         "delegatesCategory": "Delegates Category",
         "registrationDate": "2024-12-19",
         "country":"India",
@@ -245,181 +255,130 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
 
     return
       ListView.builder(
-          itemCount: activeConferenceList.length,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemBuilder: (context, index) {
-            final item = activeConferenceList
-            [index];
-            final bookingStatus = item['bookingStatus'] ?? 'Pending';
-            return Container(
-              // height: height * 0.16,
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              padding: const EdgeInsets.all(26),
-              decoration: BoxDecoration(
-                color: index % 2 == 0 ? const Color(0xFFFFF7E6) : const Color(0xFFFF8D70).withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
+        itemCount: activeConferenceList.length,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        itemBuilder: (context, index) {
+          final item = activeConferenceList[index];
+          final bookingStatus = item['bookingStatus'] ?? 'Pending';
+
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey.shade100),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                /// Title
+                Text(
+                  item['title'] ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: FTextStyle.subheading.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
                   ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                            item['title']!,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: FTextStyle.listTitle
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          children: [
-                            Icon(Icons.confirmation_number, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Registration No: ${item['registrationNo']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          children: [
-                            Icon(Icons.app_registration, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Country : ${item['country']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
+                ),
 
-                        Row(
-                          children: [
-                            Icon(Icons.location_city, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "City : ${item['city']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
 
-                        Row(
-                          children: [
-                            Icon(Icons.g_mobiledata, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Gender : ${item['sex']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),  const SizedBox(height: 6),
 
-                        Row(
-                          children: [
-                            Icon(Icons.email, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Email : ${item['email']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                                'Booking Status: ', style: FTextStyle.listTitleSub),
-                            Text(
-                              bookingStatus,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: bookingStatus == "Approved"
-                                    ? Colors.green
-                                    : Colors.orange,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Icon(Icons.calendar_today, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "${item['registrationDate']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DelegatesRegistrationView(id: item['id'].toString(),
+                const SizedBox(height: 6),
 
-                                        ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 35,
+                /// Delegate Name
+                Row(
+                  children: [
+                    const Icon(Icons.person, size: 16, color: Colors.grey),
+                    const SizedBox(width: 6),
+                    Text(
+                      "Name: ${item['delegatesName']}",
+                      style: FTextStyle.body,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
 
-                                decoration: BoxDecoration(
-                                  color:AppColors.gray_4,
-                                  // Green for edit
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.remove_red_eye_outlined,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
+                /// Registration Date
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
+                    const SizedBox(width: 6),
+                    Text(
+                      item['registrationDate'] ?? '',
+                      style: FTextStyle.body,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
 
-                          ],
+                /// Booking Status
+                Row(
+                  children: [
+                    const Icon(Icons.verified, size: 16, color: Colors.grey),
+                    const SizedBox(width: 6),
+                    Text(
+                      "Status: ",
+                      style: FTextStyle.body,
+                    ),
+                    Text(
+                      bookingStatus,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: bookingStatus == "Approved" ? Colors.green : Colors.orange,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+
+
+
+                const SizedBox(height: 12),
+
+                /// View Icon Button (aligned right)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DelegatesRegistrationView(id: item['id']),
                         ),
-                      ],
+                      );
+                    },
+                    child: Container(
+                      height: 36,
+                      width: 36,
+                      decoration: BoxDecoration(
+                        color: AppColors.secondaryColour,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(
+                        Icons.remove_red_eye_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                   ),
-
-                ],
-              ),
-            );
-          }
+                ),
+              ],
+            ),
+          );
+        },
       );
+
 
   }
 
@@ -456,185 +415,133 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
       },
 
 
+
+
     ];
     return
       ListView.builder(
-          itemCount: inactiveConferenceList.length,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemBuilder: (context, index) {
-            final item = inactiveConferenceList[index];
-            final bookingStatus = item['bookingStatus'] ?? 'Pending';
-            return Container(
-              // height: height * 0.16,
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              padding: const EdgeInsets.all(26),
-              decoration: BoxDecoration(
-                color: index % 2 == 0
-                    ? const Color(0xFFFFF7E6)
-                    : const Color(0xFFFF8D70).withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
+        itemCount: inactiveConferenceList.length,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        itemBuilder: (context, index) {
+          final item = inactiveConferenceList[index];
+          final bookingStatus = item['bookingStatus'] ?? 'Pending';
+
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey.shade100),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                /// Title
+                Text(
+                  item['title'] ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: FTextStyle.subheading.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
                   ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                            item['title']!,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: FTextStyle.listTitle
-                        ),
+                ),
 
-                        const SizedBox(height: 6),
-                        Row(
-                          children: [
-                            Icon(Icons.confirmation_number, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Registration No: ${item['registrationNo']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          children: [
-                            Icon(Icons.app_registration, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Country : ${item['country']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
 
-                        Row(
-                          children: [
-                            Icon(Icons.location_city, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "City : ${item['city']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
 
-                        Row(
-                          children: [
-                            Icon(Icons.g_mobiledata, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Gender : ${item['sex']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),  const SizedBox(height: 6),
+                const SizedBox(height: 6),
 
-                        Row(
-                          children: [
-                            Icon(Icons.email, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "Email : ${item['email']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                                'Booking Status: ', style: FTextStyle.listTitleSub),
-                            Text(
-                              bookingStatus,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: bookingStatus == "Approved"
-                                    ? Colors.green
-                                    : Colors.orange,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Icon(Icons.calendar_today, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
-                            Text(
-                                "${item['registrationDate']}",
-                                style: FTextStyle.listTitleSub
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DelegatesRegistrationView(id: item['id'],
+                /// Delegate Name
+                Row(
+                  children: [
+                    const Icon(Icons.person, size: 16, color: Colors.grey),
+                    const SizedBox(width: 6),
+                    Text(
+                      "Name: ${item['delegatesName']}",
+                      style: FTextStyle.body,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
 
-                                        ),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 35,
+                /// Registration Date
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
+                    const SizedBox(width: 6),
+                    Text(
+                      item['registrationDate'] ?? '',
+                      style: FTextStyle.body,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
 
-                                decoration: BoxDecoration(
-                                  color:AppColors.gray_4,
-                                  // Green for edit
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.remove_red_eye_outlined,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
+                /// Booking Status
+                Row(
+                  children: [
+                    const Icon(Icons.verified, size: 16, color: Colors.grey),
+                    const SizedBox(width: 6),
+                    Text(
+                      "Status: ",
+                      style: FTextStyle.body,
+                    ),
+                    Text(
+                      bookingStatus,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: bookingStatus == "Approved" ? Colors.green : Colors.orange,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
 
-                          ],
+
+
+                const SizedBox(height: 12),
+
+                /// View Icon Button (aligned right)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DelegatesRegistrationView(id: item['id']),
                         ),
-                      ],
+                      );
+                    },
+                    child: Container(
+                      height: 36,
+                      width: 36,
+                      decoration: BoxDecoration(
+                        color: AppColors.secondaryColour,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(
+                        Icons.remove_red_eye_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                   ),
-
-                ],
-              ),
-            );
-          }
+                ),
+              ],
+            ),
+          );
+        },
       );
   }
 

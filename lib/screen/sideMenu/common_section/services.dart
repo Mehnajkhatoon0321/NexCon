@@ -31,26 +31,26 @@ class _ServicesScreenState extends State<ServicesScreen> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            Text("Services We Offer", style: FTextStyle.preHeadingBoldStyle),
+            Text("Services We Offer", style: FTextStyle.headingMiddle),
             Text(
               'Conferences are a platform where people from different parts of life come and share their knowledge and expertise with others and learn from their experiences. Our prime focus is to provide a common platform to connect people where they can learn from each other\'s experience, excel their skills, and grow together.\n\n'
                   'Smart Conference is focused on providing online conference management solutions to the conference organizers. Started operations in 2014, our Conference Management System has provided online registration and other services to various national and international conferences. Smart Conference is also recognized under the StartUpIndia initiative by the Government of India.\n\n'
                   'We enable conference organizers to achieve their goals by adopting a technology-inspired approach to innovation. In a highly competitive environment where information is the most valuable asset, we provide excellent solutions to answer all your critical questions. Better information systems assist in more informed decision-making and give you a strategic advantage over the competition.\n\n'
                   'Our team consists of domain experts, system analysts, project managers, and technology experts. We have an excellent support system to provide you with professional assistance. Our strength lies in constant innovation and process refinement practices. We progress towards making world-class products and providing truly exceptional services.',
-              style: FTextStyle.Faqssubtitle,
+              style: FTextStyle.body,
             ),
             SizedBox(height: 16.0),
             Text(
               'For Conference Organizers:',
-              style: FTextStyle.preHeadingBoldStyle,
+              style: FTextStyle.subheading,
             ),
             SizedBox(height: 8.0),
             ...[
@@ -72,16 +72,19 @@ class _ServicesScreenState extends State<ServicesScreen> {
             ].map((item) => Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.circle,
-                  size: 12.0,
-                  color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.only(top: 3.0),
+                  child: Icon(
+                    Icons.circle,
+                    size: 12.0,
+                    color: Colors.black54,
+                  ),
                 ),
                 SizedBox(width: 6,),
                 Expanded(
                   child: Text(
                     item,
-                    style: FTextStyle.Faqssubtitle,
+                    style: FTextStyle.body,
                   ),
                 ),
 
@@ -93,7 +96,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
             // Section for Delegates/Attendees
             Text(
               'For Delegates/Attendees:',
-              style: FTextStyle.preHeadingBoldStyle,
+              style: FTextStyle.subheading,
             ),
             SizedBox(height: 8.0),
             ...[
@@ -116,13 +119,13 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 Icon(
                   Icons.circle,
                   size: 12.0,
-                  color: Colors.black,
+                  color: Colors.black54,
                 ),
                 SizedBox(width: 6,),
                 Expanded(
                   child: Text(
                     item,
-                    style: FTextStyle.Faqssubtitle,
+                    style: FTextStyle.body,
                   ),
                 ),
 

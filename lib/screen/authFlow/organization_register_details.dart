@@ -21,12 +21,12 @@ class OrganizationRegisterDetails extends StatefulWidget {
   String nameOrganization;
   String mobileNumber;
   String  dateBirth;
-  String  gender;
+  String  conference;
   String email;
 
   String  country;
   String city;
-   OrganizationRegisterDetails({required this.nameOrganization,required this.email,required this.city,required this.country,required this.dateBirth,required this.gender,required this.mobileNumber,super.key});
+   OrganizationRegisterDetails({required this.nameOrganization,required this.email,required this.city,required this.country,required this.dateBirth,required this.conference,required this.mobileNumber,super.key});
 
   @override
   State<OrganizationRegisterDetails> createState() => _OrganizationRegisterDetailsState();
@@ -116,7 +116,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
   String? selectCityNamesCategories;
   String? selectTitleName;
   String? selectCategoryName;
-  String? genderTitleName;
+  String? conferenceTitleName;
   late final TextEditingController _emailConference = TextEditingController();
   late final TextEditingController _firstConference = TextEditingController();
   late final TextEditingController _gstConference = TextEditingController();
@@ -165,7 +165,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _passwordConferenceKey =
   GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _genderKey =
+  late final GlobalKey<FormFieldState<String>> _conferenceKey =
   GlobalKey<FormFieldState<String>>();
   late final FocusNode _emailConferenceFocusNode = FocusNode();
   late final FocusNode _mobileFocusNode = FocusNode();
@@ -184,10 +184,10 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
   late final FocusNode _cityFocusNode = FocusNode();
   late final FocusNode _countryFocusNode = FocusNode();
 
-  late final FocusNode _selectGenderFocusNode = FocusNode();
+  late final FocusNode _selectconferenceFocusNode = FocusNode();
   bool checkboxChecked = false;
   bool isButtonEnabled = false;
-  List<String> sexTitleName = [
+  List<String> conferenceCategory = [
     'Human Resource',
     'Computer Science',
   ];
@@ -331,14 +331,14 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                               padding:
                               const EdgeInsets.symmetric(vertical: 10.0),
                               child: DropdownButtonFormField<String>(
-                                key: _genderKey,
-                                focusNode: _selectGenderFocusNode,
-                                value: genderTitleName,
+                                key: _conferenceKey,
+                                focusNode: _selectconferenceFocusNode,
+                                value: conferenceTitleName,
                                 hint: const Text(
                                   "Select Conference Category",
                                   style: FTextStyle.formhintTxtStyle,
                                 ),
-                                items: sexTitleName
+                                items: conferenceCategory
                                     .map((category) => DropdownMenuItem(
                                   value: category,
                                   child: Text(category),
@@ -346,9 +346,9 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                     .toList(),
                                 onChanged: (newValue) {
                                   setState(() {
-                                    genderTitleName = newValue;
+                                    conferenceTitleName = newValue;
                                   });
-                                  _genderKey.currentState?.validate(); // Validate only this field
+                                  _conferenceKey.currentState?.validate(); // Validate only this field
                                 },
                                 decoration: FormFieldStyle.dropDown,
                                 validator: ValidatorUtils.model,

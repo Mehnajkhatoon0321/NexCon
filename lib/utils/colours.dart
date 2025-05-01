@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class AppColors extends MaterialColor {
   const AppColors(super.primary, super.swatch);
-  static const Color primaryColour = Color(0xFF0db050);
+  static const Color primaryColour = Color(0xFF0DB050);
   static const Color primaryColourDark = Color(0xFF021f63);
 
   static const Color boarderColourThem = Color(0xFFbbccd3);
@@ -57,5 +57,19 @@ class AppColors extends MaterialColor {
   static const Color FormFielderrorColour = Color(0xFFB92828);
   static const Color contactUsTextcolor = Color(0xFF6B6973);
   static const Color FormFieldHintColour = Color(0xFF83828A);
+
+  //add new text overall color
+  static const Color secondaryColor = Color(0xFF8E8E8E);
+  static const Color backgroundColor = Color(0xFFF9F9F9);
+  static const Color uiBack = Color(0xFFF8F9FA);
+  static const Color cardColor = Colors.white;
+  static const Color shadowColor = Color(0xFFE0E0E0);
+  static const Color textPrimaryColor = Colors.black87;
+  static const Color textSecondaryColor = Colors.grey;
+  static const Color textSecondaryPrimaryColor = Color(0xFF045c35);
+  static const Color headingSecondColor = Color(0xFF003366);
+  static const Color secondaryColour = Color(0xFF023E8A);
+
+
 
 }

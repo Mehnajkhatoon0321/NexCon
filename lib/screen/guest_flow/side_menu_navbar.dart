@@ -11,7 +11,7 @@ import 'package:nexcon/screen/organizer_section/accommodation/accomodation.dart'
 import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/about.dart';
 import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
-import 'package:nexcon/screen/sideMenu/common_section/how_works_delegates.dart';
+import 'package:nexcon/screen/sideMenu/delegates_side_menu/how_works_delegates.dart';
 import 'package:nexcon/screen/sideMenu/common_section/plan_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/services.dart';
 import 'package:nexcon/screen/sideMenu/delegates_side_menu/my_receipt.dart';
@@ -85,12 +85,11 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     } else if (widget.selectedRole == 'isselect organizer') {
       // Show only organizer-related items
       filteredList = [
-        {'icon': Icons.person, 'subtitle': 'My Profile Details'},
-        {'icon': Icons.info, 'subtitle': 'About'},
-        {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
-        {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
-        {'icon': Icons.event, 'subtitle': 'Conferences'},
-        {'icon': Icons.home_filled, 'subtitle': 'Accommodation Organizer'},
+        // {'icon': Icons.person, 'subtitle': 'My Profile Details'},
+
+
+
+
         {
           'icon': Icons.home_filled,
           'subtitle': 'Registration',
@@ -128,10 +127,10 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         },
         {
           'icon': Icons.settings,
-          'subtitle': 'Setting',
+          'subtitle': 'Settings',
           'title': [
             {'icon': Icons.category, 'subtitle': 'Delegate Category'},
-            {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Category'},
+
             {'icon': Icons.timelapse_rounded, 'subtitle': 'Deadlines', 'sub': [
               {'icon': Icons.person, 'subsection': 'Total Registration'},
               {'icon': Icons.app_registration, 'subsection': 'Registration Fee'},
@@ -152,16 +151,16 @@ class _SideMenuScreenState extends State<SideMenuScreen>
             {'icon': Icons.punch_clock, 'subtitle': 'Set-Check-In/Check-Out'},
             {'icon': Icons.report, 'subtitle': 'Reports'},
 
-
-
-
           ]
         },
-
-        {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
+        {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Category'},
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
-        {'icon': Icons.password, 'subtitle': 'Change Password'},
-        {'icon': Icons.exit_to_app, 'subtitle': 'Logout'},
+        {'icon': Icons.info, 'subtitle': 'About'},
+        {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
+        {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
+        //
+        // {'icon': Icons.password, 'subtitle': 'Change Password'},
+        // {'icon': Icons.exit_to_app, 'subtitle': 'Logout'},
       ];
     } else {
       // Default items for other roles

@@ -10,13 +10,13 @@ class FTextStyle {
 
 
   static const smallTextBlack =TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 12,
     color: Colors.black,
     fontWeight: FontWeight.w600,
   );
   static const smallY = TextStyle(
-      fontFamily: 'OpenSans-Regular',
+      fontFamily: 'Montserrat-Regular',
       fontSize: 12,
       fontWeight: FontWeight.w600,
       color: AppColors.headingTxtColour );
@@ -26,13 +26,13 @@ class FTextStyle {
       color: AppColors.headingTxtColour,
 
 
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500);
 
 
 
   static const searchText = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 13,
     color: Color(0x66000000),
     fontWeight: FontWeight.w400,
@@ -44,32 +44,32 @@ class FTextStyle {
       color: AppColors.primaryColour,
 
 
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w900);
 
   static TextStyle HeadingTxtWhiteStyle = TextStyle(
-      fontSize: 20.sp,
+      fontSize: 18.sp,
       color: Colors.white,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.bold);
 
   static TextStyle preHeadingStyle = TextStyle(
     fontSize: 16.sp,
     color: Colors.black,
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
   );
 
   static TextStyle preHeading16BoldStyle = TextStyle(
       fontSize: 16.sp,
       color: Colors.black,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.bold
   );
 
   static TextStyle preHeadingBoldStyle = TextStyle(
       fontSize: 18.sp,
       color: Colors.black,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.bold
   );
 
@@ -77,12 +77,12 @@ class FTextStyle {
   static TextStyle SubHeadingTxtStyle = const TextStyle(
       fontSize: 16,
       color: AppColors.headingTxtColour,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400);
 
   //14 normal
   static  TextStyle formLabelTxtStyle = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 15.sp,
      fontWeight: FontWeight.w400,
     color: Colors.black,
@@ -92,13 +92,13 @@ class FTextStyle {
   static TextStyle formSubheadingTxtStyle = TextStyle(
       fontSize: 14.sp,
       color: AppColors.FormFieldHintColour,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w600);
 
 
 
   static TextStyle rememberMeTextStyle = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     //fontSize: 10.sp,
 
     fontSize: 14.sp,
@@ -107,7 +107,7 @@ class FTextStyle {
   );
 
   static  TextStyle SeeAllTextStyle = const TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 16,
     color: AppColors.primaryColour,
     fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class FTextStyle {
 
       fontSize: 16.sp,
       color: AppColors.headingTxtColour,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.bold);
 
 
@@ -130,7 +130,7 @@ class FTextStyle {
 
       fontSize: 14.sp,
       color: AppColors.appSky,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400);
 
 
@@ -140,25 +140,25 @@ class FTextStyle {
   static TextStyle formErrorTxtStyle = TextStyle(
     fontSize: 10.sp,
     color: AppColors.FormFielderrorColour,
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
   );
 
   static TextStyle loginBtnStyle = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 16.sp,
     fontWeight: FontWeight.w700,
     letterSpacing: 1.0,
     color: Colors.white,
   );
   static TextStyle nameProfile = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 16.sp,
     // fontWeight: FontWeight.w400,
     color: Colors.white,
   );
 
   static TextStyle emailProfile = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
     color: Colors.white,
@@ -167,37 +167,37 @@ class FTextStyle {
   // Guest user text style
 
   static TextStyle drawerText = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 14.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.drawerTextColor,
   );
   static TextStyle drawerButton1Text = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
   static TextStyle drawerButton2Text = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.drawerButton1Color,
   );
   static TextStyle bottomNavText1 = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 12.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.drawerButton1Color,
   );
   static TextStyle bottomNavText2 = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 12.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.bottomNavTextColor,
   );
   static TextStyle aboutUsText2 = TextStyle(
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
     fontSize: 24.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.aboutUsHeadingColor,
@@ -211,7 +211,7 @@ class FTextStyle {
     // fontSize: 11.sp,  //16 normal
       fontSize: 16, //16 normal
       color: AppColors.FormFieldHintColour,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400);
   static const TextStyle style = TextStyle(
     fontSize: 14,
@@ -221,7 +221,7 @@ class FTextStyle {
   static const TextStyle listTitle = TextStyle(
 
 letterSpacing: 1.2,
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
 
     fontSize: 14,fontWeight: FontWeight.w700,color: Colors.black,
 
@@ -229,7 +229,7 @@ letterSpacing: 1.2,
   static const TextStyle listTitleBig = TextStyle(
 
 
-    fontFamily: 'OpenSans',
+    fontFamily: 'Montserrat',
 
     fontSize: 16,fontWeight: FontWeight.w700,color: Colors.black,
 
@@ -237,7 +237,7 @@ letterSpacing: 1.2,
   static const TextStyle listTitleSub = TextStyle(
 
 
-    fontFamily: "OpenSans",
+    fontFamily: "Montserrat",
     letterSpacing: 1.0,
 
     fontSize: 15,fontWeight: FontWeight.w600,color: Colors.grey,
@@ -246,14 +246,14 @@ letterSpacing: 1.2,
   static const TextStyle listTitleSubBig = TextStyle(
 
 
-    fontFamily: "OpenSans",
+    fontFamily: "Montserrat",
 
     fontSize: 15,fontWeight: FontWeight.w600,color: Colors.grey,
 
   );
 
   static TextStyle TextSnakbar = TextStyle(
-    fontFamily: 'OpenSans-Regular',
+    fontFamily: 'Montserrat-Regular',
     fontSize: 10.sp,
     fontWeight: FontWeight.bold,
     color: Colors.white,
@@ -275,18 +275,18 @@ letterSpacing: 1.2,
   static  TextStyle FaqsTxtStyle = TextStyle(
       fontSize: 15.sp,
       color: AppColors.aboutUsHeadingColor,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w800);
 
   static  TextStyle Faqssubtitle = TextStyle(
       fontSize: 14.sp,
       color: AppColors.aboutUsHeadingColor,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500);
   static  TextStyle subtitle = TextStyle(
       fontSize: 12.sp,
       color: AppColors.aboutUsHeadingColor,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500);
 
 
@@ -296,7 +296,7 @@ letterSpacing: 1.2,
   static TextStyle cartItemColors = TextStyle(
       fontSize: 14.sp,
       color: AppColors.contactUsTextcolor,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400);
 
 
@@ -307,14 +307,64 @@ letterSpacing: 1.2,
           .sp,
       letterSpacing: 2.0,
       color: AppColors.aboutUsHeadingColor,
-      fontFamily: 'OpenSans',
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w800);
 
 
+//change ui
+  static const TextStyle appBarTitleWhite = TextStyle(
+    color: Colors.white,
+    fontSize: 20,
+    fontWeight: FontWeight.w700, // Bold
+    fontFamily: 'Montserrat', // Use global font
+  );
 
+  // Navigation Bar Selected Style
+  static const TextStyle navBarSelectedStyle = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w600, // Semi-Bold
+    color: Colors.white,
+    fontFamily: 'Montserrat',
+  );
 
+  // Navigation Bar Unselected Style
+  static const TextStyle navBarUnselectedStyle = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400, // Regular weight
+    color: Colors.white70,
+    fontFamily: 'Montserrat',
+  );
 
+  // Heading Style
+  static const TextStyle heading = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w700, // Bold
+    color: AppColors.textPrimaryColor,
+    fontFamily: 'Montserrat', // Font family applied globally
+  );
 
+  // Subheading Style
+  static const TextStyle subheading = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600, // Semi-Bold
+    color: AppColors.textPrimaryColor,
+    fontFamily: 'Montserrat',
+  );
+
+  // Body Text Style
+  static const TextStyle body = TextStyle(
+    fontSize: 14,
+    color: AppColors.textSecondaryColor,
+    fontFamily: 'Montserrat',
+  );
+
+  // Label Style
+  static const TextStyle label = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w400, // Regular weight
+    fontFamily: "Montserrat", // Specify font family
+    color: AppColors.textSecondaryColor,
+  );
 
 
 

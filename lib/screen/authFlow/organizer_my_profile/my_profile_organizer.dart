@@ -40,65 +40,65 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor:AppColors.appSky, // Customize app bar color
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-                size: 28,
-              ), // Menu icon
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            title: Text(
-              'My Profile Details',
-              style: FTextStyle.HeadingTxtWhiteStyle,
-            ),
-            centerTitle: true,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: (displayType == 'desktop' || displayType == 'tablet')
-                      ? 70
-                      : 37,
-                  child: ElevatedButton(
-                      onPressed: () async {
-
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  EditProfileOrganizer()       ),
-
-                        ).then((result) {
-                          // Handle the result from the edit screen
-                          if (result[0]) {
-                            // data.clear();
-                            // pageNo = 1;
-                            // hasMoreData = true;
-                            // totalPages = 0;
-                            // BlocProvider.of<AllRequesterBloc>(context)
-                            //     .add(AddCartDetailHandler("", pageNo, pageSize));
-                          }
-                        }
-                        );
-
-
-                      },
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(26),
-                          ),
-                          backgroundColor: Colors.white),
-                      child: Icon(Icons.edit_calendar_rounded,color: AppColors.primaryColour,)),
-                ),
-              )
-            ],
-          ),
+          // appBar: AppBar(
+          //   backgroundColor:AppColors.appSky, // Customize app bar color
+          //   leading: IconButton(
+          //     icon: const Icon(
+          //       Icons.arrow_back_ios,
+          //       color: Colors.white,
+          //       size: 28,
+          //     ), // Menu icon
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //   ),
+          //   title: Text(
+          //     'My Profile Details',
+          //     style: FTextStyle.HeadingTxtWhiteStyle,
+          //   ),
+          //   centerTitle: true,
+          //   actions: [
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: SizedBox(
+          //         height: (displayType == 'desktop' || displayType == 'tablet')
+          //             ? 70
+          //             : 37,
+          //         child: ElevatedButton(
+          //             onPressed: () async {
+          //
+          //
+          //               Navigator.push(
+          //                 context,
+          //                 MaterialPageRoute(
+          //                     builder: (context) =>
+          //                         EditProfileOrganizer()       ),
+          //
+          //               ).then((result) {
+          //                 // Handle the result from the edit screen
+          //                 if (result[0]) {
+          //                   // data.clear();
+          //                   // pageNo = 1;
+          //                   // hasMoreData = true;
+          //                   // totalPages = 0;
+          //                   // BlocProvider.of<AllRequesterBloc>(context)
+          //                   //     .add(AddCartDetailHandler("", pageNo, pageSize));
+          //                 }
+          //               }
+          //               );
+          //
+          //
+          //             },
+          //             style: ElevatedButton.styleFrom(
+          //                 shape: RoundedRectangleBorder(
+          //                   borderRadius: BorderRadius.circular(26),
+          //                 ),
+          //                 backgroundColor: Colors.white),
+          //             child: Icon(Icons.edit_calendar_rounded,color: AppColors.primaryColour,)),
+          //       ),
+          //     )
+          //   ],
+          // ),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Column(

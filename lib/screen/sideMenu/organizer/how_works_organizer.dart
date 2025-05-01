@@ -32,7 +32,7 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -41,7 +41,7 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
           children: [
             Text(
               "How it works for Conference Organizers",
-              style: FTextStyle.preHeadingBoldStyle,
+              style: FTextStyle.headingMiddle,
             ),
             SizedBox(height: 20,),
             Text(
@@ -50,14 +50,14 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
                   'To access all these features, you won’t have to pay high web server or software maintenance costs. Organizers only pay per registration, meaning you only incur a cost for each delegate that registers for your conference. We do not charge any fees from delegates.\n\n'
                   'Delegates can use a single login for registering at multiple conferences. There is no need for delegates to create a new account for each new conference. They can keep track of upcoming conferences and view conference programs through their delegate panel.\n\n'
                   'It takes just five minutes for a conference organizer to register, set up a conference, and start using our conference management system.',
-              style: FTextStyle.Faqssubtitle,
+              style: FTextStyle.body,
             ),
             SizedBox(height: 20),
             Text(
               "Steps to Follow by Conference Organizers",
-              style: FTextStyle.preHeadingBoldStyle,
+              style: FTextStyle.subheading,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -97,7 +97,7 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
           Expanded(
             child: Text(
               text,
-              style: FTextStyle.Faqssubtitle,
+              style: FTextStyle.body,
             ),
           ),
         ],

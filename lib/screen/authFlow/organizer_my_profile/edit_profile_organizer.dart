@@ -665,12 +665,13 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                   height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 40,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyProfileOrganizer(),
-                        ),
-                      );
+                      Navigator.pop(context);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const MyProfileOrganizer(),
+                      //   ),
+                      // );
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

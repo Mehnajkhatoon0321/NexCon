@@ -217,6 +217,6 @@ class FormFieldStyle {
     fillColor: AppColors.formFieldBackColour,
     hintText: "Select Product Category",
     hintStyle:FTextStyle.formhintTxtStyle,
-    errorStyle: TextStyle(color: AppColors.formFieldBackColour),
+    errorStyle: TextStyle(color: AppColors.FormFielderrorColour),
   );
 }

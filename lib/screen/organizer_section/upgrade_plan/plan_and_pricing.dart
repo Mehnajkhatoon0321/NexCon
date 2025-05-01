@@ -28,11 +28,11 @@ class PricingScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16),
+            // SizedBox(height: 16),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
@@ -48,7 +48,7 @@ class PricingScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-           Text("Service Terms",style: FTextStyle.headingMiddle,),
+           Text("Service Terms",style: FTextStyle.subheading,),
             SizedBox(height: 10),
             ...[
               '* GST of 18% to be paid additionally on Smart Conference Service Fee (not on the Fees received from Delegates)',
@@ -73,7 +73,7 @@ class PricingScreen extends StatelessWidget {
                 Expanded(
                   child: Text(
                     item,
-                    style: FTextStyle.Faqssubtitle,
+                    style: FTextStyle.body,
                   ),
                 ),
 
@@ -88,7 +88,7 @@ class PricingScreen extends StatelessWidget {
   Text _tableHeaderText(String text) {
     return Text(
       text,
-      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+      style: FTextStyle.headingMiddle,
       textAlign: TextAlign.center,
     );
   }
@@ -189,7 +189,7 @@ class PricingScreen extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style:isHeader ? FTextStyle.listTitle :FTextStyle.Faqssubtitle,
+          style:isHeader ? FTextStyle.subheading :FTextStyle.subheading,
           maxLines: 4,
           overflow: TextOverflow.ellipsis,textAlign: TextAlign.left,
         ),
@@ -203,7 +203,7 @@ class PricingScreen extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style:isHeader ? FTextStyle.listTitle :FTextStyle.Faqssubtitle,
+          style:isHeader ? FTextStyle.subheading :FTextStyle.subheading,
           maxLines: 4,
           overflow: TextOverflow.ellipsis,
         ),
