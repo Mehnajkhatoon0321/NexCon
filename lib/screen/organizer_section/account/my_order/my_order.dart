@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
@@ -237,7 +238,7 @@ class _MyOrderState extends State<MyOrder> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.error_outline, size: 40, color: Colors.red),
-                      const SizedBox(height: 12),
+                    SizedBox(height: 8),
                       Text(
                       " ${errorMessage ?? errorServerMessage}",
                         style: FTextStyle.listTitle,
@@ -313,7 +314,7 @@ class _MyOrderState extends State<MyOrder> {
                       Expanded(
                         child: ListView.builder(
                           itemCount: inactiveConferenceList.length,
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
                           itemBuilder: (context, index) {
                             final item = inactiveConferenceList[index];
                             final bookingStatus = item['bookingStatus'] ?? 'Pending';
@@ -340,25 +341,26 @@ class _MyOrderState extends State<MyOrder> {
                                   // Conference Title
                                   Text(
                                     "${item['id']}. ${item['conferenceName']}",
-                                    style: FTextStyle.subheading.copyWith(fontSize: 16),
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
+                                    style: FTextStyle.listTitle,
+
                                   ),
-                                  const SizedBox(height: 12),
+                                SizedBox(height: 8),
 
                                   // Pay Type and Purchase Date
                                   Row(
                                     children: [
                                       Icon(Icons.confirmation_number, size: 18, color: Colors.grey.shade600),
                                       const SizedBox(width: 6),
-                                      Text("Pay Type: ${item['payType']}", style: FTextStyle.body),
+                                      Text("Pay Type: ${item['payType']}", style: FTextStyle.style),
                                       const Spacer(),
                                       Icon(Icons.calendar_today, size: 18, color: Colors.grey.shade600),
                                       const SizedBox(width: 6),
-                                      Text("${item['purchaseDate']}", style: FTextStyle.body),
+                                      Text("${item['purchaseDate']}", style: FTextStyle.style),
                                     ],
                                   ),
-                                  const SizedBox(height: 8),
+                             SizedBox(height: 4),
 
                                   // Invoice
                                   Row(
@@ -366,51 +368,107 @@ class _MyOrderState extends State<MyOrder> {
                                       Icon(Icons.receipt_long, size: 18, color: Colors.grey.shade600),
                                       const SizedBox(width: 6),
                                       Expanded(
-                                        child: Text("Invoice No: ${item['invoiceNumber']}", style: FTextStyle.body),
+                                        child: Text("Invoice No: ${item['invoiceNumber']}", style: FTextStyle.style),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 8),
+                             SizedBox(height: 4),
 
                                   // Payment Status
                                   Row(
                                     children: [
                                       Icon(Icons.payments, size: 18, color: Colors.grey.shade600),
                                       const SizedBox(width: 6),
-                                      const Text('Payment Status: ', style: FTextStyle.body),
+                                      const Text('Payment Status: ', style: FTextStyle.style),
                                       Text(
                                         bookingStatus,
-                                        style: FTextStyle.body.copyWith(
+                                        style: FTextStyle.style.copyWith(
                                           fontWeight: FontWeight.bold,
                                           color: isPaid ? Colors.green : Colors.orange,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 12),
+                                SizedBox(height: 4),
 
-                                  // Action Button
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        final orderId = item['id'] ?? '';
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyOrderView(id: orderId),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          final orderId = item['id'] ?? '';
+                                          Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) => MyOrderView(id: orderId),
+                                                      ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 35,
+                                          width: 35,
+
+                                          decoration: BoxDecoration(
+                                            color:AppColors.secondaryColour,
+                                            // Green for edit
+                                            borderRadius: BorderRadius.circular(8),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.1),
+                                                blurRadius: 6,
+                                                offset: const Offset(0, 2),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      },
-                                      child: Container(
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.secondaryColour,
-                                          borderRadius: BorderRadius.circular(8),
+                                          child: const Icon(
+                                            Icons.remove_red_eye_outlined,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
                                         ),
-                                        child: const Icon(Icons.remove_red_eye_outlined, color: Colors.white),
                                       ),
-                                    ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+
+                                          SizedBox(width: 10,),
+                                          GestureDetector(
+                                            onTap: () {
+                                              CommonPopups.showDeleteCustomPopup(
+                                                context,
+                                                "Are you sure you want to delete?",
+                                                    () {
+                                                  // Handle delete logic
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              height: 35,
+                                              width: 35,
+                                              decoration: BoxDecoration(
+                                                color: Colors.red, // Red for delete
+                                                borderRadius: BorderRadius.circular(8),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black.withOpacity(0.1),
+                                                    blurRadius: 6,
+                                                    offset: const Offset(0, 2),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: const Icon(
+                                                Icons.delete,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

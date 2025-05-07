@@ -15,6 +15,9 @@ import 'package:nexcon/screen/sideMenu/delegates_side_menu/how_works_delegates.d
 import 'package:nexcon/screen/sideMenu/common_section/plan_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/services.dart';
 import 'package:nexcon/screen/sideMenu/delegates_side_menu/my_receipt.dart';
+import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/abstract_organizer/abstract_theam/abstract_organizer.dart';
+import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/paper_organizer/paper_organizer.dart';
+import 'package:nexcon/screen/sideMenu/organizer/accommodation/accomodation_category.dart';
 import 'package:nexcon/screen/sideMenu/organizer/attendance/manual_attendance.dart';
 import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_attendance.dart';
 import 'package:nexcon/screen/sideMenu/organizer/how_works_organizer.dart';
@@ -42,6 +45,7 @@ import 'package:nexcon/screen/sideMenu/organizer/settings/setcheckout-setcheckin
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/pref_utils.dart';
+import '../sideMenu/organizer/abstract_and_paper/abstract_organizer/review_abstract/review_abstract.dart';
 
 
 
@@ -70,6 +74,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     {'icon': Icons.login, 'subtitle': 'Login'},
 
   ];
+  String? selectedSubSection;
 
   String? expandedItem;
   String? expandedSubItem;
@@ -86,16 +91,24 @@ class _SideMenuScreenState extends State<SideMenuScreen>
       // Show only organizer-related items
       filteredList = [
         // {'icon': Icons.person, 'subtitle': 'My Profile Details'},
-
-
-
-
+        {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
+        {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Organization'},
         {
-          'icon': Icons.home_filled,
-          'subtitle': 'Registration',
+          'icon': Icons.my_library_books_outlined,
+          'subtitle': 'Abstracts & Paper',
           'title': [
-            {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
-            {'icon': Icons.perm_contact_cal, 'subtitle': 'Free Registration'}
+            {
+              'icon': Icons.featured_play_list_rounded,
+              'subtitle': 'Abstracts',
+              'sub': [
+                {'icon': Icons.library_books_rounded, 'subsection': 'Manage Abstract Session/Themes'},
+                {'icon': Icons.rate_review, 'subsection': 'Review Abstracts'}
+              ]
+            },
+            {'icon': Icons.collections_bookmark_rounded, 'subtitle': 'Paper', 'sub': [
+              {'icon': Icons.collections_bookmark_sharp, 'subsection': 'Review Full Paper'},
+
+            ]}
           ]
         },
         {
@@ -106,6 +119,17 @@ class _SideMenuScreenState extends State<SideMenuScreen>
             {'icon': Icons.report, 'subtitle': 'QR Attendance'},
           ]
         },
+
+
+        {
+          'icon': Icons.home_filled,
+          'subtitle': 'Registration',
+          'title': [
+            {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
+            {'icon': Icons.perm_contact_cal, 'subtitle': 'Free Registration'}
+          ]
+        },
+
 
         {
           'icon': Icons.timelapse_rounded,
@@ -125,6 +149,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
             ]}
           ]
         },
+
+
+
+
+
+
         {
           'icon': Icons.settings,
           'subtitle': 'Settings',
@@ -153,8 +183,8 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
           ]
         },
-        {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Category'},
-        {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
+
+
         {'icon': Icons.info, 'subtitle': 'About'},
         {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
         {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
@@ -183,146 +213,179 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
     return Drawer(
       backgroundColor: Colors.white,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
+      child: Column(
+        children: [
           // Drawer Header
-          SizedBox(
-            height: 160,
-            child: UserAccountsDrawerHeader(
-              accountName: Text("", style: FTextStyle.nameProfile),
-              accountEmail: Text("Smart Conference", style: FTextStyle.nameProfile),
-              decoration: const BoxDecoration(
-                color: AppColors.appSky,
-              ),
+          UserAccountsDrawerHeader(
+            accountName: Text(
+              "",
+              style: FTextStyle.nameProfile,
+            ),
+            accountEmail: Text(
+              "Smart Conference",
+              style: FTextStyle.nameProfile,
+            ),
+            decoration: const BoxDecoration(
+              color: AppColors.appSky,
+            ),
+            currentAccountPicture: CircleAvatar(
+              
+              backgroundColor: Colors.white,
+              child: Icon(Icons.person, color: AppColors.appSky),
             ),
           ),
-          // Dynamic ListTiles from filteredList
-          ...filteredList.map((item) {
-            // Check if the item has a 'title' (nested items)
-            if (item['title'] != null) {
-              return Container(
-                color: expandedItem== item['subtitle']? Colors.green[50]
-                    : Colors.white,
-                child: ExpansionTile(
 
-                  leading:
-                  Icon(
-                    item['icon'],
-                    size: 20,
-                    color: expandedItem== item['subtitle']? Colors.green
-                      : AppColors.aboutUsHeadingColor,
-                  ),
-
-                  title: Text(
-                    item['subtitle'],
-                    style: FTextStyle.drawerText.copyWith(
-                      fontSize: 14,
-                      fontWeight: expandedItem == item['subtitle']
-                          ? FontWeight.bold
-                          : FontWeight.bold,
-                      color: expandedItem == item['subtitle']
-                          ?  Colors.green
-                          : AppColors.aboutUsHeadingColor,
-                    ),
-                  ),
-                  onExpansionChanged: (isExpanded) {
-                    setState(() {
-                      expandedItem = isExpanded ? item['subtitle'] : null;
-                    });
-                  },
-                  children: item['title'].map<Widget>((childItem) {
-                    // Check if the childItem has a 'sub' (nested inside 'title')
-                    if (childItem['sub'] != null) {
-                      return ExpansionTile(
+          // Menu List
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: filteredList.map((item) {
+                if (item['title'] != null) {
+                  return Container(
+                    color: expandedItem == item['subtitle']
+                        ? Colors.grey.shade200
+                        : Colors.white,
+                    child: Theme(
+                      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        key: PageStorageKey(item['subtitle']),
                         leading: Icon(
-                          childItem['icon'],
-                          size: 20,
-                          color: expandedSubItem== item['subtitle']? Colors.green[300]
-                              :  AppColors.aboutUsHeadingColor,
+                          item['icon'],
+                          size: 22,
+                          color: expandedItem == item['subtitle']
+                              ? Colors.green
+                              : AppColors.aboutUsHeadingColor,
                         ),
                         title: Text(
-                          childItem['subtitle'],
+                          item['subtitle'],
                           style: FTextStyle.drawerText.copyWith(
                             fontSize: 14,
-                            fontWeight: expandedSubItem == item['subtitle']
-                                ? FontWeight.bold
-                                : FontWeight.bold,
-                            color: expandedSubItem == item['subtitle']
-                                ?  Colors.green[300]
+                            fontWeight: FontWeight.bold,
+                            color: expandedItem == item['subtitle']
+                                ? Colors.green
                                 : AppColors.aboutUsHeadingColor,
                           ),
                         ),
+                        initiallyExpanded: expandedItem == item['subtitle'],
                         onExpansionChanged: (isExpanded) {
                           setState(() {
-                            expandedSubItem = isExpanded ? item['subtitle'] : null;
+                            expandedItem = isExpanded ? item['subtitle'] : null;
+                            expandedSubItem = null;
                           });
                         },
-                        children: childItem['sub'].map<Widget>((subItem) {
-                          return Container(
-                            color: expandedSubItem == item['subtitle']? Colors.green[200] :Colors.green[30],
-                            child: ListTile(
+                        children: item['title'].map<Widget>((childItem) {
+                          if (childItem['sub'] != null) {
+                            return Theme(
+                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                              child: ExpansionTile(
+                                key: PageStorageKey(childItem['subtitle']),
+                                leading: Icon(
+                                  childItem['icon'],
+                                  size: 20,
+                                  color: expandedSubItem == childItem['subtitle']
+                                      ? Colors.black
+                                      : AppColors.aboutUsHeadingColor,
+                                ),
+                                title: Text(
+                                  childItem['subtitle'],
+                                  style: FTextStyle.drawerText.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: expandedSubItem == childItem['subtitle']
+                                        ? Colors.black
+                                        : AppColors.aboutUsHeadingColor,
+                                  ),
+                                ),
+                                initiallyExpanded: expandedSubItem == childItem['subtitle'],
+                                onExpansionChanged: (isExpanded) {
+                                  setState(() {
+                                    expandedSubItem = isExpanded ? childItem['subtitle'] : null;
+                                  });
+                                },
+                                children: childItem['sub'].map<Widget>((subItem) {
+                                  return Material(
+                                    color: selectedSubSection == subItem['subsection']
+                                        ? Colors.green.shade100
+                                        : Colors.grey.shade400,
+                                    child: ListTile(
+                                      dense: true,
+                                      leading: Icon(
+                                        subItem['icon'],
+                                        size: 20,
+                                        color: selectedSubSection == subItem['subsection']
+                                            ? Colors.green
+                                            : AppColors.aboutUsHeadingColor,
+                                      ),
+                                      title: Text(
+                                        subItem['subsection'],
+                                        style: FTextStyle.drawerText.copyWith(
+                                          fontSize: 14,
+                                          fontWeight: selectedSubSection == subItem['subsection']
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          color: selectedSubSection == subItem['subsection']
+                                              ? Colors.green
+                                              : AppColors.aboutUsHeadingColor,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          selectedSubSection = subItem['subsection'];
+                                        });
+                                        _subSectionHandleNavigation(subItem['subsection']);
+                                      },
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            );
+                          } else {
+                            return ListTile(
                               dense: true,
                               leading: Icon(
-                                subItem['icon'],
+                                childItem['icon'],
                                 size: 20,
                                 color: AppColors.aboutUsHeadingColor,
                               ),
                               title: Text(
-                                subItem['subsection'],
+                                childItem['subtitle'],
                                 style: FTextStyle.drawerText.copyWith(fontSize: 14),
                               ),
                               onTap: () {
-                                Navigator.pop(context);
-                                _subSectionHandleNavigation(subItem['subsection']);
+                                _subtitleHandleNavigation(childItem['subtitle']);
                               },
-                            ),
-                          );
+                            );
+                          }
                         }).toList(),
-                      );
-                    } else {
-                      return ListTile(
-                        dense: true,
-                        leading: Icon(
-                          childItem['icon'],
-                          size: 20,
-                          color: AppColors.aboutUsHeadingColor,
-                        ),
-                        title: Text(
-                          childItem['subtitle'],
-                          style: FTextStyle.drawerText.copyWith(fontSize: 14),
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                          _subtitleHandleNavigation(childItem['subtitle']);
-                        },
-                      );
-                    }
-                  }).toList(),
-                ),
-              );
-            } else {
-              return ListTile(
-                dense: true,
-                leading: Icon(
-                  item['icon'],
-                  size: 20,
-                  color: AppColors.aboutUsHeadingColor,
-                ),
-                title: Text(
-                  item['subtitle'],
-                  style: FTextStyle.drawerText.copyWith(fontSize: 14),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  _handleNavigation(item['subtitle']);
-                },
-              );
-            }
-          }).toList(),
+                      ),
+                    ),
+                  );
+                } else {
+                  return ListTile(
+                    dense: true,
+                    leading: Icon(
+                      item['icon'],
+                      size: 20,
+                      color: AppColors.aboutUsHeadingColor,
+                    ),
+                    title: Text(
+                      item['subtitle'],
+                      style: FTextStyle.drawerText.copyWith(fontSize: 14),
+                    ),
+                    onTap: () {
+                      _handleNavigation(item['subtitle']);
+                    },
+                  );
+                }
+              }).toList(),
+            ),
+          ),
         ],
       ),
     );
+
+
+
   }
 
 
@@ -387,6 +450,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HowWorksScreen()),
+        );
+        break;
+        case 'Accommodation Organization':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AccommodationCategoryOrganization()),
         );
         break;
       case 'How Its Works Delegate':
@@ -521,6 +590,24 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) =>  PrintProgram()),
+        );
+        break;
+
+        case 'Review Full Paper':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  FullPaperReview()),
+        );
+        break;
+        case 'Manage Abstract Session/Themes':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  AbstractOrganizer()),
+        );
+        break; case 'Review Abstracts':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  ReviewAbstractOrganizer()),
         );
         break;
 //deadlines

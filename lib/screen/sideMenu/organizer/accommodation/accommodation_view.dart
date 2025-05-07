@@ -2,21 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../../utils/colours.dart';
-import '../../../../../utils/commonFunction.dart';
-import '../../../../../utils/flutter_flow_animations.dart';
-import '../../../../../utils/font_text_Style.dart';
-class ManageProgramView extends StatefulWidget {
-  String id;
-   ManageProgramView({ required this.id,super.key});
+import '../../../../utils/colours.dart';
+import '../../../../utils/commonFunction.dart';
+import '../../../../utils/font_text_Style.dart';
+class AccommodationOrganizationView extends StatefulWidget {
+  final  String id ;
+  const AccommodationOrganizationView({ required this.id,super.key});
 
   @override
-  State<ManageProgramView> createState() => _ManageProgramViewState();
+  State<AccommodationOrganizationView> createState() => _AccommodationOrganizationViewState();
 }
 
-class _ManageProgramViewState extends State<ManageProgramView> {
+class _AccommodationOrganizationViewState extends State<AccommodationOrganizationView> {
   Map<String, dynamic> activeConferenceList =
   {
     "id":"1",
@@ -121,7 +121,38 @@ class _ManageProgramViewState extends State<ManageProgramView> {
   int totalPages = 0;
   int pageSize = 10;
   bool hasMoreData = true;
+  List<dynamic> data = [
+    {
+      "id":"1",
+      "title": "30th ISCB International Conference (ISCBC-2025)",
+    },
 
+    {
+      "id":"2",
+      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
+    },  {
+      "id":"3",
+      "title": "30th ISCB International Conference (ISCBC-2025)",
+    },
+
+    {
+      "id":"4",
+      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
+    },  {
+      "id":"5",
+      "title": "30th ISCB International Conference (ISCBC-2025)",
+    },
+
+    {
+      "id":"6",
+      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
+    },  {
+      "id":"7",
+      "title": "30th ISCB International Conference (ISCBC-2025)",
+    },
+
+
+  ];
   final controller = ScrollController();
   final TextEditingController controllerText = TextEditingController();
   bool isLoading = false;
@@ -217,7 +248,7 @@ class _ManageProgramViewState extends State<ManageProgramView> {
 
             Expanded(
 
-              child: isInitialLoading && activeConferenceList.isEmpty
+              child: isInitialLoading && data.isEmpty
 
                   ? Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
@@ -276,7 +307,7 @@ class _ManageProgramViewState extends State<ManageProgramView> {
                   textAlign: TextAlign.center,
                 ),
               )
-                  : (activeConferenceList.isEmpty)
+                  : (data.isEmpty)
                   ? const Center(
                 child: Text("No  data available.",
                     style: FTextStyle.listTitle),
@@ -526,5 +557,16 @@ class _ManageProgramViewState extends State<ManageProgramView> {
     );
   }
 
-
+  void _clearText() {
+    controllerText.clear();
+    setState(() {
+      _isTextEmpty = true;
+      data.clear();
+      pageNo = 1;
+      hasMoreData = true;
+      totalPages = 0;
+      // BlocProvider.of<AllRequesterBloc>(context)
+      //     .add(GetBillingListHandler("", pageNo, pageSize));
+    });
+  }
 }

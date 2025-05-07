@@ -45,12 +45,12 @@ class _ServicesScreenState extends State<ServicesScreen> {
                   'Smart Conference is focused on providing online conference management solutions to the conference organizers. Started operations in 2014, our Conference Management System has provided online registration and other services to various national and international conferences. Smart Conference is also recognized under the StartUpIndia initiative by the Government of India.\n\n'
                   'We enable conference organizers to achieve their goals by adopting a technology-inspired approach to innovation. In a highly competitive environment where information is the most valuable asset, we provide excellent solutions to answer all your critical questions. Better information systems assist in more informed decision-making and give you a strategic advantage over the competition.\n\n'
                   'Our team consists of domain experts, system analysts, project managers, and technology experts. We have an excellent support system to provide you with professional assistance. Our strength lies in constant innovation and process refinement practices. We progress towards making world-class products and providing truly exceptional services.',
-              style: FTextStyle.body,
+              style: FTextStyle.style,
             ),
             SizedBox(height: 16.0),
             Text(
               'For Conference Organizers:',
-              style: FTextStyle.subheading,
+              style: FTextStyle.listTitle,
             ),
             SizedBox(height: 8.0),
             ...[
@@ -84,7 +84,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 Expanded(
                   child: Text(
                     item,
-                    style: FTextStyle.body,
+                    style: FTextStyle.style,
                   ),
                 ),
 
@@ -96,7 +96,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
             // Section for Delegates/Attendees
             Text(
               'For Delegates/Attendees:',
-              style: FTextStyle.subheading,
+              style: FTextStyle.listTitle,
             ),
             SizedBox(height: 8.0),
             ...[
@@ -125,7 +125,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 Expanded(
                   child: Text(
                     item,
-                    style: FTextStyle.body,
+                    style: FTextStyle.style,
                   ),
                 ),
 

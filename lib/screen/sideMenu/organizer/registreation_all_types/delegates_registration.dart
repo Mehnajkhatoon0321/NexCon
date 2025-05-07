@@ -69,7 +69,70 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
     });
   }
 
+  List<dynamic> inactiveConferenceList = [
+    {
+      "id":"1",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      "registrationNo":"1",
+      'bookingStatus': "Approved",
+      "delegatesName":"Delegates Name",
+      "delegatesCategory": "Delegates Category",
+      "registrationDate": "2024-12-19",
+      "country":"India",
+      "city":"Lucknow",
+      "sex":"Female",
+      "email":"mahi@123mailinator.com"
 
+    },
+    {
+      "id":"2",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      "registrationNo":"2",
+      'bookingStatus': "Approved",
+      "delegatesName":"Delegates Name",
+      "delegatesCategory": "Delegates Category",
+      "registrationDate": "2024-12-19",
+      "country":"India",
+      "city":"Lucknow",
+      "sex":"Female",
+      "email":"mahi@123mailinator.com"
+
+    },
+
+
+
+
+  ];
+  List<dynamic> activeConferenceList = [
+    {
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      "registrationNo":"1",
+      "id":"1",
+      'bookingStatus': "Approved",
+      "delegatesName":" Name",
+      "delegatesCategory": "Delegates Category",
+      "registrationDate": "2024-12-19",
+      "country":"India",
+      "city":"Lucknow",
+      "sex":"Female",
+      "email":"mahi@123mailinator.com"
+
+    },
+    {
+      "id":"2",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      "registrationNo":"2",
+      'bookingStatus': "Approved",
+      "delegatesName":" Name",
+      "delegatesCategory": "Delegates Category",
+      "registrationDate": "2024-12-19",
+      "country":"India",
+      "city":"Lucknow",
+      "sex":"Female",
+      "email":"mahi@123mailinator.com"
+
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -222,36 +285,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
 
   // Active Segment
   Widget _buildActiveSegment(double height, double width) {
-    List<dynamic> activeConferenceList = [
-      {
-        'title': "30th ISCB International Conference (ISCBC-2025)",
-        "registrationNo":"1",
-        "id":"1",
-        'bookingStatus': "Approved",
-        "delegatesName":" Name",
-        "delegatesCategory": "Delegates Category",
-        "registrationDate": "2024-12-19",
-        "country":"India",
-        "city":"Lucknow",
-        "sex":"Female",
-        "email":"mahi@123mailinator.com"
 
-      },
-      {
-        "id":"2",
-        'title': "30th ISCB International Conference (ISCBC-2025)",
-        "registrationNo":"2",
-        'bookingStatus': "Approved",
-        "delegatesName":" Name",
-        "delegatesCategory": "Delegates Category",
-        "registrationDate": "2024-12-19",
-        "country":"India",
-        "city":"Lucknow",
-        "sex":"Female",
-        "email":"mahi@123mailinator.com"
-
-      },
-    ];
 
     return
       ListView.builder(
@@ -285,7 +319,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                   item['title'] ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: FTextStyle.subheading.copyWith(
+                  style: FTextStyle.listTitle.copyWith(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
@@ -302,7 +336,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                     const SizedBox(width: 6),
                     Text(
                       "Name: ${item['delegatesName']}",
-                      style: FTextStyle.body,
+                      style: FTextStyle.style,
                     ),
                   ],
                 ),
@@ -315,7 +349,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                     const SizedBox(width: 6),
                     Text(
                       item['registrationDate'] ?? '',
-                      style: FTextStyle.body,
+                      style: FTextStyle.style,
                     ),
                   ],
                 ),
@@ -328,7 +362,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                     const SizedBox(width: 6),
                     Text(
                       "Status: ",
-                      style: FTextStyle.body,
+                      style: FTextStyle.style,
                     ),
                     Text(
                       bookingStatus,
@@ -384,40 +418,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
 
   // Inactive Segment
   Widget _buildInActiveSegment(double height, double width) {
-    List<dynamic> inactiveConferenceList = [
-      {
-        "id":"1",
-        'title': "30th ISCB International Conference (ISCBC-2025)",
-        "registrationNo":"1",
-        'bookingStatus': "Approved",
-        "delegatesName":"Delegates Name",
-        "delegatesCategory": "Delegates Category",
-        "registrationDate": "2024-12-19",
-        "country":"India",
-        "city":"Lucknow",
-        "sex":"Female",
-        "email":"mahi@123mailinator.com"
 
-      },
-      {
-        "id":"2",
-        'title': "30th ISCB International Conference (ISCBC-2025)",
-        "registrationNo":"2",
-        'bookingStatus': "Approved",
-        "delegatesName":"Delegates Name",
-        "delegatesCategory": "Delegates Category",
-        "registrationDate": "2024-12-19",
-        "country":"India",
-        "city":"Lucknow",
-        "sex":"Female",
-        "email":"mahi@123mailinator.com"
-
-      },
-
-
-
-
-    ];
     return
       ListView.builder(
         itemCount: inactiveConferenceList.length,
@@ -450,7 +451,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                   item['title'] ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: FTextStyle.subheading.copyWith(
+                  style: FTextStyle.listTitle.copyWith(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
@@ -467,7 +468,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                     const SizedBox(width: 6),
                     Text(
                       "Name: ${item['delegatesName']}",
-                      style: FTextStyle.body,
+                      style: FTextStyle.style,
                     ),
                   ],
                 ),
@@ -480,7 +481,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                     const SizedBox(width: 6),
                     Text(
                       item['registrationDate'] ?? '',
-                      style: FTextStyle.body,
+                      style: FTextStyle.style,
                     ),
                   ],
                 ),
@@ -493,7 +494,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration>  {
                     const SizedBox(width: 6),
                     Text(
                       "Status: ",
-                      style: FTextStyle.body,
+                      style: FTextStyle.style,
                     ),
                     Text(
                       bookingStatus,

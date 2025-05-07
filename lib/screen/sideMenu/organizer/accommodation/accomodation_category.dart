@@ -1,19 +1,21 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nexcon/screen/delegates_section/accomondation/accomondation_view.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
 
 import '../../../../utils/colours.dart';
 import '../../../../utils/commonFunction.dart';
 import '../../../../utils/common_popups.dart';
-import '../../../../utils/font_text_Style.dart';
-class ManualAttendance extends StatefulWidget {
-  const ManualAttendance({super.key});
+import 'accommodation_view.dart';
+class AccommodationCategoryOrganization extends StatefulWidget {
+  const AccommodationCategoryOrganization({super.key});
 
   @override
-  State<ManualAttendance> createState() => _ManualAttendanceState();
+  State<AccommodationCategoryOrganization> createState() => _AccommodationCategoryOrganizationState();
 }
 
-class _ManualAttendanceState extends State<ManualAttendance> {
+class _AccommodationCategoryOrganizationState extends State<AccommodationCategoryOrganization> {
   int _selectedIndex = 0;
 
   void _onButtonPressed(int index) {
@@ -72,53 +74,129 @@ class _ManualAttendanceState extends State<ManualAttendance> {
   List<dynamic> activeConferenceList = [
     {
       "id":"1",
-      'delegateCategory': "30th ISCB International Conference (ISCBC-2025)",
-      'name': "Mahi",
-      'Gender': "Female",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
       'bookingStatus': "Pending",
-
-    }, {
-      "id":"2",
-      'delegateCategory': "30th ISCB International Conference (ISCBC-2025)",
-      'name': "Mahi",
-      'Gender': "Female",
-      'bookingStatus': "Success",
-
-    }, {
-      "id":"3",
-      'delegateCategory': "30th ISCB International Conference (ISCBC-2025)",
-      'name': "Mahi",
-      'Gender': "Female",
-      'bookingStatus': "Pending",
-
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
     },
-
+    { "id":"2",
+      'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC ",
+      'amount': "23424343",
+      'status': "Success",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    { "id":"3",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "COD",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'bookingStatus': "Success",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    { "id":"3",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'bookingStatus': "Success",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
+    }
   ];
 
   List<dynamic> inactiveConferenceList = [
+
     {
       "id":"1",
-      'delegateCategory': "30th ISCB International Conference (ISCBC-2025)",
-      'name': "Mahi",
-      'Gender': "Female",
-      'bookingStatus': "Success",
-
-    }, {
-      "id":"2",
-      'delegateCategory': "30th ISCB International Conference (ISCBC-2025)",
-      'name': "Mahi",
-      'Gender': "Female",
-      'bookingStatus': "Pending",
-
-    }, {
-      "id":"3",
-      'delegateCategory': "30th ISCB International Conference (ISCBC-2025)",
-      'name': "Mahi",
-      'Gender': "Female",
-      'bookingStatus': "Success",
-
+      'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC ",
+      'amount': "23424343",
+      'status': "Success",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
     },
-
+    {
+      "id":"2",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'bookingStatus': "Pending",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    { "id":"3",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "COD",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'bookingStatus': "Success",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    { "id":"3",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'bookingStatus': "Success",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
+    }
   ];
   @override
   Widget build(BuildContext context) {
@@ -149,7 +227,7 @@ class _ManualAttendanceState extends State<ManualAttendance> {
           },
         ),
         title: Text(
-          'Delegate Attendance',
+          'Accommodation',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
@@ -288,13 +366,15 @@ class _ManualAttendanceState extends State<ManualAttendance> {
         final item = activeConferenceList[index];
 
         // Provide default values for null fields
-        final title = item['delegateCategory'] ?? ' Title';
+        final title = item['title'] ?? 'Unknown Title';
+        final id = item['id'] ?? 'Unknown Title';
 
-
-
-        final name = item['name']?.toString() ?? 'N/A';
-        final Gender = item['Gender'] ?? 'N/A';
-
+        final fromDate = item['fromDate'] ?? 'N/A';
+        final toDate = item['toDate'] ?? 'N/A';
+        final amount = item['amount']?.toString() ?? 'N/A';
+        final paymentMode = item['paymentMode'] ?? 'N/A';
+        final bankName = item['bankName'] ?? 'N/A';
+        final tnDate = item['tnDate'] ?? 'N/A';
         final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
@@ -328,22 +408,47 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'From Date: $fromDate',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.style,
+                        ),
+                        Text(
+                          'To Date: $toDate',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.style,
+                        ),
+                      ],
+                    ),
 
 
                     Text(
-                      'Delegate Name: $name',
+                      'Payment Mode: $paymentMode',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
                     ),
-                    Text(
-                      'Gender: $Gender',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Bank Name: ', style: FTextStyle.style),
+                        Expanded(
+                          child: Text(
+                            bankName,
+                            style: FTextStyle.style,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
-
 
 
 
@@ -352,7 +457,7 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                            'Attendance  Status: ', style: FTextStyle.listTitle),
+                            'Booking Status: ', style: FTextStyle.listTitle),
                         Text(
                           bookingStatus,
                           style: TextStyle(
@@ -370,23 +475,25 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-
-                        SizedBox(width: 10,),
                         GestureDetector(
                           onTap: () {
-                            CommonPopups.showDeleteCustomPopup(
+                            Navigator.push(
                               context,
-                              "Are you sure you want to delete?",
-                                  () {
-                                // Handle delete logic
-                              },
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AccommodationOrganizationView(id: id,
+
+                                    ),
+                              ),
                             );
                           },
                           child: Container(
                             height: 35,
                             width: 35,
+
                             decoration: BoxDecoration(
-                              color: Colors.red, // Red for delete
+                              color:AppColors.secondaryColour,
+                              // Green for edit
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
@@ -397,11 +504,50 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                               ],
                             ),
                             child: const Icon(
-                              Icons.delete,
+                              Icons.remove_red_eye_outlined,
                               color: Colors.white,
                               size: 20,
                             ),
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                CommonPopups.showDeleteCustomPopup(
+                                  context,
+                                  "Are you sure you want to delete?",
+                                      () {
+                                    // Handle delete logic
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                  color: Colors.red, // Red for delete
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -430,13 +576,16 @@ class _ManualAttendanceState extends State<ManualAttendance> {
       itemBuilder: (context, index) {
         final item = inactiveConferenceList[index];
 
-        final title = item['delegateCategory'] ?? ' Title';
+        // Provide default values for null fields
+        final title = item['title'] ?? 'Unknown Title';
+        final id = item['id'] ?? 'Unknown Title';
 
-
-
-        final name = item['name']?.toString() ?? 'N/A';
-        final Gender = item['Gender'] ?? 'N/A';
-
+        final fromDate = item['fromDate'] ?? 'N/A';
+        final toDate = item['toDate'] ?? 'N/A';
+        final amount = item['amount']?.toString() ?? 'N/A';
+        final paymentMode = item['paymentMode'] ?? 'N/A';
+        final bankName = item['bankName'] ?? 'N/A';
+        final tnDate = item['tnDate'] ?? 'N/A';
         final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
@@ -470,22 +619,47 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'From Date: $fromDate',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.style,
+                        ),
+                        Text(
+                          'To Date: $toDate',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.style,
+                        ),
+                      ],
+                    ),
 
 
                     Text(
-                      'Delegate Name: $name',
+                      'Payment Mode: $paymentMode',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
                     ),
-                    Text(
-                      'Gender: $Gender',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Bank Name: ', style: FTextStyle.style),
+                        Expanded(
+                          child: Text(
+                            bankName,
+                            style: FTextStyle.style,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
-
 
 
 
@@ -494,7 +668,7 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                            'Attendance  Status: ', style: FTextStyle.listTitle),
+                            'Booking Status: ', style: FTextStyle.listTitle),
                         Text(
                           bookingStatus,
                           style: TextStyle(
@@ -502,7 +676,7 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                             fontWeight: FontWeight.bold,
                             color: bookingStatus == "Success"
                                 ? Colors.green
-                                : Colors.red,
+                                : Colors.orange,
                           ),
                         ),
                       ],
@@ -512,23 +686,25 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-
-                        SizedBox(width: 10,),
                         GestureDetector(
                           onTap: () {
-                            CommonPopups.showDeleteCustomPopup(
+                            Navigator.push(
                               context,
-                              "Are you sure you want to delete?",
-                                  () {
-                                // Handle delete logic
-                              },
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AccommodationView(id: id,
+
+                                    ),
+                              ),
                             );
                           },
                           child: Container(
                             height: 35,
                             width: 35,
+
                             decoration: BoxDecoration(
-                              color: Colors.red, // Red for delete
+                              color:AppColors.secondaryColour,
+                              // Green for edit
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
@@ -539,11 +715,50 @@ class _ManualAttendanceState extends State<ManualAttendance> {
                               ],
                             ),
                             child: const Icon(
-                              Icons.delete,
+                              Icons.remove_red_eye_outlined,
                               color: Colors.white,
                               size: 20,
                             ),
                           ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                CommonPopups.showDeleteCustomPopup(
+                                  context,
+                                  "Are you sure you want to delete?",
+                                      () {
+                                    // Handle delete logic
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                  color: Colors.red, // Red for delete
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

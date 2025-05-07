@@ -3,7 +3,7 @@ import 'package:nexcon/screen/authFlow/change_password.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
 
 import 'package:nexcon/screen/guest_flow/side_menu_navbar.dart';
-import 'package:nexcon/screen/organizer_section/abstract_and_paper/paper_organizer/paper_organizer.dart';
+
 import 'package:nexcon/screen/organizer_section/account/conference_register_here.dart';
 import 'package:nexcon/screen/organizer_section/account/upgrade_wait_list.dart';
 import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer.dart';

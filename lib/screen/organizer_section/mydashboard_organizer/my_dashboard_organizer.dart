@@ -70,9 +70,9 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Upgrade Membership", style: FTextStyle.subheading.copyWith(color: Colors.white)),
+                            Text("Upgrade Membership", style: FTextStyle.listTitle.copyWith(color: Colors.white)),
                             SizedBox(height: 4),
-                            Text("Basic Plan", style: FTextStyle.body.copyWith(color: Colors.white70)),
+                            Text("Basic Plan", style: FTextStyle.style.copyWith(color: Colors.white70)),
                           ],
                         ),
                       ],
@@ -116,7 +116,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
           children: [
             Icon(icon, color: AppColors.primaryColour, size: 28),
             SizedBox(height: 8),
-            Text(value, style: FTextStyle.subheading),
+            Text(value, style: FTextStyle.listTitle),
             SizedBox(height: 4),
             Text(title, style: FTextStyle.label),
           ],
@@ -136,13 +136,13 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(item['conferenceName'] ?? '', style: FTextStyle.subheading),
+          Text(item['conferenceName'] ?? '', style: FTextStyle.listTitle),
           SizedBox(height: 8),
           Row(
             children: [
               Icon(Icons.date_range, size: 18, color: AppColors.primaryColour),
               SizedBox(width: 6),
-              Text("${item['fromDate']} - ${item['toDate']}", style: FTextStyle.body),
+              Text("${item['fromDate']} - ${item['toDate']}", style: FTextStyle.style),
             ],
           ),
           SizedBox(height: 10),
@@ -153,14 +153,14 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                 children: [
                   Icon(Icons.how_to_reg, size: 18, color: AppColors.primaryColour),
                   SizedBox(width: 4),
-                  Text("Registrations: ${item['registration']}", style: FTextStyle.body),
+                  Text("Registrations: ${item['registration']}", style: FTextStyle.style),
                 ],
               ),
               Row(
                 children: [
                   Icon(Icons.access_time, size: 18, color: Colors.orange),
                   SizedBox(width: 4),
-                  Text("Waiting: ${item['registrationWait']}", style: FTextStyle.body),
+                  Text("Waiting: ${item['registrationWait']}", style: FTextStyle.style),
                 ],
               ),
             ],

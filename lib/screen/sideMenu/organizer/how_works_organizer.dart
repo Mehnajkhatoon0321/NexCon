@@ -27,7 +27,7 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
           },
         ),
         title: Text(
-          'Work Conference Organizer',
+          'Organizer Work',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
@@ -50,12 +50,12 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
                   'To access all these features, you won’t have to pay high web server or software maintenance costs. Organizers only pay per registration, meaning you only incur a cost for each delegate that registers for your conference. We do not charge any fees from delegates.\n\n'
                   'Delegates can use a single login for registering at multiple conferences. There is no need for delegates to create a new account for each new conference. They can keep track of upcoming conferences and view conference programs through their delegate panel.\n\n'
                   'It takes just five minutes for a conference organizer to register, set up a conference, and start using our conference management system.',
-              style: FTextStyle.body,
+              style: FTextStyle.style,
             ),
             SizedBox(height: 20),
             Text(
               "Steps to Follow by Conference Organizers",
-              style: FTextStyle.subheading,
+              style: FTextStyle.listTitle,
             ),
             const SizedBox(height: 4),
             Column(
@@ -97,7 +97,7 @@ class _HowWorksScreenState extends State<HowWorksScreen> {
           Expanded(
             child: Text(
               text,
-              style: FTextStyle.body,
+              style: FTextStyle.style,
             ),
           ),
         ],

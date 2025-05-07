@@ -123,6 +123,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
   late final TextEditingController nameVenueConference = TextEditingController();
   late final TextEditingController _conferenceTheme = TextEditingController();
   late final TextEditingController uploadName = TextEditingController();
+  late final TextEditingController uploadConferenceName = TextEditingController();
   late final TextEditingController _passwordConference = TextEditingController();
   late final TextEditingController _mobileNumberConference = TextEditingController();
   late final TextEditingController _websiteNumberConferenceNumberConference = TextEditingController();
@@ -967,13 +968,14 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                                 imagesIdConference =
                                     File(result.files.single.path!);
                                 isImageUploaded = true;
-                                uploadName.text = fileName2!;
+                                uploadConferenceName.text = fileName2!;
                               });
                             }
                           },
                         ),
                       ),
-                      controller: uploadName,
+                      controller: uploadConferenceName,
+
                       validator: ValidatorUtils.uploadValidator,
                       onChanged: (text) {
                         setState(() {

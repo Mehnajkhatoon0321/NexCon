@@ -48,7 +48,7 @@ class PricingScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-           Text("Service Terms",style: FTextStyle.subheading,),
+           Text("Service Terms",style: FTextStyle.listTitle,),
             SizedBox(height: 10),
             ...[
               '* GST of 18% to be paid additionally on Smart Conference Service Fee (not on the Fees received from Delegates)',
@@ -73,7 +73,7 @@ class PricingScreen extends StatelessWidget {
                 Expanded(
                   child: Text(
                     item,
-                    style: FTextStyle.body,
+                    style: FTextStyle.style,
                   ),
                 ),
 
@@ -189,7 +189,7 @@ class PricingScreen extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style:isHeader ? FTextStyle.subheading :FTextStyle.subheading,
+          style:isHeader ? FTextStyle.listTitle :FTextStyle.listTitle,
           maxLines: 4,
           overflow: TextOverflow.ellipsis,textAlign: TextAlign.left,
         ),
@@ -203,7 +203,7 @@ class PricingScreen extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style:isHeader ? FTextStyle.subheading :FTextStyle.subheading,
+          style:isHeader ? FTextStyle.listTitle :FTextStyle.listTitle,
           maxLines: 4,
           overflow: TextOverflow.ellipsis,
         ),

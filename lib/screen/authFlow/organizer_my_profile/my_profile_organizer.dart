@@ -111,8 +111,8 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 14.0),
                       child: Container(
-                        width: height * 0.15, // Adjust width as needed
-                        height: height * 0.15, // Adjust height as needed
+                        width: height * 0.13, // Adjust width as needed
+                        height: height * 0.13, // Adjust height as needed
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200, // Background color for placeholder
                           borderRadius: BorderRadius.circular(12),
@@ -139,7 +139,7 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
                                 flex: 2,
                                 child: Text(
                                   "${entry.key}:",
-                                  style: FTextStyle.Faqssubtitle,
+                                  style: FTextStyle.style.copyWith(color:Colors.black),
                                 ),
                               ),
 
@@ -148,7 +148,7 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
                                 child: GestureDetector(
                                   child: Text(
                                     entry.value.toString(),
-                                    style: FTextStyle.formhintTxtStyle,
+                                    style: FTextStyle.style,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 3,
                                   ),

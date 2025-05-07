@@ -87,6 +87,17 @@ static   bool isValidPass(String pass) {
 
     return null;
   }
+static String? Abstract(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please fill the field.';
+    }
+    if (value.length < 3 || value.length > 300) {
+      return "Please write field must be between 3 and 300 characters.";
+    }
+
+
+    return null;
+  }
 
   static String? nameValidator(String? value) {
     if (value == null || value.trim().split(' ').length < 2) {
@@ -439,7 +450,16 @@ static  bool isValidAddress(String value) {
     return true;
   }
 
-
+  static bool isAbstract(String value) {
+    if (value.isEmpty) {
+      return false;
+    }
+    // Check if the length of the phone number is at least 8 digits
+    if (value.length < 3) {
+      return false;
+    }
+    return true;
+  }
 
 
 

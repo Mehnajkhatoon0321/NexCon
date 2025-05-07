@@ -36,6 +36,24 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   late final TextEditingController gst = TextEditingController();
   late final TextEditingController mobile = TextEditingController();
   late final TextEditingController remark = TextEditingController();
+// Controllers
+  final TextEditingController state = TextEditingController();
+  final TextEditingController address = TextEditingController();
+  final TextEditingController gstVat = TextEditingController();
+
+// Focus Nodes
+  final FocusNode _stateNode = FocusNode();
+  final FocusNode _addressNode = FocusNode();
+  final FocusNode _gstVatNode = FocusNode();
+
+// Global Keys
+  final GlobalKey<FormFieldState> _stateKey = GlobalKey<FormFieldState>();
+
+  final GlobalKey<FormFieldState> _gstVatKey = GlobalKey<FormFieldState>();
+
+
+// Focus Flags (optional)
+  bool isStateFieldFocused = false;
 
   late final GlobalKey<FormFieldState<String>> _nameKey =
   GlobalKey<FormFieldState<String>>();
@@ -45,7 +63,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   late final GlobalKey<FormFieldState<String>> _productCategoryKey =
   GlobalKey<FormFieldState<String>>();
 
-  late final GlobalKey<FormFieldState<String>> __addressKeyKey =
+  late final GlobalKey<FormFieldState<String>> __addressKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _warrantyKey =
   GlobalKey<FormFieldState<String>>();
@@ -61,7 +79,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
 
 
 
-  late final FocusNode _addressNode = FocusNode();
+
 
   late final FocusNode _gstNode = FocusNode();
   late final FocusNode _mobileNode = FocusNode();
@@ -104,6 +122,18 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   var selfiImgBase64 = '';
   var selfiImg = '';
   List<int> profileImage = [];
+  // Controller
+  final TextEditingController username = TextEditingController();
+
+// Focus Node
+  final FocusNode _usernameNode = FocusNode();
+
+// Global Key
+  final GlobalKey<FormFieldState> _usernameKey = GlobalKey<FormFieldState>();
+
+// Focus Flag (optional)
+  bool isUsernameFieldFocused = false;
+
   List<int> Images = [];
   String? selectCountryNamesCategories;
   String? selectCityNamesCategories;
@@ -250,7 +280,8 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
 
         ),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        body:
+        SingleChildScrollView(
           child: Column(
             crossAxisAlignment:CrossAxisAlignment.center ,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -258,6 +289,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 15,left: 20,right: 20),
                 child: Form(
+                  key: formKey,
 
                   onChanged: () {
                     if ( selectedProductCategory != null &&
@@ -290,7 +322,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                     } if (isGstFieldFocused == true) {
                       _gstKey.currentState!.validate();
                     } if (isDescriptionFieldFocused == true) {
-                      __addressKeyKey.currentState!.validate();
+                      __addressKey.currentState!.validate();
                     }
 
 
@@ -444,6 +476,31 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                           },
                         ).animateOnPageLoad(
                             animationsMap['imageOnPageLoadAnimation2']!),
+                      ),
+                      /// --- Username ---
+                      Text(
+                        "Username",
+                        style: FTextStyle.formLabelTxtStyle,
+                      ).animateOnPageLoad(
+                          animationsMap['imageOnPageLoadAnimation2']!),
+                      const SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _usernameKey,
+                          focusNode: _usernameNode,
+                          keyboardType: TextInputType.name,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter username",
+                          ),
+                          controller: username,
+                          validator: ValidatorUtils.model,
+                          onTap: () {
+                            setState(() {
+                              isUsernameFieldFocused = true;
+                            });
+                          },
+                        ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
                       ),
 
                       Text(
@@ -613,45 +670,85 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                       ),
 
 
+                      /// --- State ---
+                      Text(
+                        "State",
+                        style: FTextStyle.formLabelTxtStyle,
+                      ).animateOnPageLoad(
+                          animationsMap['imageOnPageLoadAnimation2']!),
+                      const SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _stateKey,
+                          focusNode: _stateNode,
+                          keyboardType: TextInputType.text,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter state",
+                          ),
+                          controller: state,
+                          validator: ValidatorUtils.model,
+                          onTap: () {
+                            setState(() {
+                              // update focus flags accordingly
+                              isStateFieldFocused = true;
+                            });
+                          },
+                        ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
+                      ),
 
-
-
-
+                      /// --- Address ---
                       Text(
                         "Address",
                         style: FTextStyle.formLabelTxtStyle,
                       ).animateOnPageLoad(
                           animationsMap['imageOnPageLoadAnimation2']!),
+                      const SizedBox(height: 5),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: TextFormField(
-                          key: __addressKeyKey,
+                          key: __addressKey,
                           focusNode: _addressNode,
                           keyboardType: TextInputType.multiline,
-                          maxLines: 4, // Allows for multiple lines
+                          maxLines: 3,
                           decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                            hintText: "Enter address",
+                            hintText: "Enter full address",
                           ),
-                          inputFormatters: [NoSpaceFormatter()],
-                          controller: _addressKey,
+                          controller: address,
                           validator: ValidatorUtils.model,
                           onTap: () {
                             setState(() {
-                              isProductCategoryFieldFocused = false;
-                              isBrandFieldFocused = false;
-                              isModelFieldFocused = false;
-                              isWarrantyFieldFocused = false;
-                              isNameFieldFocused = false;
-                              isDealerFocused = false;
                               isDescriptionFieldFocused = true;
-                              isGstFieldFocused = false;
-                              isRemarkFieldFocused = false;
                             });
                           },
-                        ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!,
-                        ),
-                      )
+                        ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
+                      ),
+
+                      /// --- GST/VAT (Optional) ---
+                      Text(
+                        "GST/VAT (Optional)",
+                        style: FTextStyle.formLabelTxtStyle,
+                      ).animateOnPageLoad(
+                          animationsMap['imageOnPageLoadAnimation2']!),
+                      const SizedBox(height: 5),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _gstVatKey,
+                          focusNode: _gstVatNode,
+                          keyboardType: TextInputType.text,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter GST/VAT number (optional)",
+                          ),
+                          controller: gstVat,
+                          validator: ValidatorUtils.model,
+                        ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
+                      ),
+
+
+
+
+
 
                     ],
                   ),
@@ -665,13 +762,16 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                   height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 40,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const MyProfileOrganizer(),
-                      //   ),
-                      // );
+                      if (formKey.currentState!.validate()) {
+
+
+                        Navigator.pop(context);
+
+                        // print("Form is valid, proceed with submission.");
+                      } else {
+                        // Form is invalid
+                        // print("Form is invalid, please fill all required fields.");
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

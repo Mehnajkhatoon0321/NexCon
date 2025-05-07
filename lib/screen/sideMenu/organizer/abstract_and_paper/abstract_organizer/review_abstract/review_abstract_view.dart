@@ -1,42 +1,21 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../../utils/colours.dart';
-import '../../../../../utils/commonFunction.dart';
-import '../../../../../utils/flutter_flow_animations.dart';
-import '../../../../../utils/font_text_Style.dart';
-class ManageProgramView extends StatefulWidget {
+import '../../../../../../utils/commonFunction.dart';
+class ReviewAbstractView extends StatefulWidget {
   String id;
-   ManageProgramView({ required this.id,super.key});
+   ReviewAbstractView({ required this.id,super.key});
 
   @override
-  State<ManageProgramView> createState() => _ManageProgramViewState();
+  State<ReviewAbstractView> createState() => _ReviewAbstractViewState();
 }
 
-class _ManageProgramViewState extends State<ManageProgramView> {
-  Map<String, dynamic> activeConferenceList =
-  {
-    "id":"1",
-    'title': "30th ISCB International Conference (ISCBC-2025)",
-    'paymentMode': "PhonePay",
-    'tnNumber': "2343546446",
-    'tnDate': "2023-12-10",
-    'bankName': "HDFC",
-    'amount': "23424343",
-    'bookingStatus': "Pending",
-    'feeStatus': "Pending",
-    "numberPerson": "2",
-    "numberDays": "4",
-    "fromDate": "23-11-2025",
-    "toDate": "24-12-2025",
-    'downloadReceipt': "assets/images/payment.png"
-  }
+class _ReviewAbstractViewState extends State<ReviewAbstractView> {
 
-  ;
-  bool _isTextEmpty = true;
 
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
@@ -117,71 +96,42 @@ class _ManageProgramViewState extends State<ManageProgramView> {
     ),
   };
 
-  int pageNo = 1;
-  int totalPages = 0;
-  int pageSize = 10;
-  bool hasMoreData = true;
 
-  final controller = ScrollController();
-  final TextEditingController controllerText = TextEditingController();
-  bool isLoading = false;
+
+
+
   bool isInitialLoading = false;
-  bool isLoadingEdit = false;
-  String searchQuery = "";
+
+
   @override
   void dispose() {
-    controllerText.dispose();
-    _debounce?.cancel();
+
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    controllerText.addListener(() {
-      setState(() {
-        _isTextEmpty = controllerText.text.isEmpty;
-      });
-    });
-    // BlocProvider.of<AllRequesterBloc>(context)
-    //     .add(GetBillingListHandler("", pageNo, pageSize));
-    paginationCall();
+
+
   }
   Map<String, dynamic> errorServerMessage = {};
   String? errorMessage;
-  void paginationCall() {
-    controller.addListener(() {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
-        if (!isLoading && hasMoreData) {
-          pageNo++;
+  Map<String, dynamic> activeConferenceList =
+  {
+    "id":"1",
+    'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+    "proposalType": "Lorem",
+    "paperTitle":"vbncnbnnbnn",
+    "dateOfSubmission":"12-05-2023",
+    "status":"Success",
+    "feeStatus":"Success",
+    "Remark":"Chsnge some thingx",
 
-          isInitialLoading = false;
-          isLoading = true;
-          //
-          // BlocProvider.of<AllRequesterBloc>(context)
-          //     .add(GetBillingListHandler(searchQuery, pageNo, pageSize));
-        }
-      }
-    });
-  }
-  Timer? _debounce;
-  void _onSearchChanged(String value) {
-    setState(() {
-      _isTextEmpty = value.isEmpty;
-      searchQuery = value;
-    });
 
-    // Cancel the previous timer
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
+  };
 
-    // Start a new timer
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      pageNo=1;
-      // Call the API only after the user has stopped typing for 500 milliseconds
-      // BlocProvider.of<AllRequesterBloc>(context).add(
-      //     GetBillingListHandler(searchQuery, pageNo, pageSize));
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -223,7 +173,7 @@ class _ManageProgramViewState extends State<ManageProgramView> {
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
                 child: ListView.builder(
-                  itemCount: 10, // Number of shimmer placeholders
+                  itemCount:activeConferenceList.length , // Number of shimmer placeholders
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.symmetric(
@@ -278,7 +228,7 @@ class _ManageProgramViewState extends State<ManageProgramView> {
               )
                   : (activeConferenceList.isEmpty)
                   ? const Center(
-                child: Text("No  data available.",
+                child: Text("No  activeConferenceList available.",
                     style: FTextStyle.listTitle),
 
               )
@@ -304,7 +254,7 @@ class _ManageProgramViewState extends State<ManageProgramView> {
                     ),
                     child: Center(
                       child: Text(
-                        activeConferenceList['title'],
+                        activeConferenceList['conferenceName'],
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle,
@@ -319,82 +269,6 @@ class _ManageProgramViewState extends State<ManageProgramView> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'No. of persons: ', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['numberPerson'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ), Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'No. of Days:', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['numberDays'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ),
-
-
-
-                          ],
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'From Date: ', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['fromDate'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ), Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'To Date: ', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['toDate'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ),
-
-
-                          ],
-                        ),
 
 
                         Padding(
@@ -404,32 +278,16 @@ class _ManageProgramViewState extends State<ManageProgramView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                  'Amount: ', style: FTextStyle.listTitle),
+                                  'Proposal Type: ', style: FTextStyle.listTitle),
                               Text(
-                                  activeConferenceList['amount'],
-                                  style:FTextStyle.listTitleSub
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Payment Mode: ', style: FTextStyle.listTitle),
-                              Text(
-                                  activeConferenceList['paymentMode'],
+                                  activeConferenceList['proposalType'],
                                   style:FTextStyle.listTitleSub
                               ),
                             ],
                           ),
                         ),
 
-
-
+                        SizedBox(height: 10,),
 
                         Padding(
                           padding: const EdgeInsets.only(top: 5.0),
@@ -437,37 +295,17 @@ class _ManageProgramViewState extends State<ManageProgramView> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Bank Name: ', style: FTextStyle.listTitle),
-                              Expanded(
-                                child: Text(
-                                  activeConferenceList["bankName"],
-                                  style: FTextStyle.style,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
                               const Text(
-                                  'Date of Payment: ', style: FTextStyle.listTitle),
+                                  'Date Of Submission: ', style: FTextStyle.listTitle),
                               Text(
-                                  activeConferenceList['tnDate'],
-                                  style:FTextStyle.style
+                                activeConferenceList['dateOfSubmission'],
+                                style:FTextStyle.listTitleSub,
                               ),
                             ],
                           ),
                         ),
+
+                        SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.only(top: 5.0),
                           child: Row(
@@ -475,40 +313,89 @@ class _ManageProgramViewState extends State<ManageProgramView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                  'Booking Status: ', style: FTextStyle.listTitle),
+                                  'Paper Title: ', style: FTextStyle.listTitle),
                               Text(
-                                activeConferenceList['bookingStatus'],
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: activeConferenceList['bookingStatus'] == "Success"
-                                      ? Colors.green
-                                      : Colors.orange,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            children: [
-                              const Text(
-                                  'Fee Status: ', style: FTextStyle.listTitle),
-                              Text(
-                                activeConferenceList['feeStatus'],
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: activeConferenceList['feeStatus'] == "Success"
-                                      ? Colors.green
-                                      : Colors.orange,
-                                ),
+                                activeConferenceList['paperTitle'],
+                                style:FTextStyle.listTitleSub,
                               ),
                             ],
                           ),
                         ),
 
+
+
+                        SizedBox(height: 10,),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                  'Remark :', style: FTextStyle.listTitle),
+                              Text(
+                                activeConferenceList['Remark'],
+                                style:FTextStyle.listTitleSub,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                                'Booking Status: ', style: FTextStyle.listTitle),
+                            Text(
+                              activeConferenceList['status'],
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: activeConferenceList['status'] == "Success"
+                                    ? Colors.green
+                                    : Colors.orange,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            const Text(
+                                'Fee Status: ', style: FTextStyle.listTitle),
+                            Text(
+                              activeConferenceList['feeStatus'],
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: activeConferenceList['feeStatus'] == "Success"
+                                    ? Colors.green
+                                    : Colors.orange,
+                              ),
+                            ),
+                          ],
+                        ),
+
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Text(
+                                'Download ', style: FTextStyle.listTitle),
+                            IconButton(
+                              icon: const Icon(Icons.download_rounded, color: AppColors.appSky),
+                              onPressed: () {
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text("Download fee receipt...")),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
 
 
                       ],
@@ -525,6 +412,5 @@ class _ManageProgramViewState extends State<ManageProgramView> {
       ),
     );
   }
-
 
 }

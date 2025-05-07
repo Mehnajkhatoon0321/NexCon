@@ -235,7 +235,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
             children: [
               Text(
                 item['conferenceName'],
-               style: FTextStyle.subheading,
+               style: FTextStyle.listTitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -246,28 +246,28 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                   const SizedBox(width: 4),
                   Text(
                     "${item['fromDate']} - ${item['toDate']}",
-                   style: FTextStyle.body
+                   style: FTextStyle.style
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 4),
               Row(
                 children: [
                   Icon(Icons.app_registration, size: 18, color: Colors.grey[600]),
                   const SizedBox(width: 4),
                   Text(
                     "Total Registration: ${item['registration']}",
-                      style: FTextStyle.body
+                      style: FTextStyle.style
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                      'Booking Status: ', style: FTextStyle.body),
+                      'Booking Status: ', style: FTextStyle.style),
                   Text(
                     item['bookingStatus'],
                     style: TextStyle(
@@ -408,7 +408,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
             children: [
               Text(
                 item['conferenceName'],
-                style: FTextStyle.subheading,
+                style: FTextStyle.listTitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -419,28 +419,28 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                   const SizedBox(width: 4),
                   Text(
                       "${item['fromDate']} - ${item['toDate']}",
-                      style: FTextStyle.body
+                      style: FTextStyle.style
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 4),
               Row(
                 children: [
                   Icon(Icons.app_registration, size: 18, color: Colors.grey[600]),
                   const SizedBox(width: 4),
                   Text(
                       "Total Registration: ${item['registration']}",
-                      style: FTextStyle.body
+                      style: FTextStyle.style
                   ),
                 ],
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                      'Booking Status: ', style: FTextStyle.body),
+                      'Booking Status: ', style: FTextStyle.style),
                   Text(
                     item['bookingStatus'],
                     style: TextStyle(
@@ -471,8 +471,8 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                       );
                     },
                     child: Container(
-                      height: 36,
-                      width: 36,
+                      height: 35,
+                      width: 35,
                       decoration: BoxDecoration(
                         color: AppColors.secondaryColour,
                         borderRadius: BorderRadius.circular(8),

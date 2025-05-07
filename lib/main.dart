@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:nexcon/screen/authFlow/splash_screen.dart';
 import 'package:nexcon/utils/shared_preference.dart';
 
@@ -10,6 +11,7 @@ void main() async {
   runApp(const MyApp());
 
 }
+
 
 
 class MyApp extends StatelessWidget {

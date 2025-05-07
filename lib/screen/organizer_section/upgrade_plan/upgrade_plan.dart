@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
+import 'package:nexcon/screen/organizer_section/upgrade_plan/upgrade_membership.dart';
 
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
@@ -30,7 +31,7 @@ class _UpgradePlanState extends State<UpgradePlan> {
           },
         ),
         title: Text(
-          'Upgrade Plan ',
+          'Upgrade Membership',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
@@ -44,9 +45,13 @@ body: SingleChildScrollView(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Upgrade Membership',
-          style: FTextStyle.headingMiddle,
+
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5.0),
+          child: Text(
+            'You can upgrade you Membership type in any of the following:\nInstructions for Membership',
+            style: FTextStyle.headingMiddle,
+          ),
         ),
         SizedBox(height: 8.0),
         ...[
@@ -67,7 +72,7 @@ body: SingleChildScrollView(
               child: Center( // Center the text
                 child: Text(
                   item,
-                  style: FTextStyle.subheading.copyWith(color:  AppColors.secondaryColour),
+                  style: FTextStyle.listTitle.copyWith(color:  AppColors.secondaryColour),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -88,7 +93,7 @@ body: SingleChildScrollView(
                 Expanded(
                   child: Text(
                     item,
-                    style: FTextStyle.body,
+                    style: FTextStyle.style,
                   ),
                 ),
               ],
@@ -97,7 +102,7 @@ body: SingleChildScrollView(
         }).toList(),
 
         SizedBox(height: 10,),
-        Text("Membership Type",style: FTextStyle.subheading,),
+        Text("Membership Type",style: FTextStyle.listTitle,),
         Column(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -116,7 +121,7 @@ body: SingleChildScrollView(
     RichText(
     text: TextSpan(
     text: "Pro ",
-    style: FTextStyle.subheading.copyWith(
+    style: FTextStyle.listTitle.copyWith(
    // Selected text turns green
     ),
     children: [
@@ -154,7 +159,7 @@ body: SingleChildScrollView(
           RichText(
             text: TextSpan(
               text: "ELITE ",
-              style: FTextStyle.subheading.copyWith(
+              style: FTextStyle.listTitle.copyWith(
                 // Selected text turns green
               ),
               children: [
@@ -179,34 +184,39 @@ body: SingleChildScrollView(
     ],
     ),
 
-        SizedBox(height: 35,),
-        Center(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.primaryColour,
-                  AppColors.secondaryColour,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                minimumSize: const Size(100, 35),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+
+        Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.primaryColour,
+                    AppColors.secondaryColour,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
-                child: Text("Subscribe", style: FTextStyle.loginBtnStyle),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => UpgradeMembership()));
+                },
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  minimumSize: const Size(100, 35),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+                  child: Text("Subscribe", style: FTextStyle.loginBtnStyle),
+                ),
               ),
             ),
           ),

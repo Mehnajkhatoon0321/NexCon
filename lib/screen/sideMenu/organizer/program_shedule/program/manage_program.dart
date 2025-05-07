@@ -88,7 +88,7 @@ class _ManageProgramState extends State<ManageProgram> {
         .size
         .width;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
@@ -102,11 +102,56 @@ class _ManageProgramState extends State<ManageProgram> {
           },
         ),
         title: Text(
-          'Accommodation',
+          'Manage Program',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: (displayType == 'desktop' || displayType == 'tablet')
+                  ? 70
+                  : 37,
+              child: ElevatedButton(
+                  onPressed: () async {
 
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>const ManagerProgramEdit()
+                      ),
+
+                    );
+                    //     .then((result) {
+                    //   // Handle the result from the edit screen
+                    //   if (result[0]) {
+                    //     data.clear();
+                    //     pageNo = 1;
+                    //     hasMoreData = true;
+                    //     totalPages = 0;
+                    //     BlocProvider.of<AllRequesterBloc>(context)
+                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                    //   }
+                    // }
+                    // );
+
+                    // );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(26),
+                      ),
+                      backgroundColor: Colors.white),
+                  child: Text(
+                    "Create",
+                    style: FTextStyle.loginBtnStyle
+                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
+                  )),
+            ),
+          )
+        ],
       ),
 
       body: Column(
@@ -192,35 +237,43 @@ class _ManageProgramState extends State<ManageProgram> {
 
   // Toggle Button Widget
   Widget _buildToggleButton(String text, int index) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _onButtonPressed(index),
-        child: Container(
-          padding: const EdgeInsets.all(12.0),
-          decoration: BoxDecoration(
-            color: _selectedIndex == index
-                ? AppColors.primaryColour
-                : AppColors.formFieldBackColour,
-            borderRadius: BorderRadius.circular(8),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryColour, // Green 0DB050
+              AppColors.secondaryColour, // Blue 023E8A
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: _selectedIndex == index
-                    ? Colors.white
-                    : AppColors.primaryColour,
-                fontSize: _selectedIndex == index
-                    ?17:15,
-                fontWeight:_selectedIndex == index
-                    ? FontWeight.w500 :FontWeight.w600,
-              ),
-            ),
+          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
       ),
     );
   }
+
 
   // Active Segment
   Widget _buildActiveSegment(double height, double width) {
@@ -228,78 +281,37 @@ class _ManageProgramState extends State<ManageProgram> {
       {
         "id":"1",
         'title': "30th ISCB International Conference (ISCBC-2025)",
-        'paymentMode': "PhonePay",
-        'tnNumber': "2343546446",
-        'tnDate': "2023-12-10",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'bankName': "HDFC",
-        'amount': "23424343",
+        'sessionName': "Session Name",
+        'presentation': "Oral",
         'bookingStatus': "Pending",
-        'feeStatus': "Pending",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
+
       },
-      { "id":"2",
-        'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-        'paymentMode': "PhonePay",
-        'tnNumber': "2343546446",
-        'tnDate': "2023-12-10",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'bankName': "HDFC ",
-        'amount': "23424343",
-        'status': "Success",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
-      },
-      { "id":"3",
+ {
+        "id":"2",
         'title': "30th ISCB International Conference (ISCBC-2025)",
-        'paymentMode': "COD",
-        'tnNumber': "2343546446",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'tnDate': "2023-12-10",
-        'bankName': "HDFC",
-        'amount': "23424343",
-        'bookingStatus': "Success",
-        'feeStatus': "Pending",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
+        'sessionName': "Session Name",
+        'presentation': "Oral",
+        'bookingStatus': "Pending",
+
       },
-      { "id":"3",
+ {
+        "id":"3",
         'title': "30th ISCB International Conference (ISCBC-2025)",
-        'paymentMode': "PhonePay",
-        'tnNumber': "2343546446",
-        'tnDate': "2023-12-10",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'bankName': "HDFC",
-        'amount': "23424343",
-        'bookingStatus': "Success",
-        'feeStatus': "Pending",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
-      }
+        'sessionName': "Session Name",
+        'presentation': "Oral",
+        'bookingStatus': "Pending",
+
+      },
+ {
+        "id":"4",
+        'title': "30th ISCB International Conference (ISCBC-2025)",
+        'sessionName': "Session Name",
+        'presentation': "Oral",
+        'bookingStatus': "Pending",
+
+      },
+
     ];
-
-
     return ListView.builder(
       itemCount: activeConferenceList.length,
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -308,14 +320,11 @@ class _ManageProgramState extends State<ManageProgram> {
 
         // Provide default values for null fields
         final title = item['title'] ?? 'Unknown Title';
-        final id = item['id'] ?? 'Unknown Title';
+        final id = item['id'] ?? '0';
 
-        final fromDate = item['fromDate'] ?? 'N/A';
-        final toDate = item['toDate'] ?? 'N/A';
-        final amount = item['amount']?.toString() ?? 'N/A';
-        final paymentMode = item['paymentMode'] ?? 'N/A';
-        final bankName = item['bankName'] ?? 'N/A';
-        final tnDate = item['tnDate'] ?? 'N/A';
+        final sessionName = item['sessionName'] ?? 'N/A';
+        final presentation = item['presentation'] ?? 'N/A';
+
         final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
@@ -324,14 +333,12 @@ class _ManageProgramState extends State<ManageProgram> {
           margin: const EdgeInsets.symmetric(vertical: 8),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: index % 2 == 0
-                ? const Color(0xFFFFF7E6)
-                : const Color(0xFFFF8D70).withOpacity(0.1),// Light coral
+            color: Colors.white,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
+                blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
             ],
@@ -351,47 +358,23 @@ class _ManageProgramState extends State<ManageProgram> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'From Date: $fromDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                        Text(
-                          'To Date: $toDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                      ],
-                    ),
+
 
 
                     Text(
-                      'Payment Mode: $paymentMode',
+                      'Session Name: $sessionName',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Bank Name: ', style: FTextStyle.style),
-                        Expanded(
-                          child: Text(
-                            bankName,
-                            style: FTextStyle.style,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+
+  Text(
+                      'Presentation: $presentation',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
                     ),
+
 
 
 
@@ -415,8 +398,8 @@ class _ManageProgramState extends State<ManageProgram> {
                     ),
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         GestureDetector(
                           onTap: () {
@@ -435,7 +418,7 @@ class _ManageProgramState extends State<ManageProgram> {
                             width: 35,
 
                             decoration: BoxDecoration(
-                              color:AppColors.gray_4,
+                              color:AppColors.secondaryColour,
                               // Green for edit
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
@@ -453,6 +436,8 @@ class _ManageProgramState extends State<ManageProgram> {
                             ),
                           ),
                         ),
+                        SizedBox(width: 10,),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -553,81 +538,40 @@ class _ManageProgramState extends State<ManageProgram> {
   // Inactive Segment
   Widget _buildInActiveSegment(double height, double width) {
 
-    List<dynamic> inactiveConferenceList = [
-
+    List<dynamic> inactiveConferenceList =[
       {
         "id":"1",
-        'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-        'paymentMode': "PhonePay",
-        'tnNumber': "2343546446",
-        'tnDate': "2023-12-10",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'bankName': "HDFC ",
-        'amount': "23424343",
-        'status': "Success",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
+        'title': "30th ISCB International Conference (ISCBC-2025)",
+        'sessionName': "Session Name",
+        'presentation': "Oral",
+        'bookingStatus': "Pending",
+
       },
       {
         "id":"2",
         'title': "30th ISCB International Conference (ISCBC-2025)",
-        'paymentMode': "PhonePay",
-        'tnNumber': "2343546446",
-        'tnDate': "2023-12-10",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'bankName': "HDFC",
-        'amount': "23424343",
+        'sessionName': "Session Name",
+        'presentation': "Oral",
         'bookingStatus': "Pending",
-        'feeStatus': "Pending",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
+
       },
-      { "id":"3",
+      {
+        "id":"3",
         'title': "30th ISCB International Conference (ISCBC-2025)",
-        'paymentMode': "COD",
-        'tnNumber': "2343546446",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'tnDate': "2023-12-10",
-        'bankName': "HDFC",
-        'amount': "23424343",
-        'bookingStatus': "Success",
-        'feeStatus': "Pending",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
+        'sessionName': "Session Name",
+        'presentation': "Oral",
+        'bookingStatus': "Pending",
+
       },
-      { "id":"3",
+      {
+        "id":"4",
         'title': "30th ISCB International Conference (ISCBC-2025)",
-        'paymentMode': "PhonePay",
-        'tnNumber': "2343546446",
-        'tnDate': "2023-12-10",
-        "delegateName":"Mahi",
-        "accommodationCategory":"accommodationCategory",
-        "transactionNumber":"1323434453454",
-        'bankName': "HDFC",
-        'amount': "23424343",
-        'bookingStatus': "Success",
-        'feeStatus': "Pending",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
-      }
+        'sessionName': "Session Name",
+        'presentation': "Oral",
+        'bookingStatus': "Pending",
+
+      },
+
     ];
     return ListView.builder(
       itemCount: inactiveConferenceList.length,
@@ -637,14 +581,11 @@ class _ManageProgramState extends State<ManageProgram> {
 
         // Provide default values for null fields
         final title = item['title'] ?? 'Unknown Title';
-        final id = item['id'] ?? 'Unknown Title';
+        final id = item['id'] ?? '0';
 
-        final fromDate = item['fromDate'] ?? 'N/A';
-        final toDate = item['toDate'] ?? 'N/A';
-        final amount = item['amount']?.toString() ?? 'N/A';
-        final paymentMode = item['paymentMode'] ?? 'N/A';
-        final bankName = item['bankName'] ?? 'N/A';
-        final tnDate = item['tnDate'] ?? 'N/A';
+        final sessionName = item['sessionName'] ?? 'N/A';
+        final presentation = item['presentation'] ?? 'N/A';
+
         final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
@@ -653,14 +594,12 @@ class _ManageProgramState extends State<ManageProgram> {
           margin: const EdgeInsets.symmetric(vertical: 8),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: index % 2 == 0
-                ? const Color(0xFFFFF7E6)
-                : const Color(0xFFFF8D70).withOpacity(0.1),// Light coral
+            color: Colors.white,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
+                blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
             ],
@@ -680,49 +619,23 @@ class _ManageProgramState extends State<ManageProgram> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'From Date: $fromDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                        Text(
-                          'To Date: $toDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                      ],
-                    ),
+
+
 
 
                     Text(
-                      'Payment Mode: $paymentMode',
+                      'Session Name: $sessionName',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Bank Name: ', style: FTextStyle.style),
-                        Expanded(
-                          child: Text(
-                            bankName,
-                            style: FTextStyle.style,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+
+                    Text(
+                      'Presentation: $presentation',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
                     ),
-
-
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -744,7 +657,7 @@ class _ManageProgramState extends State<ManageProgram> {
                     ),
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         GestureDetector(
@@ -764,7 +677,7 @@ class _ManageProgramState extends State<ManageProgram> {
                             width: 35,
 
                             decoration: BoxDecoration(
-                              color:AppColors.gray_4,
+                              color:AppColors.secondaryColour,
                               // Green for edit
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
