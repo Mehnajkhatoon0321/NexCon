@@ -6,7 +6,6 @@ import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
-import 'manage_program_view.dart';
 import 'manager_program_edit.dart';
 class ManageProgram extends StatefulWidget {
   const ManageProgram({super.key});
@@ -120,7 +119,7 @@ class _ManageProgramState extends State<ManageProgram> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>const ManagerProgramEdit()
+                          builder: (context) => ManagerProgramEdit(isEdit: '',)
                       ),
 
                     );
@@ -401,42 +400,7 @@ class _ManageProgramState extends State<ManageProgram> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ManageProgramView(id: id,
 
-                                    ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-
-                            decoration: BoxDecoration(
-                              color:AppColors.secondaryColour,
-                              // Green for edit
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10,),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -444,21 +408,13 @@ class _ManageProgramState extends State<ManageProgram> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         ManagerProgramEdit(
-                                //           bankName: bankName,
-                                //           tnNumber: item['tnNumber'] ?? 'N/A',
-                                //           date: tnDate,
-                                //           amount: amount,
-                                //           image: item['downloadReceipt'],
-                                //           title: title,
-                                //           paymentMode: paymentMode,
-                                //         ),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ManagerProgramEdit(isEdit: 'Yes',)
+                                  ),
+
+                                );
                               },
                               child: Container(
                                 height: 35,
@@ -656,126 +612,6 @@ class _ManageProgramState extends State<ManageProgram> {
                       ],
                     ),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ManageProgramView(id: id,
-
-                                    ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-
-                            decoration: BoxDecoration(
-                              color:AppColors.secondaryColour,
-                              // Green for edit
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.end,
-                        //   crossAxisAlignment: CrossAxisAlignment.end,
-                        //   children: [
-                        //     GestureDetector(
-                        //       onTap: () {
-                        //         Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //             builder: (context) =>
-                        //                 AccommodationRegister(
-                        //                   bankName: bankName,
-                        //                   tnNumber: item['tnNumber'] ?? 'N/A',
-                        //                   date: tnDate,
-                        //                   amount: amount,
-                        //                   image: item['downloadReceipt'],
-                        //                   title: title,
-                        //                   paymentMode: paymentMode,
-                        //                 ),
-                        //           ),
-                        //         );
-                        //       },
-                        //       child: Container(
-                        //         height: 35,
-                        //         width: 35,
-                        //
-                        //         decoration: BoxDecoration(
-                        //           color: const Color(0xFF0db050),
-                        //           // Green for edit
-                        //           borderRadius: BorderRadius.circular(8),
-                        //           boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black.withOpacity(0.1),
-                        //               blurRadius: 6,
-                        //               offset: const Offset(0, 2),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //         child: const Icon(
-                        //           Icons.edit,
-                        //           color: Colors.white,
-                        //           size: 20,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     SizedBox(width: 10,),
-                        //     GestureDetector(
-                        //       onTap: () {
-                        //         CommonPopups.showDeleteCustomPopup(
-                        //           context,
-                        //           "Are you sure you want to delete?",
-                        //               () {
-                        //             // Handle delete logic
-                        //           },
-                        //         );
-                        //       },
-                        //       child: Container(
-                        //         height: 35,
-                        //         width: 35,
-                        //         decoration: BoxDecoration(
-                        //           color: Colors.red, // Red for delete
-                        //           borderRadius: BorderRadius.circular(8),
-                        //           boxShadow: [
-                        //             BoxShadow(
-                        //               color: Colors.black.withOpacity(0.1),
-                        //               blurRadius: 6,
-                        //               offset: const Offset(0, 2),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //         child: const Icon(
-                        //           Icons.delete,
-                        //           color: Colors.white,
-                        //           size: 20,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                      ],
-                    ),
 
 
 

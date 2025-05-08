@@ -16,7 +16,7 @@ class AccommodationOrganizationView extends StatefulWidget {
   State<AccommodationOrganizationView> createState() => _AccommodationOrganizationViewState();
 }
 
-class _AccommodationOrganizationViewState extends State<AccommodationOrganizationView> {
+class _AccommodationOrganizationViewState extends State<AccommodationOrganizationView>  {
   Map<String, dynamic> activeConferenceList =
   {
     "id":"1",
@@ -121,38 +121,7 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
   int totalPages = 0;
   int pageSize = 10;
   bool hasMoreData = true;
-  List<dynamic> data = [
-    {
-      "id":"1",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
 
-    {
-      "id":"2",
-      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-    },  {
-      "id":"3",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
-
-    {
-      "id":"4",
-      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-    },  {
-      "id":"5",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
-
-    {
-      "id":"6",
-      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-    },  {
-      "id":"7",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
-
-
-  ];
   final controller = ScrollController();
   final TextEditingController controllerText = TextEditingController();
   bool isLoading = false;
@@ -243,13 +212,10 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
           centerTitle: true,
 
         ),
-        body:  Column(
+        body: Column(
           children: [
-
             Expanded(
-
-              child: isInitialLoading && data.isEmpty
-
+              child: isInitialLoading && activeConferenceList.isEmpty
                   ? Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
@@ -278,17 +244,13 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
                           children: [
                             Expanded(
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                      height: 10, color: Colors.grey),
+                                  Container(height: 10, color: Colors.grey),
                                   const SizedBox(height: 5),
-                                  Container(
-                                      height: 10, color: Colors.grey),
+                                  Container(height: 10, color: Colors.grey),
                                   const SizedBox(height: 5),
-                                  Container(
-                                      height: 10, color: Colors.grey),
+                                  Container(height: 10, color: Colors.grey),
                                 ],
                               ),
                             ),
@@ -307,18 +269,15 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
                   textAlign: TextAlign.center,
                 ),
               )
-                  : (data.isEmpty)
+                  : (activeConferenceList.isEmpty)
                   ? const Center(
-                child: Text("No  data available.",
+                child: Text("No data available.",
                     style: FTextStyle.listTitle),
-
               )
-                  :
-
-              Column(
+                  : Column(
                 children: [
                   Container(
-                    height: height*0.06,
+                    height: height * 0.06,
                     width: screenWidth,
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
@@ -339,7 +298,7 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle,
-                        textAlign:TextAlign.center,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -347,207 +306,48 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'No. of persons: ', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['numberPerson'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ), Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'No. of Days:', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['numberDays'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ),
-
-
-
-                          ],
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'From Date: ', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['fromDate'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ), Padding(
-                              padding: const EdgeInsets.only(top: 5.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                      'To Date: ', style: FTextStyle.listTitle),
-                                  Text(
-                                      activeConferenceList['toDate'],
-                                      style:FTextStyle.listTitleSub
-                                  ),
-                                ],
-                              ),
-                            ),
-
-
-                          ],
-                        ),
-
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Amount: ', style: FTextStyle.listTitle),
-                              Text(
-                                  activeConferenceList['amount'],
-                                  style:FTextStyle.listTitleSub
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Payment Mode: ', style: FTextStyle.listTitle),
-                              Text(
-                                  activeConferenceList['paymentMode'],
-                                  style:FTextStyle.listTitleSub
-                              ),
-                            ],
-                          ),
-                        ),
-
-
-
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('Bank Name: ', style: FTextStyle.listTitle),
-                              Expanded(
-                                child: Text(
-                                  activeConferenceList["bankName"],
-                                  style: FTextStyle.style,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Date of Payment: ', style: FTextStyle.listTitle),
-                              Text(
-                                  activeConferenceList['tnDate'],
-                                  style:FTextStyle.style
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Booking Status: ', style: FTextStyle.listTitle),
-                              Text(
-                                activeConferenceList['bookingStatus'],
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: activeConferenceList['bookingStatus'] == "Success"
-                                      ? Colors.green
-                                      : Colors.orange,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            children: [
-                              const Text(
-                                  'Fee Status: ', style: FTextStyle.listTitle),
-                              Text(
-                                activeConferenceList['feeStatus'],
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: activeConferenceList['feeStatus'] == "Success"
-                                      ? Colors.green
-                                      : Colors.orange,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-
-
+                        _buildDetailTile(
+                            'No. of persons:',
+                            activeConferenceList['numberPerson']),
+                        _buildDetailTile(
+                            'No. of Days:',
+                            activeConferenceList['numberDays']),
+                        _buildDetailTile(
+                            'From Date:',
+                            activeConferenceList['fromDate']),
+                        _buildDetailTile(
+                            'To Date:',
+                            activeConferenceList['toDate']),
+                        _buildDetailTile(
+                            'Amount:',
+                            activeConferenceList['amount']),
+                        _buildDetailTile(
+                            'Payment Mode:',
+                            activeConferenceList['paymentMode']),
+                        _buildDetailTile(
+                            'Bank Name:',
+                            activeConferenceList["bankName"]),
+                        _buildDetailTile(
+                            'Date of Payment:',
+                            activeConferenceList['tnDate']),
+                        _buildDetailTile(
+                            'Booking Status:',
+                            activeConferenceList['bookingStatus'],
+                            valueColor: activeConferenceList['bookingStatus'] == "Success"
+                                ? Colors.green
+                                : Colors.orange),
+                        _buildDetailTile(
+                            'Fee Status:',
+                            activeConferenceList['feeStatus'],
+                            valueColor: activeConferenceList['feeStatus'] == "Success"
+                                ? Colors.green
+                                : Colors.orange),
                       ],
                     ),
                   ),
                 ],
               ),
-
             ),
           ],
         ),
@@ -556,17 +356,44 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
       ),
     );
   }
-
-  void _clearText() {
-    controllerText.clear();
-    setState(() {
-      _isTextEmpty = true;
-      data.clear();
-      pageNo = 1;
-      hasMoreData = true;
-      totalPages = 0;
-      // BlocProvider.of<AllRequesterBloc>(context)
-      //     .add(GetBillingListHandler("", pageNo, pageSize));
-    });
+  Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 4,
+            child: Text(
+              "$title:",
+              style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 6,
+            child: Text(
+              value,
+              style: valueColor != null
+                  ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
+                  : FTextStyle.listTitleSub,
+            ),
+          ),
+        ],
+      ),
+    );
   }
+
 }

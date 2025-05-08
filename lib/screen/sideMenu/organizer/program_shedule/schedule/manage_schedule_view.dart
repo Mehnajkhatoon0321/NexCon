@@ -3,34 +3,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
-class AbstractOrganizerView extends StatefulWidget {
-  String id;
-  AbstractOrganizerView({required this.id,super.key});
+
+import '../../../../../utils/commonFunction.dart';
+class ManageScheduleView extends StatefulWidget {
+  String id ;
+   ManageScheduleView({required this.id,super.key});
 
   @override
-  State<AbstractOrganizerView> createState() => _AbstractOrganizerViewState();
+  State<ManageScheduleView> createState() => _ManageScheduleViewState();
 }
 
-class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
-  Map<String, dynamic> activeConferenceList =
-  {
-    "id":"1",
-    'title': "30th ISCB International Conference (ISCBC-2025)",
-    'abstracTopic': "30th ISCB International Conference (ISCBC-2025)",
+class _ManageScheduleViewState extends State<ManageScheduleView> {
 
-    'subtitle': "Lorem",
-
-    "fromDate": "23-11-2025",
-    "toDate": "24-12-2025",
-
-  }
-
-  ;
-
+  bool _isTextEmpty = true;
 
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
@@ -111,13 +99,17 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
     ),
   };
 
+  int pageNo = 1;
+  int totalPages = 0;
+  int pageSize = 10;
+  bool hasMoreData = true;
 
-
-
-
+  final controller = ScrollController();
+  final TextEditingController controllerText = TextEditingController();
+  bool isLoading = false;
   bool isInitialLoading = false;
-
-
+  bool isLoadingEdit = false;
+  String searchQuery = "";
   @override
   void dispose() {
 
@@ -128,12 +120,26 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
   void initState() {
     super.initState();
 
-
   }
   Map<String, dynamic> errorServerMessage = {};
   String? errorMessage;
+  Map<String, dynamic> activeConferenceList =
+  {
+    "id":"1",
+    'title': "30th ISCB International Conference (ISCBC-2025)",
+    'sessionName': "Session Name",
+    'session_start_time': "Session Start Time",
+    'session_end_time': "Session End Time",
+    'name_chair': "Name of Chair	",
+    'name_co_chair': "Name of Co-chair",
+    'name_of_coordinator': "Name of Coordinator",
+    'name_of_panelists': "Name of Panelists",
+    'session_venue': "Session Venue",
+    'bookingStatus': "Pending",
 
+  }
 
+  ;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -158,7 +164,7 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
             },
           ),
           title: Text(
-            'Abstract Session/Themes View',
+            'Manage Schedule View',
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
@@ -208,6 +214,7 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
                     style: FTextStyle.listTitle),
               )
                   : ListView(
+
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -230,36 +237,39 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
                         activeConferenceList['title'],
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
+                        style:
+                        FTextStyle.listTitle.copyWith(fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  _buildDetailTile(
-                    "Abstract Topic",
-                    activeConferenceList['abstracTopic'],
-                  ),
-                  _buildDetailTile(
-                    "From Date",
-                    activeConferenceList['fromDate'],
-                  ),
-                  _buildDetailTile(
-                    "To Date",
-                    activeConferenceList['toDate'],
-                  ),
-                  // Add more fields if necessary
+                  _buildDetailTile("Session Name",
+                      activeConferenceList['sessionName']),
+                  _buildDetailTile("Name of Chair",
+                      activeConferenceList['name_chair']),
+                  _buildDetailTile("Name of Co-chair",
+                      activeConferenceList['name_co_chair']),
+                  _buildDetailTile("Name of Panelists",
+                      activeConferenceList['name_of_panelists']),
+                  _buildDetailTile("Session Venue",
+                      activeConferenceList['session_venue']),
+                  _buildDetailTile("Session Start Time",
+                      activeConferenceList['session_start_time']),
+                  _buildDetailTile("Session End Time",
+                      activeConferenceList['session_end_time']),
                 ],
               ),
             ),
           ],
-        ),
+        )
 
 
 
       ),
     );
   }
+
   Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -304,5 +314,7 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
       ),
     );
   }
+
+
 
 }

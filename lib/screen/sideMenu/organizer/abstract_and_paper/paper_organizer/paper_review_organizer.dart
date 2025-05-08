@@ -96,36 +96,31 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
   };
 
 
-
-
-
   bool isInitialLoading = false;
 
 
   @override
   void dispose() {
-
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-
-
   }
+
   Map<String, dynamic> errorServerMessage = {};
   String? errorMessage;
   Map<String, dynamic> activeConferenceList =
   {
-    "id":"1",
+    "id": "1",
     'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
     "proposalType": "Lorem",
-    "paperTitle":"vbncnbnnbnn",
-    "dateOfSubmission":"12-05-2023",
-    "status":"Success",
-    "feeStatus":"Success",
-    "Remark":"Chsnge some thingx",
+    "paperTitle": "vbncnbnnbnn",
+    "dateOfSubmission": "12-05-2023",
+    "status": "Success",
+    "feeStatus": "Success",
+    "Remark": "Chsnge some thingx",
 
 
   };
@@ -133,17 +128,27 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+    var displayType = valueType
+        .toString()
+        .split('.')
+        .last;
 
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context).copyWith(
+          textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor:AppColors.appSky, // Customize app bar color
+          backgroundColor: AppColors.appSky, // Customize app bar color
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -159,59 +164,29 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
-
         ),
-        body:  Column(
+        body: Column(
           children: [
-
             Expanded(
-
               child: isInitialLoading && activeConferenceList.isEmpty
-
                   ? Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
                 child: ListView.builder(
-                  itemCount:activeConferenceList.length , // Number of shimmer placeholders
+                  itemCount: 10,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth * 0.03, vertical: 5),
-                      child: Container(
-                        margin: const EdgeInsets.all(8),
-                        padding: const EdgeInsets.all(7),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              spreadRadius: 2,
-                              blurRadius: 4,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                      height: 10, color: Colors.grey),
-                                  const SizedBox(height: 5),
-                                  Container(
-                                      height: 10, color: Colors.grey),
-                                  const SizedBox(height: 5),
-                                  Container(
-                                      height: 10, color: Colors.grey),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                    return Container(
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 6,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                       ),
                     );
                   },
@@ -219,197 +194,173 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
               )
                   : (errorMessage != null || errorServerMessage.isNotEmpty)
                   ? Center(
-                child: Text(
-                  errorMessage ?? errorServerMessage.toString(),
-                  style: FTextStyle.listTitle,
-                  textAlign: TextAlign.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    errorMessage ?? errorServerMessage.toString(),
+                    style: FTextStyle.listTitle,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               )
-                  : (activeConferenceList.isEmpty)
+                  : activeConferenceList.isEmpty
                   ? const Center(
-                child: Text("No  activeConferenceList available.",
+                child: Text("No data available.",
                     style: FTextStyle.listTitle),
-
               )
-                  :
-
-              Column(
+                  : ListView(
                 children: [
                   Container(
-                    height: height*0.06,
-                    width: screenWidth,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95, 0.95],
+                        stops: [0.0, 0.5, 0.95],
                         colors: [
                           Color(0xffffffff),
                           Color(0xf5c6f6da),
                           Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
                         ],
                       ),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
                       child: Text(
-                        activeConferenceList['conferenceName'],
+                        activeConferenceList['conferenceName'], // Correct key
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle,
-                        textAlign:TextAlign.center,
+                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  _buildDetailTile(
+                    "Proposal Type",
+                    activeConferenceList['proposalType'], // Correct key
+                  ),
+                  _buildDetailTile(
+                    "Paper Title",
+                    activeConferenceList['paperTitle'], // Correct key
+                  ),
+                  _buildDetailTile(
+                    "Date of Submission",
+                    activeConferenceList['dateOfSubmission'], // Correct key
+                  ),
+                  _buildDetailTile(
+                    "Status",
+                    activeConferenceList['status'], // Correct key
+                  ),
+                  _buildDetailTile(
+                    "Fee Status",
+                    activeConferenceList['feeStatus'], // Correct key
+                  ),
+                  _buildDetailTile(
+                    "Remark",
+                    activeConferenceList['Remark'], // Correct key
+                  ),
+                  // Add the Download Section here
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-
-
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 2),
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Display Title
+                          // Show download row only for specific status
+                          Row(
                             children: [
                               const Text(
-                                  'Proposal Type: ', style: FTextStyle.listTitle),
-                              Text(
-                                  activeConferenceList['proposalType'],
-                                  style:FTextStyle.listTitleSub
+                                "Download ",
+                                style: FTextStyle.listTitle,
+                              ),
+                              SizedBox(width: 50,),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.download_rounded,
+                                  color: AppColors.appSky, // Color based on status
+                                ),
+                                onPressed: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("Download fee receipt..."),
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),
-                        ),
-
-                        SizedBox(height: 10,),
-
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Date Of Submission: ', style: FTextStyle.listTitle),
-                              Text(
-                                activeConferenceList['dateOfSubmission'],
-                                style:FTextStyle.listTitleSub,
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(height: 10,),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Paper Title: ', style: FTextStyle.listTitle),
-                              Text(
-                                activeConferenceList['paperTitle'],
-                                style:FTextStyle.listTitleSub,
-                              ),
-                            ],
-                          ),
-                        ),
-
-
-
-                        SizedBox(height: 10,),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                  'Remark :', style: FTextStyle.listTitle),
-                              Text(
-                                activeConferenceList['Remark'],
-                                style:FTextStyle.listTitleSub,
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                                'Booking Status: ', style: FTextStyle.listTitle),
-                            Text(
-                              activeConferenceList['status'],
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: activeConferenceList['status'] == "Success"
-                                    ? Colors.green
-                                    : Colors.orange,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 10,),
-                        Row(
-                          children: [
-                            const Text(
-                                'Fee Status: ', style: FTextStyle.listTitle),
-                            Text(
-                              activeConferenceList['feeStatus'],
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: activeConferenceList['feeStatus'] == "Success"
-                                    ? Colors.green
-                                    : Colors.orange,
-                              ),
-                            ),
-                          ],
-                        ),
-
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Text(
-                                'Download ', style: FTextStyle.listTitle),
-                            IconButton(
-                              icon: const Icon(Icons.download_rounded, color: AppColors.appSky),
-                              onPressed: () {
-
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text("Download fee receipt...")),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-
-
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
-
             ),
           ],
         ),
-
 
       ),
     );
   }
 
+  Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 4,
+              child: Text(
+                "$title:",
+                style: FTextStyle.listTitle.copyWith(
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              flex: 6,
+              child: Text(
+                value,
+                style: valueColor != null
+                    ? FTextStyle.listTitleSub.copyWith(
+                    color: valueColor, fontWeight: FontWeight.bold)
+                    : FTextStyle.listTitleSub,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
