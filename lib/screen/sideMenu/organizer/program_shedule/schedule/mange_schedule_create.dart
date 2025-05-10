@@ -231,7 +231,7 @@ class _MangeScheduleCreateState extends State<MangeScheduleCreate>  {
 
           centerTitle: true,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor:AppColors.backgroundColor,
         body:
         SingleChildScrollView(
           child: Form(

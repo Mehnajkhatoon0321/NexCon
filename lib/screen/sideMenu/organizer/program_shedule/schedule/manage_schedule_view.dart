@@ -150,7 +150,7 @@ class _ManageScheduleViewState extends State<ManageScheduleView> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        backgroundColor: Colors.white,
+          backgroundColor: AppColors.backgroundColor,
         appBar: AppBar(
           backgroundColor:AppColors.appSky, // Customize app bar color
           leading: IconButton(
