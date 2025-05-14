@@ -3,9 +3,8 @@ import 'package:nexcon/screen/authFlow/change_password.dart';
 import 'package:nexcon/screen/authFlow/delegate_my_profile/my_profile.dart';
 import 'package:nexcon/screen/authFlow/organizer_my_profile/my_profile_organizer.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
-import 'package:nexcon/screen/delegates_section/abstract/abstract.dart';
-import 'package:nexcon/screen/delegates_section/accomondation/accomodation.dart';
-import 'package:nexcon/screen/delegates_section/featured_conferences.dart';
+
+import 'package:nexcon/screen/guest_flow/delegates_register_process/featured_conferences.dart';
 import 'package:nexcon/screen/delegates_section/paper_delegates/paper_delegates.dart';
 import 'package:nexcon/screen/organizer_section/accommodation/accomodation.dart';
 import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
@@ -45,6 +44,9 @@ import 'package:nexcon/screen/sideMenu/organizer/settings/setcheckout-setcheckin
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/pref_utils.dart';
+import '../sideMenu/delegates_side_menu/abstract/abstract.dart';
+import '../sideMenu/delegates_side_menu/accomondation/accomodation.dart';
+import '../sideMenu/delegates_side_menu/bank_details/bank_details.dart';
 import '../sideMenu/organizer/abstract_and_paper/abstract_organizer/review_abstract/review_abstract.dart';
 
 
@@ -61,17 +63,17 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 {
   bool _isLogoutDialogVisible = false;
   final List<Map<String, dynamic>> listItem = [
-    {'icon': Icons.person, 'subtitle': 'My profile'},
+    {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
+
+    {'icon': Icons.work_outline, 'subtitle': 'How Its Works Delegate'},
     {'icon': Icons.info, 'subtitle': 'About'},
     {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
     {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
     {'icon': Icons.event, 'subtitle': 'Conferences'},
     {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
-    {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
-    {'icon': Icons.exit_to_app, 'subtitle': 'Logout'},
-    {'icon': Icons.work_outline, 'subtitle': 'How Its Works Delegate'},
-    {'icon': Icons.password, 'subtitle': 'Change Password'},
-    {'icon': Icons.login, 'subtitle': 'Login'},
+    // {'icon': Icons.password, 'subtitle': 'Change Password'},
+    {'icon': Icons.login, 'subtitle': 'Delegates Login/Organizer Login'},
+
 
   ];
   String? selectedSubSection;
@@ -195,19 +197,19 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     } else {
       // Default items for other roles
       filteredList = [
-        {'icon': Icons.person, 'subtitle': 'My profile'},
+        {'icon': Icons.account_balance, 'subtitle': 'Bank Data'},
         {'icon': Icons.event, 'subtitle': 'Conferences'},
         {'icon': Icons.summarize, 'subtitle': 'Abstract'},
         {'icon': Icons.padding_rounded, 'subtitle': 'Paper'},
         {'icon': Icons.home_filled, 'subtitle': 'Accommodation'},
         {'icon': Icons.receipt_long, 'subtitle': 'My Receipt'},
-        {'icon': Icons.info, 'subtitle': 'About'},
-        {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Delegate'},
         {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
+        {'icon': Icons.info, 'subtitle': 'About'},
+        {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
+
         {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
-        {'icon': Icons.password, 'subtitle': 'Change Password'},
-        {'icon': Icons.exit_to_app, 'subtitle': 'Logout'},
+
       ];
     }
 
@@ -464,6 +466,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const HowWorksDelegates()),
         );
         break;
+      case 'Bank Data':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BankDetailsPage()),
+        );
+        break;
       case 'Plans & Pricing':
         Navigator.push(
           context,
@@ -482,7 +490,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const ContactScreen()),
         );
         break;
-      case 'Login':
+      case 'Delegates Login/Organizer Login':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const RoleSelectionScreen()),
@@ -749,4 +757,5 @@ class _SideMenuScreenState extends State<SideMenuScreen>
       _isLogoutDialogVisible = false; // Reset the flag when the dialog is closed
     });
   }
+
 }

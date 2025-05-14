@@ -14,6 +14,7 @@ class _AccommodationCategoryState extends State<AccommodationCategory> {
   "title":"18th Indian Science Communication Congress (ISCC-2018)",
   "accomandation":""
 },
+
 {
 
  }
@@ -40,7 +41,7 @@ class _AccommodationCategoryState extends State<AccommodationCategory> {
           },
         ),
         title: Text(
-          'Accommodation Category',
+          'Accommodation Fee',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,

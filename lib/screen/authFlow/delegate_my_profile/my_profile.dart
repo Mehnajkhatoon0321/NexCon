@@ -48,66 +48,7 @@ class _MyProfileState extends State<MyProfile> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor:AppColors.appSky, // Customize app bar color
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-              size: 28,
-            ), // Menu icon
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: Text(
-            'My Profile',
-            style: FTextStyle.HeadingTxtWhiteStyle,
-          ),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: (displayType == 'desktop' || displayType == 'tablet')
-                    ? 70
-                    : 37,
-                child: ElevatedButton(
-                    onPressed: () async {
 
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                EditProfile()       ),
-
-                      );
-                      //     .then((result) {
-                      //   // Handle the result from the edit screen
-                      //   if (result[0]) {
-                      //     data.clear();
-                      //     pageNo = 1;
-                      //     hasMoreData = true;
-                      //     totalPages = 0;
-                      //     BlocProvider.of<AllRequesterBloc>(context)
-                      //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                      //   }
-                      // }
-                      // );
-
-                      // );
-                    },
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(26),
-                        ),
-                        backgroundColor: Colors.white),
-                    child: Icon(Icons.edit_calendar_rounded,color: AppColors.primaryColour,)),
-              ),
-            )
-          ],
-        ),
         backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Column(
@@ -115,13 +56,13 @@ class _MyProfileState extends State<MyProfile> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.23,
+                  height: MediaQuery.of(context).size.height * 0.18,
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 14.0),
                       child: Container(
-                        width: height * 0.15, // Adjust width as needed
-                        height: height * 0.15, // Adjust height as needed
+                        width: height * 0.13, // Adjust width as needed
+                        height: height * 0.13, // Adjust height as needed
                         decoration: BoxDecoration(
                           color: Colors.grey.shade200, // Background color for placeholder
                           borderRadius: BorderRadius.circular(12),
@@ -148,7 +89,7 @@ class _MyProfileState extends State<MyProfile> {
                               flex: 2,
                               child: Text(
                                 "${entry.key}:",
-                                style: FTextStyle.Faqssubtitle,
+                                style: FTextStyle.style.copyWith(color:Colors.black),
                               ),
                             ),
 
@@ -157,7 +98,7 @@ class _MyProfileState extends State<MyProfile> {
                               child: GestureDetector(
                                 child: Text(
                                   entry.value.toString(),
-                                  style: FTextStyle.formhintTxtStyle,
+                                  style: FTextStyle.style,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 3,
                                 ),
@@ -171,6 +112,7 @@ class _MyProfileState extends State<MyProfile> {
 
                 ),
 
+                SizedBox(height: 40,)
               ],
             ),
           )

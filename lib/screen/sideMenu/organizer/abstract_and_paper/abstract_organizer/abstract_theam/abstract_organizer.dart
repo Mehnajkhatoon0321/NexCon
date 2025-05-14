@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/delegates_section/abstract/abstaction_view.dart';
+
 import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/abstract_organizer/abstract_theam/abstract_view.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/common_popups.dart';

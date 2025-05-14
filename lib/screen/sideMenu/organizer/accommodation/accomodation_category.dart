@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/delegates_section/accomondation/accomondation_view.dart';
+import 'package:nexcon/screen/organizer_section/accommodation/accomondation_view.dart';
+
 import 'package:nexcon/utils/font_text_Style.dart';
 
 import '../../../../utils/colours.dart';

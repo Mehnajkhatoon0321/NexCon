@@ -171,7 +171,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-
+      backgroundColor: AppColors.backgroundColor,
         body:
         ListView(
           padding: EdgeInsets.symmetric(horizontal: (displayType == 'desktop' ||  displayType == 'tablet') ? 50 : 20),

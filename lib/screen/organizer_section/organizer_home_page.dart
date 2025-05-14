@@ -32,7 +32,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
     {"title": "Organizer Dashboard", "icon": Icons.dashboard},
     {"title": "My Conference", "icon": Icons.event},
     {"title": "My Order", "icon": Icons.receipt_long},
-    {"title": "My Profile", "icon": Icons.book},
+    {"title": "My Profile", "icon": Icons.person},
 
   ];
   final List<Map<String, dynamic>> _customMenuItems = [
@@ -68,7 +68,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
 
   Container buildMyNavBar(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.08,
+
       decoration: const BoxDecoration(
         color: AppColors.primaryColour,
       ),
@@ -79,6 +79,8 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
         unselectedItemColor: Colors.white70,
         selectedLabelStyle: FTextStyle.navBarSelectedStyle,
         unselectedLabelStyle: FTextStyle.navBarUnselectedStyle,
+
+
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: _navBarItems.map((item) {

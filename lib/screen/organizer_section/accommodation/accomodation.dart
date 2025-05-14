@@ -1,12 +1,14 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/delegates_section/accomondation/accomodaton_register.dart';
-import 'package:nexcon/screen/delegates_section/accomondation/accomondation_view.dart';
+import 'package:nexcon/screen/organizer_section/accommodation/accomondation_view.dart';
+
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
+
+import '../../sideMenu/delegates_side_menu/accomondation/accomodaton_register.dart';
 
 class AccommodationOrganizationScreen extends StatefulWidget {
   const AccommodationOrganizationScreen({super.key});

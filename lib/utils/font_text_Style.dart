@@ -83,7 +83,7 @@ class FTextStyle {
   //14 normal
   static  TextStyle formLabelTxtStyle = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 15.sp,
+    fontSize: 15,
      fontWeight: FontWeight.w400,
     color: Colors.black,
   );
@@ -209,7 +209,7 @@ class FTextStyle {
 
   static const TextStyle formhintTxtStyle = TextStyle(
     // fontSize: 11.sp,  //16 normal
-      fontSize: 16, //16 normal
+      fontSize: 15, //16 normal
       color: AppColors.FormFieldHintColour,
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400);

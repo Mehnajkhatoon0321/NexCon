@@ -22,6 +22,26 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
       "registration": "200",
       "registrationWait": "1200",
     },
+    {
+      "id": "2",
+      'bookingStatus': "Approved",
+      "conferenceId": "1232343543",
+      "conferenceName": "5th International Tech & Innovation Summit",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20",
+      "registration": "200",
+      "registrationWait": "1200",
+    },
+    {
+      "id": "3",
+      'bookingStatus': "Approved",
+      "conferenceId": "1232343543",
+      "conferenceName": "4th International Science Communication Conference",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20",
+      "registration": "200",
+      "registrationWait": "1200",
+    },
     // Additional conference data...
   ];
 
@@ -41,7 +61,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                 children: [
                   _buildStatCard("Total Conferences", "200", Icons.event),
                   _buildStatCard("Total Registrations", "500", Icons.people),
-                  _buildStatCard("Credits Balance", "200", Icons.account_balance_wallet),
+                  _buildStatCard("Total  Credits Balance", "200", Icons.account_balance_wallet),
                 ],
               ),
               SizedBox(height: 24),
@@ -104,6 +124,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
   Widget _buildStatCard(String title, String value, IconData icon) {
     return Expanded(
       child: Container(
+        height: 140,
         padding: const EdgeInsets.symmetric(vertical: 18),
         margin: const EdgeInsets.symmetric(horizontal: 6),
         decoration: BoxDecoration(
@@ -113,12 +134,13 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(icon, color: AppColors.primaryColour, size: 28),
             SizedBox(height: 8),
             Text(value, style: FTextStyle.listTitle),
             SizedBox(height: 4),
-            Text(title, style: FTextStyle.label),
+            Text(title, style: FTextStyle.label,textAlign: TextAlign.center,),
           ],
         ),
       ),
@@ -134,9 +156,10 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
         boxShadow: [BoxShadow(color: AppColors.shadowColor, blurRadius: 6)],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(item['conferenceName'] ?? '', style: FTextStyle.listTitle),
+          Text(item['conferenceName'] ?? '', style: FTextStyle.subtitle),
           SizedBox(height: 8),
           Row(
             children: [

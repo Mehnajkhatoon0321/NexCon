@@ -1,12 +1,14 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/delegates_section/accomondation/accomodaton_register.dart';
-import 'package:nexcon/screen/delegates_section/accomondation/accomondation_view.dart';
+import 'package:nexcon/screen/sideMenu/delegates_side_menu/accomondation/accomodaton_register.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
+
+import '../../../organizer_section/accommodation/accomondation_view.dart';
+import 'accomondation_view.dart';
 
 class AccommodationScreen extends StatefulWidget {
   const AccommodationScreen({super.key});
@@ -88,7 +90,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         .size
         .width;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
@@ -103,7 +105,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         ),
         title: Text(
           'Accommodation',
-          style: FTextStyle.HeadingTxtWhiteStyle,
+          style: FTextStyle.appBarTitleWhite,
         ),
         centerTitle: true,
         actions: [
@@ -237,30 +239,37 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
 
   // Toggle Button Widget
   Widget _buildToggleButton(String text, int index) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _onButtonPressed(index),
-        child: Container(
-          padding: const EdgeInsets.all(12.0),
-          decoration: BoxDecoration(
-            color: _selectedIndex == index
-                ? AppColors.primaryColour
-                : AppColors.formFieldBackColour,
-            borderRadius: BorderRadius.circular(8),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryColour, // Green 0DB050
+              AppColors.secondaryColour, // Blue 023E8A
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: _selectedIndex == index
-                    ? Colors.white
-                    : AppColors.primaryColour,
-                fontSize: _selectedIndex == index
-                    ?17:15,
-                fontWeight:_selectedIndex == index
-                    ? FontWeight.w500 :FontWeight.w600,
-              ),
-            ),
+          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
       ),
@@ -356,19 +365,17 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
             // height: height * 0.24,
             margin: const EdgeInsets.symmetric(vertical: 8),
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: index % 2 == 0
-                  ? const Color(0xFFFFF7E6)
-                  : const Color(0xFFFF8D70).withOpacity(0.1),// Light coral
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
+           decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
             child: Row(
               children: [
                 // Left Column: Payment Details
@@ -448,8 +455,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                       ),
 
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -457,7 +464,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      AccommodationView(id: id,
+                                      AccommodationDelegatesView(id: id,
 
                                       ),
                                 ),
@@ -468,7 +475,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                               width: 35,
 
                               decoration: BoxDecoration(
-                                color:AppColors.gray_4,
+                                color:AppColors.secondaryColour,
                                 // Green for edit
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: [
@@ -486,6 +493,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                               ),
                             ),
                           ),
+                          SizedBox(width: 10,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -673,19 +681,17 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
             // height: height * 0.24,
             margin: const EdgeInsets.symmetric(vertical: 8),
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: index % 2 == 0
-                  ? const Color(0xFFFFF7E6)
-                  : const Color(0xFFFF8D70).withOpacity(0.1),// Light coral
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
+           decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
             child: Row(
               children: [
                 // Left Column: Payment Details
@@ -765,8 +771,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                       ),
 
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -774,7 +780,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      AccommodationView(id: id,
+                                      AccommodationDelegatesView(id: id,
 
                                       ),
                                 ),
@@ -785,7 +791,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                               width: 35,
 
                               decoration: BoxDecoration(
-                                color:AppColors.gray_4,
+                                color:AppColors.secondaryColour,
                                 // Green for edit
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: [
@@ -803,52 +809,12 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                               ),
                             ),
                           ),
+                          SizedBox(width: 10,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          AccommodationRegister(
-                                            bankName: bankName,
-                                            tnNumber: item['tnNumber'] ?? 'N/A',
-                                            date: tnDate,
-                                            amount: amount,
-                                            image: item['downloadReceipt'],
-                                            title: title,
-                                            paymentMode: paymentMode,
-                                          ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  height: 35,
-                                  width: 35,
 
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF0db050),
-                                    // Green for edit
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 6,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10,),
                               GestureDetector(
                                 onTap: () {
                                   CommonPopups.showDeleteCustomPopup(

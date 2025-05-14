@@ -3,6 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 
+import '../../../../utils/font_text_Style.dart';
+
 class ViewBankDetails extends StatefulWidget {
   const ViewBankDetails({super.key});
 
@@ -59,31 +61,32 @@ class _ViewBankDetailsState extends State<ViewBankDetails> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
+        title:  Text(
           'View Details',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          style: FTextStyle.appBarTitleWhite,
         ),
         centerTitle: true,
       ),
-      backgroundColor: const Color(0xFFFFF7E6), // Light cream background
+      backgroundColor: const Color(0xFFF9F9F9),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
+              SizedBox(height: 10,),
               // Header Section
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0),
-
+                  borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
                     ),
                   ],
                 ),
@@ -102,7 +105,7 @@ class _ViewBankDetailsState extends State<ViewBankDetails> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
               // Dynamic List Section
               ...details.skip(1).map(
@@ -115,13 +118,12 @@ class _ViewBankDetailsState extends State<ViewBankDetails> {
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(color: const Color(0xFFFF8D70), width: 1.2), // Coral for border
+                      borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
+                          color: Colors.black12,
+                          blurRadius: 4,
+                          offset: Offset(0, 2),
                         ),
                       ],
                     ),
@@ -130,14 +132,14 @@ class _ViewBankDetailsState extends State<ViewBankDetails> {
                       children: [
                         Text(
                           key,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black87),
+                          style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(width: 10.0),
                         Expanded(
                           child: Text(
                             value,
                             textAlign: TextAlign.end,
-                            style: const TextStyle(fontSize: 15, color: Colors.black54),
+                            style:   FTextStyle.listTitleSub,
                           ),
                         ),
                       ],

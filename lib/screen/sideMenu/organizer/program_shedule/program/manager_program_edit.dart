@@ -376,6 +376,7 @@ class _ManagerProgramEditState extends State<ManagerProgramEdit> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 30,),
                         Text(
                           "Presentation Title",
                           style: FTextStyle.formLabelTxtStyle,
@@ -444,7 +445,7 @@ class _ManagerProgramEditState extends State<ManagerProgramEdit> {
                       value: showListTitleName,
                       isExpanded: true, // ✅ Prevent horizontal overflow
                       hint: const Text(
-                        "Select show / hide",
+                        "Select Show / Hide",
                         style: FTextStyle.formhintTxtStyle,
                         overflow: TextOverflow.ellipsis,
                       ),

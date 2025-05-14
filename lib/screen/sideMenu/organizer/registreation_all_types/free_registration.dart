@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/delegates_section/accomondation/accomodaton_register.dart';
+
 import 'package:nexcon/screen/sideMenu/organizer/registreation_all_types/free_registration_view.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';

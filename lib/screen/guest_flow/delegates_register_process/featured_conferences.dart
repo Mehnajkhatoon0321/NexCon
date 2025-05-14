@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
-import 'package:nexcon/screen/delegates_section/delegates_register_process/conference_category.dart';
-import 'package:nexcon/screen/delegates_section/delegates_register_process/conference_category_details.dart';
-import 'package:nexcon/screen/delegates_section/delegates_register_process/conference_sub_category.dart';
+
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
+
+import 'conference_category.dart';
+import 'conference_category_details.dart';
+import 'conference_sub_category.dart';
 
 class FeaturedConferences extends StatefulWidget {
   final String selectedRole;

@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nexcon/screen/authFlow/organizer_register.dart';
 import 'package:nexcon/screen/delegates_section/delegates_home_page.dart';
-import 'package:nexcon/screen/delegates_section/featured_conferences.dart';
+import 'package:nexcon/screen/guest_flow/delegates_register_process/featured_conferences.dart';
 import 'package:nexcon/screen/organizer_section/organizer_home_page.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';

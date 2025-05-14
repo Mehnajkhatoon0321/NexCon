@@ -105,12 +105,13 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
       data: MediaQuery.of(context).copyWith(
           textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundColor,
         body: Column(
           children: [
+            SizedBox(height: 10,),
             Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: screenWidth * 0.02, vertical: 10),
+                  horizontal: 15, vertical: 10),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -175,16 +176,13 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 16),
                     decoration: BoxDecoration(
-                      color: index % 2 == 0
-                          ? const Color(0xFFFFF7E6) // Light yellow
-                          : const Color(0xFFFF8D70).withOpacity(0.1),
-                      // Light coral
-                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withOpacity(0.1),
                           blurRadius: 8,
-                          offset: const Offset(0, 2),
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
@@ -201,22 +199,14 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                                 item['conferenceName'],
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
+                                style: FTextStyle.listTitle
                               ),
                               const SizedBox(height: 8),
                               Text(
                                 item['category'],
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54,
-                                ),
+                                style:FTextStyle.style
                               ),
                             ],
                           ),

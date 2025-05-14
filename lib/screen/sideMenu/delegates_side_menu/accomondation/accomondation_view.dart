@@ -2,25 +2,41 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:nexcon/screen/delegates_section/bank_details/bank_view_details.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
-import 'package:nexcon/utils/form_field_style.dart';
 import 'package:shimmer/shimmer.dart';
 
-class BankDetailsPage extends StatefulWidget {
-  const BankDetailsPage({super.key});
+class AccommodationDelegatesView extends StatefulWidget {
+final  String id ;
+  const AccommodationDelegatesView({
+    required this.id,super.key});
 
   @override
-  State<BankDetailsPage> createState() => _BankDetailsPageState();
+  State<AccommodationDelegatesView> createState() => _AccommodationDelegatesView();
 }
 
+class _AccommodationDelegatesView extends State<AccommodationDelegatesView> {
+  Map<String, dynamic> activeConferenceList =
+  {
+    "id":"1",
+    'title': "30th ISCB International Conference (ISCBC-2025)",
+    'paymentMode': "PhonePay",
+    'tnNumber': "2343546446",
+    'tnDate': "2023-12-10",
+    'bankName': "HDFC",
+    'amount': "23424343",
+    'bookingStatus': "Pending",
+    'feeStatus': "Pending",
+    "numberPerson": "2",
+    "numberDays": "4",
+    "fromDate": "23-11-2025",
+    "toDate": "24-12-2025",
+    'downloadReceipt': "assets/images/payment.png"
+  }
 
-
-class _BankDetailsPageState extends State<BankDetailsPage> {
-
+  ;
   bool _isTextEmpty = true;
 
   final animationsMap = {
@@ -106,38 +122,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
   int totalPages = 0;
   int pageSize = 10;
   bool hasMoreData = true;
-  List<dynamic> data = [
-    {
-      "id":"1",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
 
-    {
-      "id":"2",
-      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-    },  {
-      "id":"3",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
-
-    {
-      "id":"4",
-      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-    },  {
-      "id":"5",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
-
-    {
-      "id":"6",
-      "title": "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-    },  {
-      "id":"7",
-      "title": "30th ISCB International Conference (ISCBC-2025)",
-    },
-
-
-  ];
   final controller = ScrollController();
   final TextEditingController controllerText = TextEditingController();
   bool isLoading = false;
@@ -208,47 +193,30 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundColor,
+        appBar: AppBar(
+          backgroundColor:AppColors.appSky, // Customize app bar color
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.white,
+              size: 28,
+            ), // Menu icon
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text(
+            'Accommodation View',
+            style: FTextStyle.HeadingTxtWhiteStyle,
+          ),
+          centerTitle: true,
 
-        body:  Column(
+        ),
+        body: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: screenWidth * 0.02, vertical: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(23.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                      offset: const Offset(0, 1),
-                    ),
-                  ],
-                ),
-                child: TextFormField(
-                  controller: controllerText,
-                  decoration: FormFieldStyle.searchDecoration.copyWith(
-                    suffixIcon: _isTextEmpty
-                        ? const Icon(Icons.search,
-                        color: AppColors.appSky)
-                        : IconButton(
-                      icon: const Icon(Icons.clear,
-                          color: AppColors.appSky),
-                      onPressed: _clearText,
-                    ),
-                  ),
-                  onChanged:_onSearchChanged,
-                ),
-              ),
-            ),
-            const SizedBox(height: 10,),
             Expanded(
-
-              child: isInitialLoading && data.isEmpty
-
+              child: isInitialLoading && activeConferenceList.isEmpty
                   ? Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
                 highlightColor: Colors.grey[100]!,
@@ -277,17 +245,13 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
                           children: [
                             Expanded(
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                      height: 10, color: Colors.grey),
+                                  Container(height: 10, color: Colors.grey),
                                   const SizedBox(height: 5),
-                                  Container(
-                                      height: 10, color: Colors.grey),
+                                  Container(height: 10, color: Colors.grey),
                                   const SizedBox(height: 5),
-                                  Container(
-                                      height: 10, color: Colors.grey),
+                                  Container(height: 10, color: Colors.grey),
                                 ],
                               ),
                             ),
@@ -306,64 +270,85 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
                   textAlign: TextAlign.center,
                 ),
               )
-                  : (data.isEmpty)
+                  : (activeConferenceList.isEmpty)
                   ? const Center(
-                child: Text("No  data available.",
+                child: Text("No data available.",
                     style: FTextStyle.listTitle),
-
               )
-                  :ListView.builder(
-                itemCount: data.length,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemBuilder: (context, index) {
-                  final item = data[index];
-                  return GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const ViewBankDetails()));
-                    },
-                    child: Container(
-                      // height: height*0.12,
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: index % 2 == 0
-                            ? const Color(0xFFFFF7E6)
-                            : const Color(0xFFFF8D70).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 6,
-                            offset: const Offset(0, 2),
-                          ),
+                  : Column(
+                children: [
+                  Container(
+                    height: height * 0.06,
+                    width: screenWidth,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        stops: [0.0, 0.5, 0.95, 0.95],
+                        colors: [
+                          Color(0xffffffff),
+                          Color(0xf5c6f6da),
+                          Color(0xf5c6f6da),
+                          Color(0xf5c6f6da),
                         ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              item['title']!,
-                              maxLines: 3,
-                              style: const TextStyle(
-                                fontSize: 16,
-
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          const Icon(Icons.arrow_forward_ios,
-                              color: Color(0xFF0db050)),
-                        ],
-                      ),
-                    ).animate().fadeIn(duration: 300.ms).slideX(
-                      begin: 0.2,
-                      curve: Curves.easeOut,
                     ),
-                  );
-                },
+                    child: Center(
+                      child: Text(
+                        activeConferenceList['title'],
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: FTextStyle.listTitle,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildDetailTile(
+                            'No. of persons:',
+                            activeConferenceList['numberPerson']),
+                        _buildDetailTile(
+                            'No. of Days:',
+                            activeConferenceList['numberDays']),
+                        _buildDetailTile(
+                            'From Date:',
+                            activeConferenceList['fromDate']),
+                        _buildDetailTile(
+                            'To Date:',
+                            activeConferenceList['toDate']),
+                        _buildDetailTile(
+                            'Amount:',
+                            activeConferenceList['amount']),
+                        _buildDetailTile(
+                            'Payment Mode:',
+                            activeConferenceList['paymentMode']),
+                        _buildDetailTile(
+                            'Bank Name:',
+                            activeConferenceList["bankName"]),
+                        _buildDetailTile(
+                            'Date of Payment:',
+                            activeConferenceList['tnDate']),
+                        _buildDetailTile(
+                            'Booking Status:',
+                            activeConferenceList['bookingStatus'],
+                            valueColor: activeConferenceList['bookingStatus'] == "Success"
+                                ? Colors.green
+                                : Colors.orange),
+                        _buildDetailTile(
+                            'Fee Status:',
+                            activeConferenceList['feeStatus'],
+                            valueColor: activeConferenceList['feeStatus'] == "Success"
+                                ? Colors.green
+                                : Colors.orange),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-
             ),
           ],
         ),
@@ -372,17 +357,44 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
       ),
     );
   }
-
-  void _clearText() {
-    controllerText.clear();
-    setState(() {
-      _isTextEmpty = true;
-      data.clear();
-      pageNo = 1;
-      hasMoreData = true;
-      totalPages = 0;
-      // BlocProvider.of<AllRequesterBloc>(context)
-      //     .add(GetBillingListHandler("", pageNo, pageSize));
-    });
+  Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 4,
+            child: Text(
+              "$title:",
+              style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 6,
+            child: Text(
+              value,
+              style: valueColor != null
+                  ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
+                  : FTextStyle.listTitleSub,
+            ),
+          ),
+        ],
+      ),
+    );
   }
+
 }

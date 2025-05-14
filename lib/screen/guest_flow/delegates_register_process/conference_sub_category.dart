@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
-import 'package:nexcon/screen/delegates_section/delegates_register_process/conference_category_details.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
+
+import 'conference_category_details.dart';
 
 class SubCategoryScreen extends StatefulWidget {
   String id;

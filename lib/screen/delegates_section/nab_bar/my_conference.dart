@@ -77,7 +77,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
         .size
         .width;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       body: Column(
         children: [
           const SizedBox(height: 20),
@@ -96,7 +96,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
           // Search Bar
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.04, vertical: 10),
+                horizontal: 10, vertical: 10),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -161,30 +161,37 @@ class _MyConferencePageState extends State<MyConferencePage> {
 
   // Toggle Button Widget
   Widget _buildToggleButton(String text, int index) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _onButtonPressed(index),
-        child: Container(
-          padding: const EdgeInsets.all(12.0),
-          decoration: BoxDecoration(
-            color: _selectedIndex == index
-                ? AppColors.primaryColour
-                : AppColors.formFieldBackColour,
-            borderRadius: BorderRadius.circular(8),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryColour, // Green 0DB050
+              AppColors.secondaryColour, // Blue 023E8A
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: _selectedIndex == index
-                    ? Colors.white
-                    : AppColors.primaryColour,
-                fontSize: _selectedIndex == index
-                    ?17:15,
-                fontWeight:_selectedIndex == index
-                    ? FontWeight.w500 :FontWeight.w600,
-              ),
-            ),
+          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
       ),
@@ -261,15 +268,13 @@ class _MyConferencePageState extends State<MyConferencePage> {
               margin: const EdgeInsets.symmetric(vertical: 8),
               padding: const EdgeInsets.all(26),
               decoration: BoxDecoration(
-                color: index % 2 == 0
-                    ? const Color(0xFFFFF7E6)
-                    : const Color(0xFFFF8D70).withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -289,23 +294,24 @@ class _MyConferencePageState extends State<MyConferencePage> {
                         Row(
                           children: [
                             Icon(Icons.confirmation_number, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
+                            const SizedBox(width: 4),
                             Text(
                               "ID: ${item['conferenceId']}",
-                              style: FTextStyle.listTitleSub
+                              style: FTextStyle.style
                             ),
                           ],
                         ),
                         Row(
                           children: [
                             Icon(Icons.calendar_today, size: 18, color: Colors.grey[600]),
-                            const SizedBox(width: 3),
+                            const SizedBox(width: 4),
                             Text(
-                              "${item['fromDate']} - ${item['toDate']}",
-                              style: FTextStyle.listTitleSub
+                                "${item['fromDate']} - ${item['toDate']}",
+                                style: FTextStyle.style
                             ),
                           ],
                         ),
+                        const SizedBox(height: 4),
                       ],
                     ),
                   ),
@@ -417,15 +423,13 @@ class _MyConferencePageState extends State<MyConferencePage> {
           margin: const EdgeInsets.symmetric(vertical: 8),
           padding: const EdgeInsets.all(26),
           decoration: BoxDecoration(
-            color: index % 2 == 0
-                ? const Color(0xFFFFF7E6)
-                : const Color(0xFFFF8D70).withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 6,
-                offset: const Offset(0, 3),
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -448,7 +452,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                         const SizedBox(width: 3),
                         Text(
                             "ID: ${item['conferenceId']}",
-                            style: FTextStyle.listTitleSub
+                            style: FTextStyle.style
                         ),
                       ],
                     ),
@@ -458,7 +462,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                         const SizedBox(width: 3),
                         Text(
                             "${item['fromDate']} - ${item['toDate']}",
-                            style: FTextStyle.listTitleSub
+                            style: FTextStyle.style
                         ),
                       ],
                     ),

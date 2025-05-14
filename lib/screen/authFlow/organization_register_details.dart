@@ -117,6 +117,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
   String? selectTitleName;
   String? selectCategoryName;
   String? conferenceTitleName;
+  bool isAdminDialogVisible = false;
   late final TextEditingController _emailConference = TextEditingController();
   late final TextEditingController _firstConference = TextEditingController();
   late final TextEditingController _gstConference = TextEditingController();
@@ -1131,12 +1132,13 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                             SizedBox(height: 10),
                                             TextButton(
                                               onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>RoleSelectionScreen()
-                                                  ),
-                                                );
+                                                _showCredentialDialog(isFromBVUA: true);
+                                                // Navigator.push(
+                                                //   context,
+                                                //   MaterialPageRoute(
+                                                //     builder: (context) =>RoleSelectionScreen()
+                                                //   ),
+                                                // );
 
                                               },
                                               style: TextButton.styleFrom(
@@ -1222,5 +1224,111 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
         ),
       ),
     );
+  }
+  void _showCredentialDialog({required bool isFromBVUA}) {
+    if (!isFromBVUA || isAdminDialogVisible) return;
+
+    isAdminDialogVisible = true;
+
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismiss on outside tap
+      barrierLabel: "CredentialDialog",
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation1, animation2) {
+        return SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.black.withOpacity(0.5),
+            body: Center(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 20,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.check_circle_outline, size: 60, color: Colors.green),
+                    const SizedBox(height: 20),
+                    Text(
+                      "Signup Successful!",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      "Please contact the administrator to obtain your login credentials in order to access the data.",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[700],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 30),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.drawerButton1Color,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          elevation: 5,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>RoleSelectionScreen()
+                            ),
+                          );
+
+
+
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => BlocProvider(
+                          //       create: (context) => AuthFlowBloc(),
+                          //       child: LogScreen(),
+                          //     ),
+                          //   ),
+                          //       (route) => false,
+                          // );
+                          isAdminDialogVisible = false;
+                        },
+                        child: const Text(
+                          "OK",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ).then((_) {
+      isAdminDialogVisible = false;
+    });
   }
 }

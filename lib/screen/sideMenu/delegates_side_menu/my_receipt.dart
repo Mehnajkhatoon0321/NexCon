@@ -204,12 +204,12 @@ class _MyReceiptState extends State<MyReceipt> {
           ),
           title: Text(
             'My Receipts',
-            style: FTextStyle.HeadingTxtWhiteStyle,
+            style: FTextStyle.appBarTitleWhite,
           ),
           centerTitle: true,
 
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,14 +260,12 @@ class _MyReceiptState extends State<MyReceipt> {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     padding: const EdgeInsets.all( 16),
                     decoration: BoxDecoration(
-                      color: index % 2 == 0
-                          ? const Color(0xFFFFF7E6) // Light yellow
-                          : const Color(0xFFFF8D70).withOpacity(0.1), // Light coral
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
+                          blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
                       ],
@@ -284,11 +282,7 @@ class _MyReceiptState extends State<MyReceipt> {
                                 item['conferenceSelect'],
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
+                                style:FTextStyle.listTitle
                               ),
                               const SizedBox(height: 2),
                               Text(

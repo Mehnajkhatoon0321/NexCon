@@ -8,6 +8,8 @@ import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 
+import 'fee_page_view.dart';
+
 class FeePage extends StatefulWidget {
   const
   FeePage({super.key});
@@ -18,7 +20,8 @@ class FeePage extends StatefulWidget {
 
 class _FeePageState extends State<FeePage> {
   List<dynamic> feeList = [
-    {'title':"30th ISCB International Conference (ISCBC-2025)",
+    {"id":"1",
+      'title':"30th ISCB International Conference (ISCBC-2025)",
       'paymentMode': "PhonePay",
       'tnNumber': "2343546446",
       'tnDate': "2023-12-10",
@@ -28,6 +31,7 @@ class _FeePageState extends State<FeePage> {
       'downloadReceipt': "assets/images/payment.png"
     },
     {
+      "id":"2",
       'title':"4th International Science Communication Conference & 24th Indian Science Communication Conference",
       'paymentMode': "PhonePay",
       'tnNumber': "2343546446",
@@ -36,7 +40,10 @@ class _FeePageState extends State<FeePage> {
       'amount': "23424343",
       'status': "Success",
       'downloadReceipt': "assets/images/payment.png"
-    },{'title':"30th ISCB International Conference (ISCBC-2025)",
+    },{
+      "id":"1",
+    'title':"30th ISCB International Conference (ISCBC-2025)",
+
       'paymentMode': "COD",
       'tnNumber': "2343546446",
       'tnDate': "2023-12-10",
@@ -125,12 +132,13 @@ class _FeePageState extends State<FeePage> {
       data: MediaQuery.of(context).copyWith(
           textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundColor,
         body: Column(
           children: [
+            SizedBox(height: 10,),
             Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: screenWidth * 0.02, vertical: 10),
+                  horizontal: 15, vertical: 10),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -170,18 +178,16 @@ class _FeePageState extends State<FeePage> {
           itemBuilder: (context, index) {
             final item = feeList[index];
             return Container(
-              height: height*0.3,
+              // height: height*0.3,
               margin: const EdgeInsets.symmetric(vertical: 8),
               padding: const EdgeInsets.all( 16),
               decoration: BoxDecoration(
-                color: index % 2 == 0
-                    ? const Color(0xFFFFF7E6) // Light yellow
-                    : const Color(0xFFFF8D70).withOpacity(0.1), // Light coral
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
+                    blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
                 ],
@@ -192,17 +198,14 @@ class _FeePageState extends State<FeePage> {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+
                         Text(
                           item['title'],
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
+                          style:FTextStyle.listTitle
                         ),
                         const SizedBox(height: 2),
                         Text(
@@ -211,12 +214,12 @@ class _FeePageState extends State<FeePage> {
                           overflow: TextOverflow.ellipsis,
                           style: FTextStyle.style
                         ),
- Text(
-                          'TN Number: ${item['tnNumber']}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style
-                        ),
+ // Text(
+ //                          'TN Number: ${item['tnNumber']}',
+ //                          maxLines: 1,
+ //                          overflow: TextOverflow.ellipsis,
+ //                          style: FTextStyle.style
+ //                        ),
 
                         Text(
                           'Date: ${item['tnDate']}',
@@ -236,26 +239,26 @@ class _FeePageState extends State<FeePage> {
                         ),
 
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Bank Name: ',
-                                style:FTextStyle.style,
-
-                            ),
-                            Container(
-                              width: screenWidth/2,
-                              child: Text(
-                                item['bankName'],
-                                style: FTextStyle.style,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.start,
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     const Text(
+                        //       'Bank Name: ',
+                        //         style:FTextStyle.style,
+                        //
+                        //     ),
+                        //     Container(
+                        //       width: screenWidth/2,
+                        //       child: Text(
+                        //         item['bankName'],
+                        //         style: FTextStyle.style,
+                        //         maxLines: 2,
+                        //         overflow: TextOverflow.ellipsis,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
 
                         Row(
                           children: [
@@ -277,23 +280,29 @@ class _FeePageState extends State<FeePage> {
                         ),
 
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                             const Text(
-                              'Download Receipt: ',
-                              style:FTextStyle.listTitle
-                            ),
+
+
                             GestureDetector(
                               onTap: () {
-                                // Handle Download Receipt
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FeePageView(id: "",
+
+                                        ),
+                                  ),
+                                );
                               },
                               child: Container(
-                                height: 25,
-                                width: 25,
-                                margin: const EdgeInsets.only(bottom: 8),
+                                height: 35,
+                                width: 35,
+
                                 decoration: BoxDecoration(
-                                  color: Colors.blue, // Blue for download
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
                                     BoxShadow(
@@ -304,93 +313,92 @@ class _FeePageState extends State<FeePage> {
                                   ],
                                 ),
                                 child: const Icon(
-                                  Icons.download,
+                                  Icons.remove_red_eye_outlined,
                                   color: Colors.white,
-                                  size: 15,
+                                  size: 20,
                                 ),
                               ),
                             ),
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  PayRegistrationFee(bankName: item['bankName'], tnNumber: item['tnNumber'], date: item['tnDate'], amount: item['amount'], image: item['downloadReceipt'], title: item['title'], paymentMode: item['paymentMode'],)),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0db050), // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                CommonPopups
+                                    .showDeleteCustomPopup(
+                                  context,
+                                  "Are you sure you want to delete?",
+                                      () {
+                                    // BlocProvider.of<
+                                    //     AllRequesterBloc>(
+                                    //     context)
+                                    //     .add(DeleteBillingHandlers(
+                                    //     data[index]
+                                    //     [
+                                    //     'id']));
+                                  },
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                  color: Colors.red, // Red for delete
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+
                           ],
                         ),
                       ],
                     ),
                   ),
                   // Right Column: Action Buttons
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
 
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  PayRegistrationFee(bankName: item['bankName'], tnNumber: item['tnNumber'], date: item['tnDate'], amount: item['amount'], image: item['downloadReceipt'], title: item['title'], paymentMode: item['paymentMode'],)),
-                          );
-                        },
-                        child: Container(
-                          height: 35,
-                          width: 35,
-                          margin: const EdgeInsets.only(bottom: 8),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF0db050), // Green for edit
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 6,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          CommonPopups
-                              .showDeleteCustomPopup(
-                            context,
-                            "Are you sure you want to delete?",
-                                () {
-                              // BlocProvider.of<
-                              //     AllRequesterBloc>(
-                              //     context)
-                              //     .add(DeleteBillingHandlers(
-                              //     data[index]
-                              //     [
-                              //     'id']));
-                            },
-                          );
-                        },
-                        child: Container(
-                          height: 35,
-                          width: 35,
-                          decoration: BoxDecoration(
-                            color: Colors.red, // Red for delete
-                            borderRadius: BorderRadius.circular(8),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 6,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
+
             );
           },
         ),

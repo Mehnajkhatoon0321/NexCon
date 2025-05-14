@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:nexcon/screen/delegates_section/abstract/abstaction_register.dart';
+
+import 'package:nexcon/screen/sideMenu/delegates_side_menu/abstract/abstaction_register.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
@@ -218,7 +219,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
           ),
           title: Text(
             'Abstract',
-            style: FTextStyle.HeadingTxtWhiteStyle,
+            style: FTextStyle.appBarTitleWhite,
           ),
           centerTitle: true,
           actions: [
@@ -268,11 +269,12 @@ class _AbstractScreenState extends State<AbstractScreen> {
             )
           ],
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 10,),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: screenWidth * 0.04, vertical: 10),
@@ -319,14 +321,12 @@ class _AbstractScreenState extends State<AbstractScreen> {
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     padding: const EdgeInsets.all( 16),
                     decoration: BoxDecoration(
-                      color: index % 2 == 0
-                          ? const Color(0xFFFFF7E6) // Light yellow
-                          : const Color(0xFFFF8D70).withOpacity(0.1), // Light coral
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
+                          blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
                       ],
@@ -343,11 +343,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 item['conferenceSelect'],
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
+                                style: FTextStyle.listTitle,
                               ),
                               const SizedBox(height: 2),
                               Text(

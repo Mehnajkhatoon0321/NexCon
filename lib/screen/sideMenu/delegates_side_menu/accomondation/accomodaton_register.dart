@@ -1,26 +1,43 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:nexcon/screen/delegates_section/abstract/abstract.dart';
+
+import 'package:nexcon/screen/sideMenu/delegates_side_menu/accomondation/accomodation.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/custom_popup.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
+import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/no_space_input_formatter_class.dart';
 import 'package:nexcon/utils/validator_utils.dart';
 
-import '../../../utils/font_text_Style.dart';
+class AccommodationRegister extends StatefulWidget {
+  final String tnNumber;
+  final String date;
+  final String amount;
+  final String bankName;
+  final String image;
+  final String title;
+  final String paymentMode;
 
-class AbstractionRegister extends StatefulWidget {
-  const AbstractionRegister({super.key});
+  const AccommodationRegister(
+      {required this.bankName,
+        required this.date,
+        required this.amount,
+        required this.image,
+        required this.tnNumber,
+        super.key,
+        required this.title,
+        required this.paymentMode});
 
   @override
-  State<AbstractionRegister> createState() => _AbstractionRegisterState();
+  State<AccommodationRegister> createState() => _AccommodationRegisterState();
 }
 
-class _AbstractionRegisterState extends State<AbstractionRegister> {
+class _AccommodationRegisterState extends State<AccommodationRegister> {
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -219,8 +236,8 @@ class _AbstractionRegisterState extends State<AbstractionRegister> {
           },
         ),
         title: Text(
-          'Submit Paper',
-          style: FTextStyle.HeadingTxtWhiteStyle,
+          'Accommodation Apply',
+          style: FTextStyle.appBarTitleWhite,
         ),
         centerTitle: true,
       ),
@@ -762,7 +779,7 @@ class _AbstractionRegisterState extends State<AbstractionRegister> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                AbstractScreen(),
+                                AccommodationScreen(),
                           ),
                         );
 
