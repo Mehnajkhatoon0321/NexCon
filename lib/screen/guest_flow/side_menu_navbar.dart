@@ -172,7 +172,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
             ]},
             { 'icon': Icons.cases_sharp,'subtitle': 'Fee', 'sub': [
-              {'icon': Icons.app_registration, 'subsection': 'Registration Fee'},
+              {'icon': Icons.app_registration, 'subsection': 'Registration'},
                 {'icon': Icons.home_work_rounded, 'subsection': 'Accommodation Fee'},
                 {'icon': Icons.person, 'subsection': 'Bank Details'},
                 {'icon': Icons.app_registration, 'subsection': 'Receipt Setting'},
@@ -656,7 +656,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
         //fee
 
-      case 'Registration Fee':
+      case 'Registration':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) =>  RegistrationFee()),

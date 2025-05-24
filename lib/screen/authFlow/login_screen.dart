@@ -141,6 +141,15 @@ class _LoginScreenState extends State<LoginScreen> {
     _updateButtonState();
   }
 
+  List<dynamic> conferenceManagement=[
+    "Register a conference for free"
+    "24 x 7 online suppport"
+    "Reach out to our large number of registered users"
+    "Accept payments in INR, USD & EURO"
+    "Get access to Conference Management System"
+        "Pay only for delegates registered"
+  ];
+
   void _updateButtonState() {
     setState(() {
       isButtonEnabled = checkboxChecked &&
@@ -164,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
     var displayType = valueType.toString().split('.').last;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: Container(
           decoration: const BoxDecoration(

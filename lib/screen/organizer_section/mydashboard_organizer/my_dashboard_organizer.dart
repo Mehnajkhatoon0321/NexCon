@@ -156,8 +156,8 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
         boxShadow: [BoxShadow(color: AppColors.shadowColor, blurRadius: 6)],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(item['conferenceName'] ?? '', style: FTextStyle.subtitle),
           SizedBox(height: 8),
@@ -188,6 +188,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
               ),
             ],
           ),
+
         ],
       ),
     );

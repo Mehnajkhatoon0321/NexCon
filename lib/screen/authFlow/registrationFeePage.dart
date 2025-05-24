@@ -49,13 +49,13 @@ class _RegistrationFeePageState extends State<RegistrationFeePage> {
 
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 4),
         child: SingleChildScrollView(
           child: Table(
-            border: TableBorder.all(color: Colors.black12),
+            border: TableBorder.all(color: Colors.black54),
             columnWidths: const {
-              0: FlexColumnWidth(3),
-              1: FlexColumnWidth(2),
+              0: FlexColumnWidth(2.5),
+              1: FlexColumnWidth(2.5),
             },
             children: feeData.asMap().entries.map((entry) {
               final index = entry.key;

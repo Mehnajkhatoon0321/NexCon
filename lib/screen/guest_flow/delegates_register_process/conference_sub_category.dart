@@ -191,6 +191,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Container(
 
+
                        // height: height * 0.45, // Set fixed height for each card
                       // width: height * 0.3, // Set fixed width for each card
                       decoration: BoxDecoration(
@@ -215,7 +216,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                 ),
                                 child: Image.asset(
                                   conference["imageConference"],
-                                  height: height * 0.12, // Set image height to half of the card
+                                  height: height * 0.10, // Set image height to half of the card
                                   width: double.infinity,
                                   fit: BoxFit.cover,
                                 ),
@@ -283,27 +284,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                       TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  // Row(
-                                  //   children: [
-                                  //     Image.asset(
-                                  //       conference["organizationImage"],
-                                  //       height: 40,
-                                  //       width: 40,
-                                  //     ),
-                                  //     const SizedBox(width: 4),
-                                  //     Expanded(
-                                  //       child: Text(
-                                  //         conference["organizationText"],
-                                  //         style: FTextStyle.listTitleSub.copyWith(
-                                  //           fontSize: 13,
-                                  //           color: Colors.black,
-                                  //         ),
-                                  //         maxLines: 2,
-                                  //         overflow: TextOverflow.ellipsis,
-                                  //       ),
-                                  //     ),
-                                  //   ],
-                                  // ),
+
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -348,6 +329,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                       ),
                                     ],
                                   ),
+
                                 ],
                               ),
                             ),

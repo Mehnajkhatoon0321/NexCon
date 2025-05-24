@@ -13,11 +13,7 @@ class MyConferencePage extends StatefulWidget {
 class _MyConferencePageState extends State<MyConferencePage> {
   int _selectedIndex = 0;
 
-  void _onButtonPressed(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
   int pageNo = 1;
   int totalPages = 0;
   int pageSize = 10;

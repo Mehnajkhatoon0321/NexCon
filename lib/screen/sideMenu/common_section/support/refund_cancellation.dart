@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
-class Reports extends StatefulWidget {
-  const Reports({super.key});
+class RefundCancellation extends StatefulWidget {
+  const RefundCancellation({super.key});
 
   @override
-  State<Reports> createState() => _ReportsState();
+  State<RefundCancellation> createState() => _RefundCancellationState();
 }
 
-class _ReportsState extends State<Reports> {
+class _RefundCancellationState extends State<RefundCancellation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
@@ -26,11 +25,16 @@ class _ReportsState extends State<Reports> {
           },
         ),
         title: Text(
-          'Report',
+          'Refund and Cancellations',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-
+      ),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          Text("")
+        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/sideMenu/organizer/settings/fee/accomodation/accommodation_view.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/fee/accomodation/accommodation_edit.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
 
@@ -78,128 +78,38 @@ class _AccommodationState extends State<Accommodation> {
     {
       "id":"1",
       'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Pending",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
-    },
-    { "id":"2",
-      'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC ",
-      'amount': "23424343",
-      'status': "Success",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
-    },
-    { "id":"3",
-      'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "COD",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Success",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
-    },
-    { "id":"3",
-      'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Success",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
-    }
-  ];
-
-  List<dynamic> inactiveConferenceList = [
-
-    {
-      "id":"1",
-      'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC ",
-      'amount': "23424343",
-      'status': "Success",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
+      'accommodationCategory': "Category",
+      "ratePerDay": "1200",
+      "currency": "4",
     },
     {
       "id":"2",
       'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Pending",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
+      'accommodationCategory': "Category",
+      "ratePerDay": "1288",
+      "currency": "4",
+
     },
-    { "id":"3",
+
+  ];
+
+  List<dynamic> inactiveConferenceList = [
+    {
+      "id":"1",
       'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "COD",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Success",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
+      'accommodationCategory': "Category",
+      "ratePerDay": "1200",
+      "currency": "4",
     },
-    { "id":"3",
+    {
+      "id":"2",
       'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Success",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
-    }
+      'accommodationCategory': "Category",
+      "ratePerDay": "1288",
+      "currency": "4",
+
+    },
+
   ];
   @override
   Widget build(BuildContext context) {
@@ -235,6 +145,52 @@ class _AccommodationState extends State<Accommodation> {
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: (displayType == 'desktop' || displayType == 'tablet')
+                  ? 70
+                  : 37,
+              child: ElevatedButton(
+                  onPressed: () async {
+
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AccommodationEdit(isEdit: '',)
+                      ),
+
+                    );
+                    //     .then((result) {
+                    //   // Handle the result from the edit screen
+                    //   if (result[0]) {
+                    //     data.clear();
+                    //     pageNo = 1;
+                    //     hasMoreData = true;
+                    //     totalPages = 0;
+                    //     BlocProvider.of<AllRequesterBloc>(context)
+                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                    //   }
+                    // }
+                    // );
+
+                    // );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(26),
+                      ),
+                      backgroundColor: Colors.white),
+                  child: Text(
+                    "Add",
+                    style: FTextStyle.loginBtnStyle
+                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
+                  )),
+            ),
+          )
+        ],
 
       ),
 
@@ -369,17 +325,13 @@ class _AccommodationState extends State<Accommodation> {
       itemBuilder: (context, index) {
         final item = activeConferenceList[index];
 
-        // Provide default values for null fields
+
         final title = item['title'] ?? 'Unknown Title';
         final id = item['id'] ?? 'Unknown Title';
+        final accommodationCategory = item['accommodationCategory'] ?? 'N/A';
+        final ratePerDay = item['ratePerDay'] ?? 'N/A';
+        final currency = item['currency'] ?? 'N/A';
 
-        final fromDate = item['fromDate'] ?? 'N/A';
-        final toDate = item['toDate'] ?? 'N/A';
-        final amount = item['amount']?.toString() ?? 'N/A';
-        final paymentMode = item['paymentMode'] ?? 'N/A';
-        final bankName = item['bankName'] ?? 'N/A';
-        final tnDate = item['tnDate'] ?? 'N/A';
-        final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
         return Container(
@@ -412,114 +364,72 @@ class _AccommodationState extends State<Accommodation> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'From Date: $fromDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                        Text(
-                          'To Date: $toDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                      ],
-                    ),
 
 
                     Text(
-                      'Payment Mode: $paymentMode',
+                      'Accommodation Category: $accommodationCategory',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
+                    ), Text(
+                      'Rate Per Day/ Per Person: $ratePerDay',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
+                    ), Text(
+                      'Currency: $currency',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Bank Name: ', style: FTextStyle.style),
-                        Expanded(
-                          child: Text(
-                            bankName,
-                            style: FTextStyle.style,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
 
 
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                            'Booking Status: ', style: FTextStyle.listTitle),
-                        Text(
-                          bookingStatus,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: bookingStatus == "Success"
-                                ? Colors.green
-                                : Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AccommodationFreeView(id: id,
 
-                                    ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-
-                            decoration: BoxDecoration(
-                              color:AppColors.secondaryColour,
-                              // Green for edit
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AccommodationEdit(isEdit: 'Yes',)
+                                  ),
 
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0db050),
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
                             SizedBox(width: 10,),
+
                             GestureDetector(
                               onTap: () {
                                 CommonPopups.showDeleteCustomPopup(
@@ -580,17 +490,11 @@ class _AccommodationState extends State<Accommodation> {
       itemBuilder: (context, index) {
         final item = inactiveConferenceList[index];
 
-        // Provide default values for null fields
         final title = item['title'] ?? 'Unknown Title';
         final id = item['id'] ?? 'Unknown Title';
-
-        final fromDate = item['fromDate'] ?? 'N/A';
-        final toDate = item['toDate'] ?? 'N/A';
-        final amount = item['amount']?.toString() ?? 'N/A';
-        final paymentMode = item['paymentMode'] ?? 'N/A';
-        final bankName = item['bankName'] ?? 'N/A';
-        final tnDate = item['tnDate'] ?? 'N/A';
-        final bookingStatus = item['bookingStatus'] ?? 'Pending';
+        final accommodationCategory = item['accommodationCategory'] ?? 'N/A';
+        final ratePerDay = item['ratePerDay'] ?? 'N/A';
+        final currency = item['currency'] ?? 'N/A';
 
 
         return Container(
@@ -623,113 +527,69 @@ class _AccommodationState extends State<Accommodation> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'From Date: $fromDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                        Text(
-                          'To Date: $toDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-                      ],
-                    ),
-
-
                     Text(
-                      'Payment Mode: $paymentMode',
+                      'Accommodation Category: $accommodationCategory',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
+                    ), Text(
+                      'Rate Per Day/ Per Person: $ratePerDay',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
+                    ), Text(
+                      'Currency: $currency',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Bank Name: ', style: FTextStyle.style),
-                        Expanded(
-                          child: Text(
-                            bankName,
-                            style: FTextStyle.style,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
 
 
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                            'Booking Status: ', style: FTextStyle.listTitle),
-                        Text(
-                          bookingStatus,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: bookingStatus == "Success"
-                                ? Colors.green
-                                : Colors.orange,
-                          ),
-                        ),
-                      ],
-                    ),
+
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    AccommodationFreeView(id: id,
 
-                                    ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-
-                            decoration: BoxDecoration(
-                              color:AppColors.secondaryColour,
-                              // Green for edit
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AccommodationEdit(isEdit: 'Yes',)
+                                  ),
 
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF0db050),
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
                             SizedBox(width: 10,),
                             GestureDetector(
                               onTap: () {
