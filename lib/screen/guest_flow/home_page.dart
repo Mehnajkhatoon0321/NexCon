@@ -190,6 +190,36 @@ class _HomePageState extends State<HomePage>
     'https://smartconference.in/assets/images/img1.jpg',
 
   ];
+  final List<Map<String, String>> clients = [
+    {
+      'image': 'https://smartconference.in/assets/clients/srm-logo.jpg',
+      'name': 'SRM University, Chennai',
+    },
+    {
+      'image': 'https://smartconference.in/assets/clients/muj-logo.jpg',
+      'name': 'Manipal University Jaipur',
+    },
+    {
+      'image': 'https://smartconference.in/assets/clients/iscb-logo.jpg',
+      'name': 'Indian Society of Chemists & Biologists',
+    },
+    {
+      'image': 'https://smartconference.in/assets/clients/iscos-logo.jpg',
+      'name': 'Indian Science Communication Society',
+    },
+    {
+      'image': 'https://smartconference.in/assets/clients/iswa-logo.jpg',
+      'name': "Indian Science Writers' Association",
+    },
+    {
+      'image': 'https://smartconference.in/assets/clients/spjimr-logo.jpg',
+      'name': 'SPJIMR, Mumbai',
+    },
+    {
+      'image': 'https://smartconference.in/assets/clients/awoke-logo.jpg',
+      'name': 'AWOKE India Foundation',
+    },
+  ];
 
   final List<Map<String, String>> testimonials = [
     {
@@ -757,6 +787,7 @@ class _HomePageState extends State<HomePage>
                             style: FTextStyle.headingMiddle.copyWith(fontSize: 16),
                             textAlign: TextAlign.left,
                           ),
+                          SizedBox(height: 4,),
                           Text(
                             "Here's what our  satisfied conference organisers and delegates feel after using our conference management system.",
                             style: FTextStyle.style,
@@ -867,21 +898,72 @@ class _HomePageState extends State<HomePage>
                         ],
                       ),
                     ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 28.0),
+                          child: Center(
+                            child: Text(
+                              "Our Clients",
+                              style: FTextStyle.headingMiddle.copyWith(fontSize: 16),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: height*0.19,
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            viewportFraction: 0.4,
+                            enableInfiniteScroll: true,
+                          ),
+                          items: clients.map((client) {
+                            final isActive = _currentIndex == client;
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.network(
+                                      client['image']!,
+                                      height: 60,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      client['name']!,
+                                      textAlign: TextAlign.center,
+                                      style:isActive?FTextStyle.style:FTextStyle.subtitle,
+                                    ),
+
+
+                                  ],
+                                );
+                              },
+                            );
+                          }).toList(),
+                        ),
+
+                      ],
+                    ),
+
+
+
+                    SizedBox(height: 25),
 
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 28.0),
                       child: Center(
                         child: Text(
-                          "Our Clients",
+                          "Follow Us",
                           style: FTextStyle.headingMiddle.copyWith(fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
                       ),
                     ),
 
-
-
-                    SizedBox(height: 35),
                   ],
                 ),
               ),

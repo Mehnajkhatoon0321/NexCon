@@ -68,11 +68,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     {'icon': Icons.work_outline, 'subtitle': 'How Its Works Delegate'},
     {'icon': Icons.info, 'subtitle': 'About'},
     {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
-    {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
     {'icon': Icons.event, 'subtitle': 'Conferences'},
+    {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
+
     {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
     // {'icon': Icons.password, 'subtitle': 'Change Password'},
-    {'icon': Icons.login, 'subtitle': 'Delegates Login/Organizer Login'},
+    {'icon': Icons.login, 'subtitle': 'Login'},
 
 
   ];
@@ -490,7 +491,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const ContactScreen()),
         );
         break;
-      case 'Delegates Login/Organizer Login':
+      case 'Login':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const RoleSelectionScreen()),

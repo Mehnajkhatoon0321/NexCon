@@ -93,69 +93,27 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
 
   ];
 
-  List<dynamic> inactiveConferenceList = [
-
+  List<dynamic> inactiveConferenceList =[
     {
       "id":"1",
-      'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC ",
-      'amount': "23424343",
-      'status': "Success",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'seal_stamp': "Seal.pdf",
+      'signature': "signature.pdf",
+      'receipt_date_organizer': "12-10-2025",
+      'receipt_date_delegate': "12-10-2025",
+
     },
+
     {
       "id":"2",
       'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Pending",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
+      'seal_stamp': "Seal.pdf",
+      'signature': "signature.pdf",
+      'receipt_date_organizer': "12-10-2025",
+      'receipt_date_delegate': "12-10-2025",
+
     },
-    { "id":"3",
-      'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "COD",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Success",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
-    },
-    { "id":"3",
-      'title': "30th ISCB International Conference (ISCBC-2025)",
-      'paymentMode': "PhonePay",
-      'tnNumber': "2343546446",
-      'tnDate': "2023-12-10",
-      'bankName': "HDFC",
-      'amount': "23424343",
-      'bookingStatus': "Success",
-      'feeStatus': "Pending",
-      "numberPerson": "2",
-      "numberDays": "4",
-      "fromDate": "23-11-2025",
-      "toDate": "24-12-2025",
-      'downloadReceipt': "assets/images/payment.png"
-    }
+
   ];
   @override
   Widget build(BuildContext context) {
@@ -249,7 +207,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
               children: [
                 _buildToggleButton('Upcoming', 0),
                 const SizedBox(width: 8.0),
-                _buildToggleButton('Past', 1),
+                _buildToggleButton('Previous', 1),
               ],
             ),
           ),
@@ -419,7 +377,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Receipt Date Delegate: $dataDelegate',
+                          'Delegate Date:$dataDelegate',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: FTextStyle.style,
@@ -429,7 +387,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                     ),
 
                     Text(
-                      'Receipt Date Organizer: $dataOrganizer',
+                      'Organizer Date:$dataOrganizer',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
@@ -561,16 +519,15 @@ Text(
         final title = item['title'] ?? 'Unknown Title';
         final id = item['id'] ?? 'Unknown Title';
 
-        final fromDate = item['fromDate'] ?? 'N/A';
-        final toDate = item['toDate'] ?? 'N/A';
-        final amount = item['amount']?.toString() ?? 'N/A';
-        final paymentMode = item['paymentMode'] ?? 'N/A';
-        final bankName = item['bankName'] ?? 'N/A';
-        final tnDate = item['tnDate'] ?? 'N/A';
-        final bookingStatus = item['bookingStatus'] ?? 'Pending';
+        final dataDelegate = item['receipt_date_delegate'] ?? 'N/A';
+        final dataOrganizer = item['receipt_date_organizer'] ?? 'N/A';
+
+        final signature = item['signature'] ?? 'N/A';
+        final seal_stamp = item['seal_stamp'] ?? 'N/A';
 
 
-        return Container(
+
+            return Container(
           // height: height * 0.24,
           margin: const EdgeInsets.symmetric(vertical: 8),
           padding: const EdgeInsets.all(16),
@@ -605,65 +562,40 @@ Text(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'From Date: $fromDate',
+                          'Delegate Date:$dataDelegate',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: FTextStyle.style,
                         ),
-                        Text(
-                          'To Date: $toDate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
+
                       ],
                     ),
 
-
                     Text(
-                      'Payment Mode: $paymentMode',
+                      'Organizer Date:$dataOrganizer',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: FTextStyle.style,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Bank Name: ', style: FTextStyle.style),
-                        Expanded(
-                          child: Text(
-                            bankName,
-                            style: FTextStyle.style,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'Signature: $signature',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
+                    ),
+
+                    Text(
+                      'Seal Stamp: $seal_stamp',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: FTextStyle.style,
                     ),
 
 
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                            'Booking Status: ', style: FTextStyle.listTitle),
-                        Text(
-                          bookingStatus,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: bookingStatus == "Success"
-                                ? Colors.green
-                                : Colors.orange,
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    SizedBox(width: 10,),
+
+
 
 
 
