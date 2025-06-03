@@ -1,21 +1,21 @@
  import 'dart:async';
-import 'dart:developer';
+
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:nexcon/screen/authFlow/delegate_register.dart';
+
 
 import 'package:nexcon/screen/guest_flow/side_menu_navbar.dart';
 
 import 'package:nexcon/screen/sideMenu/organizer/how_works_organizer.dart';
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
+
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
 import 'delegates_register_process/conference_category.dart';
-import 'delegates_register_process/conference_category_details.dart';
+
 import 'delegates_register_process/conference_sub_category.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,7 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
 {
-  bool _isLogoutDialogVisible = false;
+
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -329,9 +329,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -456,7 +454,7 @@ class _HomePageState extends State<HomePage>
                     //
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                      child: Container(
+                      child: SizedBox(
                         height: height * 0.30,
                         child: GridView.builder(
                           physics: const NeverScrollableScrollPhysics(),
@@ -514,6 +512,8 @@ class _HomePageState extends State<HomePage>
                                                   ),
                                                 ],
                                               ),
+                                              height: 65,
+                                              width: 65,
                                               child: IconButton(
                                                 icon: const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 30),
                                                 onPressed: () {
@@ -525,8 +525,6 @@ class _HomePageState extends State<HomePage>
                                                   );
                                                 },
                                               ),
-                                              height: 65,
-                                              width: 65,
                                             ),
                                           ),
                                         ),

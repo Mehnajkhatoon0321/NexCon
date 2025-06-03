@@ -147,7 +147,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
   late final FocusNode _passwordFocusNode = FocusNode();
   late final FocusNode _dateBirthFocusNode = FocusNode();
   late final FocusNode _cityFocusNode = FocusNode();
-  late final FocusNode _countryFocusNode = FocusNode();
+
   late final FocusNode _selectTitleFocusNode = FocusNode();
   late final FocusNode _selectCategoryFocusNode = FocusNode();
   late final FocusNode _selectGenderFocusNode = FocusNode();
@@ -237,7 +237,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
               height: 10,
             ),
             Text(
-              "${widget.title}",
+              widget.title,
               style: FTextStyle.headingMiddle.copyWith(
                 fontSize: 17,
               ),
@@ -571,7 +571,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "${Constants.emailLabel}",
+                      Constants.emailLabel,
                       style: FTextStyle.SubHeadingTxtStyle,
                     ).animateOnPageLoad(
                         animationsMap['imageOnPageLoadAnimation2']!),
@@ -739,9 +739,6 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                             onTap: () {
                               setState(() {
                                 checkboxChecked = !checkboxChecked;
-                                print(
-                                    'Checkbox checked: $checkboxChecked');
-
                                 PrefUtils.setRememberMe(
                                     checkboxChecked);
                               });

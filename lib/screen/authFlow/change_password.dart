@@ -148,7 +148,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         body: Stack(
           children: [
             Container(
-              color: AppColors.primaryColour,
+              color: AppColors.appSky,
             ),
             Center(
               child: Container(
@@ -434,7 +434,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               borderRadius: BorderRadius.circular(30),
                             ),
                             backgroundColor:
-                            isButtonEnabled ? AppColors.primaryColour :  AppColors.formFieldBorderColour,
+                            isButtonEnabled ? AppColors.appSky :  AppColors.formFieldBorderColour,
                             // Button color depending on the enabled state
                             minimumSize: const Size(double.infinity, 50),
                             // Minimum height

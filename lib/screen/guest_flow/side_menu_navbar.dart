@@ -254,7 +254,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                           item['icon'],
                           size: 22,
                           color: expandedItem == item['subtitle']
-                              ? Colors.green
+                              ? AppColors.appSky
                               : AppColors.aboutUsHeadingColor,
                         ),
                         title: Text(
@@ -263,7 +263,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: expandedItem == item['subtitle']
-                                ? Colors.green
+                                ? AppColors.appSky
                                 : AppColors.aboutUsHeadingColor,
                           ),
                         ),
@@ -721,7 +721,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                       const SizedBox(width: 10),
                       TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: AppColors.primaryColour,
+                          backgroundColor: AppColors.appSky,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                           ),

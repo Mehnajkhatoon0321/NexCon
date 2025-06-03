@@ -3,17 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 
 import 'conference_category_details.dart';
 
 class SubCategoryScreen extends StatefulWidget {
-  String id;
-  String  name;
-  String selected;
-   SubCategoryScreen({super.key,required this.id,required this.name,required this.selected});
+final   String id;
+final  String  name;
+final String selected;
+   const SubCategoryScreen({super.key,required this.id,required this.name,required this.selected});
 
   @override
   State<SubCategoryScreen> createState() => _SubCategoryScreenState();
@@ -112,8 +111,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -272,7 +271,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     height: 55,
                                     child: Text(
                                       conference["subtitle"],

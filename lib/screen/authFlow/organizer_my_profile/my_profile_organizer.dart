@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/authFlow/organizer_my_profile/edit_profile_organizer.dart';
-import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 class MyProfileOrganizer extends StatefulWidget {
   const MyProfileOrganizer({super.key});
@@ -27,16 +24,13 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
 
   @override
   Widget build(BuildContext context) {
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+
+
     var height = MediaQuery
         .of(context)
         .size
         .height;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
@@ -94,7 +88,7 @@ class _MyProfileOrganizerState extends State<MyProfileOrganizer> {
           //                   borderRadius: BorderRadius.circular(26),
           //                 ),
           //                 backgroundColor: Colors.white),
-          //             child: Icon(Icons.edit_calendar_rounded,color: AppColors.primaryColour,)),
+          //             child: Icon(Icons.edit_calendar_rounded,color: AppColors.appSky,)),
           //       ),
           //     )
           //   ],

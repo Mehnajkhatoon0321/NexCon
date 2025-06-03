@@ -41,7 +41,7 @@ class FTextStyle {
 
   static TextStyle SplashHeadingTab = TextStyle(
       fontSize: 38.sp,
-      color: AppColors.primaryColour,
+      color: AppColors.appSky,
 
 
       fontFamily: 'Montserrat',
@@ -109,7 +109,7 @@ class FTextStyle {
   static  TextStyle SeeAllTextStyle = const TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 16,
-    color: AppColors.primaryColour,
+    color: AppColors.appSky,
     fontWeight: FontWeight.bold,
   );
 
@@ -220,7 +220,7 @@ class FTextStyle {
 
   static const TextStyle listTitle = TextStyle(
 
-letterSpacing: 1.2,
+// letterSpacing: 1.2,
     fontFamily: 'Montserrat',
 
     fontSize: 14,fontWeight: FontWeight.w700,color: Colors.black,
@@ -283,6 +283,7 @@ letterSpacing: 1.2,
       color: AppColors.aboutUsHeadingColor,
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500);
+
   static  TextStyle subtitle = TextStyle(
       fontSize: 12.sp,
       color: AppColors.aboutUsHeadingColor,

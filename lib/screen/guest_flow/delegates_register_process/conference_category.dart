@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
+
 
 import 'dart:async';
 
@@ -104,7 +104,7 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
       ],
     ),
   };
-  final TextEditingController _searchController = TextEditingController();
+
   List<Map<String, dynamic>> FeaturesCategoryList = [
     {"id":"1",
       "title":"African Studies",
@@ -233,10 +233,10 @@ class _ConferenceCategoryState extends State<ConferenceCategory> {
   }
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
+
 
     var width = MediaQuery.of(context).size.width;
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
+
 
 
     return MediaQuery(

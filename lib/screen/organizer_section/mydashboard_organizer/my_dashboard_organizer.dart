@@ -74,7 +74,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.primaryColour, // Green 0DB050
+                          AppColors.appSky, // Green 0DB050
                           AppColors.secondaryColour, // Blue 023E8A
                         ],
                         begin: Alignment.topLeft,
@@ -136,7 +136,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(icon, color: AppColors.primaryColour, size: 28),
+            Icon(icon, color: AppColors.appSky, size: 28),
             SizedBox(height: 8),
             Text(value, style: FTextStyle.listTitle),
             SizedBox(height: 4),
@@ -163,7 +163,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
           SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.date_range, size: 18, color: AppColors.primaryColour),
+              Icon(Icons.date_range, size: 18, color: AppColors.appSky),
               SizedBox(width: 6),
               Text("${item['fromDate']} - ${item['toDate']}", style: FTextStyle.style),
             ],
@@ -174,7 +174,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.how_to_reg, size: 18, color: AppColors.primaryColour),
+                  Icon(Icons.how_to_reg, size: 18, color: AppColors.appSky),
                   SizedBox(width: 4),
                   Text("Registrations: ${item['registration']}", style: FTextStyle.style),
                 ],

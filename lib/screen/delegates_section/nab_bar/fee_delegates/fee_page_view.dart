@@ -253,7 +253,7 @@ class _FeePageViewState extends State<FeePageView> {
                   _buildDetailTile("Fee Payment Date", activeConferenceList['feeDate']),
                   _buildDetailTile("Booking Status", activeConferenceList['bookingStatus'],
                       valueColor: activeConferenceList['bookingStatus'] == "Success"
-                          ? Colors.green
+                          ? AppColors.appSky
                           : Colors.orange),
                   _buildDetailTile("Transaction Date", activeConferenceList['tnDate']),
                   _buildDetailTile("Transaction Number", activeConferenceList['tnDate']),

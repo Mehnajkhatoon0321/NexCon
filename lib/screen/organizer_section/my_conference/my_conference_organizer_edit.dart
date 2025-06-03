@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
@@ -1068,7 +1067,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
         // Stack(
         //   children: [
         //     Container(
-        //       color: AppColors.primaryColour,
+        //       color: AppColors.appSky,
         //     ),
         //     Center(
         //       child:

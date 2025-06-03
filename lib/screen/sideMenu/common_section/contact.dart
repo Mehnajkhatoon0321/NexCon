@@ -278,18 +278,16 @@ class _ContactScreenState extends State<ContactScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
               child: Text("Regd. Office:",style: FTextStyle.headingMiddle,),
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('315/41, Bagh Maha Narayan, Chowk\nLucknow - 226003\n(U.P.), India',style: FTextStyle.listTitleSub,),
-        
-        
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('315/41, Bagh Maha Narayan, Chowk\nLucknow - 226003\n(U.P.), India',style: FTextStyle.listTitleSub,),
+
+
+                ],
               ),
             ),
             Divider(height: 1,thickness: 1.0,),
@@ -588,10 +586,9 @@ class _ContactScreenState extends State<ContactScreen> {
                               ),
                             );
 
-                            print("Form is valid, proceed with submission.");
                           } else {
                             // Form is invalid
-                            print("Form is invalid, please fill all required fields.");
+
                           }
                         },
                         style: ElevatedButton.styleFrom(

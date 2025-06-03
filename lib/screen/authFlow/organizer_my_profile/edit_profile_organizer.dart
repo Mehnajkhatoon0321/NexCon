@@ -247,14 +247,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
   Widget build(BuildContext context) {
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
     var displayType = valueType.toString().split('.').last;
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
@@ -382,7 +375,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                                         ),
                                         child: Icon(
                                           Icons.remove,
-                                          color: AppColors.primaryColour,
+                                          color: AppColors.appSky,
                                           size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                         ),
                                       ),
@@ -429,7 +422,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                                       ),
                                       child: Icon(
                                         Icons.edit,
-                                        color: AppColors.primaryColour,
+                                        color: AppColors.appSky,
                                         size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                       ),
                                     ),
@@ -776,7 +769,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      backgroundColor: AppColors.primaryColour,
+                      backgroundColor: AppColors.appSky,
                     ),
                     child: Text(
                       "Update",

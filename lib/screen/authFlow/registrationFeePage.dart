@@ -4,6 +4,8 @@ import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
 class RegistrationFeePage extends StatefulWidget {
+  const RegistrationFeePage({super.key});
+
   @override
   _RegistrationFeePageState createState() => _RegistrationFeePageState();
 }

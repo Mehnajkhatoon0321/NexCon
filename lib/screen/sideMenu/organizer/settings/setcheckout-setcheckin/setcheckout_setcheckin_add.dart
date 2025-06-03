@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:intl/intl.dart';
+
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/flutter_flow_animations.dart';
+
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
-import 'package:nexcon/utils/validator_utils.dart';
+
 class SetCheckoutSetCheckInAdd extends StatefulWidget {
   String isEdit;
    SetCheckoutSetCheckInAdd({ required this.isEdit,super.key});
@@ -210,7 +209,7 @@ class _SetCheckoutSetCheckInAddState extends State<SetCheckoutSetCheckInAdd> {
                       borderRadius: BorderRadius.circular(30),
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.primaryColour,
+                          AppColors.appSky,
                           AppColors.secondaryColour,
                         ],
                         begin: Alignment.topLeft,

@@ -18,7 +18,6 @@ class ManageScheduleView extends StatefulWidget {
 
 class _ManageScheduleViewState extends State<ManageScheduleView> {
 
-  bool _isTextEmpty = true;
 
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(

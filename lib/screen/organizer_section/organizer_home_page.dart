@@ -70,7 +70,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
     return Container(
 
       decoration: const BoxDecoration(
-        color: AppColors.primaryColour,
+        color: AppColors.appSky,
       ),
       child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -104,7 +104,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColour,
+        backgroundColor: AppColors.appSky,
         elevation: 3,
         leading: IconButton(
           icon: const Icon(Icons.menu, size: 28, color: Colors.white),
@@ -277,7 +277,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
                       const SizedBox(width: 10),
                       TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: AppColors.primaryColour,
+                          backgroundColor: AppColors.appSky,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                           ),

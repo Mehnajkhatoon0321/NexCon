@@ -32,7 +32,7 @@ class _UpgradePlanState extends State<UpgradePlan> {
         ),
         title: Text(
           'Upgrade Membership',
-          style: FTextStyle.HeadingTxtWhiteStyle,
+          style: FTextStyle.appBarTitleWhite,
         ),
         centerTitle: true,
       ),
@@ -50,7 +50,7 @@ body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 5.0),
           child: Text(
             'You can upgrade you Membership type in any of the following:\nInstructions for Membership',
-            style: FTextStyle.headingMiddle,
+            style: FTextStyle.subheading,
           ),
         ),
         SizedBox(height: 8.0),
@@ -116,7 +116,7 @@ body: SingleChildScrollView(
     _selectedValue = value!;
     });
     },
-    activeColor: Colors.green, // Highlight selected radio button
+    activeColor: AppColors.appSky, // Highlight selected radio button
     ),
     RichText(
     text: TextSpan(
@@ -127,10 +127,10 @@ body: SingleChildScrollView(
     children: [
     TextSpan(
     text: "(View Plan)",
-    style: FTextStyle.formLabelTxtStyle.copyWith(
-    color:  AppColors.secondaryColour // Hyperlink color
- // Underline for hyperlink
-    ),
+      style: FTextStyle.style.copyWith(
+          color: AppColors.secondaryColour// Hyperlink color
+        // Underline for hyperlink
+      ),
     recognizer: TapGestureRecognizer()
     ..onTap = () {
 
@@ -154,7 +154,7 @@ body: SingleChildScrollView(
                 _selectedValue = value!;
               });
             },
-            activeColor: Colors.green, // Highlight selected radio button
+            activeColor: AppColors.appSky, // Highlight selected radio button
           ),
           RichText(
             text: TextSpan(
@@ -165,7 +165,7 @@ body: SingleChildScrollView(
               children: [
                 TextSpan(
                   text: "(Request a Quote)",
-                  style: FTextStyle.formLabelTxtStyle.copyWith(
+                  style: FTextStyle.style.copyWith(
                     color: AppColors.secondaryColour// Hyperlink color
                     // Underline for hyperlink
                   ),
@@ -193,7 +193,7 @@ body: SingleChildScrollView(
                 borderRadius: BorderRadius.circular(30),
                 gradient: LinearGradient(
                   colors: [
-                    AppColors.primaryColour,
+                    AppColors.appSky,
                     AppColors.secondaryColour,
                   ],
                   begin: Alignment.topLeft,
@@ -214,7 +214,7 @@ body: SingleChildScrollView(
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
                   child: Text("Subscribe", style: FTextStyle.loginBtnStyle),
                 ),
               ),

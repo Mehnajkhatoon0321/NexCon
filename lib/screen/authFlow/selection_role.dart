@@ -111,7 +111,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                                   ],
                                                   borderRadius: BorderRadius.circular(100.0),
                                                   border: (isSelectedRole == 'isselect organizer')
-                                                      ? Border.all(color: Colors.green, width: 1.5)
+                                                      ? Border.all(color:  AppColors.appSky , width: 1.5)
                                                       : null,
                                                 ),
                                               ),
@@ -124,6 +124,29 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                                   ),
                                                 ),
                                               ),
+                                              // Visibility(
+                                              //   visible: (isSelectedRole == 'isselect organizer'),
+                                              //   child: Positioned(
+                                              //     bottom: 0,
+                                              //     right: 0,
+                                              //     child: Padding(
+                                              //       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
+                                              //       child: Container(
+                                              //         decoration: BoxDecoration(
+                                              //           color: Colors.white,
+                                              //           borderRadius: BorderRadius.circular(15.0),
+                                              //         ),
+                                              //         child:
+                                              //         Image.asset(
+                                              //           "assets/images/filledTick.png",
+                                              //           height: 30,
+                                              //           width: 30,
+                                              //         ),
+                                              //       ),
+                                              //     ),
+                                              //   ),
+                                              // ),
+
                                               Visibility(
                                                 visible: (isSelectedRole == 'isselect organizer'),
                                                 child: Positioned(
@@ -136,15 +159,16 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                                         color: Colors.white,
                                                         borderRadius: BorderRadius.circular(15.0),
                                                       ),
-                                                      child: Image.asset(
-                                                        "assets/images/filledTick.png",
-                                                        height: 30,
-                                                        width: 30,
+                                                      child: Icon(
+                                                        Icons.check_circle, // or Icons.check, Icons.verified, etc.
+                                                        color:AppColors.appSky, // choose the color you want
+                                                        size: 30, // same size as your image
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
+
                                             ],
                                           ),
                                           Padding(
@@ -182,7 +206,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                                     ],
                                                     borderRadius: BorderRadius.circular(78.0),
                                                     border: (isSelectedRole == 'isselect delegate')
-                                                        ? Border.all(color: Colors.green, width: 1.5)
+                                                        ? Border.all(color: AppColors.appSky ,width: 1.5)
                                                         : null,
                                                   ),
                                                 ),
@@ -207,10 +231,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                                           color: Colors.white,
                                                           borderRadius: BorderRadius.circular(15.0),
                                                         ),
-                                                        child: Image.asset(
-                                                          "assets/images/filledTick.png",
-                                                          height: 30,
-                                                          width: 30,
+                                                        child: Icon(
+                                                          Icons.check_circle, // or Icons.check, Icons.verified, etc.
+                                                          color:AppColors.appSky, // choose the color you want
+                                                          size: 30, // same size as your image
                                                         ),
                                                       ),
                                                     ),

@@ -251,16 +251,16 @@ class _ManualAttendanceState extends State<ManualAttendance> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.primaryColour, // Green 0DB050
+              AppColors.appSky, // Green 0DB050
               AppColors.secondaryColour, // Blue 023E8A
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
             width: 2,
           ),
         ),

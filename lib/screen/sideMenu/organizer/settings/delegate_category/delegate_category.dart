@@ -155,7 +155,7 @@ class _DelegateCategoryState extends State<DelegateCategory> {
                   child: Text(
                     "Apply",
                     style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
+                        .copyWith(color: AppColors.appSky,fontSize: 13),
                   )),
             ),
           )

@@ -5,11 +5,11 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/screen/delegates_section/paper_delegates/paper_register.dart';
 import 'package:nexcon/screen/delegates_section/paper_delegates/paper_view.dart';
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
+
 import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
-import 'package:nexcon/utils/form_field_style.dart';
+
 
 class PaperDelegates extends StatefulWidget {
 
@@ -221,10 +221,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
@@ -340,16 +337,16 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.primaryColour, // Green 0DB050
+              AppColors.appSky, // Green 0DB050
               AppColors.secondaryColour, // Blue 023E8A
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
             width: 2,
           ),
         ),
@@ -414,7 +411,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: item['status'] == "Success"
-                                ? Colors.green
+                                ? AppColors.appSky
                                 : Colors.orange,
                           ),
                         ),
@@ -792,7 +789,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: item['status'] == "Success"
-                                ? Colors.green
+                                ? AppColors.appSky
                                 : Colors.orange,
                           ),
                         ),

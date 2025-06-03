@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
 import 'package:nexcon/screen/sideMenu/organizer/settings/setcheckout-setcheckin/setcheckout_setcheckin_add.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
 import '../../../../../utils/commonFunction.dart';
-import '../../../../../utils/flutter_flow_animations.dart';
+
 class SetCheckOut extends StatefulWidget {
   const SetCheckOut({super.key});
 
@@ -19,11 +19,7 @@ class SetCheckOut extends StatefulWidget {
 class _SetCheckOutState extends State<SetCheckOut> {
   int _selectedIndex = 0;
 
-  void _onButtonPressed(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
   int pageNo = 1;
   int totalPages = 0;
   int pageSize = 10;
@@ -206,7 +202,7 @@ class _SetCheckOutState extends State<SetCheckOut> {
                   child: Text(
                     "Add",
                     style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
+                        .copyWith(color: AppColors.appSky,fontSize: 13),
                   )),
             ),
           )
@@ -308,16 +304,16 @@ class _SetCheckOutState extends State<SetCheckOut> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.primaryColour, // Green 0DB050
+              AppColors.appSky, // Green 0DB050
               AppColors.secondaryColour, // Blue 023E8A
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
             width: 2,
           ),
         ),

@@ -349,7 +349,7 @@ class _EditProfileState extends State<EditProfile> {
                                         ),
                                         child: Icon(
                                           Icons.remove,
-                                          color: AppColors.primaryColour,
+                                          color: AppColors.appSky,
                                           size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                         ),
                                       ),
@@ -396,7 +396,7 @@ class _EditProfileState extends State<EditProfile> {
                                       ),
                                       child: Icon(
                                         Icons.edit,
-                                        color: AppColors.primaryColour,
+                                        color: AppColors.appSky,
                                         size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                       ),
                                     ),
@@ -691,7 +691,7 @@ class _EditProfileState extends State<EditProfile> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      backgroundColor: AppColors.primaryColour,
+                      backgroundColor: AppColors.appSky,
                     ),
                     child: Text(
                       "Update",

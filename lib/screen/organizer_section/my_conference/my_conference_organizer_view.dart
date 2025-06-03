@@ -133,7 +133,7 @@ class _MyConferenceOrganizerViewState extends State<MyConferenceOrganizerView> {
   Map<String, dynamic> errorServerMessage = {};
   String? errorMessage;
 
-  Timer? _debounce;
+
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +242,7 @@ class _MyConferenceOrganizerViewState extends State<MyConferenceOrganizerView> {
 
                   _buildDetailTile("Booking Status", activeConferenceList['bookingStatus'],
                       valueColor: activeConferenceList['bookingStatus'] == "Success"
-                          ? Colors.green
+                          ? AppColors.appSky
                           : Colors.orange),
 
                 ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
@@ -121,9 +121,8 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
     return Scaffold(
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
@@ -507,7 +506,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 46,
                               child:
                               Text(
@@ -570,7 +569,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
 
                           GestureDetector(
                             onTap: () async {
-                              final url = "https://${featuresCategoryDetails["siteLink"]}/"!;
+                              final url = "https://${featuresCategoryDetails["siteLink"]}/";
                               if (await canLaunchUrl(Uri.parse(url))) {
                                 await launchUrl(Uri.parse(url));
                               } else {
@@ -620,8 +619,7 @@ class _ConferenceCategoryDetailsState extends State<ConferenceCategoryDetails> {
                               if (await canLaunchUrl(emailUri)) {
                                 await launchUrl(emailUri);
                               } else {
-                                // Handle the error (e.g., show a Snackbar or Dialog)
-                                print("Could not launch email composer.");
+
                               }
                             },
                             child: Text(

@@ -119,7 +119,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         body: Stack(
           children: [
             Container(
-              color: AppColors.primaryColour,
+              color: AppColors.appSky,
             ),
             Center(
               child: Container(

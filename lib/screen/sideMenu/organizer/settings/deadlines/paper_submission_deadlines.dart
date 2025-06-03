@@ -219,7 +219,7 @@ class _PaperSubmissionDeadlinesState extends State<PaperSubmissionDeadlines> {
                     borderRadius: BorderRadius.circular(30),
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.primaryColour,
+                        AppColors.appSky,
                         AppColors.secondaryColour,
                       ],
                       begin: Alignment.topLeft,

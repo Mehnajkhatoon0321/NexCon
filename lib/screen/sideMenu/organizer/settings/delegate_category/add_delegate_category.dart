@@ -283,7 +283,7 @@ class _AddDelegateCategoryState extends State<AddDelegateCategory> {
                       borderRadius: BorderRadius.circular(30),
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.primaryColour,
+                          AppColors.appSky,
                           AppColors.secondaryColour,
                         ],
                         begin: Alignment.topLeft,

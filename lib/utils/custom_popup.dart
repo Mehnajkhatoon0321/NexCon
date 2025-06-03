@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:nexcon/utils/colours.dart';
 
 
@@ -54,7 +53,7 @@ class CustomPopUp {
   //     builder: (BuildContext context, Widget? child) {
   //       return Theme(
   //         data: ThemeData(
-  //           primaryColor: AppColors.primaryColour, // Date selection color
+  //           primaryColor: AppColors.appSky, // Date selection color
   //           buttonTheme: ButtonThemeData(
   //             textTheme: ButtonTextTheme.primary,
   //           ),
@@ -62,10 +61,10 @@ class CustomPopUp {
   //           textTheme: TextTheme(
   //             bodyLarge: TextStyle(color: Colors.black), // Calendar text color
   //             bodyMedium: TextStyle(color: Colors.black),
-  //             titleLarge: TextStyle(color: AppColors.primaryColour, fontSize: 20), // Header text style
+  //             titleLarge: TextStyle(color: AppColors.appSky, fontSize: 20), // Header text style
   //           ),
-  //           iconTheme: IconThemeData(color: AppColors.primaryColour),
-  //           colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.primaryColour), // Icon color (e.g., arrows)
+  //           iconTheme: IconThemeData(color: AppColors.appSky),
+  //           colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.appSky), // Icon color (e.g., arrows)
   //         ),
   //         child: child ?? Container(),
   //       );
@@ -80,13 +79,13 @@ class CustomPopUp {
   //       builder: (BuildContext context, Widget? child) {
   //         return Theme(
   //           data: ThemeData(
-  //             primaryColor: AppColors.primaryColour,
+  //             primaryColor: AppColors.appSky,
   //             dialogBackgroundColor: Colors.white,
   //             textTheme: TextTheme(
   //               bodyLarge: TextStyle(color: Colors.black),
-  //               titleLarge: TextStyle(color: AppColors.primaryColour, fontSize: 20),
+  //               titleLarge: TextStyle(color: AppColors.appSky, fontSize: 20),
   //             ),
-  //             iconTheme: IconThemeData(color: AppColors.primaryColour),
+  //             iconTheme: IconThemeData(color: AppColors.appSky),
   //           ),
   //           child: child ?? Container(),
   //         );
@@ -121,7 +120,7 @@ class CustomPopUp {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData(
-            primaryColor: AppColors.primaryColour, // Date selection color
+            primaryColor: AppColors.appSky, // Date selection color
             buttonTheme: ButtonThemeData(
               textTheme: ButtonTextTheme.primary,
             ),
@@ -129,10 +128,10 @@ class CustomPopUp {
             textTheme: TextTheme(
               bodyLarge: TextStyle(color: Colors.black), // Calendar text color
               bodyMedium: TextStyle(color: Colors.black),
-              titleLarge: TextStyle(color: AppColors.primaryColour, fontSize: 20), // Header text style
+              titleLarge: TextStyle(color: AppColors.appSky, fontSize: 20), // Header text style
             ),
-            iconTheme: IconThemeData(color: AppColors.primaryColour),
-            colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.primaryColour), // Icon color (e.g., arrows)
+            iconTheme: IconThemeData(color: AppColors.appSky),
+            colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.appSky), // Icon color (e.g., arrows)
           ),
           child: child ?? Container(),
         );
@@ -147,13 +146,13 @@ class CustomPopUp {
         builder: (BuildContext context, Widget? child) {
           return Theme(
             data: ThemeData(
-              primaryColor: AppColors.primaryColour,
+              primaryColor: AppColors.appSky,
               dialogBackgroundColor: Colors.white,
               textTheme: TextTheme(
                 bodyLarge: TextStyle(color: Colors.black),
-                titleLarge: TextStyle(color: AppColors.primaryColour, fontSize: 20),
+                titleLarge: TextStyle(color: AppColors.appSky, fontSize: 20),
               ),
-              iconTheme: IconThemeData(color: AppColors.primaryColour),
+              iconTheme: IconThemeData(color: AppColors.appSky),
             ),
             child: child ?? Container(),
           );

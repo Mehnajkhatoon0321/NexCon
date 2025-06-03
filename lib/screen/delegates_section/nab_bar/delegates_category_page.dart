@@ -406,7 +406,7 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isButtonEnabled
-                            ? AppColors.primaryColour
+                            ? AppColors.appSky
                             : Colors.grey[300],
                         padding: const EdgeInsets.symmetric(
                           vertical: 10,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 class AppColors extends MaterialColor {
   const AppColors(super.primary, super.swatch);
-  static const Color primaryColour = Color(0xFF0DB050);
-  static const Color primaryColourDark = Color(0xFF021f63);
+  // static const Color appSky = Color(0xFF0DB050);
+  // static const Color appSky = Color(0xFF0537ff);
+  static const Color appSkyDark = Color(0xFF0a248c);
 
   static const Color boarderColourThem = Color(0xFFbbccd3);
   static const Color disableButtonColor =
@@ -44,8 +45,9 @@ class AppColors extends MaterialColor {
   static const Color drawerDisableButtonColor =
   Color.fromARGB(102, 104, 30, 102);
   static const appBlue = Color(0xFF3D94D1);
-  // static const appSky = Color(0xFF0db050);
-  static const appSky = Color(0xFF26b758);
+  static const appSky = Color(0xff071960);
+  // static const appSky = Color(0xFF0a248c);
+  // static const appSky = Color(0xFF26b758);
   static const primaryPinkColor = Color(0xFFF58CA9);
 
 

@@ -16,15 +16,15 @@ import 'package:nexcon/utils/no_space_input_formatter_class.dart';
 import 'package:nexcon/utils/pref_utils.dart';
 import 'package:nexcon/utils/validator_utils.dart';
 class OrganizationRegisterDetails extends StatefulWidget {
-  String nameOrganization;
-  String mobileNumber;
-  String  dateBirth;
-  String  conference;
-  String email;
+ final String nameOrganization;
+ final String mobileNumber;
+ final String  dateBirth;
+ final String  conference;
+ final String email;
 
-  String  country;
-  String city;
-   OrganizationRegisterDetails({required this.nameOrganization,required this.email,required this.city,required this.country,required this.dateBirth,required this.conference,required this.mobileNumber,super.key});
+ final String  country;
+ final String city;
+   const OrganizationRegisterDetails({required this.nameOrganization,required this.email,required this.city,required this.country,required this.dateBirth,required this.conference,required this.mobileNumber,super.key});
 
   @override
   State<OrganizationRegisterDetails> createState() => _OrganizationRegisterDetailsState();
@@ -763,7 +763,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
 
 
                     const SizedBox(height: 8),
-                    Text("${Constants.emailLabel}", style: FTextStyle.SubHeadingTxtStyle),
+                    Text(Constants.emailLabel, style: FTextStyle.SubHeadingTxtStyle),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
@@ -1076,7 +1076,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                 //     "Success!",
                                 //     style: FTextStyle.listTitleSub.copyWith(    fontSize: 24,
                                 //       fontWeight: FontWeight.bold,
-                                //       color: Colors.green,)
+                                //       color: AppColors.appSky,)
                                 //   ),
                                 // ),
                                 content: Column(
@@ -1085,7 +1085,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                     Icon(
                                       Icons.check_circle_outline,
                                       size: 60,
-                                      color: Colors.green,
+                                      color: AppColors.appSky,
                                     ),
                                     SizedBox(height: 20),
                                     Center(
@@ -1093,7 +1093,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                           "Success!",
                                           style: FTextStyle.listTitleSub.copyWith(    fontSize: 24,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.green,)
+                                            color: AppColors.appSky,)
                                       ),
                                     ),
                                     Text(
@@ -1119,7 +1119,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                                       },
                                       style: TextButton.styleFrom(
                                         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: AppColors.appSky,
 
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(30),
@@ -1197,7 +1197,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
         // Stack(
         //   children: [
         //     Container(
-        //       color: AppColors.primaryColour,
+        //       color: AppColors.appSky,
         //     ),
         //     Center(
         //       child:
@@ -1261,7 +1261,7 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.check_circle_outline, size: 60, color: Colors.green),
+                    Icon(Icons.check_circle_outline, size: 60, color: AppColors.appSky),
                     const SizedBox(height: 20),
                     Text(
                       "Signup Successful!",

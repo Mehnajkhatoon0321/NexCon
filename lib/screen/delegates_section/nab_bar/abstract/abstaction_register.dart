@@ -11,10 +11,10 @@ import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/validator_utils.dart';
 class AbstractionRegister extends StatefulWidget {
-   String isEdit;
-   String title;
+  final  String isEdit;
+  final  String title;
 
-   AbstractionRegister({required this.isEdit,required this.title,super.key});
+   const AbstractionRegister({required this.isEdit,required this.title,super.key});
 
   @override
   State<AbstractionRegister> createState() => _AbstractionRegisterState();
@@ -113,14 +113,10 @@ class _AbstractionRegisterState extends State<AbstractionRegister> {
   String? abstractPaperFileName;
   bool isAbstractPaperFileUploaded = false;
   bool isAbstractPaperUploadFocused = false;
-
-  late final GlobalKey<FormFieldState<String>> _conferenceCategoryKey =
-  GlobalKey<FormFieldState<String>>();
-  late final FocusNode _selectconferenceCategoryFocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   //
   late final GlobalKey<FormFieldState<String>> _wishlistKey = GlobalKey<FormFieldState<String>>();
-  late final FocusNode _wishlistFocusNode = FocusNode();
+
   final wishlistController = TextEditingController();
   //
   bool isButtonEnabled = false;
@@ -187,7 +183,7 @@ class _AbstractionRegisterState extends State<AbstractionRegister> {
   @override
   Widget build(BuildContext context){
     var height = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
@@ -524,7 +520,7 @@ class _AbstractionRegisterState extends State<AbstractionRegister> {
                           borderRadius: BorderRadius.circular(30),
                           gradient: LinearGradient(
                             colors: [
-                              AppColors.primaryColour,
+                              AppColors.appSky,
                               AppColors.secondaryColour,
                             ],
                             begin: Alignment.topLeft,

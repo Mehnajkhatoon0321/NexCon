@@ -201,7 +201,7 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
           padding: const EdgeInsets.all(12.0),
           decoration: BoxDecoration(
             color: _selectedIndex == index
-                ? AppColors.primaryColour
+                ? AppColors.appSky
                 : AppColors.formFieldBackColour,
             borderRadius: BorderRadius.circular(8),
           ),
@@ -211,7 +211,7 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
               style: TextStyle(
                 color: _selectedIndex == index
                     ? Colors.white
-                    : AppColors.primaryColour,
+                    : AppColors.appSky,
                 fontSize: _selectedIndex == index
                     ?17:15,
                 fontWeight:_selectedIndex == index
@@ -409,7 +409,7 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: bookingStatus == "Success"
-                                  ? Colors.green
+                                  ? AppColors.appSky
                                   : Colors.orange,
                             ),
                           ),
@@ -643,10 +643,10 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
 
           final fromDate = item['fromDate'] ?? 'N/A';
           final toDate = item['toDate'] ?? 'N/A';
-          final amount = item['amount']?.toString() ?? 'N/A';
+
           final paymentMode = item['paymentMode'] ?? 'N/A';
           final bankName = item['bankName'] ?? 'N/A';
-          final tnDate = item['tnDate'] ?? 'N/A';
+
           final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
@@ -738,7 +738,7 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: bookingStatus == "Success"
-                                  ? Colors.green
+                                  ? AppColors.appSky
                                   : Colors.orange,
                             ),
                           ),

@@ -17,11 +17,6 @@ class RegistrationFee extends StatefulWidget {
 class _RegistrationFeeState extends State<RegistrationFee> {
   int _selectedIndex = 0;
 
-  void _onButtonPressed(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
   int pageNo = 1;
   int totalPages = 0;
   int pageSize = 10;
@@ -192,7 +187,7 @@ class _RegistrationFeeState extends State<RegistrationFee> {
                   child: Text(
                     "Add",
                     style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
+                        .copyWith(color: AppColors.appSky,fontSize: 13),
                   )),
             ),
           )
@@ -295,16 +290,16 @@ class _RegistrationFeeState extends State<RegistrationFee> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.primaryColour, // Green 0DB050
+              AppColors.appSky, // Green 0DB050
               AppColors.secondaryColour, // Blue 023E8A
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
             width: 2,
           ),
         ),

@@ -169,16 +169,16 @@ class _MyConferencePageState extends State<MyConferencePage> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.primaryColour, // Green 0DB050
+              AppColors.appSky, // Green 0DB050
               AppColors.secondaryColour, // Blue 023E8A
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
             width: 2,
           ),
         ),
@@ -309,9 +309,9 @@ class _MyConferencePageState extends State<MyConferencePage> {
                       children: [
                         Text(
                           item['conferenceName']!,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.listTitle
+                          // maxLines: 2,
+                          // overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.subtitle
                         ),
 
                         Row(
@@ -536,7 +536,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                         item['conferenceName']!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle
+                        style: FTextStyle.subtitle
                     ),
 
                     Row(
@@ -770,7 +770,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isButtonEnabled
-                            ? AppColors.primaryColour
+                            ? AppColors.appSky
                             : Colors.grey[300],
                         padding: const EdgeInsets.symmetric(
                           vertical: 10,

@@ -152,7 +152,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
     return Container(
       // height: MediaQuery.of(context).size.height*0.08,
       decoration: const BoxDecoration(
-        color: AppColors.primaryColour,// Use the theme's primary color
+        color: AppColors.appSky,// Use the theme's primary color
         // borderRadius: BorderRadius.only(
         //   topLeft: Radius.circular(25),  // Rounded top-left corner
         //   topRight: Radius.circular(25), // Rounded top-right corner
@@ -309,7 +309,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
         //         ),
         //         child: Text(
         //           "Registration Fee",
-        //           style: FTextStyle.loginBtnStyle.copyWith(color: AppColors.primaryColour, fontSize: 12),
+        //           style: FTextStyle.loginBtnStyle.copyWith(color: AppColors.appSky, fontSize: 12),
         //         ),
         //       ),
         //     ),
@@ -340,7 +340,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
         //         child: Text(
         //           "Add",
         //           style: FTextStyle.loginBtnStyle.copyWith(
-        //             color: AppColors.primaryColour,
+        //             color: AppColors.appSky,
         //             fontSize: 12,
         //           ),
         //         ),
@@ -399,7 +399,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
                       const SizedBox(width: 10),
                       TextButton(
                         style: TextButton.styleFrom(
-                          backgroundColor: AppColors.primaryColour,
+                          backgroundColor: AppColors.appSky,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                           ),

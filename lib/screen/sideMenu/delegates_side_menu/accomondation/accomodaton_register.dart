@@ -797,7 +797,7 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       backgroundColor: isButtonEnabled
-                          ? AppColors.primaryColour
+                          ? AppColors.appSky
                           : AppColors.formFieldBorderColour,
                       // Button color depending on the enabled state
                       minimumSize: const Size(double.infinity, 50),

@@ -158,7 +158,6 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
             final isValid =
                 selectedConference != null &&
                 _conferenceController.text.isNotEmpty && uploadName.text.isNotEmpty && uploadName2.text.isNotEmpty;
-            ;
 
             setState(() {
               isButtonEnabled = isValid;
@@ -366,7 +365,7 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
                     borderRadius: BorderRadius.circular(30),
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.primaryColour,
+                        AppColors.appSky,
                         AppColors.secondaryColour,
                       ],
                       begin: Alignment.topLeft,

@@ -222,7 +222,7 @@ class _UpgradeMembershipState extends State<UpgradeMembership> {
                   'Upgrade Membership',
                   style: FTextStyle.headingMiddle,
                 ),
-                SizedBox(height:height*0.01 ,),
+                SizedBox(height:height*0.02 ,),
                 Text(
                   "Enter Credit Points/ Number of Delegates",
                   style: FTextStyle.SubHeadingTxtStyle,
@@ -307,7 +307,7 @@ class _UpgradeMembershipState extends State<UpgradeMembership> {
                       borderRadius: BorderRadius.circular(30),
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.primaryColour,
+                          AppColors.appSky,
                           AppColors.secondaryColour,
                         ],
                         begin: Alignment.topLeft,
@@ -338,7 +338,7 @@ class _UpgradeMembershipState extends State<UpgradeMembership> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
                         child: Text("Update", style: FTextStyle.loginBtnStyle),
                       ),
                     ),

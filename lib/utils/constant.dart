@@ -43,9 +43,8 @@ class Constants {
   static const loginBtnTxt = 'Log in';
   static const submitBtnTxt = 'Submit';
   static const continueBtnTxt = 'Continue';
-  static const OTPHeadingTxt = 'OTP Verification';
-  static const OTPSubTTxt = 'Please enter the 4 digit verification code that was sent your email. The code is valid for 3 minutes.';
-  static const signupBtnTxt = 'Sign up';
+
+ static const signupBtnTxt = 'Sign up';
   static const createAccountTxt = ' Sign up';
   static const signintoAccountTxt = ' Log in';
   static const donthaveAccountTxt = 'Don’t have an account?';

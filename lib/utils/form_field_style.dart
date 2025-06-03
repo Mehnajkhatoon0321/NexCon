@@ -197,7 +197,7 @@ class FormFieldStyle {
       borderRadius: BorderRadius.circular(28),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: AppColors.primaryColour),
+      borderSide: BorderSide(color: AppColors.appSky),
       borderRadius: BorderRadius.circular(28),
     ),
     errorBorder: OutlineInputBorder(

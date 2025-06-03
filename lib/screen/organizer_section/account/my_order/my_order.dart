@@ -343,7 +343,7 @@ class _MyOrderState extends State<MyOrder> {
                                     "${item['id']}. ${item['conferenceName']}",
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: FTextStyle.listTitle,
+                                    style: FTextStyle.subtitle,
 
                                   ),
                                 SizedBox(height: 8),
@@ -384,7 +384,7 @@ class _MyOrderState extends State<MyOrder> {
                                         bookingStatus,
                                         style: FTextStyle.style.copyWith(
                                           fontWeight: FontWeight.bold,
-                                          color: isPaid ? Colors.green : Colors.orange,
+                                          color: isPaid ? AppColors.appSky : Colors.orange,
                                         ),
                                       ),
                                     ],

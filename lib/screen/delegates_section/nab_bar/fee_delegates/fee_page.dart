@@ -232,16 +232,16 @@ class _FeePageState extends State<FeePage> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.primaryColour, // Green 0DB050
+              AppColors.appSky, // Green 0DB050
               AppColors.secondaryColour, // Blue 023E8A
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
             width: 2,
           ),
         ),
@@ -339,31 +339,6 @@ class _FeePageState extends State<FeePage> {
                           style:FTextStyle.listTitle
                       ),
                       const SizedBox(height: 2),
-                      // Text(
-                      //     'Payment Mode: ${item['paymentMode']}',
-                      //     maxLines: 1,
-                      //     overflow: TextOverflow.ellipsis,
-                      //     style: FTextStyle.style
-                      // ),
-                      //
-                      //
-                      // Text(
-                      //   'Date: ${Constants.formatDate(item['tnDate'])}',
-                      //   style:FTextStyle.style,
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      // ),
-                      //
-                      // Container(
-                      //   width: width/2,
-                      //   child: Text(
-                      //     'Amount: ${item['amount']}',
-                      //     style: FTextStyle.style
-                      //     ,  maxLines: 1,
-                      //     overflow: TextOverflow.ellipsis,
-                      //   ),
-                      // ),
-
 
 
 
@@ -379,7 +354,7 @@ class _FeePageState extends State<FeePage> {
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: item['status'] == "Success"
-                                  ? Colors.green
+                                  ? AppColors.appSky
                                   : Colors.orange,
                             ),
                           ),
@@ -417,29 +392,7 @@ class _FeePageState extends State<FeePage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                // Padding(
-                                //   padding: const EdgeInsets.all(2.0),
-                                //   child: ElevatedButton(
-                                //
-                                //     onPressed: () => _showBankDetailsDialog(context),
-                                //
-                                //     style: ElevatedButton.styleFrom(
-                                //       shape: RoundedRectangleBorder(
-                                //         borderRadius: BorderRadius.circular(30),
-                                //       ),
-                                //       backgroundColor: AppColors.appSky,
-                                //       elevation: 2,
-                                //       minimumSize: const Size(80, 30),
-                                //     ),
-                                //     child: Text(
-                                //       "View Bank Details",
-                                //       style: FTextStyle.loginBtnStyle.copyWith(
-                                //         fontSize: 12,
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
-                                // SizedBox(width: 10,),
+
 
                                 if (item['status'] == 'Success')
                                   Row(
@@ -1035,7 +988,7 @@ class _FeePageState extends State<FeePage> {
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: item['status'] == "Success"
-                                  ? Colors.green
+                                  ? AppColors.appSky
                                   : Colors.orange,
                             ),
                           ),
@@ -1411,7 +1364,7 @@ class _FeePageState extends State<FeePage> {
   //                               fontSize: 14,
   //                               fontWeight: FontWeight.bold,
   //                               color: item['status'] == "Success"
-  //                                   ? Colors.green
+  //                                   ? AppColors.appSky
   //                                   : Colors.orange,
   //                             ),
   //                           ),

@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_edit.dart';
-import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_view.dart';
+
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/common_popups.dart';
+
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
 class MyConferenceOrganizer extends StatefulWidget {
@@ -238,7 +237,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
             children: [
               Text(
                 item['conferenceName'],
-               style: FTextStyle.listTitle,
+               style: FTextStyle.subtitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -289,7 +288,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: item['bookingStatus'] == "Approved"
-                          ? Colors.green
+                          ? AppColors.appSky
                           : Colors.orange,
                     ),
                   ),
@@ -423,7 +422,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
             children: [
               Text(
                 item['conferenceName'],
-                style: FTextStyle.listTitle,
+                style: FTextStyle.subtitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -465,7 +464,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: item['bookingStatus'] == "Approved"
-                          ? Colors.green
+                          ? AppColors.appSky
                           : Colors.orange,
                     ),
                   ),
@@ -528,16 +527,16 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.primaryColour, // Green 0DB050
+              AppColors.appSky, // Green 0DB050
               AppColors.secondaryColour, // Blue 023E8A
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          color: _selectedIndex == index ? AppColors.primaryColour: Colors.transparent,
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
-            color: _selectedIndex == index ? AppColors.primaryColour : Colors.grey[400]!,
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
             width: 2,
           ),
         ),

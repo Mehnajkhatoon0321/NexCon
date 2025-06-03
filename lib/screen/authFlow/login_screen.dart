@@ -173,263 +173,315 @@ class _LoginScreenState extends State<LoginScreen> {
     var displayType = valueType.toString().split('.').last;
 
     return Scaffold(
-      // backgroundColor: AppColors.backgroundColor,
-      body: Center(
-        child: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  stops: [
-                0.2,
-                0.5,
-                0.95,
-                0.3
-              ],
-                  colors: [
-                Color(0xffffffff),
-                Color(0xf5c6f6da),
-                Color(0xf5c6f6da),
-                Color(0xf5c6f6da),
-              ])),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: (displayType == 'desktop' || displayType == 'tablet')
-                  ? 50
-                  : 20,
-            ),
-            child: ListView(
-              children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: const BoxDecoration(
-                      color: AppColors.appSky,
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
+      backgroundColor: AppColors.cardColor,
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: (displayType == 'desktop' || displayType == 'tablet')
+              ? 50
+              : 20,
+        ),
+        child: ListView(
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                height: 40,
+                width: 40,
+                decoration: const BoxDecoration(
+                  color: AppColors.appSky,
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                ),
+                child: Align(
+                  alignment: Alignment.center, // Center the icon within the container
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 25,
+                      ), // Menu icon
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    child: Align(
-                      alignment: Alignment.center, // Center the icon within the container
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                            size: 25,
-                          ), // Menu icon
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.topCenter,
+              child: Image.asset(
+                'assets/images/applogo.png',
+                width: (displayType == 'desktop' || displayType == 'tablet')
+                    ? 450.w
+                    : 250,
+                height:
+                    (displayType == 'desktop' || displayType == 'tablet')
+                        ? 100.h
+                        : 140,
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
+                child: Text(
+                  "Welcome to NexCon! Let's get you signed in",
+                  style: FTextStyle.headingMiddle,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ).animateOnPageLoad(
+                animationsMap['imageOnPageLoadAnimation2']!),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 15),
+              child: Form(
+                key: formKey,
+                onChanged: () {
+                  if (ValidatorUtils.isValidEmailOrUsername(_email.text) &&
+                      ValidatorUtils.isValidPass(_password.text)) {
+                    setState(() {
+                      isButtonEnabled = true;
+                    });
+                  } else {
+                    setState(() {
+                      isButtonEnabled = false;
+                    });
+                  }
+                  if (isEmailFieldFocused == true) {
+                    _emailKey.currentState!.validate();
+                  }
+                  if (isPasswordFieldFocused == true) {
+                    _passwordKey.currentState!.validate();
+                  }
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "${Constants.emailLabel}/UserName",
+
+                      style: FTextStyle.formLabelTxtStyle,
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation2']!),
+                    const SizedBox(height: 5),
+                    TextFormField(
+                      key: _emailKey,
+                      focusNode: _emailFocusNode,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: FormFieldStyle.defaultemailDecoration,
+                      inputFormatters: [NoSpaceFormatter()],
+                      controller: _email,
+                      validator: ValidatorUtils.emailOrUsernameValidator,
+                      onTap: () {
+                        setState(() {
+                          isEmailFieldFocused = true;
+                          isPasswordFieldFocused = false;
+                        });
+                      },
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation2']!),
+                    const SizedBox(height: 15),
+                    Text(
+                      "Password",
+                      style: FTextStyle.formLabelTxtStyle,
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation2']!),
+                    const SizedBox(height: 5),
+                    TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      key: _passwordKey,
+                      focusNode: _passwordFocusNode,
+                      decoration: FormFieldStyle
+                          .defaultPasswordInputDecoration
+                          .copyWith(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.black45,
+                          ),
                           onPressed: () {
-                            Navigator.pop(context);
+                            setState(() {
+                              passwordVisible = !passwordVisible;
+                            });
                           },
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      controller: _password,
+                      obscureText: !passwordVisible,
+                      inputFormatters: [NoSpaceFormatter()],
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        }
+
+                        if (!ValidatorUtils.isValidPass(value)) {
+                          return 'Password must be at least 8 characters';
+                        }
+
+                        return null; // Password is valid
+                      },
+                      onTap: () {
+                        setState(() {
+                          isPasswordFieldFocused = true;
+                          isEmailFieldFocused = false;
+                        });
+                      },
+                    ).animateOnPageLoad(
+                        animationsMap['imageOnPageLoadAnimation2']!),
+                  ],
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          checkboxChecked = !checkboxChecked;
+                          // print('Checkbox checked: $checkboxChecked');
+
+                          PrefUtils.setRememberMe(checkboxChecked);
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: IconTheme(
+                          data: const IconThemeData(
+                            color: AppColors.appSky,
+                            size: 20,
+                          ),
+                          child: Icon(
+                            checkboxChecked
+                                ? Icons.check_box
+                                : Icons.check_box_outline_blank,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.topCenter,
-                  child: Image.asset(
-                    'assets/images/applogo.png',
-                    width: (displayType == 'desktop' || displayType == 'tablet')
-                        ? 450.w
-                        : 250,
-                    height:
-                        (displayType == 'desktop' || displayType == 'tablet')
-                            ? 100.h
-                            : 140,
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
-                    child: Text(
-                      "Welcome to NexCon! Let's get you signed in",
-                      style: FTextStyle.headingMiddle,
-                      textAlign: TextAlign.center,
+                    Text(
+                      Constants.rememberMeTxt,
+                      style: FTextStyle.listTitleSub.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.black),
                     ),
-                  ),
-                ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 15),
-                  child: Form(
-                    key: formKey,
-                    onChanged: () {
-                      if (ValidatorUtils.isValidEmailOrUsername(_email.text) &&
-                          ValidatorUtils.isValidPass(_password.text)) {
-                        setState(() {
-                          isButtonEnabled = true;
-                        });
-                      } else {
-                        setState(() {
-                          isButtonEnabled = false;
-                        });
-                      }
-                      if (isEmailFieldFocused == true) {
-                        _emailKey.currentState!.validate();
-                      }
-                      if (isPasswordFieldFocused == true) {
-                        _passwordKey.currentState!.validate();
-                      }
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          "${Constants.emailLabel}/UserName",
-
-                          style: FTextStyle.formLabelTxtStyle,
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!),
-                        const SizedBox(height: 5),
-                        TextFormField(
-                          key: _emailKey,
-                          focusNode: _emailFocusNode,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: FormFieldStyle.defaultemailDecoration,
-                          inputFormatters: [NoSpaceFormatter()],
-                          controller: _email,
-                          validator: ValidatorUtils.emailOrUsernameValidator,
-                          onTap: () {
-                            setState(() {
-                              isEmailFieldFocused = true;
-                              isPasswordFieldFocused = false;
-                            });
-                          },
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!),
-                        const SizedBox(height: 15),
-                        Text(
-                          "Password",
-                          style: FTextStyle.formLabelTxtStyle,
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!),
-                        const SizedBox(height: 5),
-                        TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          key: _passwordKey,
-                          focusNode: _passwordFocusNode,
-                          decoration: FormFieldStyle
-                              .defaultPasswordInputDecoration
-                              .copyWith(
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black45,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  passwordVisible = !passwordVisible;
-                                });
-                              },
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                          controller: _password,
-                          obscureText: !passwordVisible,
-                          inputFormatters: [NoSpaceFormatter()],
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter a password';
-                            }
-
-                            if (!ValidatorUtils.isValidPass(value)) {
-                              return 'Password must be at least 8 characters';
-                            }
-
-                            return null; // Password is valid
-                          },
-                          onTap: () {
-                            setState(() {
-                              isPasswordFieldFocused = true;
-                              isEmailFieldFocused = false;
-                            });
-                          },
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!),
-                      ],
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              checkboxChecked = !checkboxChecked;
-                              // print('Checkbox checked: $checkboxChecked');
-
-                              PrefUtils.setRememberMe(checkboxChecked);
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 5),
-                            child: IconTheme(
-                              data: const IconThemeData(
-                                color: AppColors.appSky,
-                                size: 20,
-                              ),
-                              child: Icon(
-                                checkboxChecked
-                                    ? Icons.check_box
-                                    : Icons.check_box_outline_blank,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Text(
-                          Constants.rememberMeTxt,
-                          style: FTextStyle.listTitleSub.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: Colors.black),
-                        ),
-                      ],
-                    ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => ForgotPassword(
-                    //
-
-                    //         ),
-                    //       ),
-                    //     );
-                    //   },
-                    //   child: Text(
-                    //     "Forgot Password ?",
-                    //     style: FTextStyle.listTitleSub.copyWith(
-                    //         fontWeight: FontWeight.w600,
-                    //         fontSize: 15,
-                    //         color: Colors.black),
-                    //   ),
-                    // ),
                   ],
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: ElevatedButton(
-                    onPressed: (){
-                      if (formKey.currentState!.validate()) {
-                        // All fields are valid, proceed with submission
-                        setState(() {
-                          isLoading = true; // Start loading
-                        });
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => ForgotPassword(
+                //
+
+                //         ),
+                //       ),
+                //     );
+                //   },
+                //   child: Text(
+                //     "Forgot Password ?",
+                //     style: FTextStyle.listTitleSub.copyWith(
+                //         fontWeight: FontWeight.w600,
+                //         fontSize: 15,
+                //         color: Colors.black),
+                //   ),
+                // ),
+              ],
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: ElevatedButton(
+                onPressed: (){
+                  if (formKey.currentState!.validate()) {
+                    // All fields are valid, proceed with submission
+                    setState(() {
+                      isLoading = true; // Start loading
+                    });
+                    if (widget.selectedRole == 'isselect organizer') {
+                      setState(() {
+                        PrefUtils.setIsLogin(true);
+                        PrefUtils.setRoleSelection(widget.selectedRole);
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                           OrganizerHomePage(selectedRole: widget.selectedRole,),
+                        ),
+                      );
+                    } else {
+                      setState(() {
+                        PrefUtils.setIsLogin(true);
+                        PrefUtils.setRoleSelection("");
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              HomeDelegates( selectedRole: widget.selectedRole,),
+                        ),
+                      );
+                    }
+
+                  } else {
+                    // If any field is invalid, trigger validation error display
+                    formKey.currentState!.validate();
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    backgroundColor: isButtonEnabled
+                        ? AppColors.appSky
+                        : AppColors.formFieldBorderColour,
+                    // Button color depending on the enabled state
+                    minimumSize: const Size(double.infinity, 50),
+                    // Minimum height
+                    maximumSize: const Size(double.infinity, 50),
+                    // elevation: 1 // Maximum height
+                    ),
+                child: Center(
+                  child: Text(
+                    "Log in",
+                    style: FTextStyle.loginBtnStyle,
+                  ),
+                ),
+              ).animateOnPageLoad(
+                animationsMap['imageOnPageLoadAnimation2']!,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "New here ? ",
+                    style: FTextStyle.listTitleSub.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
                         if (widget.selectedRole == 'isselect organizer') {
                           setState(() {
                             PrefUtils.setIsLogin(true);
@@ -439,111 +491,39 @@ class _LoginScreenState extends State<LoginScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                               OrganizerHomePage(selectedRole: widget.selectedRole,),
+                                  const OrganizerRegister(),
                             ),
                           );
-                        } else {
+                        }
+
+                        else {
                           setState(() {
-                            PrefUtils.setIsLogin(true);
-                            PrefUtils.setRoleSelection("");
+                            setState(() {
+                              PrefUtils.setIsLogin(true);
+                              PrefUtils.setRoleSelection("");
+                            });
                           });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  HomeDelegates( selectedRole: widget.selectedRole,),
+                                   FeaturedConferences( selectedRole: widget.selectedRole,),
                             ),
                           );
                         }
-
-                      } else {
-                        // If any field is invalid, trigger validation error display
-                        formKey.currentState!.validate();
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        backgroundColor: isButtonEnabled
-                            ? AppColors.primaryColour
-                            : AppColors.formFieldBorderColour,
-                        // Button color depending on the enabled state
-                        minimumSize: const Size(double.infinity, 50),
-                        // Minimum height
-                        maximumSize: const Size(double.infinity, 50),
-                        // elevation: 1 // Maximum height
-                        ),
-                    child: Center(
+                      },
                       child: Text(
-                        "Log in",
-                        style: FTextStyle.loginBtnStyle,
+                        "Create an Account",
+                        style: FTextStyle.listTitleSub.copyWith(
+                            color: AppColors.appSky,
+                            fontWeight: FontWeight.w800),
                       ),
                     ),
-                  ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!,
                   ),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "New here ? ",
-                        style: FTextStyle.listTitleSub.copyWith(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () {
-                            if (widget.selectedRole == 'isselect organizer') {
-                              setState(() {
-                                PrefUtils.setIsLogin(true);
-                                PrefUtils.setRoleSelection(widget.selectedRole);
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const OrganizerRegister(),
-                                ),
-                              );
-                            }
-
-                            else {
-                              setState(() {
-                                setState(() {
-                                  PrefUtils.setIsLogin(true);
-                                  PrefUtils.setRoleSelection("");
-                                });
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                       FeaturedConferences( selectedRole: widget.selectedRole,),
-                                ),
-                              );
-                            }
-                          },
-                          child: Text(
-                            "Create an Account",
-                            style: FTextStyle.listTitleSub.copyWith(
-                                color: AppColors.appSky,
-                                fontWeight: FontWeight.w800),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

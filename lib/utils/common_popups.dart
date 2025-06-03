@@ -113,7 +113,7 @@ class CustomPopup extends StatelessWidget {
                 ? ElevatedButton(
               onPressed: onOkPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primaryColour,
+                backgroundColor: AppColors.appSky,
                 textStyle: FTextStyle.loginBtnStyle,
                 // Adjusted button height
                 shape: RoundedRectangleBorder(
@@ -138,7 +138,7 @@ class CustomPopup extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onOkPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColour,
+                  backgroundColor: AppColors.appSky,
                   textStyle: FTextStyle.loginBtnStyle,
                   // Adjusted button height
                   shape: RoundedRectangleBorder(
@@ -224,7 +224,7 @@ class _DeleteCustomPopupState extends State<DeleteCustomPopup> {
                   Navigator.pop(context); // Call the provided callback
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColour,
+                  backgroundColor: AppColors.appSky,
                   textStyle: FTextStyle.loginBtnStyle,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(35.0),
@@ -251,7 +251,7 @@ class _DeleteCustomPopupState extends State<DeleteCustomPopup> {
                     Navigator.pop(context); // Call the provided callback
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColour,
+                    backgroundColor: AppColors.appSky,
                     textStyle: FTextStyle.loginBtnStyle,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(35.0),
@@ -280,7 +280,7 @@ class _DeleteCustomPopupState extends State<DeleteCustomPopup> {
                   widget.onActionPressed(); // Call the provided callback
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColour,
+                  backgroundColor: AppColors.appSky,
                   textStyle: FTextStyle.loginBtnStyle,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(35.0),
@@ -316,7 +316,7 @@ class _DeleteCustomPopupState extends State<DeleteCustomPopup> {
                     widget.onActionPressed(); // Call the provided callback
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColour,
+                    backgroundColor: AppColors.appSky,
                     textStyle: FTextStyle.loginBtnStyle,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(35.0),

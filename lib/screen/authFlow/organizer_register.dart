@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -112,11 +111,11 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   String? genderTitleName;
   late final TextEditingController _email = TextEditingController();
   late final TextEditingController _first = TextEditingController();
-  late final TextEditingController _last = TextEditingController();
+
   late final TextEditingController _password = TextEditingController();
   late final TextEditingController _mobileNumber = TextEditingController();
   late final TextEditingController _dateBirth = TextEditingController();
-  late final TextEditingController _city = TextEditingController();
+
 
   late final GlobalKey<FormFieldState<String>> _emailKey =
   GlobalKey<FormFieldState<String>>();
@@ -429,7 +428,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                     ),
 
                     const SizedBox(height: 8),
-                    Text("${Constants.emailLabel}", style: FTextStyle.SubHeadingTxtStyle),
+                    Text(Constants.emailLabel, style: FTextStyle.SubHeadingTxtStyle),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(

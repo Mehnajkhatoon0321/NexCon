@@ -151,7 +151,7 @@ class _AbstractOrganizerState extends State<AbstractOrganizer> {
                   child: Text(
                     "Create",
                     style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
+                        .copyWith(color: AppColors.appSky,fontSize: 13),
                   )),
             ),
           )

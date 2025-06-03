@@ -218,7 +218,7 @@ class _AbstractSubmissionDeadlinesState extends State<AbstractSubmissionDeadline
                     borderRadius: BorderRadius.circular(30),
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.primaryColour,
+                        AppColors.appSky,
                         AppColors.secondaryColour,
                       ],
                       begin: Alignment.topLeft,

@@ -93,10 +93,9 @@ class _MangeScheduleCreateState extends State<MangeScheduleCreate>  {
       ],
     ),
   };
-  int _selectedValue = 1;
+
   String? conferenceCategoryTitleName;
-  final TextEditingController _presentationNumberController = TextEditingController();
-  final TextEditingController _presentationNameController = TextEditingController();
+
   String? timeListTitleName;
   String? showListTitleName;
   List<String> conferenceTitleName = [
@@ -113,17 +112,12 @@ class _MangeScheduleCreateState extends State<MangeScheduleCreate>  {
    '12-03-2024',
  ];
 
-  final FocusNode _presentationFocusNode = FocusNode();
 
-  bool _presentationNumberErrorMessage = false;
-  bool _presentationNameErrorMessage = false;
   late final GlobalKey<FormFieldState<String>> _conferenceCategoryKey =
   GlobalKey<FormFieldState<String>>();
   late final FocusNode _selectconferenceCategoryFocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState<String>> _presentationKey =
-  GlobalKey<FormFieldState<String>>();final GlobalKey<FormFieldState<String>> _presentationNameKey =
-  GlobalKey<FormFieldState<String>>();
+
   //
   late final GlobalKey<FormFieldState<String>> timeCategoryKey =
   GlobalKey<FormFieldState<String>>();
@@ -710,7 +704,7 @@ class _MangeScheduleCreateState extends State<MangeScheduleCreate>  {
                         borderRadius: BorderRadius.circular(30),
                         gradient: LinearGradient(
                           colors: [
-                            AppColors.primaryColour,
+                            AppColors.appSky,
                             AppColors.secondaryColour,
                           ],
                           begin: Alignment.topLeft,

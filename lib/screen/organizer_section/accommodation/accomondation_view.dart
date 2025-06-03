@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
@@ -37,7 +36,7 @@ class _AccommodationViewState extends State<AccommodationView> {
     }
 
   ;
-  bool _isTextEmpty = true;
+
 
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
@@ -170,11 +169,7 @@ class _AccommodationViewState extends State<AccommodationView> {
   @override
   void initState() {
     super.initState();
-    controllerText.addListener(() {
-      setState(() {
-        _isTextEmpty = controllerText.text.isEmpty;
-      });
-    });
+
     // BlocProvider.of<AllRequesterBloc>(context)
     //     .add(GetBillingListHandler("", pageNo, pageSize));
     paginationCall();
@@ -197,29 +192,12 @@ class _AccommodationViewState extends State<AccommodationView> {
     });
   }
   Timer? _debounce;
-  void _onSearchChanged(String value) {
-    setState(() {
-      _isTextEmpty = value.isEmpty;
-      searchQuery = value;
-    });
 
-    // Cancel the previous timer
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-
-    // Start a new timer
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      pageNo=1;
-      // Call the API only after the user has stopped typing for 500 milliseconds
-      // BlocProvider.of<AllRequesterBloc>(context).add(
-      //     GetBillingListHandler(searchQuery, pageNo, pageSize));
-    });
-  }
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
@@ -514,7 +492,7 @@ class _AccommodationViewState extends State<AccommodationView> {
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: activeConferenceList['bookingStatus'] == "Success"
-                                      ? Colors.green
+                                      ? AppColors.appSky
                                       : Colors.orange,
                                 ),
                               ),
@@ -533,7 +511,7 @@ class _AccommodationViewState extends State<AccommodationView> {
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: activeConferenceList['feeStatus'] == "Success"
-                                      ? Colors.green
+                                      ? AppColors.appSky
                                       : Colors.orange,
                                 ),
                               ),
@@ -558,16 +536,5 @@ class _AccommodationViewState extends State<AccommodationView> {
     );
   }
 
-  void _clearText() {
-    controllerText.clear();
-    setState(() {
-      _isTextEmpty = true;
-      data.clear();
-      pageNo = 1;
-      hasMoreData = true;
-      totalPages = 0;
-      // BlocProvider.of<AllRequesterBloc>(context)
-      //     .add(GetBillingListHandler("", pageNo, pageSize));
-    });
-  }
+
 }

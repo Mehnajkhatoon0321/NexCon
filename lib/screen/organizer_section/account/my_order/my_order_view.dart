@@ -6,8 +6,8 @@ import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
 class MyOrderView extends StatefulWidget {
-  String id;
-   MyOrderView({ required this.id ,super.key});
+  final String id;
+   const MyOrderView({ required this.id ,super.key});
 
   @override
   State<MyOrderView> createState() => _MyOrderViewState();
@@ -234,7 +234,7 @@ class _MyOrderViewState extends State<MyOrderView> {
 
                   _buildDetailTile("Payment Status", activeConferenceList['bookingStatus'],
                       valueColor: activeConferenceList['bookingStatus'] == "Success"
-                          ? Colors.green
+                          ? AppColors.appSky
                           : Colors.orange),
 
                 ],

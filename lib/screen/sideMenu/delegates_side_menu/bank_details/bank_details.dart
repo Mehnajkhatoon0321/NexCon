@@ -212,7 +212,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
       child: Scaffold(
         backgroundColor:AppColors.backgroundColor,
         appBar: AppBar(
-          backgroundColor: AppColors.primaryColour,// Coral for app bar
+          backgroundColor: AppColors.appSky,// Coral for app bar
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 28),
             onPressed: () {
