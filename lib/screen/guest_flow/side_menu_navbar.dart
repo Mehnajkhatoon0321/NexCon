@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/authFlow/change_password.dart';
-import 'package:nexcon/screen/authFlow/delegate_my_profile/my_profile.dart';
+
 import 'package:nexcon/screen/authFlow/organizer_my_profile/my_profile_organizer.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
+import 'package:nexcon/screen/delegates_section/delegates_conferences/delegates_conference.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/abstract/abstract.dart';
 
-import 'package:nexcon/screen/guest_flow/delegates_register_process/featured_conferences.dart';
+
 import 'package:nexcon/screen/delegates_section/paper_delegates/paper_delegates.dart';
 import 'package:nexcon/screen/organizer_section/accommodation/accomodation.dart';
 import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/about.dart';
 import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
 import 'package:nexcon/screen/sideMenu/delegates_side_menu/how_works_delegates.dart';
-import 'package:nexcon/screen/sideMenu/common_section/plan_pricing.dart';
+
 import 'package:nexcon/screen/sideMenu/common_section/services.dart';
 import 'package:nexcon/screen/sideMenu/delegates_side_menu/my_receipt.dart';
 import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/abstract_organizer/abstract_theam/abstract_organizer.dart';
@@ -44,13 +46,9 @@ import 'package:nexcon/screen/sideMenu/organizer/settings/setcheckout-setcheckin
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/pref_utils.dart';
-import '../sideMenu/delegates_side_menu/abstract/abstract.dart';
 import '../sideMenu/delegates_side_menu/accomondation/accomodation.dart';
 import '../sideMenu/delegates_side_menu/bank_details/bank_details.dart';
 import '../sideMenu/organizer/abstract_and_paper/abstract_organizer/review_abstract/review_abstract.dart';
-
-
-
 class SideMenuScreen extends StatefulWidget {
   final String selectedRole;
   const SideMenuScreen({required this.selectedRole,super.key});
@@ -78,22 +76,20 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
   ];
   String? selectedSubSection;
-
   String? expandedItem;
   String? expandedSubItem;
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+
     List<Map<String, dynamic>> filteredList;
 
     if (widget.selectedRole == 'guestFlow') {
-      // Show all items for guestFlow
+
       filteredList = listItem;
     } else if (widget.selectedRole == 'isselect organizer') {
-      // Show only organizer-related items
+
       filteredList = [
-        // {'icon': Icons.person, 'subtitle': 'My Profile Details'},
+
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
         {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Organization'},
         {
@@ -198,14 +194,16 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     } else {
       // Default items for other roles
       filteredList = [
-        {'icon': Icons.account_balance, 'subtitle': 'Bank Data'},
-        {'icon': Icons.event, 'subtitle': 'Conferences'},
-        {'icon': Icons.summarize, 'subtitle': 'Abstract'},
+        // {'icon': Icons.account_balance, 'subtitle': 'Bank Data'},
+        {'icon': Icons.event, 'subtitle': 'All Conferences '},
         {'icon': Icons.padding_rounded, 'subtitle': 'Paper'},
         {'icon': Icons.home_filled, 'subtitle': 'Accommodation'},
-        {'icon': Icons.receipt_long, 'subtitle': 'My Receipt'},
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Delegate'},
-        {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
+        // {'icon': Icons.summarize, 'subtitle': 'Abstract'},
+
+        // {'icon': Icons.receipt_long, 'subtitle': 'My Receipt'},
+
+        // {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
         {'icon': Icons.info, 'subtitle': 'About'},
         {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
 
@@ -479,10 +477,10 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) =>  PricingScreen()),
         );
         break;
-      case 'Conferences':
+      case 'All Conferences ':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  FeaturedConferences(selectedRole: widget.selectedRole,)),
+          MaterialPageRoute(builder: (context) =>  DelegatesConference(selectedRole: widget.selectedRole,)),
         );
         break;
       case 'Contact':

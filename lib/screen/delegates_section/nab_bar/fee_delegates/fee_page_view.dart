@@ -139,7 +139,7 @@ class _FeePageViewState extends State<FeePageView> {
   Map<String, dynamic> errorServerMessage = {};
   String? errorMessage;
 
-  Timer? _debounce;
+
 
   @override
   Widget build(BuildContext context) {

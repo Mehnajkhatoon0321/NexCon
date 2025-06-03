@@ -539,7 +539,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Upload",
+                  "Upload Fee Payment Proof",
                   style: FTextStyle.formLabelTxtStyle,
                 ).animateOnPageLoad(
                   animationsMap['imageOnPageLoadAnimation2']!,
@@ -553,7 +553,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 10),
                     fillColor: AppColors.formFieldBackColour,
-                    hintText: "Upload File",
+                    hintText: "Upload Fee Payment Proof",
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.attach_file),
                       onPressed: () async {

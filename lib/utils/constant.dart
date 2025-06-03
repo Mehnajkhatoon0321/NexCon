@@ -1,3 +1,6 @@
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class Constants {
   Constants._();
 
@@ -327,5 +330,39 @@ static const   List<String> titleName = [
   'Other',
 ];
   static const  List<String> cityNamesCategories = ["City1","City"];
+  static String formatDate(String date) {
+    final parsedDate = DateTime.tryParse(date);
+    if (parsedDate == null) return date;
+    return DateFormat("dd MMM yyyy").format(parsedDate);
+  }
+  static Future<void> launchEmail(String email) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+    );
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      throw 'Could not launch $emailUri';
+    }
+  }
+
+  static Future<void> launchWebsite(String url) async {
+    final Uri uri = Uri.parse(url.startsWith('http') ? url : 'https://$url');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  static  Future<void> launchWhatsApp(String phone) async {
+    final whatsappUrl = Uri.parse("https://wa.me/$phone");
+    if (await canLaunchUrl(whatsappUrl)) {
+      await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch WhatsApp';
+    }
+  }
 
 }

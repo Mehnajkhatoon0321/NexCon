@@ -541,10 +541,9 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                                   country: selectCountryNamesCategories.toString(), dateBirth: _dateBirth.text.toString(),  mobileNumber: _mobileNumber.text.toString(), conference: '', ),
                               ),
                             );
-                            print("Form is valid, proceed with submission.");
+
                           } else {
-                            // Form is invalid
-                            print("Form is invalid, please fill all required fields.");
+
                           }
                         },
                         style: ElevatedButton.styleFrom(

@@ -58,12 +58,10 @@ class _RegistrationFeePageState extends State<RegistrationFeePage> {
               1: FlexColumnWidth(2.5),
             },
             children: feeData.asMap().entries.map((entry) {
-              final index = entry.key;
+
               final category = entry.value.keys.first;
               final fee = entry.value.values.first;
 
-              // Apply bold style for the first row (header)
-              final isHeader = index == 0;
 
               return TableRow(
                 children: [

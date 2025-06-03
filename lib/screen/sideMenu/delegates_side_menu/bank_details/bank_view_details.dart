@@ -157,4 +157,6 @@ class _ViewBankDetailsState extends State<ViewBankDetails> {
       ),
     );
   }
+
+
 }

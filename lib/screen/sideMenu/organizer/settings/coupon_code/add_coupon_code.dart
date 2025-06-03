@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:intl/intl.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
@@ -109,6 +110,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
   late final GlobalKey<FormFieldState<String>> titleKey = GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> codeKey = GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> discountValueKey = GlobalKey<FormFieldState<String>>();
+  late final GlobalKey<FormFieldState<String>> discountTypeKey = GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> validFromKey = GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> validToKey = GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> usageLimitKey = GlobalKey<FormFieldState<String>>();
@@ -136,7 +138,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
 
   String? discountType;
   String? status;
-
+  bool isTitleFieldFocused = false;
   List<String> discountTypeOptions = ['Percentage', 'Flat'];
   List<String> statusOptions = ['Active', 'Inactive'];
   void initState() {
@@ -226,7 +228,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
           child: Form(
               key: formKey,
               onChanged: () {
-                final isValid = _titleController.text.isNotEmpty &&
+        if(_titleController.text.isNotEmpty && ValidatorUtils.isValidCommon(_titleController.text)&&
                     _codeController.text.isNotEmpty &&
                     discountType != null &&
                     _discountValueController.text.isNotEmpty &&
@@ -234,11 +236,16 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                     _validToController.text.isNotEmpty &&
                     _usageLimitController.text.isNotEmpty &&
                     status != null &&
-                    conferenceCategoryTitleName != null && conferenceCategoryTitleName!.isNotEmpty;
+                    conferenceCategoryTitleName != null && conferenceCategoryTitleName!.isNotEmpty);
 
                 setState(() {
-                  isButtonEnabled = isValid;
+                  isButtonEnabled = true;
                 });
+
+                if (isTitleFieldFocused == true) {
+                  titleKey.currentState!.validate();
+                }
+
               },
 
               child:Column(
@@ -263,8 +270,19 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                     ),
                     controller: _titleController,
                     validator: ValidatorUtils.model,
+                    onChanged: (value) {
+                      setState(() {
+                        // Validate only the name field
+                        titleKey.currentState?.validate();
+                      });
+                    },
                     onTap: () {
+                      setState(() {
+                        isTitleFieldFocused == true;
 
+                        // Reset other fields if needed
+
+                      });
                     },
                   ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!,
@@ -276,11 +294,18 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                       .animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
                   const SizedBox(height: 5),
                   TextFormField(
+                    key: codeKey,
                     controller: _codeController,
                     decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
                       hintText: "Enter Coupon Code",
                     ),
                     validator: ValidatorUtils.model,
+                    onChanged: (value) {
+                      setState(() {
+                        // Validate only the name field
+                        codeKey.currentState?.validate();
+                      });
+                    },
                   ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
 
                   const SizedBox(height: 10),
@@ -290,6 +315,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                   DropdownButtonFormField<String>(
                     value: discountType,
                     isExpanded: true,
+                    key: discountTypeKey,
                     hint: const Text("Select Discount Type", style: FTextStyle.formhintTxtStyle),
                     items: discountTypeOptions.map((type) {
                       return DropdownMenuItem<String>(
@@ -301,6 +327,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                       setState(() {
                         discountType = val;
                       });
+                      discountTypeKey.currentState?.validate(); // Validate on
                     },
                     decoration: FormFieldStyle.dropDown.copyWith(
                       errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
@@ -314,11 +341,18 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                   const SizedBox(height: 5),
                   TextFormField(
                     controller: _discountValueController,
+                    key:discountValueKey ,
                     keyboardType: TextInputType.number,
                     decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
                       hintText: "Enter Discount Value",
                     ),
                     validator: ValidatorUtils.model,
+                    onChanged: (value) {
+                      setState(() {
+                        // Validate only the name field
+                        discountValueKey.currentState?.validate();
+                      });
+                    },
                   ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
 
                   const SizedBox(height: 10),
@@ -326,6 +360,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                       .animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
                   const SizedBox(height: 5),
                   TextFormField(
+                    key: validFromKey,
                     controller: _validFromController,
                     readOnly: true,
                     decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
@@ -340,7 +375,11 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                         lastDate: DateTime(2100),
                       );
                       if (picked != null) {
-                        _validFromController.text = picked.toIso8601String().split('T').first;
+                        setState(() {
+                          _validFromController.text = DateFormat('yyyy-MM-dd').format(picked);
+                        });
+                        validFromKey.currentState?.validate();
+
                       }
                     },
                     validator: ValidatorUtils.model,
@@ -353,6 +392,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                   TextFormField(
                     controller: _validToController,
                     readOnly: true,
+                    key: validToKey,
                     decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
                       hintText: "Select End Date",
                       suffixIcon: const Icon(Icons.calendar_today, size: 20),
@@ -365,9 +405,14 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                         lastDate: DateTime(2100),
                       );
                       if (picked != null) {
-                        _validToController.text = picked.toIso8601String().split('T').first;
+                        setState(() {
+                          _validToController.text = DateFormat('yyyy-MM-dd').format(picked);
+                          // _validToController.text = picked.toIso8601String().split('T').first;
+                        });
+                        validToKey.currentState?.validate(); // Validate the field after date is picked
                       }
                     },
+
                     validator: ValidatorUtils.model,
                   ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
 
@@ -377,11 +422,18 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                   const SizedBox(height: 5),
                   TextFormField(
                     controller: _usageLimitController,
+                    key: usageLimitKey,
                     keyboardType: TextInputType.number,
                     decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
                       hintText: "Enter Usage Limit",
                     ),
                     validator: ValidatorUtils.model,
+                    onChanged: (value) {
+                      setState(() {
+                        // Validate only the name field
+                        usageLimitKey.currentState?.validate();
+                      });
+                    },
                   ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
 
 
@@ -392,6 +444,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                   DropdownButtonFormField<String>(
                     value: status,
                     isExpanded: true,
+                    key: statusKey,
                     hint: const Text("Select Status", style: FTextStyle.formhintTxtStyle),
                     items: statusOptions.map((s) {
                       return DropdownMenuItem<String>(
@@ -403,6 +456,7 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                       setState(() {
                         status = val;
                       });
+                      statusKey.currentState?.validate();
                     },
                     decoration: FormFieldStyle.dropDown.copyWith(
                       errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),

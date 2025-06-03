@@ -3,22 +3,24 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:intl/intl.dart';
+
 import 'package:nexcon/utils/colours.dart';
+
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/validator_utils.dart';
+class AbstractionRegister extends StatefulWidget {
+   String isEdit;
+   String title;
 
-class PaperRegister extends StatefulWidget {
-  String isEdit;
-   PaperRegister({required this.isEdit,super.key});
+   AbstractionRegister({required this.isEdit,required this.title,super.key});
 
   @override
-  State<PaperRegister> createState() => _PaperRegisterState();
+  State<AbstractionRegister> createState() => _AbstractionRegisterState();
 }
 
-class _PaperRegisterState extends State<PaperRegister>{
+class _AbstractionRegisterState extends State<AbstractionRegister> {
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -102,14 +104,15 @@ class _PaperRegisterState extends State<PaperRegister>{
     '4th International Science Communication Conference',
     '5th International Tech & Innovation Summit',
   ];
-  final GlobalKey<FormFieldState> _paperFileKey = GlobalKey<FormFieldState>();
-  final FocusNode _paperFileFocusNode = FocusNode();
-  final TextEditingController paperFileController = TextEditingController();
+  final GlobalKey<FormFieldState> _abstractPaperFileKey = GlobalKey<FormFieldState>();
+  final FocusNode _abstractPaperFileFocusNode = FocusNode();
 
-  String? paperFileName;
-  File? paperFile;
-  bool isPaperFileUploaded = false;
-  bool isPaperUploadFocused = false;
+  TextEditingController abstractPaperFileController = TextEditingController();
+
+  File? abstractPaperFile;
+  String? abstractPaperFileName;
+  bool isAbstractPaperFileUploaded = false;
+  bool isAbstractPaperUploadFocused = false;
 
   late final GlobalKey<FormFieldState<String>> _conferenceCategoryKey =
   GlobalKey<FormFieldState<String>>();
@@ -122,59 +125,10 @@ class _PaperRegisterState extends State<PaperRegister>{
   //
   bool isButtonEnabled = false;
 
-
-  late final GlobalKey<FormFieldState<String>> validFromKey = GlobalKey<FormFieldState<String>>();
-
-
-
   final delegateNumberController = TextEditingController();
   bool isSelectedConferenceFocused = false;
   bool isWaitlistFieldFocused = false;
   bool isDelegateNumberFieldFocused = false;
-
-  String? selectedCategory;
-
-  List<String> categoryList = [
-    'Workshop',
-    'Seminar',
-    'Webinar',
-    'Symposium',
-    // Add more categories if needed
-  ];
-
-
-  @override
-  void initState() {
-    super.initState();
-
-    _wishlistFocusNode.addListener(() {
-      if (!_wishlistFocusNode.hasFocus) {
-        _wishlistKey.currentState?.validate();
-      }
-    });
-
-
-
-    _selectconferenceCategoryFocusNode.addListener(() {
-      if (!_selectconferenceCategoryFocusNode.hasFocus) {
-        _conferenceCategoryKey.currentState?.validate();
-      }
-    });
-  }
-  final GlobalKey<FormFieldState> _paperTitleKey = GlobalKey<FormFieldState>();
-  final FocusNode _paperTitleFocusNode = FocusNode();
-  final TextEditingController paperTitleController = TextEditingController();
-
-  bool isPaperTitleFieldFocused = false;
-
-
-  TextEditingController abstractPaperFileController = TextEditingController();
-
-  File? abstractPaperFile;
-  String? abstractPaperFileName;
-  bool isAbstractPaperFileUploaded = false;
-  bool isAbstractPaperUploadFocused = false;
-
 
   final GlobalKey<FormFieldState> _paperTypeKey = GlobalKey<FormFieldState>();
   final FocusNode _selectPaperTypeFocusNode = FocusNode();
@@ -199,6 +153,10 @@ class _PaperRegisterState extends State<PaperRegister>{
 
   bool isRemarksFocused = false;
 
+  final GlobalKey<FormFieldState> _paperTitleKey = GlobalKey<FormFieldState>();
+  final FocusNode _paperTitleFocusNode = FocusNode();
+
+  final TextEditingController paperTitleController = TextEditingController();
 
   bool isPaperTitleFocused = false;
   final GlobalKey<FormFieldState> _presentingAuthorNameKey = GlobalKey<FormFieldState>();
@@ -215,6 +173,17 @@ class _PaperRegisterState extends State<PaperRegister>{
   final FocusNode _descriptionFocusNode = FocusNode();
   final TextEditingController descriptionController = TextEditingController();
   bool isDescriptionFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+
+  }
+
+
+
+
   @override
   Widget build(BuildContext context){
     var height = MediaQuery.of(context).size.height;
@@ -235,7 +204,8 @@ class _PaperRegisterState extends State<PaperRegister>{
             },
           ),
           title: Text(
-            widget.isEdit.isNotEmpty ?"Edit Paper":"Create Paper",
+            widget.isEdit.isNotEmpty ? 'Edit Abstract Session/Themes' : 'Create Abstract Session/Themes',
+
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
@@ -273,51 +243,50 @@ class _PaperRegisterState extends State<PaperRegister>{
                 children: [
                   SizedBox(height:height*0.01 ,),
                   Text(
-                    "Select Conference ",
-                    style: FTextStyle.SubHeadingTxtStyle,
+                    widget.title,
+                    style: FTextStyle.subheading,
                   ).animateOnPageLoad(
                       animationsMap['imageOnPageLoadAnimation2']!),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(vertical: 10.0),
-                    child: DropdownButtonFormField<String>(
-                      key: _conferenceCategoryKey,
-                      focusNode: _selectconferenceCategoryFocusNode,
-                      value: conferenceCategoryTitleName,
-                      isExpanded: true, // ✅ Prevent horizontal overflow
-                      hint: const Text(
-                        "Select Conference ",
-                        style: FTextStyle.formhintTxtStyle,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      items: conferenceTitleName.map((category) {
-                        return DropdownMenuItem<String>(
-                          value: category,
-                          child: Text(
-                            category,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          conferenceCategoryTitleName = newValue;
-                        });
-                        _conferenceCategoryKey.currentState?.validate();
-                      },
-                      decoration: FormFieldStyle.dropDown.copyWith(
-                        errorStyle: const TextStyle(
-                          color: AppColors.errorColor,  // Or any other color you'd like
-                          fontSize: 12,
-                        ),
-                      ),
-                      validator: ValidatorUtils.model,
-                    ),
-                  ),
-          
-          
+                  // Padding(
+                  //   padding:
+                  //   const EdgeInsets.symmetric(vertical: 10.0),
+                  //   child: DropdownButtonFormField<String>(
+                  //     key: _conferenceCategoryKey,
+                  //     focusNode: _selectconferenceCategoryFocusNode,
+                  //     value: conferenceCategoryTitleName,
+                  //     isExpanded: true, // ✅ Prevent horizontal overflow
+                  //     hint: const Text(
+                  //       "Select Conference",
+                  //       style: FTextStyle.formhintTxtStyle,
+                  //       overflow: TextOverflow.ellipsis,
+                  //     ),
+                  //     items: conferenceTitleName.map((category) {
+                  //       return DropdownMenuItem<String>(
+                  //         value: category,
+                  //         child: Text(
+                  //           category,
+                  //           overflow: TextOverflow.ellipsis,
+                  //           maxLines: 1,
+                  //           style: const TextStyle(fontSize: 14),
+                  //         ),
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (newValue) {
+                  //       setState(() {
+                  //         conferenceCategoryTitleName = newValue;
+                  //       });
+                  //       _conferenceCategoryKey.currentState?.validate();
+                  //     },
+                  //     decoration: FormFieldStyle.dropDown.copyWith(
+                  //       errorStyle: const TextStyle(
+                  //         color: AppColors.errorColor,  // Or any other color you'd like
+                  //         fontSize: 12,
+                  //       ),
+                  //     ),
+                  //     validator: ValidatorUtils.model,
+                  //   ),
+                  // ),
+          SizedBox(height: 20,),
                   Text(
                     "Select Proposal Type",
                     style: FTextStyle.SubHeadingTxtStyle,
@@ -365,6 +334,8 @@ class _PaperRegisterState extends State<PaperRegister>{
                   Text(
                     "Paper Title",
                     style: FTextStyle.SubHeadingTxtStyle,
+                  ).animateOnPageLoad(
+                    animationsMap['imageOnPageLoadAnimation2']!,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -383,7 +354,7 @@ class _PaperRegisterState extends State<PaperRegister>{
                           // Reset other field focus flags if you have them
                         });
                       },
-                    )
+                    ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
                   ),
           
                   Text(
@@ -408,13 +379,13 @@ class _PaperRegisterState extends State<PaperRegister>{
                           // Reset other fields focus states if needed
                         });
                       },
-                    )// Ensure this animation exists
+                    )
                   ),
-          
+
                   Text(
                     "Presenting Author's Name",
                     style: FTextStyle.SubHeadingTxtStyle,
-          
+
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -432,12 +403,13 @@ class _PaperRegisterState extends State<PaperRegister>{
                           // Reset other field focus states if necessary
                         });
                       },
+                    // Make sure this exists
                     ),
-          
                   ),
                   Text(
                     "Keywords",
                     style: FTextStyle.SubHeadingTxtStyle,
+
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -455,11 +427,13 @@ class _PaperRegisterState extends State<PaperRegister>{
                           // Reset other field focus states if necessary
                         });
                       },
-                    )
+                    // Ensure this animation exists
+                    ),
                   ),
                   Text(
                     "Description",
                     style: FTextStyle.SubHeadingTxtStyle,
+
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -467,7 +441,7 @@ class _PaperRegisterState extends State<PaperRegister>{
                       key: _descriptionKey, // Define in your state
                       focusNode: _descriptionFocusNode, // Define in your state
                       controller: descriptionController, // Define in your state
-                      maxLines: 7, // Allows multi-line input
+                      maxLines: 5, // Allows multi-line input
                       minLines: 3,
                       decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
                         hintText: "Enter Description",
@@ -479,15 +453,13 @@ class _PaperRegisterState extends State<PaperRegister>{
                           // Reset other focus flags if needed
                         });
                       },
-                    )
+                    // Ensure animation exists
+                    ),
                   ),
-          
-          
-          
-          
-                  const SizedBox(height: 10),
+
+
                   Text(
-                    "Upload Paper",
+                    "Upload Abstract Paper",
                     style: FTextStyle.formLabelTxtStyle,
                   ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!,
@@ -495,31 +467,31 @@ class _PaperRegisterState extends State<PaperRegister>{
                   const SizedBox(height: 10),
                   TextFormField(
                     readOnly: true,
-                    key: _paperFileKey,
-                    focusNode: _paperFileFocusNode,
+                    key: _abstractPaperFileKey,
+                    focusNode: _abstractPaperFileFocusNode,
                     decoration: FormFieldStyle.defaultemailDecoration.copyWith(
                       contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                       fillColor: AppColors.formFieldBackColour,
-                      hintText: "Upload Paper File",
+                      hintText: "Upload Abstract Paper File",
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.attach_file),
                         onPressed: () async {
                           final result = await FilePicker.platform.pickFiles(
                             type: FileType.custom,
-                            allowedExtensions: ['pdf', 'doc', 'docx','png'],
+                            allowedExtensions: ['pdf', 'doc', 'docx', 'png'],
                           );
                           if (result != null && result.files.isNotEmpty) {
                             setState(() {
-                              paperFileName = result.files.single.name;
-                              paperFile = File(result.files.single.path!);
-                              isPaperFileUploaded = true;
-                              paperFileController.text = paperFileName!;
+                              abstractPaperFileName = result.files.single.name;
+                              abstractPaperFile = File(result.files.single.path!);
+                              isAbstractPaperFileUploaded = true;
+                              abstractPaperFileController.text = abstractPaperFileName!;
                             });
                           }
                         },
                       ),
                     ),
-                    controller: paperFileController,
+                    controller: abstractPaperFileController,
                     validator: ValidatorUtils.uploadValidator,
                     onChanged: (text) {
                       setState(() {
@@ -528,17 +500,21 @@ class _PaperRegisterState extends State<PaperRegister>{
                     },
                     onTap: () {
                       setState(() {
-                        isPaperUploadFocused = true;
+                        isAbstractPaperUploadFocused = true;
                       });
                     },
                     onEditingComplete: () {
                       setState(() {
-                        isPaperUploadFocused = false;
+                        isAbstractPaperUploadFocused = false;
                       });
                     },
                   ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!,
                   ),
+          
+          
+          
+          
           
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 30 ,),
@@ -580,7 +556,7 @@ class _PaperRegisterState extends State<PaperRegister>{
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
-                            child: Text(widget.isEdit.isNotEmpty ?"Edit Paper":"Create Paper",style: FTextStyle.loginBtnStyle),
+                            child:  Text(widget.isEdit.isNotEmpty ? "Update" : "Submit", style: FTextStyle.loginBtnStyle),
                           ),
                         ),
                       ),
@@ -596,4 +572,5 @@ class _PaperRegisterState extends State<PaperRegister>{
       ),
     );
   }
+
 }

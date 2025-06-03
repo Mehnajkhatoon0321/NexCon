@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/screen/authFlow/change_password.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/abstract/abstract.dart';
 
-import 'package:nexcon/screen/delegates_section/nab_bar/delegates_category_page.dart';
 import 'package:nexcon/screen/delegates_section/nab_bar/fee_delegates/fee_page.dart';
-import 'package:nexcon/screen/delegates_section/nab_bar/fee_delegates/pay_registaration_fee.dart';
-import 'package:nexcon/screen/delegates_section/nab_bar/my_conference.dart';
+
+import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference.dart';
 import 'package:nexcon/screen/guest_flow/side_menu_navbar.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
@@ -16,6 +16,8 @@ import 'package:nexcon/utils/pref_utils.dart';
 
 import '../authFlow/delegate_my_profile/edit_profile.dart';
 import '../authFlow/delegate_my_profile/my_profile.dart';
+
+
 
 
 class HomeDelegates extends StatefulWidget {
@@ -111,8 +113,9 @@ class _HomeDelegatesState extends State<HomeDelegates> {
 
   final List<Map<String, dynamic>> _navBarItems = [
     {"title": "My Conference", "icon": Icons.event},
-    {"title": "Delegates", "icon": Icons.people},
-    {"title": "Fee", "icon": Icons.attach_money},
+    {"title": "Abstract", "icon": Icons.book},
+    {"title": "Fee", "icon": Icons.payment},
+
     {"title": "My Profile", "icon": Icons.person},
   ];
   final List<Map<String, dynamic>> _customMenuItems = [
@@ -129,7 +132,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
       case 0:
         return const MyConferencePage();
       case 1:
-        return const DelegatesCategoryPage();
+        return const AbstractScreen();
       case 2:
         return const FeePage();
       case 3:
@@ -285,31 +288,69 @@ class _HomeDelegatesState extends State<HomeDelegates> {
             },
           )
         ]
-            : (_selectedIndex == 2)
-            ? [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 37,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => PayRegistrationFee(
-                    bankName: '', date: '', amount: '', image: '', tnNumber: '', title: '', paymentMode: '',
-                  )));
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-                  backgroundColor: Colors.white,
-                ),
-                child: Text(
-                  "Pay Register",
-                  style: FTextStyle.loginBtnStyle.copyWith(color: AppColors.primaryColour, fontSize: 12),
-                ),
-              ),
-            ),
-          )
-        ]
-            : [],
+
+
+            :
+        // (_selectedIndex == 2)
+        //     ? [
+        //   Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: SizedBox(
+        //       height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 37,
+        //       child: ElevatedButton(
+        //         onPressed: () {
+        //           Navigator.push(context, MaterialPageRoute(builder: (_) => PayRegistrationFee(
+        //             bankName: '', date: '', amount: '', image: '', tnNumber: '', title: '', paymentMode: '',
+        //           )));
+        //         },
+        //         style: ElevatedButton.styleFrom(
+        //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+        //           backgroundColor: Colors.white,
+        //         ),
+        //         child: Text(
+        //           "Registration Fee",
+        //           style: FTextStyle.loginBtnStyle.copyWith(color: AppColors.primaryColour, fontSize: 12),
+        //         ),
+        //       ),
+        //     ),
+        //   )
+        // ]
+        //     :
+        // (_selectedIndex == 1)
+        //     ? [
+        //   Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: SizedBox(
+        //       height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 37,
+        //       child: ElevatedButton(
+        //         onPressed: () {
+        //           Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //               builder: (_) => AbstractionRegister(isEdit: '', title: '',),
+        //             ),
+        //           );
+        //         },
+        //         style: ElevatedButton.styleFrom(
+        //           shape: RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(26),
+        //           ),
+        //           backgroundColor: Colors.white,
+        //         ),
+        //         child: Text(
+        //           "Add",
+        //           style: FTextStyle.loginBtnStyle.copyWith(
+        //             color: AppColors.primaryColour,
+        //             fontSize: 12,
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   )
+        //
+        // ] :
+        //
+        [],
       ),
 
       drawer: SideMenuScreen(selectedRole: widget.selectedRole),

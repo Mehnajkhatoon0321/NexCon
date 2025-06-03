@@ -87,19 +87,9 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType
-        .toString()
-        .split('.')
-        .last;
+
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(
@@ -218,8 +208,7 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                               context,
                               item['id'], // Pass the selected ID for identification
                                   () {
-                                // Refresh callback after the dialog is closed
-                                print("Dialog Closed, Refresh Callback");
+
                               },
                               item['category'], // Pass the initial category of the selected item
                             );
@@ -276,7 +265,8 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
       int selectedIds, // Pass the selected ID for identifying the category
       Function refreshCallback,
       String? initialCategory, // Pass the initial category, allowing null
-      ) {
+      )
+  {
     final formKey = GlobalKey<FormState>();
     String? selectedCategory = initialCategory;
 

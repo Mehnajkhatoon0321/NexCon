@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:intl/intl.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/validator_utils.dart';
@@ -99,12 +100,15 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
   late final FocusNode _conferenceFocusNode = FocusNode();
   final GlobalKey<FormFieldState<String>> conferenceCategoryKey = GlobalKey<FormFieldState<String>>();
   String? fileName1;
-  String? fileName2;
+
   File? imagesId;
-  File? imagesId2;
+
   bool isUploadFocused = false;
-  bool isUpload2Focused = false;
+
   bool isImageUploaded = false;
+  bool isUpload2Focused = false;
+  File? imagesId2;
+  String? fileName2;
   bool isImage2Uploaded = false;
   late final FocusNode _uploadNameNode = FocusNode();
   late final FocusNode _uploadName2Node = FocusNode();
@@ -212,6 +216,7 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
                             isImageUploaded = true;
                             uploadName.text = fileName1!;
                           });
+                          _uploadNameKey.currentState?.validate();
                         }
                       },
                     ),
@@ -222,6 +227,7 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
                     setState(() {
                       isButtonEnabled = ValidatorUtils.isValidCommon(text);
                     });
+
                   },
                   onTap: () {
                     setState(() {
@@ -260,6 +266,7 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
                             isImage2Uploaded = true;
                             uploadName2.text = fileName1!;
                           });
+                          _uploadNameKey2.currentState?.validate();
                         }
                       },
                     ),
@@ -270,6 +277,7 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
                     setState(() {
                       isButtonEnabled = ValidatorUtils.isValidCommon(text);
                     });
+
                   },
                   onTap: () {
                     setState(() {
@@ -290,6 +298,7 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
               const SizedBox(height: 6),
 
               TextFormField(
+                key: validFromKey,
                 controller: _validFromController,
                 readOnly: true,
                 decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
@@ -304,7 +313,13 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
                     lastDate: DateTime(2100),
                   );
                   if (picked != null) {
-                    _validFromController.text = picked.toIso8601String().split('T').first;
+                    setState(() {
+                      _validFromController.text = DateFormat('yyyy-MM-dd').format(picked);
+                      // _validFromController.text = picked.toIso8601String().split('T').first;
+                    });
+                    validFromKey.currentState?.validate();
+
+
                   }
                 },
                 validator: ValidatorUtils.model,
@@ -314,6 +329,7 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
               Text("Generation Receipt Date-Delegate", style: FTextStyle.SubHeadingTxtStyle),
 
               TextFormField(
+                key: validToKey,
                 controller: _validToController,
                 readOnly: true,
                 decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
@@ -328,7 +344,12 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
                     lastDate: DateTime(2100),
                   );
                   if (picked != null) {
-                    _validToController.text = picked.toIso8601String().split('T').first;
+                    setState(() {
+                      _validToController.text = DateFormat('yyyy-MM-dd').format(picked);
+                      // _validToController.text = picked.toIso8601String().split('T').first;
+                    });
+                    validToKey.currentState?.validate();
+
                   }
                 },
 

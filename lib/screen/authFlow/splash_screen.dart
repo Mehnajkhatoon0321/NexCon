@@ -42,18 +42,14 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Center(
-            child: Container(
-              // alignment: Alignment.topCenter,
-
-              child: Image.asset(
-                'assets/images/applogo.png',
-                width: (displayType == 'desktop' || displayType == 'tablet')
-                    ? 450.w
-                    : 350,
-                height: (displayType == 'desktop' || displayType == 'tablet')
-                    ? 100.h
-                    : 170,
-              ),
+            child: Image.asset(
+              'assets/images/applogo.png',
+              width: (displayType == 'desktop' || displayType == 'tablet')
+                  ? 450.w
+                  : 350,
+              height: (displayType == 'desktop' || displayType == 'tablet')
+                  ? 100.h
+                  : 170,
             ),
           ),
         ),
@@ -78,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
               (route) => false,
         );
       } else if (roleSelection==""){
-        print("Navigating to HomeDelegates");
+
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (BuildContext context) => HomeDelegates(

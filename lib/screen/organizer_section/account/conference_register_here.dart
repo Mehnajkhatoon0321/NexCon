@@ -908,6 +908,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                                 isImageUploaded = true;
                                 uploadName.text = fileName1!;
                               });
+                              _uploadNameKey.currentState?.validate();
                             }
                           },
                         ),
@@ -970,6 +971,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                                 isImageUploaded = true;
                                 uploadConferenceName.text = fileName2!;
                               });
+                              _uploadConferenceNameKey.currentState?.validate();
                             }
                           },
                         ),

@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
+
 import 'package:nexcon/screen/authFlow/registrationFeePage.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
 import 'package:nexcon/screen/delegates_section/delegates_home_page.dart';

@@ -166,10 +166,7 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
           key: formKey,
           onChanged: () {
             if ( conferenceCategoryTitleName != null &&
-                conferenceCategoryTitleName!.isNotEmpty &&
-
-
-                ValidatorUtils.isAbstract(wishlistController.text)
+                conferenceCategoryTitleName!.isNotEmpty && ValidatorUtils.isAbstract(wishlistController.text)
             ) {
               setState(() {
                 isButtonEnabled = true;

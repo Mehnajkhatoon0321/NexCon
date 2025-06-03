@@ -37,6 +37,8 @@ class PricingScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: DataTable(
                 columnSpacing: 10,
+                dataRowMinHeight: 50, // increase height
+                dataRowMaxHeight: 110,
                 border: TableBorder.all(),
                 columns: [
                   DataColumn(label: _tableHeaderText("Service")),
@@ -88,7 +90,7 @@ class PricingScreen extends StatelessWidget {
   Text _tableHeaderText(String text) {
     return Text(
       text,
-      style: FTextStyle.headingMiddle,
+      style: FTextStyle.subheading,
       textAlign: TextAlign.center,
     );
   }
@@ -146,7 +148,7 @@ class PricingScreen extends StatelessWidget {
 
   Widget _registerButton(String plan,context ) {
     return  Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(30.0),
       child: Center(
         child: ElevatedButton(
           onPressed: (){
@@ -162,7 +164,7 @@ class PricingScreen extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             backgroundColor:  AppColors.appSky ,
-            minimumSize: const Size(100, 50),
+            minimumSize: const Size(80, 40),
           ),
           child: Center(child: Text("Register $plan", style: FTextStyle.loginBtnStyle)),
         ),
@@ -173,6 +175,7 @@ class PricingScreen extends StatelessWidget {
 
   DataRow _buildRow(String title, String basic, String pro, String elite, {bool isHeader = false}) {
     return DataRow(
+
       cells: [
         DataCell(_tableCellText(title, isHeader)),
         DataCell(_tableCellBasicText(basic, isHeader)),
@@ -185,12 +188,12 @@ class PricingScreen extends StatelessWidget {
   Widget _tableCellText(String text, bool isHeader, {Color color = Colors.black}) {
     return SizedBox(
       width: 180,
-      height: 90,
+      // height: 90,
       child: Center(
         child: Text(
           text,
           style:isHeader ? FTextStyle.listTitle :FTextStyle.listTitle,
-          maxLines: 4,
+          maxLines: 5,
           overflow: TextOverflow.ellipsis,textAlign: TextAlign.left,
         ),
       ),
@@ -199,12 +202,12 @@ class PricingScreen extends StatelessWidget {
   Widget _tableCellBasicText(String text, bool isHeader, {Color color = Colors.black}) {
     return SizedBox(
       width: 120,
-      height: 120,
+      // height: 120,
       child: Center(
         child: Text(
           text,
           style:isHeader ? FTextStyle.listTitle :FTextStyle.listTitle,
-          maxLines: 4,
+          maxLines: 5,
           overflow: TextOverflow.ellipsis,
         ),
       ),

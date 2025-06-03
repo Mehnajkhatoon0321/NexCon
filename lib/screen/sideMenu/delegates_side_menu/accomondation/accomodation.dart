@@ -108,52 +108,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
           style: FTextStyle.appBarTitleWhite,
         ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: (displayType == 'desktop' || displayType == 'tablet')
-                  ? 70
-                  : 37,
-              child: ElevatedButton(
-                  onPressed: () async {
 
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>const AccommodationRegister(bankName: '', date: '', amount: '', image: '', tnNumber: '', title: '', paymentMode: '',)
-                      ),
-
-                    );
-                    //     .then((result) {
-                    //   // Handle the result from the edit screen
-                    //   if (result[0]) {
-                    //     data.clear();
-                    //     pageNo = 1;
-                    //     hasMoreData = true;
-                    //     totalPages = 0;
-                    //     BlocProvider.of<AllRequesterBloc>(context)
-                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                    //   }
-                    // }
-                    // );
-
-                    // );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                      backgroundColor: Colors.white),
-                  child: Text(
-                    "Apply",
-                    style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.primaryColour,fontSize: 13),
-                  )),
-            ),
-          )
-        ],
       ),
 
       body: Column(
@@ -287,7 +242,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
-        'bookingStatus': "Pending",
+        'status': "Not Registered",
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
@@ -302,7 +257,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'tnDate': "2023-12-10",
         'bankName': "HDFC ",
         'amount': "23424343",
-        'status': "Success",
+        'status': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
         "fromDate": "23-11-2025",
@@ -316,7 +271,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
-        'bookingStatus': "Success",
+        'status': "Success",
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
@@ -331,7 +286,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
-        'bookingStatus': "Success",
+        'status': "Success",
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
@@ -358,7 +313,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
           final paymentMode = item['paymentMode'] ?? 'N/A';
           final bankName = item['bankName'] ?? 'N/A';
           final tnDate = item['tnDate'] ?? 'N/A';
-          final bookingStatus = item['bookingStatus'] ?? 'Pending';
+          final bookingStatus = item['status'] ?? 'Pending';
 
 
           return Container(
@@ -411,28 +366,6 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                       ),
 
 
-                      Text(
-                        'Payment Mode: $paymentMode',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.style,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Bank Name: ', style: FTextStyle.style),
-                          Expanded(
-                            child: Text(
-                              bankName,
-                              style: FTextStyle.style,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-
 
 
                       Row(
@@ -453,7 +386,87 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                           ),
                         ],
                       ),
+                      if (item['status'] == 'Success')
 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(height: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccommodationDelegatesView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         FeePageView(id: "",
+                              //
+                              //         ),
+                              //   ),
+                              // );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.appBlue,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.save_alt_rounded,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (item['status'] == 'Pending')
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -575,7 +588,120 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                           ),
                         ],
                       ),
+                      if (item['status'] == 'Not Registered')
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AccommodationDelegatesView(id: id,
 
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>const AccommodationRegister(bankName: '', date: '', amount: '', image: '', tnNumber: '', title: '', paymentMode: '',)
+                                      ),
+
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF0db050),
+                                      // Green for edit
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10,),
+                                GestureDetector(
+                                  onTap: () {
+                                    CommonPopups.showDeleteCustomPopup(
+                                      context,
+                                      "Are you sure you want to delete?",
+                                          () {
+                                        // Handle delete logic
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red, // Red for delete
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
 
 
                     ],
@@ -619,7 +745,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
-        'bookingStatus': "Pending",
+        'status': "Pending",
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
@@ -634,7 +760,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
-        'bookingStatus': "Success",
+        'status': "Success",
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
@@ -649,7 +775,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'tnDate': "2023-12-10",
         'bankName': "HDFC",
         'amount': "23424343",
-        'bookingStatus': "Success",
+        'status': "Success",
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
@@ -670,10 +796,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
 
           final fromDate = item['fromDate'] ?? 'N/A';
           final toDate = item['toDate'] ?? 'N/A';
-          final amount = item['amount']?.toString() ?? 'N/A';
-          final paymentMode = item['paymentMode'] ?? 'N/A';
-          final bankName = item['bankName'] ?? 'N/A';
-          final tnDate = item['tnDate'] ?? 'N/A';
+
           final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
@@ -727,27 +850,6 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                       ),
 
 
-                      Text(
-                        'Payment Mode: $paymentMode',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.style,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Bank Name: ', style: FTextStyle.style),
-                          Expanded(
-                            child: Text(
-                              bankName,
-                              style: FTextStyle.style,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
 
 
 
@@ -770,6 +872,87 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                         ],
                       ),
 
+                      if (item['status'] == 'Success')
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(height: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AccommodationDelegatesView(id: id,
+
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         FeePageView(id: "",
+                                //
+                                //         ),
+                                //   ),
+                                // );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.appBlue,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.save_alt_rounded,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      if (item['status'] == 'Pending')
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -809,45 +992,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                               ),
                             ),
                           ),
-                          SizedBox(width: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
 
-                              GestureDetector(
-                                onTap: () {
-                                  CommonPopups.showDeleteCustomPopup(
-                                    context,
-                                    "Are you sure you want to delete?",
-                                        () {
-                                      // Handle delete logic
-                                    },
-                                  );
-                                },
-                                child: Container(
-                                  height: 35,
-                                  width: 35,
-                                  decoration: BoxDecoration(
-                                    color: Colors.red, // Red for delete
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
-                                        blurRadius: 6,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Icon(
-                                    Icons.delete,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
 

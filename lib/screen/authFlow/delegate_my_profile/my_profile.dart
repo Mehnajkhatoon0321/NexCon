@@ -35,15 +35,12 @@ class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+
     var height = MediaQuery
         .of(context)
         .size
         .height;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(

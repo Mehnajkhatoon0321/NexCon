@@ -73,6 +73,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       "id": "1",
       "bookingStatus": "Approved",
       "conferenceId": "1232343543",
+      "registrationWaitList": "350",
       "conferenceName": "4th International Science Communication Conference",
       "fromDate": "24-12-2025",
       "toDate": "20-12-2025",
@@ -80,6 +81,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
     },
     {
       "id": "2",
+      "registrationWaitList": "350",
       "bookingStatus": "Approved",
       "conferenceId": "1232343543",
       "conferenceName": "4th International Science Communication Conference",
@@ -90,6 +92,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
     {
       "id": "3",
       "bookingStatus": "Approved",
+      "registrationWaitList": "350",
       "conferenceId": "1232343544",
       "conferenceName":
       "5th International Tech & Innovation Summit",
@@ -261,6 +264,18 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                   ),
                 ],
               ),
+              const SizedBox(height: 4),           const SizedBox(height: 4),
+              Row(
+                children: [
+                  Icon(Icons.access_time_rounded, size: 18, color: Colors.orange[600]),
+
+                  const SizedBox(width: 4),
+                  Text(
+                    "Registration Wait List: ${item['registrationWaitList']}",
+                      style: FTextStyle.style
+                  ),
+                ],
+              ),
               const SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -281,68 +296,68 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                 ],
               ),
               const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // View Icon
-                  InkWell(
-                    borderRadius: BorderRadius.circular(8),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyConferenceOrganizerView(
-                            id: item['id'],
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 36,
-                      width: 36,
-                      decoration: BoxDecoration(
-                        color: AppColors.secondaryColour,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(
-                        Icons.remove_red_eye_outlined,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  // Edit Icon
-                  InkWell(
-                    borderRadius: BorderRadius.circular(8),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyConferenceOrganizerEdit(
-                            conferenceName: item["conferenceName"],
-                            fromdata: item['fromDate'] ?? 'N/A',
-                            todata: item['toDate'] ?? 'N/A',
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 36,
-                      width: 36,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF0DB050),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     // View Icon
+              //     InkWell(
+              //       borderRadius: BorderRadius.circular(8),
+              //       onTap: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => MyConferenceOrganizerView(
+              //               id: item['id'],
+              //             ),
+              //           ),
+              //         );
+              //       },
+              //       child: Container(
+              //         height: 36,
+              //         width: 36,
+              //         decoration: BoxDecoration(
+              //           color: AppColors.secondaryColour,
+              //           borderRadius: BorderRadius.circular(8),
+              //         ),
+              //         child: const Icon(
+              //           Icons.remove_red_eye_outlined,
+              //           color: Colors.white,
+              //           size: 20,
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 12),
+              //     // Edit Icon
+              //     // InkWell(
+              //     //   borderRadius: BorderRadius.circular(8),
+              //     //   onTap: () {
+              //     //     Navigator.push(
+              //     //       context,
+              //     //       MaterialPageRoute(
+              //     //         builder: (context) => MyConferenceOrganizerEdit(
+              //     //           conferenceName: item["conferenceName"],
+              //     //           fromdata: item['fromDate'] ?? 'N/A',
+              //     //           todata: item['toDate'] ?? 'N/A', isEdit: '',
+              //     //         ),
+              //     //       ),
+              //     //     );
+              //     //   },
+              //     //   child: Container(
+              //     //     height: 36,
+              //     //     width: 36,
+              //     //     decoration: BoxDecoration(
+              //     //       color: const Color(0xFF0DB050),
+              //     //       borderRadius: BorderRadius.circular(8),
+              //     //     ),
+              //     //     child: const Icon(
+              //     //       Icons.edit,
+              //     //       color: Colors.white,
+              //     //       size: 20,
+              //     //     ),
+              //     //   ),
+              //     // ),
+              //   ],
+              // ),
 
             ],
           ),
@@ -434,6 +449,9 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                   ),
                 ],
               ),
+
+              const SizedBox(height: 4),
+
               const SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -454,40 +472,40 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                 ],
               ),
               const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // View Icon
-                  InkWell(
-                    borderRadius: BorderRadius.circular(8),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyConferenceOrganizerView(
-                            id: item['id'],
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 35,
-                      width: 35,
-                      decoration: BoxDecoration(
-                        color: AppColors.secondaryColour,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(
-                        Icons.remove_red_eye_outlined,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     // View Icon
+              //     InkWell(
+              //       borderRadius: BorderRadius.circular(8),
+              //       onTap: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) => MyConferenceOrganizerView(
+              //               id: item['id'],
+              //             ),
+              //           ),
+              //         );
+              //       },
+              //       child: Container(
+              //         height: 35,
+              //         width: 35,
+              //         decoration: BoxDecoration(
+              //           color: AppColors.secondaryColour,
+              //           borderRadius: BorderRadius.circular(8),
+              //         ),
+              //         child: const Icon(
+              //           Icons.remove_red_eye_outlined,
+              //           color: Colors.white,
+              //           size: 20,
+              //         ),
+              //       ),
+              //     ),
+              //     const SizedBox(width: 12),
+              //
+              //   ],
+              // ),
 
             ],
           ),
