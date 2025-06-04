@@ -316,7 +316,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
 
                         Row(
                           children: [
-                            Icon(Icons.calendar_today, size: 18, color: Colors.black),
+                            Icon(Icons.calendar_today, size: 18, color:AppColors.secondYellowColour),
                             SizedBox(width: 10,),
                             Text(
                               "${Constants.formatDate(item['fromDate'])} → ${Constants.formatDate(item['toDate'])}",
@@ -541,7 +541,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
 
                     Row(
                       children: [
-                        Icon(Icons.calendar_today, size: 18, color: Colors.black),
+                        Icon(Icons.calendar_today, size: 18, color:AppColors.secondYellowColour),
                         SizedBox(width: 10,),
                         Text(
 

@@ -495,9 +495,9 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const RoleSelectionScreen()),
         );
         break;
-      case 'Logout':
-        _showLogDialog(-1);
-        break;
+      // case 'Logout':
+      //   _showLogDialog(-1);
+      //   break;
       default:
         break;
     }
@@ -681,80 +681,80 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
     }
   }
-
-  void _showLogDialog(int index) {
-    if (_isLogoutDialogVisible) return; // Prevent showing multiple dialogs
-
-    _isLogoutDialogVisible = true; // Set the flag when showing the dialog
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: AppColors.greyLight,
-          child: Padding(
-            padding:  EdgeInsets.all(16.0),
-            child: Container(
-              color: AppColors.greyLight,
-              height: MediaQuery.of(context).size.height*0.15,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Are you sure you want to logout?", style: FTextStyle.preHeadingStyle),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.04),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: AppColors.boarderColour,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                        ),
-                        child: const Text("Cancel", style: TextStyle(color: Colors.black)),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          _isLogoutDialogVisible = false; // Reset the flag when closed
-                        },
-                      ),
-                      const SizedBox(width: 10),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: AppColors.appSky,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                        ),
-                        child: const Text("OK", style: TextStyle(color: Colors.white)),
-                        onPressed: () {
-                          PrefUtils.setIsLogin(false);
-                          PrefUtils.setToken("");
-                          // Save user
-                          PrefUtils.setUserEmailLogin("");
-                          // Save  role
-                          // PrefUtils.setUserId(0);
-
-                          PrefUtils.setUserPassword("");
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => RoleSelectionScreen()),
-                                (route) => false, // This will remove all previous routes
-                          ); // Close the dialog
-                          _isLogoutDialogVisible = false; // Reset the flag
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    ).then((_) {
-      _isLogoutDialogVisible = false; // Reset the flag when the dialog is closed
-    });
-  }
+  //
+  // void _showLogDialog(int index) {
+  //   if (_isLogoutDialogVisible) return; // Prevent showing multiple dialogs
+  //
+  //   _isLogoutDialogVisible = true; // Set the flag when showing the dialog
+  //
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Dialog(
+  //         backgroundColor: AppColors.greyLight,
+  //         child: Padding(
+  //           padding:  EdgeInsets.all(16.0),
+  //           child: Container(
+  //             color: AppColors.greyLight,
+  //             height: MediaQuery.of(context).size.height*0.15,
+  //             child: Column(
+  //               mainAxisSize: MainAxisSize.min,
+  //               children: [
+  //                 Text("Are you sure you want to logout?", style: FTextStyle.preHeadingStyle),
+  //                 SizedBox(height: MediaQuery.of(context).size.height*0.04),
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.end,
+  //                   children: [
+  //                     TextButton(
+  //                       style: TextButton.styleFrom(
+  //                         backgroundColor: AppColors.boarderColour,
+  //                         shape: RoundedRectangleBorder(
+  //                           borderRadius: BorderRadius.circular(25.0),
+  //                         ),
+  //                       ),
+  //                       child: const Text("Cancel", style: TextStyle(color: Colors.black)),
+  //                       onPressed: () {
+  //                         Navigator.of(context).pop();
+  //                         _isLogoutDialogVisible = false; // Reset the flag when closed
+  //                       },
+  //                     ),
+  //                     const SizedBox(width: 10),
+  //                     TextButton(
+  //                       style: TextButton.styleFrom(
+  //                         backgroundColor: AppColors.appSky,
+  //                         shape: RoundedRectangleBorder(
+  //                           borderRadius: BorderRadius.circular(25.0),
+  //                         ),
+  //                       ),
+  //                       child: const Text("OK", style: TextStyle(color: Colors.white)),
+  //                       onPressed: () {
+  //                         PrefUtils.setIsLogin(false);
+  //                         PrefUtils.setToken("");
+  //                         // Save user
+  //                         PrefUtils.setUserEmailLogin("");
+  //                         // Save  role
+  //                         // PrefUtils.setUserId(0);
+  //
+  //                         PrefUtils.setUserPassword("");
+  //                         Navigator.pushAndRemoveUntil(
+  //                           context,
+  //                           MaterialPageRoute(builder: (context) => RoleSelectionScreen()),
+  //                               (route) => false, // This will remove all previous routes
+  //                         ); // Close the dialog
+  //                         _isLogoutDialogVisible = false; // Reset the flag
+  //                       },
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   ).then((_) {
+  //     _isLogoutDialogVisible = false; // Reset the flag when the dialog is closed
+  //   });
+  // }
 
 }

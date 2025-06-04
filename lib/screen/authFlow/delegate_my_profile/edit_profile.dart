@@ -25,6 +25,14 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   late final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> _designationKey = GlobalKey<FormFieldState>();
+  String? selectedDesignation;
+  List<String> designationList = ['Professor', 'Doctor', 'Student', 'Researcher']; // Replace with your actual list
+  final GlobalKey<FormFieldState> _genderKey = GlobalKey<FormFieldState>();
+  String? selectedGender;
+  List<String> genderList = ['Male', 'Female', 'Other'];
+  final GlobalKey<FormFieldState> _institutionKey = GlobalKey<FormFieldState>();
+  final TextEditingController _institutionController = TextEditingController();
 
   late final TextEditingController customerPrice = TextEditingController();
 
@@ -39,30 +47,23 @@ class _EditProfileState extends State<EditProfile> {
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _customerPriceKey =
   GlobalKey<FormFieldState<String>>();
-
-  late final GlobalKey<FormFieldState<String>> _productCategoryKey =
-  GlobalKey<FormFieldState<String>>();
-
+  final GlobalKey<FormFieldState> _emailKey = GlobalKey<FormFieldState>();
+  final TextEditingController _emailController = TextEditingController();
+  final GlobalKey<FormFieldState> _mobileKey = GlobalKey<FormFieldState>();
+  final TextEditingController _mobileController = TextEditingController();
   late final GlobalKey<FormFieldState<String>> _descriptionsKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _warrantyKey =
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _gstKey =
   GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _mobileKey =
-  GlobalKey<FormFieldState<String>>();
-
   late final FocusNode _modelNode = FocusNode();
-  late final FocusNode _customerPriceNode = FocusNode();
 
-  late final FocusNode _productCategoryNode = FocusNode();
+  final GlobalKey<FormFieldState> _nameKey = GlobalKey<FormFieldState>();
+  final TextEditingController _nameController = TextEditingController();
 
-
-  late final FocusNode _descriptionNode = FocusNode();
-
-  late final FocusNode _gstNode = FocusNode();
-  late final FocusNode _mobileNode = FocusNode();
-
+  final GlobalKey<FormFieldState> _dobKey = GlobalKey<FormFieldState>();
+  final TextEditingController _dobController = TextEditingController();
 
 
 
@@ -96,15 +97,9 @@ class _EditProfileState extends State<EditProfile> {
   var selfiImg = '';
   List<int> profileImage = [];
   List<int> Images = [];
-
-  List<String> productCategories = [
-    'Application Developer',
-    'Web Developer',
-    'SEO',
-    'Marketing',
-    'Other',
-
-  ];
+  final GlobalKey<FormFieldState> _cityKey = GlobalKey<FormFieldState>();
+  String? selectedCity;
+  List<String> cityList = ['Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Chennai']; // Add your cities
 
 
   bool isLoading = false;
@@ -258,7 +253,7 @@ class _EditProfileState extends State<EditProfile> {
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 15,left: 20,right: 20),
                 child: Form(
-
+                  key: formKey,
                   onChanged: () {
                     if ( selectedProductCategory != null &&
                         selectedProductCategory!.isNotEmpty &&
@@ -276,9 +271,7 @@ class _EditProfileState extends State<EditProfile> {
                         isButtonEnabled = false;
                       });
                     }
-                    if (isProductCategoryFieldFocused == true) {
-                      _productCategoryKey.currentState!.validate();
-                    }
+                
 
 
                     if (isWarrantyFieldFocused == true) {
@@ -412,187 +405,234 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       Text(
                         "Name",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
-                      const SizedBox(height: 5),
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: TextFormField(
-                          key: _customerPriceKey,
-                          focusNode: _customerPriceNode,
-                          keyboardType: TextInputType.text,
-                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(hintText: "Enter name"),
-
-                          controller: customerPrice,
-                          validator: ValidatorUtils.model,
-                          onTap: () {
-                            setState(() {
-                              isProductCategoryFieldFocused=false;
-                              isBrandFieldFocused=false;
-                              isModelFieldFocused = false;
-                              isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = true;
-                              isDealerFocused = false;
-                              isDescriptionFieldFocused = false;
-
-                              isGstFieldFocused = false;
-                              isRemarkFieldFocused = false;
-                            });
+                          key: _nameKey,
+                          controller: _nameController,
+                          keyboardType: TextInputType.name,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter Name",
+                          ),
+                          onChanged: (val) {
+                            // Validate only this field on change
+                            _nameKey.currentState?.validate();
                           },
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!),
+                          validator: ValidatorUtils.model,
+                        ),
                       ),
                       Text(
-                        "Designation",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
+                        "Select Gender",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: DropdownButtonFormField<String>(
-                          key: _productCategoryKey,
-                          focusNode: _productCategoryNode,
-                          value: selectedProductCategory,
-                          hint: const Text("Select designation",style: FTextStyle.formhintTxtStyle,),
-                          items: productCategories
-                              .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category),
-                          ))
-                              .toList(),
+                          key: _genderKey,
+                          value: selectedGender,
+                          isExpanded: true,
+                          hint: const Text(
+                            "Select Gender",
+                            style: FTextStyle.formhintTxtStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          items: genderList.map((gender) {
+                            return DropdownMenuItem<String>(
+                              value: gender,
+                              child: Text(
+                                gender,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                            );
+                          }).toList(),
                           onChanged: (newValue) {
-
-
                             setState(() {
-                              selectedProductCategory = newValue;
-
+                              selectedGender = newValue;
                             });
-
-
-                            isProductCategoryFieldFocused=true;
-                            isBrandFieldFocused=false;
-                            isModelFieldFocused = false;
-                            isCustomerPriceFieldFocused = false;
-                            isDealerFocused = false;
-                            isDescriptionFieldFocused = false;
-                            isWarrantyFieldFocused = false;
-                            isGstFieldFocused = false;
-                            isRemarkFieldFocused = false;
-
+                            _genderKey.currentState?.validate();
                           },
-                          decoration:FormFieldStyle.dropDown,
-
+                          decoration: FormFieldStyle.dropDown.copyWith(
+                            errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
+                          ),
                           validator: ValidatorUtils.model,
+                        ),
+                      ),
+                      Text(
+                        "Date of Birth",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _dobKey,
+                          controller: _dobController,
+                          readOnly: true,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Select Date of Birth",
+                            suffixIcon: const Icon(Icons.calendar_today, size: 20),
+                          ),
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime(2000),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                            );
+                            if (pickedDate != null) {
+                              String formattedDate = "${pickedDate.day.toString().padLeft(2, '0')}/"
+                                  "${pickedDate.month.toString().padLeft(2, '0')}/"
+                                  "${pickedDate.year}";
+                              setState(() {
+                                _dobController.text = formattedDate;
+                              });
+                              _dobKey.currentState?.validate();
+                            }
+                          },
+                     validator: ValidatorUtils.model,
                         ),
                       ),
                       Text(
                         "Email",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: TextFormField(
-                          key: _gstKey,
-                          focusNode: _gstNode,
-                          keyboardType: TextInputType.text,
-                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(hintText: "Enter email"),
-                          inputFormatters: [NoSpaceFormatter()],
-                          controller: gst,
-                          validator: ValidatorUtils.model,
-                          onTap: () {
-                            setState(() {
-                              isProductCategoryFieldFocused=false;
-                              isBrandFieldFocused=false;
-                              isModelFieldFocused = false;
-                              isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = false;
-                              isDealerFocused = false;
-                              isDescriptionFieldFocused = false;
-
-                              isGstFieldFocused = true;
-                              isRemarkFieldFocused = false;
-                            });
+                          key: _emailKey,
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter Email",
+                          ),
+                          onChanged: (val) {
+                            // Validate only this field on change
+                            _emailKey.currentState?.validate();
                           },
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!),
+                          validator: (value) =>ValidatorUtils.emailValidator(value),
+                        ),
+                      ),
+
+
+                      Text(
+                        "Select Designation/Profession",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: DropdownButtonFormField<String>(
+                          key: _designationKey,
+                          value: selectedDesignation,
+                          isExpanded: true,
+                          hint: const Text(
+                            "Select Designation",
+                            style: FTextStyle.formhintTxtStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          items: designationList.map((designation) {
+                            return DropdownMenuItem<String>(
+                              value: designation,
+                              child: Text(
+                                designation,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedDesignation = newValue;
+                            });
+                            _designationKey.currentState?.validate();
+                          },
+                          decoration: FormFieldStyle.dropDown.copyWith(
+                            errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
+                          ),
+                          validator: ValidatorUtils.model,
+                        ),
                       ),
                       Text(
+                        "Institution Affiliation",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _institutionKey,
+                          controller: _institutionController,
+                          keyboardType: TextInputType.text,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter Institution Affiliation",
+                          ),
+                          onChanged: (val) {
+                            _institutionKey.currentState?.validate();
+                          },
+                          validator: ValidatorUtils.model,
+                        ),
+                      ),
+                      Text(
+                        "Select City",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: DropdownButtonFormField<String>(
+                          key: _cityKey,
+                          value: selectedCity,
+                          isExpanded: true,
+                          hint: const Text(
+                            "Select City",
+                            style: FTextStyle.formhintTxtStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          items: cityList.map((city) {
+                            return DropdownMenuItem<String>(
+                              value: city,
+                              child: Text(
+                                city,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedCity = newValue;
+                            });
+                            _cityKey.currentState?.validate();
+                          },
+                          decoration: FormFieldStyle.dropDown.copyWith(
+                            errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
+                          ),
+                          validator: ValidatorUtils.model,
+                        ),
+                      ),
+
+
+                      Text(
                         "Mobile Number",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: TextFormField(
                           key: _mobileKey,
-                          focusNode: _mobileNode,
-                          keyboardType: TextInputType.number,
-                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(hintText: "Enter mobile number"),
-                          inputFormatters: [NoSpaceFormatter()],
-                          controller: mobile,
-                          validator: ValidatorUtils.model,
-                          onTap: () {
-                            setState(() {
-                              isProductCategoryFieldFocused=false;
-                              isBrandFieldFocused=false;
-                              isModelFieldFocused = false;
-                              isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = false;
-                              isDealerFocused = false;
-                              isDescriptionFieldFocused = false;
-                              isMobileFieldFocused = true;
-                              isGstFieldFocused = false;
-
-                              isRemarkFieldFocused = false;
-                            });
-                          },
-                        ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!),
-                      ),
-                      Text(
-                        "Date Of Birth",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: TextFormField(
-                          key: _modelKey,
-                          focusNode: _modelNode,
-                          keyboardType: TextInputType.text,
+                          controller: _mobileController,
+                          keyboardType: TextInputType.phone,
+                          maxLength: 10, // Assuming 10-digit Indian number
                           decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                            hintText: "dd-mm-yyyy",
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                Icons.calendar_today, // Calendar icon
-                                color: Colors.grey, // Adjust color as needed
-                              ),
-                              onPressed: () {
-                                // Show date picker when the icon is pressed
-                                _selectDate(context);
-                              },
-                            ),
+                            hintText: "Enter Mobile Number",
+                            counterText: '', // Hides the default character counter
                           ),
-                          inputFormatters: [NoSpaceFormatter()],
-                          controller: remark,
-                          validator: ValidatorUtils.dateValidator,
-                          onTap: () {
-                            setState(() {
-                              isProductCategoryFieldFocused=false;
-                              isBrandFieldFocused=false;
-                              isModelFieldFocused = true;
-                              isCustomerPriceFieldFocused = false;
-                              isDealerFocused = false;
-                              isDescriptionFieldFocused = false;
-                              isWarrantyFieldFocused = false;
-                              isGstFieldFocused = false;
-                              isRemarkFieldFocused = false;
-                            });
+                          onChanged: (val) {
+                            _mobileKey.currentState?.validate();
                           },
-                        ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!,
+                          validator: ValidatorUtils.model,
                         ),
                       ),
 
@@ -600,73 +640,6 @@ class _EditProfileState extends State<EditProfile> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      Text(
-                        "Address",
-                        style: FTextStyle.formLabelTxtStyle,
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: TextFormField(
-                          key: _descriptionsKey,
-                          focusNode: _descriptionNode,
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 4, // Allows for multiple lines
-                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                            hintText: "Enter address",
-                          ),
-                          inputFormatters: [NoSpaceFormatter()],
-                          controller: descriptions,
-                          validator: ValidatorUtils.model,
-                          onTap: () {
-                            setState(() {
-                              isProductCategoryFieldFocused = false;
-                              isBrandFieldFocused = false;
-                              isModelFieldFocused = false;
-                              isWarrantyFieldFocused = false;
-                              isCustomerPriceFieldFocused = false;
-                              isDealerFocused = false;
-                              isDescriptionFieldFocused = true;
-                              isGstFieldFocused = false;
-                              isRemarkFieldFocused = false;
-                            });
-                          },
-                        ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation2']!,
-                        ),
-                      )
 
                     ],
                   ),
@@ -680,12 +653,16 @@ class _EditProfileState extends State<EditProfile> {
                   height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 40,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyProfile(),
-                        ),
-                      );
+                      if (formKey.currentState!.validate()) {
+
+
+                        Navigator.pop(context);
+
+                        // print("Form is valid, proceed with submission.");
+                      } else {
+                        // Form is invalid
+                        // print("Form is invalid, please fill all required fields.");
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

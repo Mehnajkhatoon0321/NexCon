@@ -285,6 +285,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
                         child: const Text("OK", style: TextStyle(color: Colors.white)),
                         onPressed: () {
                           PrefUtils.setIsLogin(false);
+
                           PrefUtils.setToken("");
                           // Save user
                           PrefUtils.setUserEmailLogin("");

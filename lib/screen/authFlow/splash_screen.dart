@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
 import 'package:nexcon/screen/delegates_section/delegates_home_page.dart';
+import 'package:nexcon/screen/guest_flow/home_page.dart';
 import 'package:nexcon/screen/organizer_section/organizer_home_page.dart';
 
 
@@ -60,21 +61,18 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigateUser(BuildContext context) {
     bool isLoggedIn = PrefUtils.getIsLogin();
     String roleSelection = PrefUtils.getRoleSelection();
-    // print("isLoggedIn: $isLoggedIn, roleSelection: $roleSelection");
 
     if (isLoggedIn == true) {
-      if (roleSelection == "isselect organizer") {
-        // print("Navigating to OrganizerHomePage");
+      if (roleSelection == "guestFlow") {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (BuildContext context) => OrganizerHomePage(
+            builder: (BuildContext context) => HomePage(
               selectedRole: roleSelection,
             ),
           ),
               (route) => false,
         );
-      } else if (roleSelection==""){
-
+      } else if (roleSelection == "isselect delegate") {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (BuildContext context) => HomeDelegates(
@@ -83,9 +81,26 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
               (route) => false,
         );
+      } else if (roleSelection == "isselect organizer") {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (BuildContext context) => OrganizerHomePage(
+              selectedRole: roleSelection,
+            ),
+          ),
+              (route) => false,
+        );
+      } else {
+        // Optional: Fallback page if roleSelection is not set
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (BuildContext context) => const RoleSelectionScreen(),
+          ),
+              (route) => false,
+        );
       }
-    } else {
-      // print("Navigating to RoleSelectionScreen");
+    }
+    else {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (BuildContext context) => const RoleSelectionScreen(),
@@ -94,6 +109,46 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     }
   }
+
+// void navigateUser(BuildContext context) {
+  //   bool isLoggedIn = PrefUtils.getIsLogin();
+  //   String roleSelection = PrefUtils.getRoleSelection();
+  //   // print("isLoggedIn: $isLoggedIn, roleSelection: $roleSelection");
+  //
+  //   if (isLoggedIn == true) {
+  //     if (roleSelection == "isselect organizer") {
+  //       // print("Navigating to OrganizerHomePage");
+  //       Navigator.of(context).pushAndRemoveUntil(
+  //         MaterialPageRoute(
+  //           builder: (BuildContext context) => OrganizerHomePage(
+  //             selectedRole: roleSelection,
+  //           ),
+  //         ),
+  //             (route) => false,
+  //       );
+  //     }
+  //     else if (roleSelection==""){
+  //
+  //       Navigator.of(context).pushAndRemoveUntil(
+  //         MaterialPageRoute(
+  //           builder: (BuildContext context) => HomeDelegates(
+  //             selectedRole: roleSelection,
+  //           ),
+  //         ),
+  //             (route) => false,
+  //       );
+  //     }
+  //   }
+  //   else {
+  //     // print("Navigating to RoleSelectionScreen");
+  //     Navigator.of(context).pushAndRemoveUntil(
+  //       MaterialPageRoute(
+  //         builder: (BuildContext context) => const RoleSelectionScreen(),
+  //       ),
+  //           (route) => false,
+  //     );
+  //   }
+  // }
 
 
 }

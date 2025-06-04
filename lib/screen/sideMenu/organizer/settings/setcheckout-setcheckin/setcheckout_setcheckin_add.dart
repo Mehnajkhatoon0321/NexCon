@@ -136,26 +136,7 @@ class _SetCheckoutSetCheckInAddState extends State<SetCheckoutSetCheckInAdd> {
                   ),
                 ),
 
-                Text(
-                  "Hotel Name",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    key: _hotelNameKey,
-                    controller: _hotelNameController,
-                    keyboardType: TextInputType.text,
-                    decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                      hintText: "Enter Hotel Name",
-                    ),
-                    onChanged: (val) {
-                      // Validate only this field on change
-                      _hotelNameKey.currentState?.validate();
-                    },
-                    validator: (value) => _validateNotEmpty(value, 'hotel name'),
-                  ),
-                ),
+
 
                 Text(
                   "Check In",

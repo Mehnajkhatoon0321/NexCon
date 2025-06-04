@@ -115,6 +115,7 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
             /// Venue Info
             _buildMinimalSection(
               icon: Icons.location_on_outlined,
+
               title: "Venue",
               data: {
                 "Venue": featuresCategoryDetails["nameVenue"],
@@ -196,7 +197,7 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
         children: [
           Row(
             children: [
-              Icon(icon, size: 20, color: Colors.black87),
+              Icon(icon, size: 20, color: AppColors.secondYellowColour),
               const SizedBox(width: 8),
               Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             ],

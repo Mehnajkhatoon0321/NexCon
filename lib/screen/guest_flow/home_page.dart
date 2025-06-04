@@ -428,12 +428,13 @@ class _HomePageState extends State<HomePage>
               Padding(
                 padding: const EdgeInsets.only(left: 3.0),
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 10.0, 5.0, 14.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text("Featured Conferences", style: FTextStyle.headingMiddle.copyWith(fontSize: 16)),
                           Text("View the top rated upcoming conferences", style: FTextStyle.style),
@@ -647,54 +648,61 @@ class _HomePageState extends State<HomePage>
                     }).toList(),
                     SizedBox(height: 15),
 
-                    // Center(
-                    //   child: SingleChildScrollView(
-                    //     scrollDirection: Axis.horizontal,
-                    //     padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 22),
-                    //     child: Row(
-                    //       children: horizontalItems.map((item) {
-                    //         return Column(
-                    //           mainAxisSize: MainAxisSize.min,
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: [
-                    //             Icon(
-                    //               item["icon"],
-                    //               size: 30,
-                    //               color: AppColors.appSky,
-                    //             ),
-                    //
-                    //             const SizedBox(height: 14),
-                    //             Text(
-                    //               item["title"],
-                    //               style: TextStyle(
-                    //                 fontWeight: FontWeight.bold,
-                    //                 fontSize: 18,
-                    //                 color: Colors.green.shade900,
-                    //                 letterSpacing: 0.5,
-                    //               ),
-                    //               textAlign: TextAlign.center,
-                    //               maxLines: 1,
-                    //               overflow: TextOverflow.ellipsis,
-                    //             ),
-                    //             const SizedBox(height: 8),
-                    //             Text(
-                    //               item["subtitle"],
-                    //               style: FTextStyle.style.copyWith(
-                    //                 fontSize: 12,
-                    //                 color: Colors.grey.shade700,
-                    //                 fontWeight: FontWeight.w500,
-                    //               ),
-                    //               textAlign: TextAlign.center,
-                    //               maxLines: 2,
-                    //               overflow: TextOverflow.ellipsis,
-                    //             ),
-                    //             VerticalDivider(color: AppColors.appSky,),
-                    //           ],
-                    //         );
-                    //       }).toList(),
-                    //     ),
-                    //   ),
-                    // ),
+                    Container(
+                      child: Center(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 22),
+                          child: Row(
+                            children: horizontalItems.map((item) {
+                              return Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(14.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        item["icon"],
+                                        size: 30,
+                                        color: AppColors.appSky,
+                                      ),
+
+                                      const SizedBox(height: 14),
+                                      Text(
+                                        item["title"],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          color: Colors.green.shade900,
+                                          letterSpacing: 0.5,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        item["subtitle"],
+                                        style: FTextStyle.style.copyWith(
+                                          fontSize: 12,
+                                          color: Colors.grey.shade700,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      VerticalDivider(color: AppColors.appSky,),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ),
                 Divider(color: AppColors.appSky,thickness: 0.5,),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 14.0),
@@ -951,16 +959,16 @@ class _HomePageState extends State<HomePage>
 
                     SizedBox(height: 25),
 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 28.0),
-                      child: Center(
-                        child: Text(
-                          "Follow Us",
-                          style: FTextStyle.headingMiddle.copyWith(fontSize: 16),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(vertical: 28.0),
+                    //   child: Center(
+                    //     child: Text(
+                    //       "Follow Us",
+                    //       style: FTextStyle.headingMiddle.copyWith(fontSize: 16),
+                    //       textAlign: TextAlign.center,
+                    //     ),
+                    //   ),
+                    // ),
 
                   ],
                 ),

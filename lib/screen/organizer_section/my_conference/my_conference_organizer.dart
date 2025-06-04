@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/constant.dart';
 
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
@@ -70,33 +71,20 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
   List<dynamic> activeConferenceList = [
     {
       "id": "1",
-      "bookingStatus": "Approved",
+      'bookingStatus': "Approved",
       "conferenceId": "1232343543",
-      "registrationWaitList": "350",
       "conferenceName": "4th International Science Communication Conference",
-      "fromDate": "24-12-2025",
-      "toDate": "20-12-2025",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20",
       "registration": "200",
     },
     {
       "id": "2",
-      "registrationWaitList": "350",
-      "bookingStatus": "Approved",
+      'bookingStatus': "Approved",
       "conferenceId": "1232343543",
       "conferenceName": "4th International Science Communication Conference",
-      "fromDate": "24-12-2025",
-      "toDate": "20-12-2025",
-      "registration": "200",
-    },
-    {
-      "id": "3",
-      "bookingStatus": "Approved",
-      "registrationWaitList": "350",
-      "conferenceId": "1232343544",
-      "conferenceName":
-      "5th International Tech & Innovation Summit",
-      "fromDate": "24-12-2025",
-      "toDate": "20-12-2025",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20",
       "registration": "200",
     },
   ];
@@ -244,18 +232,18 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(Icons.calendar_today, size: 18, color: Colors.grey[600]),
+                  Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
                   const SizedBox(width: 4),
                   Text(
-                    "${item['fromDate']} - ${item['toDate']}",
-                   style: FTextStyle.style
+                      "${Constants.formatDate(item['fromDate'])} → ${Constants.formatDate(item['toDate'])}",
+                      style: FTextStyle.style
                   ),
                 ],
               ),
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Icon(Icons.app_registration, size: 18, color: Colors.grey[600]),
+                  Icon(Icons.app_registration, size: 18, color:AppColors.appSky),
                   const SizedBox(width: 4),
                   Text(
                     "Total Registration: ${item['registration']}",
@@ -263,7 +251,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                   ),
                 ],
               ),
-              const SizedBox(height: 4),           const SizedBox(height: 4),
+              const SizedBox(height: 4),
               Row(
                 children: [
                   Icon(Icons.access_time_rounded, size: 18, color: Colors.orange[600]),
@@ -429,10 +417,10 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(Icons.calendar_today, size: 18, color: Colors.grey[600]),
+                  Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
                   const SizedBox(width: 4),
                   Text(
-                      "${item['fromDate']} - ${item['toDate']}",
+                      "${Constants.formatDate(item['fromDate'])} → ${Constants.formatDate(item['toDate'])}",
                       style: FTextStyle.style
                   ),
                 ],
@@ -440,7 +428,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Icon(Icons.app_registration, size: 18, color: Colors.grey[600]),
+                  Icon(Icons.app_registration, size: 18, color: AppColors.appSky),
                   const SizedBox(width: 4),
                   Text(
                       "Total Registration: ${item['registration']}",
@@ -451,7 +439,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
 
               const SizedBox(height: 4),
 
-              const SizedBox(height: 4),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,

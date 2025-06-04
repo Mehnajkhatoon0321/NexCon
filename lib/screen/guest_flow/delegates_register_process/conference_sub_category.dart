@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
+import 'package:nexcon/utils/pref_utils.dart';
 
 import 'conference_category_details.dart';
 
@@ -76,7 +78,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   String searchQuery = "";
   bool _isTextEmpty = true;
   final TextEditingController controllerText = TextEditingController();
-
+  bool isLoggedIn = PrefUtils.getIsLogin();
+  String roleSelection = PrefUtils.getRoleSelection();
   void _clearText() {
     controllerText.clear();
     setState(() {
@@ -303,14 +306,35 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                         ),
                                       ),
 
+
                                       ElevatedButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => DelegateRegister(title : conference["title"],selectedRole: widget.selected,),
-                                            ),
-                                          );
+
+
+                                          if (isLoggedIn==true) {
+                                            _showEditDialog(
+                                              context,
+                                              conference['id'].toString(), // Pass the selected ID for identification
+                                                  () {
+                                                // Refresh callback after the dialog is closed
+                                                print("Dialog Closed, Refresh Callback");
+                                                print("loginStatus ${PrefUtils.getIsLogin()}");
+                                              },
+                                              conference['category'], // Initial category
+                                            );
+                                          }
+                                          else {
+                                            print('Not Logged In');
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => DelegateRegister(
+                                                  title: conference["title"],
+                                                  selectedRole: widget.selected,
+                                                ),
+                                              ),
+                                            );
+                                          }
                                         },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
@@ -318,14 +342,16 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                           ),
                                           backgroundColor: AppColors.appSky,
                                           elevation: 2,
-                                          minimumSize: Size(80, 30), // Set minimum width and height
-                                          padding: EdgeInsets.symmetric(horizontal: 10),
+                                          minimumSize: const Size(80, 30),
+                                          padding: const EdgeInsets.symmetric(horizontal: 10),
                                         ),
                                         child: Text(
                                           "Register",
                                           style: FTextStyle.loginBtnStyle.copyWith(fontSize: 12),
                                         ),
-                                      ),
+                                      )
+
+
                                     ],
                                   ),
 
@@ -346,5 +372,166 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
     );
   }
+  void _showEditDialog(
+      BuildContext context,
+      String selectedIds, // Pass the selected ID for identifying the category
+      Function refreshCallback,
+      String? initialCategory, // Pass the initial category, allowing null
+      )
+  {
+    final formKey = GlobalKey<FormState>();
+    String? selectedCategory = initialCategory;
 
+    // Ensure the category list has unique values
+    final List<String> uniqueCategoryList = [
+      ...Set<String>.from(Constants.categoryName)
+    ];
+
+    bool isButtonEnabled = uniqueCategoryList.isNotEmpty;
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              title: const Text(
+                "Register Delegate",
+                style: FTextStyle.subheading,
+                textAlign: TextAlign.center,
+              ),
+              content: SingleChildScrollView(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Choose a Category",
+                          style:FTextStyle.subtitle,
+                        ),
+                        const SizedBox(height: 12),
+                        // Dropdown for Category Selection
+                        DropdownButtonFormField<String>(
+                          value: selectedCategory,
+                          hint: Text(
+                            "Select a category",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                          items: uniqueCategoryList.map((category) {
+                            return DropdownMenuItem(
+                              value: category,
+                              child: Container(
+                                constraints: const BoxConstraints(maxWidth: 200), // Set maximum width
+                                child: Text(
+                                  category,
+                                  style: FTextStyle.style,
+                                  // overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedCategory = newValue; // Update selected value
+                              isButtonEnabled = true; // Always enable when dropdown is not empty
+                            });
+                          },
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 12,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Please select a category.";
+                            }
+                            return null;
+                          },
+                        ),
+
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Cancel Button
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close dialog
+                      },
+                      child: Text(
+                        "Cancel",
+                        overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+                        softWrap: true, // Enable text wrapping
+
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ),
+                    // Update Button
+                    ElevatedButton(
+                      onPressed: isButtonEnabled
+                          ? () async {
+                        if (formKey.currentState!.validate()) {
+                          print("Selected Category: $selectedCategory");
+
+                          // Refresh the UI after updating the category
+                          refreshCallback();
+                          Navigator.of(context).pop();
+                        }
+                      }
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isButtonEnabled
+                            ? AppColors.appSky
+                            : Colors.grey[300],
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 30,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        "Post",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: isButtonEnabled ? Colors.white : Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
 }

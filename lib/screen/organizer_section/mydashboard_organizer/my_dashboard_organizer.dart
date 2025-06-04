@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nexcon/screen/organizer_section/upgrade_plan/upgrade_plan.dart';
 
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 class MyDashboardOrganizer extends StatefulWidget {
   const MyDashboardOrganizer({super.key});
@@ -74,11 +75,13 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.appSky, // Green 0DB050
-                          AppColors.secondaryColour, // Blue 023E8A
+                          AppColors.gradient, // Green 0DB050
+                          AppColors.secondYellowColour, // Blue 023E8A
+
                         ],
                         begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                        end: Alignment.topRight,
+                        stops: [0.2, 0.9],
                       ),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [BoxShadow(color: AppColors.shadowColor, blurRadius: 6)],
@@ -160,15 +163,15 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(item['conferenceName'] ?? '', style: FTextStyle.subtitle),
-          SizedBox(height: 8),
+          SizedBox(height: 4),
           Row(
             children: [
-              Icon(Icons.date_range, size: 18, color: AppColors.appSky),
+              Icon(Icons.date_range, size: 18, color: AppColors.secondYellowColour),
               SizedBox(width: 6),
-              Text("${item['fromDate']} - ${item['toDate']}", style: FTextStyle.style),
+              Text("${Constants.formatDate(item['fromDate'])}  → ${Constants.formatDate(item['toDate'])}", style: FTextStyle.style),
             ],
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

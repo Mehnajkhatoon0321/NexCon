@@ -45,8 +45,9 @@ class AppColors extends MaterialColor {
   static const Color drawerDisableButtonColor =
   Color.fromARGB(102, 104, 30, 102);
   static const appBlue = Color(0xFF3D94D1);
-  static const appSky = Color(0xff071960);
-  // static const appSky = Color(0xFF0a248c);
+  static const appSky = Color(0xff011a57);
+
+  static const gradient = Color(0xFF0a248c);
   // static const appSky = Color(0xFF26b758);
   static const primaryPinkColor = Color(0xFFF58CA9);
 
@@ -71,6 +72,7 @@ class AppColors extends MaterialColor {
   static const Color textSecondaryPrimaryColor = Color(0xFF045c35);
   static const Color headingSecondColor = Color(0xFF003366);
   static const Color secondaryColour = Color(0xFF023E8A);
+  static const Color secondYellowColour = Color(0xFFd69d00);
 
 
 

@@ -15,6 +15,8 @@ import 'package:nexcon/utils/no_space_input_formatter_class.dart';
 import 'package:nexcon/utils/pref_utils.dart';
 import 'package:nexcon/utils/validator_utils.dart';
 
+import 'forgot_password.dart';
+
 
 
 class LoginScreen extends StatefulWidget {
@@ -182,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         child: ListView(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             Align(
               alignment: Alignment.topLeft,
               child: Container(
@@ -210,6 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Container(
               alignment: Alignment.topCenter,
               child: Image.asset(
@@ -225,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 20.0),
+                padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                 child: Text(
                   "Welcome to NexCon! Let's get you signed in",
                   style: FTextStyle.headingMiddle,
@@ -380,26 +383,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                // GestureDetector(
-                //   onTap: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) => ForgotPassword(
-                //
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ForgotPassword(selectedRole: '',
 
-                //         ),
-                //       ),
-                //     );
-                //   },
-                //   child: Text(
-                //     "Forgot Password ?",
-                //     style: FTextStyle.listTitleSub.copyWith(
-                //         fontWeight: FontWeight.w600,
-                //         fontSize: 15,
-                //         color: Colors.black),
-                //   ),
-                // ),
+
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "Forgot Password ?",
+                    style: FTextStyle.listTitleSub.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        color: Colors.black),
+                  ),
+                ),
               ],
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
@@ -412,8 +415,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       isLoading = true; // Start loading
                     });
+
                     if (widget.selectedRole == 'isselect organizer') {
                       setState(() {
+                        // PrefUtils.setIsLogin(true);
+                        // PrefUtils.setRoleSelection("isselect organizer");
                         PrefUtils.setIsLogin(true);
                         PrefUtils.setRoleSelection(widget.selectedRole);
                       });
@@ -424,10 +430,12 @@ class _LoginScreenState extends State<LoginScreen> {
                            OrganizerHomePage(selectedRole: widget.selectedRole,),
                         ),
                       );
-                    } else {
+                    }
+
+                    else {
                       setState(() {
                         PrefUtils.setIsLogin(true);
-                        PrefUtils.setRoleSelection("");
+                        PrefUtils.setRoleSelection("isselect delegate");
                       });
                       Navigator.push(
                         context,
@@ -484,7 +492,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () {
                         if (widget.selectedRole == 'isselect organizer') {
                           setState(() {
-                            PrefUtils.setIsLogin(true);
+
                             PrefUtils.setRoleSelection(widget.selectedRole);
                           });
                           Navigator.push(
@@ -499,8 +507,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         else {
                           setState(() {
                             setState(() {
-                              PrefUtils.setIsLogin(true);
-                              PrefUtils.setRoleSelection("");
+                              // PrefUtils.setIsLogin(true);
+                              // PrefUtils.setRoleSelection("");
                             });
                           });
                           Navigator.push(

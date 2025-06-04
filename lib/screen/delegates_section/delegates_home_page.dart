@@ -412,7 +412,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
                           PrefUtils.setUserEmailLogin("");
                           // Save  role
                           // PrefUtils.setUserId(0);
-
+                          PrefUtils.getRoleSelection();
                           PrefUtils.setUserPassword("");
                           Navigator.pushAndRemoveUntil(
                             context,

@@ -306,7 +306,7 @@ class FTextStyle {
   static  TextStyle headingMiddle = TextStyle(
       fontSize: 15
           .sp,
-      letterSpacing: 2.0,
+      // letterSpacing: 2.0,
       color: AppColors.aboutUsHeadingColor,
       fontFamily: 'Montserrat',
       fontWeight: FontWeight.w800);

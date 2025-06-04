@@ -7,6 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/common_popups.dart';
+import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
@@ -321,7 +322,7 @@ class _MyOrderState extends State<MyOrder> {
                             final isPaid = bookingStatus.toLowerCase() == "paid";
 
                             return Container(
-                              margin: const EdgeInsets.symmetric(vertical: 8),
+                               margin: const EdgeInsets.symmetric(vertical: 8),
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -351,13 +352,13 @@ class _MyOrderState extends State<MyOrder> {
                                   // Pay Type and Purchase Date
                                   Row(
                                     children: [
-                                      Icon(Icons.confirmation_number, size: 18, color: Colors.grey.shade600),
+                                      Icon(Icons.confirmation_number, size: 18, color:  AppColors.appSky),
                                       const SizedBox(width: 6),
                                       Text("Pay Type: ${item['payType']}", style: FTextStyle.style),
                                       const Spacer(),
-                                      Icon(Icons.calendar_today, size: 18, color: Colors.grey.shade600),
+                                      Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
                                       const SizedBox(width: 6),
-                                      Text("${item['purchaseDate']}", style: FTextStyle.style),
+                                      Text("${Constants.formatDate(item['purchaseDate'])}", style: FTextStyle.style),
                                     ],
                                   ),
                              SizedBox(height: 4),
@@ -365,7 +366,7 @@ class _MyOrderState extends State<MyOrder> {
                                   // Invoice
                                   Row(
                                     children: [
-                                      Icon(Icons.receipt_long, size: 18, color: Colors.grey.shade600),
+                                      Icon(Icons.receipt_long, size: 18, color:AppColors.appSky),
                                       const SizedBox(width: 6),
                                       Expanded(
                                         child: Text("Invoice No: ${item['invoiceNumber']}", style: FTextStyle.style),
@@ -377,7 +378,7 @@ class _MyOrderState extends State<MyOrder> {
                                   // Payment Status
                                   Row(
                                     children: [
-                                      Icon(Icons.payments, size: 18, color: Colors.grey.shade600),
+                                      Icon(Icons.payments, size: 18, color: AppColors.appSky),
                                       const SizedBox(width: 6),
                                       const Text('Payment Status: ', style: FTextStyle.style),
                                       Text(
