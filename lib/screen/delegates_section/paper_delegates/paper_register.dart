@@ -260,10 +260,10 @@ class _PaperRegisterState extends State<PaperRegister>{
               if (isWaitlistFieldFocused == true) {
                 _wishlistKey.currentState!.validate();
               }
-          
-          
-          
-          
+
+
+
+
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
@@ -272,52 +272,52 @@ class _PaperRegisterState extends State<PaperRegister>{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height:height*0.01 ,),
-                  Text(
-                    "Select Conference ",
-                    style: FTextStyle.SubHeadingTxtStyle,
-                  ).animateOnPageLoad(
-                      animationsMap['imageOnPageLoadAnimation2']!),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(vertical: 10.0),
-                    child: DropdownButtonFormField<String>(
-                      key: _conferenceCategoryKey,
-                      focusNode: _selectconferenceCategoryFocusNode,
-                      value: conferenceCategoryTitleName,
-                      isExpanded: true, // ✅ Prevent horizontal overflow
-                      hint: const Text(
-                        "Select Conference ",
-                        style: FTextStyle.formhintTxtStyle,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      items: conferenceTitleName.map((category) {
-                        return DropdownMenuItem<String>(
-                          value: category,
-                          child: Text(
-                            category,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          conferenceCategoryTitleName = newValue;
-                        });
-                        _conferenceCategoryKey.currentState?.validate();
-                      },
-                      decoration: FormFieldStyle.dropDown.copyWith(
-                        errorStyle: const TextStyle(
-                          color: AppColors.errorColor,  // Or any other color you'd like
-                          fontSize: 12,
-                        ),
-                      ),
-                      validator: ValidatorUtils.model,
-                    ),
-                  ),
-          
-          
+                  // Text(
+                  //   "Select Conference ",
+                  //   style: FTextStyle.SubHeadingTxtStyle,
+                  // ).animateOnPageLoad(
+                  //     animationsMap['imageOnPageLoadAnimation2']!),
+                  // Padding(
+                  //   padding:
+                  //   const EdgeInsets.symmetric(vertical: 10.0),
+                  //   child: DropdownButtonFormField<String>(
+                  //     key: _conferenceCategoryKey,
+                  //     focusNode: _selectconferenceCategoryFocusNode,
+                  //     value: conferenceCategoryTitleName,
+                  //     isExpanded: true, // ✅ Prevent horizontal overflow
+                  //     hint: const Text(
+                  //       "Select Conference ",
+                  //       style: FTextStyle.formhintTxtStyle,
+                  //       overflow: TextOverflow.ellipsis,
+                  //     ),
+                  //     items: conferenceTitleName.map((category) {
+                  //       return DropdownMenuItem<String>(
+                  //         value: category,
+                  //         child: Text(
+                  //           category,
+                  //           overflow: TextOverflow.ellipsis,
+                  //           maxLines: 1,
+                  //           style: const TextStyle(fontSize: 14),
+                  //         ),
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (newValue) {
+                  //       setState(() {
+                  //         conferenceCategoryTitleName = newValue;
+                  //       });
+                  //       _conferenceCategoryKey.currentState?.validate();
+                  //     },
+                  //     decoration: FormFieldStyle.dropDown.copyWith(
+                  //       errorStyle: const TextStyle(
+                  //         color: AppColors.errorColor,  // Or any other color you'd like
+                  //         fontSize: 12,
+                  //       ),
+                  //     ),
+                  //     validator: ValidatorUtils.model,
+                  //   ),
+                  // ),
+
+
                   Text(
                     "Select Proposal Type",
                     style: FTextStyle.SubHeadingTxtStyle,
@@ -385,7 +385,7 @@ class _PaperRegisterState extends State<PaperRegister>{
                       },
                     )
                   ),
-          
+
                   Text(
                     "Author(s) Name",
                     style: FTextStyle.SubHeadingTxtStyle,
@@ -410,11 +410,11 @@ class _PaperRegisterState extends State<PaperRegister>{
                       },
                     )// Ensure this animation exists
                   ),
-          
+
                   Text(
                     "Presenting Author's Name",
                     style: FTextStyle.SubHeadingTxtStyle,
-          
+
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -433,7 +433,7 @@ class _PaperRegisterState extends State<PaperRegister>{
                         });
                       },
                     ),
-          
+
                   ),
                   Text(
                     "Keywords",
@@ -481,10 +481,10 @@ class _PaperRegisterState extends State<PaperRegister>{
                       },
                     )
                   ),
-          
-          
-          
-          
+
+
+
+
                   const SizedBox(height: 10),
                   Text(
                     "Upload Paper",
@@ -539,7 +539,7 @@ class _PaperRegisterState extends State<PaperRegister>{
                   ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!,
                   ),
-          
+
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 30 ,),
                     child: Center(
@@ -558,17 +558,17 @@ class _PaperRegisterState extends State<PaperRegister>{
                         child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-          
-          
+
+
                               Navigator.pop(context);
-          
+
                               // print("Form is valid, proceed with submission.");
                             } else {
                               // Form is invalid
                               // print("Form is invalid, please fill all required fields.");
                             }
                           },
-          
+
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             backgroundColor: Colors.transparent,

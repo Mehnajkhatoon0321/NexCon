@@ -200,58 +200,13 @@ class _DelegatesConferenceState extends State<DelegatesConference> {
           body: SingleChildScrollView(
             child: Center(
               child: Container(
-                // decoration: BoxDecoration(
-                //   gradient: LinearGradient(
-                //     begin: Alignment.topRight,
-                //     end: Alignment.bottomLeft,
-                //     stops: [0.2, 0.5, 0.95, 0.3],
-                //     colors: [
-                //       Color(0xffffffff),
-                //       Color(0xf5c6f6da),
-                //       Color(0xf5c6f6da),
-                //       Color(0xf5c6f6da),
-                //     ],
-                //   ),
-                // ),
+
+
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      // SizedBox(
-                      //     height: MediaQuery.of(context).size.height * 0.05),
-                      //
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      //   child: Align(
-                      //     alignment: Alignment.topLeft,
-                      //     child: Container(
-                      //       height: 42,
-                      //       width: 42,
-                      //       decoration: const BoxDecoration(
-                      //         color: AppColors.appSky,
-                      //         borderRadius:
-                      //         BorderRadius.all(Radius.circular(25)),
-                      //       ),
-                      //       child: Align(
-                      //         alignment: Alignment.center,
-                      //         // Center the icon within the container
-                      //         child: Padding(
-                      //           padding: const EdgeInsets.only(left: 4.0),
-                      //           child: IconButton(
-                      //             icon: const Icon(
-                      //               Icons.arrow_back_ios,
-                      //               color: Colors.white,
-                      //               size: 25,
-                      //             ), // Menu icon
-                      //             onPressed: () {
-                      //               Navigator.pop(context);
-                      //             },
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+
                       const SizedBox(
                         height: 8,
                       ),

@@ -121,7 +121,7 @@ class _AccommodationOrganizationScreenState extends State<AccommodationOrganizat
               children: [
                 _buildToggleButton('Upcoming', 0),
                 const SizedBox(width: 8.0),
-                _buildToggleButton('Past', 1),
+                _buildToggleButton('Previous', 1),
               ],
             ),
           ),

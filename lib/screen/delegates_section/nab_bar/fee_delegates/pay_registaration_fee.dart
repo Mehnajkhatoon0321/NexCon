@@ -261,66 +261,74 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
+
+
                 Text(
-                  "Select Conference",
-                  style: FTextStyle.SubHeadingTxtStyle,
+                  widget.title,
+                  style: FTextStyle.subheading,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
-                const SizedBox(height: 5,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(28.0),
-                      border: Border.all(color: AppColors.boarderColour),
-                      color: AppColors.formFieldBackColour,
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        key: _selectCategoryKey,
-                        focusNode: _selectCategoryFocusNode,
-                        isExpanded: true,
-                        value: conferenceNames.contains(selectCategoryName)
-                            ? selectCategoryName
-                            : null,
-                        hint: const Text(
-                          "Select Conference ",
-                          style: FTextStyle.formhintTxtStyle,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        onChanged: (String? eventValue) {
-                          setState(() {
-                            selectCategoryName = eventValue;
-                            _hasPressedSaveButton = true; // Mark interaction as occurred
-                            selectedConferenceId = conferenceNameList.firstWhere(
-                                    (item) => item['name'] == eventValue)['id'];
-                          });
-                        },
-                        items: conferenceNames
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ),
-
-// Show error message if dropdown is not selected and Save button is pressed
-                if (_hasPressedSaveButton && (selectCategoryName == null || selectCategoryName!.isEmpty))
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
-                    child: Text(
-                      "Please select a category",
-                      style: FTextStyle.formErrorTxtStyle,
-                    ),
-                  ),
-                const SizedBox(height: 10,),
+//                 Text(
+//                   "Select Conference",
+//                   style: FTextStyle.SubHeadingTxtStyle,
+//                 ).animateOnPageLoad(
+//                     animationsMap['imageOnPageLoadAnimation2']!),
+//                 const SizedBox(height: 5,),
+//                 Padding(
+//                   padding: const EdgeInsets.symmetric(vertical: 4.0),
+//                   child: Container(
+//                     width: double.infinity,
+//                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+//                     decoration: BoxDecoration(
+//                       borderRadius: BorderRadius.circular(28.0),
+//                       border: Border.all(color: AppColors.boarderColour),
+//                       color: AppColors.formFieldBackColour,
+//                     ),
+//                     child: DropdownButtonHideUnderline(
+//                       child: DropdownButton<String>(
+//                         key: _selectCategoryKey,
+//                         focusNode: _selectCategoryFocusNode,
+//                         isExpanded: true,
+//                         value: conferenceNames.contains(selectCategoryName)
+//                             ? selectCategoryName
+//                             : null,
+//                         hint: const Text(
+//                           "Select Conference ",
+//                           style: FTextStyle.formhintTxtStyle,
+//                           maxLines: 1,
+//                           overflow: TextOverflow.ellipsis,
+//                         ),
+//                         onChanged: (String? eventValue) {
+//                           setState(() {
+//                             selectCategoryName = eventValue;
+//                             _hasPressedSaveButton = true; // Mark interaction as occurred
+//                             selectedConferenceId = conferenceNameList.firstWhere(
+//                                     (item) => item['name'] == eventValue)['id'];
+//                           });
+//                         },
+//                         items: conferenceNames
+//                             .map<DropdownMenuItem<String>>((String value) {
+//                           return DropdownMenuItem<String>(
+//                             value: value,
+//                             child: Text(value),
+//                           );
+//                         }).toList(),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//
+// // Show error message if dropdown is not selected and Save button is pressed
+//                 if (_hasPressedSaveButton && (selectCategoryName == null || selectCategoryName!.isEmpty))
+//                   Padding(
+//                     padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 6.0),
+//                     child: Text(
+//                       "Please select a category",
+//                       style: FTextStyle.formErrorTxtStyle,
+//                     ),
+//                   ),
+//                 const SizedBox(height: 10,),
                 Text(
                   "Payment Mode",
                   style: FTextStyle.SubHeadingTxtStyle,

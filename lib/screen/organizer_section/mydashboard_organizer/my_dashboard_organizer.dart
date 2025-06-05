@@ -75,13 +75,14 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.gradient, // Green 0DB050
-                          AppColors.secondYellowColour, // Blue 023E8A
 
+                          AppColors.gradient, // Green 0DB050
+                          // AppColors.secondYellowColour, // Blue 023E8A
+                          AppColors.appSky, // Green 0DB050
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.topRight,
-                        stops: [0.2, 0.9],
+                        // stops: [0.2, 0.9],
                       ),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [BoxShadow(color: AppColors.shadowColor, blurRadius: 6)],

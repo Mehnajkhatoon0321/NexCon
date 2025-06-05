@@ -37,6 +37,15 @@ class _EditProfileState extends State<EditProfile> {
   late final TextEditingController customerPrice = TextEditingController();
 
   late final TextEditingController productCategory = TextEditingController();
+  final GlobalKey<FormFieldState> _telephoneOKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _telephoneRKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _addressKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _websiteKey = GlobalKey<FormFieldState>();
+
+  final TextEditingController _telephoneOController = TextEditingController();
+  final TextEditingController _telephoneRController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _websiteController = TextEditingController();
 
   late final TextEditingController descriptions = TextEditingController();
   late final TextEditingController warranty = TextEditingController();
@@ -57,7 +66,10 @@ class _EditProfileState extends State<EditProfile> {
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _gstKey =
   GlobalKey<FormFieldState<String>>();
-  late final FocusNode _modelNode = FocusNode();
+
+  final GlobalKey<FormFieldState> _countryKey = GlobalKey<FormFieldState>();
+  String? selectedCountry;
+  List<String> countryList = ['India', 'United States', 'Canada', 'United Kingdom', 'Australia']; // You can expand this list
 
   final GlobalKey<FormFieldState> _nameKey = GlobalKey<FormFieldState>();
   final TextEditingController _nameController = TextEditingController();
@@ -575,6 +587,45 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       Text(
+                        "Select Country",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: DropdownButtonFormField<String>(
+                          key: _countryKey,
+                          value: selectedCountry,
+                          isExpanded: true,
+                          hint: const Text(
+                            "Select Country",
+                            style: FTextStyle.formhintTxtStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          items: countryList.map((country) {
+                            return DropdownMenuItem<String>(
+                              value: country,
+                              child: Text(
+                                country,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              selectedCountry = newValue;
+                            });
+                            _countryKey.currentState?.validate();
+                          },
+                          decoration: FormFieldStyle.dropDown.copyWith(
+                            errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
+                          ),
+                          validator: ValidatorUtils.model,
+                        ),
+                      ),
+
+                      Text(
                         "Select City",
                         style: FTextStyle.SubHeadingTxtStyle,
                       ),
@@ -612,7 +663,66 @@ class _EditProfileState extends State<EditProfile> {
                           validator: ValidatorUtils.model,
                         ),
                       ),
+                      Text(
+                        "Address for Correspondence",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _addressKey,
+                          controller: _addressController,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 3,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter Full Address",
+                          ),
+                          onChanged: (val) {
+                            _addressKey.currentState?.validate();
+                          },
+                          validator: ValidatorUtils.model,
+                        ),
+                      ),
 
+                      Text(
+                        "Telephone (O)",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _telephoneOKey,
+                          controller: _telephoneOController,
+                          keyboardType: TextInputType.phone,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter Office Telephone Number",
+                          ),
+                          onChanged: (val) {
+                            _telephoneOKey.currentState?.validate();
+                          },
+                          validator:ValidatorUtils.model,
+                        ),
+                      ),
+
+                      Text(
+                        "Telephone (R)",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _telephoneRKey,
+                          controller: _telephoneRController,
+                          keyboardType: TextInputType.phone,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter Residence Telephone Number",
+                          ),
+                          onChanged: (val) {
+                            _telephoneRKey.currentState?.validate();
+                          },
+                          validator: ValidatorUtils.model,
+                        ),
+                      ),
 
                       Text(
                         "Mobile Number",
@@ -637,6 +747,32 @@ class _EditProfileState extends State<EditProfile> {
                       ),
 
 
+                      Text(
+                        "Website Link",
+                        style: FTextStyle.SubHeadingTxtStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: TextFormField(
+                          key: _websiteKey,
+                          controller: _websiteController,
+                          keyboardType: TextInputType.url,
+                          decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                            hintText: "Enter Website URL",
+                          ),
+                          onChanged: (val) {
+                            _websiteKey.currentState?.validate();
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter website link';
+                            } else if (!Uri.tryParse(value)!.hasAbsolutePath ?? true) {
+                              return 'Enter a valid URL';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
 
 
 

@@ -151,7 +151,7 @@ class _AbstractViewState extends State<AbstractView> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor:AppColors.backgroundColor,
         appBar: AppBar(
           backgroundColor:AppColors.appSky, // Customize app bar color
           leading: IconButton(
@@ -166,7 +166,7 @@ class _AbstractViewState extends State<AbstractView> {
           ),
           title: Text(
             'Abstract Paper View',
-            style: FTextStyle.HeadingTxtWhiteStyle,
+            style: FTextStyle.appBarTitleWhite,
           ),
           centerTitle: true,
 
@@ -214,108 +214,116 @@ class _AbstractViewState extends State<AbstractView> {
                 child: Text("No data available.",
                     style: FTextStyle.listTitle),
               )
-                  : ListView(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
+                  : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 6),
+                    child: ListView(
+                                    children: [
+                    // Container(
+                    //   padding: const EdgeInsets.symmetric(vertical: 12),
+                    //   width: double.infinity,
+                    //   decoration: BoxDecoration(
+                    //     gradient: const LinearGradient(
+                    //       begin: Alignment.topRight,
+                    //       end: Alignment.bottomLeft,
+                    //       stops: [0.0, 0.5],
+                    //       colors: [
+                    //         Color(0xffffffff),
+                    // AppColors.appSky,
+                    //
+                    //
+                    //       ],
+                    //     ),
+                    //     // borderRadius: BorderRadius.circular(12),
+                    //   ),
+                    //   child: Center(
+                    //     child: Text(
+                    //       activeConferenceList['title'],
+                    //       maxLines: 2,
+                    //       overflow: TextOverflow.ellipsis,
+                    //       style: FTextStyle.listTitle.copyWith(fontSize: 16,color: AppColors.cardColor),
+                    //       textAlign: TextAlign.center,
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 20),
+                    SizedBox(height: 10,),
+                    _buildDetailTile(
+                        'Conference Name',
+                        activeConferenceList['title']),
+                    _buildDetailTile(
+                      "Abstract Topic",
+                      activeConferenceList['abstracTopic'],
+                    ),
+                    _buildDetailTile(
+                      "Proposal Type",
+                      activeConferenceList['proposalType'],
+                    ),
+                    _buildDetailTile(
+                      "Paper Title",
+                      activeConferenceList['paperTitle'],
+                    ),
+                    _buildDetailTile(
+                      "Remark",
+                      activeConferenceList['ramark'],
+                    ),
+                    _buildDetailTile(
+                      "Abstract Paper Status",
+                      activeConferenceList['paperStatus'],
+                    ),
+                    _buildDetailTile(
+                      "Date of Submission",
+                      activeConferenceList['dateOfDate'],
+                    ),
+
+
+                        Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                        BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4,
+                        offset: Offset(0, 2),
+                        ),
                         ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['title'],
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                        ),
+                        child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                        Expanded(
+                        flex: 4,
+                        child: Text(
+                        "Abstract Upload",
+                        style:
+                        FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                        flex: 6,
+                        child: _buildImage(activeConferenceList['gst_file']),
+                        ),
+                        ],
+                        ),
+                        ),
+                        ),
+                    // _buildDetailTile(
+                    //   "From Date",
+                    //   activeConferenceList['fromDate'],
+                    // ),
+                    // _buildDetailTile(
+                    //   "To Date",
+                    //   activeConferenceList['toDate'],
+                    // ),
+                    // Add more fields if necessary
+                                    ],
+                                  ),
                   ),
-                  const SizedBox(height: 20),
-                  _buildDetailTile(
-                    "Abstract Topic",
-                    activeConferenceList['abstracTopic'],
-                  ),
-                  _buildDetailTile(
-                    "Proposal Type",
-                    activeConferenceList['proposalType'],
-                  ),
-                  _buildDetailTile(
-                    "Paper Title",
-                    activeConferenceList['paperTitle'],
-                  ),
-                  _buildDetailTile(
-                    "Remark",
-                    activeConferenceList['ramark'],
-                  ),
-                  _buildDetailTile(
-                    "Abstract Paper Status",
-                    activeConferenceList['paperStatus'],
-                  ),
-                  _buildDetailTile(
-                    "Date of Submission",
-                    activeConferenceList['dateOfDate'],
-                  ),
-
-
-    Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-    child: Container(
-    margin: const EdgeInsets.only(bottom: 12),
-    padding: const EdgeInsets.all(14),
-    decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(12),
-    boxShadow: [
-    BoxShadow(
-    color: Colors.black12,
-    blurRadius: 4,
-    offset: Offset(0, 2),
-    ),
-    ],
-    ),
-    child: Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-    Expanded(
-    flex: 4,
-    child: Text(
-    "Abstract Upload",
-    style:
-    FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
-    ),
-    ),
-    const SizedBox(width: 8),
-    Expanded(
-    flex: 6,
-    child: _buildImage(activeConferenceList['gst_file']),
-    ),
-    ],
-    ),
-    ),
-    ),
-                  // _buildDetailTile(
-                  //   "From Date",
-                  //   activeConferenceList['fromDate'],
-                  // ),
-                  // _buildDetailTile(
-                  //   "To Date",
-                  //   activeConferenceList['toDate'],
-                  // ),
-                  // Add more fields if necessary
-                ],
-              ),
             ),
           ],
         ),

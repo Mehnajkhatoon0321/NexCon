@@ -283,68 +283,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                 ],
               ),
               const SizedBox(height: 12),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   children: [
-              //     // View Icon
-              //     InkWell(
-              //       borderRadius: BorderRadius.circular(8),
-              //       onTap: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => MyConferenceOrganizerView(
-              //               id: item['id'],
-              //             ),
-              //           ),
-              //         );
-              //       },
-              //       child: Container(
-              //         height: 36,
-              //         width: 36,
-              //         decoration: BoxDecoration(
-              //           color: AppColors.secondaryColour,
-              //           borderRadius: BorderRadius.circular(8),
-              //         ),
-              //         child: const Icon(
-              //           Icons.remove_red_eye_outlined,
-              //           color: Colors.white,
-              //           size: 20,
-              //         ),
-              //       ),
-              //     ),
-              //     const SizedBox(width: 12),
-              //     // Edit Icon
-              //     // InkWell(
-              //     //   borderRadius: BorderRadius.circular(8),
-              //     //   onTap: () {
-              //     //     Navigator.push(
-              //     //       context,
-              //     //       MaterialPageRoute(
-              //     //         builder: (context) => MyConferenceOrganizerEdit(
-              //     //           conferenceName: item["conferenceName"],
-              //     //           fromdata: item['fromDate'] ?? 'N/A',
-              //     //           todata: item['toDate'] ?? 'N/A', isEdit: '',
-              //     //         ),
-              //     //       ),
-              //     //     );
-              //     //   },
-              //     //   child: Container(
-              //     //     height: 36,
-              //     //     width: 36,
-              //     //     decoration: BoxDecoration(
-              //     //       color: const Color(0xFF0DB050),
-              //     //       borderRadius: BorderRadius.circular(8),
-              //     //     ),
-              //     //     child: const Icon(
-              //     //       Icons.edit,
-              //     //       color: Colors.white,
-              //     //       size: 20,
-              //     //     ),
-              //     //   ),
-              //     // ),
-              //   ],
-              // ),
+
 
             ],
           ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/scanner_details.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
@@ -352,6 +353,39 @@ class _MyConferencePageState extends State<MyConferencePage> {
                               children: [
 
                                 SizedBox(width: 10,),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                        ScannerDetails()
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+
+                                    decoration: BoxDecoration(
+                                      color:AppColors.secondYellowColour,
+                                      // Green for edit
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.qr_code_scanner,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ), SizedBox(width: 10,),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(

@@ -166,23 +166,7 @@ class _AccommodationDelegatesView extends State<AccommodationDelegatesView> {
     });
   }
   Timer? _debounce;
-  void _onSearchChanged(String value) {
-    setState(() {
-      _isTextEmpty = value.isEmpty;
-      searchQuery = value;
-    });
 
-    // Cancel the previous timer
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-
-    // Start a new timer
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      pageNo=1;
-      // Call the API only after the user has stopped typing for 500 milliseconds
-      // BlocProvider.of<AllRequesterBloc>(context).add(
-      //     GetBillingListHandler(searchQuery, pageNo, pageSize));
-    });
-  }
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -277,37 +261,58 @@ class _AccommodationDelegatesView extends State<AccommodationDelegatesView> {
               )
                   : Column(
                 children: [
-                  Container(
-                    height: height * 0.06,
-                    width: screenWidth,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                        ],
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['title'],
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+
+                  // Container(
+                  //   height: height * 0.06,
+                  //   width: screenWidth,
+                  //   // decoration: const BoxDecoration(
+                  //   //   gradient: LinearGradient(
+                  //   //     begin: Alignment.topRight,
+                  //   //     end: Alignment.bottomLeft,
+                  //   //     stops: [0.0, 0.5, 0.95, 0.95],
+                  //   //     colors: [
+                  //   //       Color(0xffffffff),
+                  //   //       Color(0xf5c6f6da),
+                  //   //       Color(0xf5c6f6da),
+                  //   //       Color(0xf5c6f6da),
+                  //   //     ],
+                  //   //   ),
+                  //   // ),
+                  //   decoration: BoxDecoration(
+                  //     gradient: const LinearGradient(
+                  //       begin: Alignment.topRight,
+                  //       end: Alignment.bottomLeft,
+                  //       stops: [0.0, 0.9],
+                  //       colors: [
+                  //         Color(0xffffffff),
+                  //         AppColors.appSky,
+                  //
+                  //
+                  //       ],
+                  //     ),
+                  //     // borderRadius: BorderRadius.circular(12),
+                  //   ),
+                  //   child: Center(
+                  //     child: Text(
+                  //       activeConferenceList['title'],
+                  //       maxLines: 2,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: FTextStyle.listTitle.copyWith(fontSize: 16,color: AppColors.cardColor),
+                  //       textAlign: TextAlign.center,
+                  //     ),
+                  //   ),
+                  // ),
+
+
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 10,),
+                        _buildDetailTile(
+                            'Conference Name',
+                            activeConferenceList['title']),
                         _buildDetailTile(
                             'No. of persons:',
                             activeConferenceList['numberPerson']),
