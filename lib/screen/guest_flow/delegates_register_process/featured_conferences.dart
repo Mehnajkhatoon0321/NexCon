@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
 
 import 'package:nexcon/utils/colours.dart';
 
@@ -102,6 +103,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
 
   List<Map<String, dynamic>> FeaturesList = [
     {
+      'id':'1',
       "upComing": "Chemistry",
       "imageConference": "assets/images/IndianConferences.png",
       "title": "30th ISCB International Conference (ISCBC-2025)",
@@ -111,6 +113,7 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
       "organizationText": "Indian Society of Chemists and Biologists",
     },
     {
+      'id':'2',
       "upComing": "Science Communication",
       "imageConference": "assets/images/conferencesOrganization1.png",
       "title": "Global Science Summit 2025",
@@ -543,8 +546,8 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => ConferenceCategoryDetails(
-                                                    selectedRole: widget.selectedRole,
+                                                  builder: (context) => MyConferenceDelegatesView(id:  conference["id"],
+
                                                   ),
                                                 ),
                                               );

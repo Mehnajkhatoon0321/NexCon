@@ -8,6 +8,7 @@ import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/pref_utils.dart';
 
+import '../../delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
 import 'conference_category_details.dart';
 
 class SubCategoryScreen extends StatefulWidget {
@@ -295,7 +296,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => ConferenceCategoryDetails(selectedRole: widget.selected,),
+                                              builder: (context) => MyConferenceDelegatesView(id:conference['id'] ,),
                                             ),
                                           );
 

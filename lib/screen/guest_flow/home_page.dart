@@ -356,6 +356,7 @@ class _HomePageState extends State<HomePage>
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               // 🌄 Banner
               Container(
@@ -418,7 +419,7 @@ class _HomePageState extends State<HomePage>
                     width: _currentTextIndex == index ? 12 : 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: _currentTextIndex == index ? Colors.green : Colors.grey.shade400,
+                      color: _currentTextIndex == index ? AppColors.appSky : Colors.grey.shade400,
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
@@ -969,7 +970,7 @@ class _HomePageState extends State<HomePage>
                     //     ),
                     //   ),
                     // ),
-
+                    SizedBox(height: 40),
                   ],
                 ),
               ),

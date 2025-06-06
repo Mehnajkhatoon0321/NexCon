@@ -49,6 +49,7 @@ import 'package:nexcon/utils/pref_utils.dart';
 import '../sideMenu/delegates_side_menu/accomondation/accomodation.dart';
 import '../sideMenu/delegates_side_menu/bank_details/bank_details.dart';
 import '../sideMenu/organizer/abstract_and_paper/abstract_organizer/review_abstract/review_abstract.dart';
+import 'delegates_register_process/conference_category.dart';
 class SideMenuScreen extends StatefulWidget {
   final String selectedRole;
   const SideMenuScreen({required this.selectedRole,super.key});
@@ -453,6 +454,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const HowWorksScreen()),
         );
         break;
+      case 'Conferences':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  ConferenceCategory(selectedRole: widget.selectedRole,)),
+        );
+        break;
         case 'Accommodation Organization':
         Navigator.push(
           context,
@@ -526,7 +533,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         case 'QR Attendance':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  QrAttendance()),
+          MaterialPageRoute(builder: (context) =>  QRScannerScreen()),
         );
         break;
 

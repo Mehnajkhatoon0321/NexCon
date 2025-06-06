@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
 
 import 'package:nexcon/screen/guest_flow/delegates_register_process/conference_category.dart';
 import 'package:nexcon/screen/guest_flow/delegates_register_process/conference_category_details.dart';
@@ -546,8 +547,8 @@ class _DelegatesConferenceState extends State<DelegatesConference> {
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                          builder: (context) => ConferenceCategoryDetails(
-                                                            selectedRole: widget.selectedRole,
+                                                          builder: (context) => MyConferenceDelegatesView(id:  conference["id"],
+
                                                           ),
                                                         ),
                                                       );

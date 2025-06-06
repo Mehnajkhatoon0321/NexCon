@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_view.dart';
 
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/constant.dart';
@@ -77,6 +78,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       "fromDate": "2024-12-19",
       "toDate": "2024-12-20",
       "registration": "200",
+
     },
     {
       "id": "2",
@@ -284,7 +286,89 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
               ),
               const SizedBox(height: 12),
 
-
+              // Column(
+              //   children: [
+              //     Row(
+              //       mainAxisAlignment: MainAxisAlignment.end,
+              //       crossAxisAlignment: CrossAxisAlignment.end,
+              //       children: [
+              //
+              //         SizedBox(width: 10,),
+              //
+              //         GestureDetector(
+              //           onTap: () {
+              //             Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                 builder: (context) =>
+              //                     MyConferenceOrganizerView(id: item['id'].toString(),
+              //
+              //                     ),
+              //               ),
+              //             );
+              //           },
+              //           child: Container(
+              //             height: 35,
+              //             width: 35,
+              //
+              //             decoration: BoxDecoration(
+              //               color:AppColors.secondaryColour,
+              //               // Green for edit
+              //               borderRadius: BorderRadius.circular(8),
+              //               boxShadow: [
+              //                 BoxShadow(
+              //                   color: Colors.black.withOpacity(0.1),
+              //                   blurRadius: 6,
+              //                   offset: const Offset(0, 2),
+              //                 ),
+              //               ],
+              //             ),
+              //             child: const Icon(
+              //               Icons.remove_red_eye_outlined,
+              //               color: Colors.white,
+              //               size: 20,
+              //             ),
+              //           ),
+              //         ),
+              //         SizedBox(width: 10,),
+              //         GestureDetector(
+              //           // onTap: () {
+              //           //   _showEditDialog(
+              //           //     context,
+              //           //     item['conferenceId'], // Pass the selected ID for identification
+              //           //         () {
+              //           //
+              //           //     },
+              //           //     item['category'], // Pass the initial category of the selected item
+              //           //   );
+              //           // },
+              //           child: Container(
+              //             height: 35,
+              //             width: 35,
+              //             decoration: BoxDecoration(
+              //               color: const Color(0xFF0db050),
+              //               // Green background
+              //               borderRadius: BorderRadius.circular(8),
+              //               boxShadow: [
+              //                 BoxShadow(
+              //                   color: Colors.black.withOpacity(0.1),
+              //                   blurRadius: 6,
+              //                   offset: const Offset(0, 2),
+              //                 ),
+              //               ],
+              //             ),
+              //             child: const Icon(
+              //               Icons.edit,
+              //               color: Colors.white,
+              //               size: 20,
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     const SizedBox(height: 4),
+              //   ],
+              // ),
             ],
           ),
         );

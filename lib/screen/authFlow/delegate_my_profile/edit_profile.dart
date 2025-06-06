@@ -7,13 +7,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:nexcon/screen/authFlow/delegate_my_profile/my_profile.dart';
+
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
-import 'package:nexcon/utils/no_space_input_formatter_class.dart';
+
 import 'package:nexcon/utils/validator_utils.dart';
 
 class EditProfile extends StatefulWidget {

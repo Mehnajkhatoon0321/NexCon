@@ -209,33 +209,34 @@ class _MyConferenceOrganizerViewState extends State<MyConferenceOrganizerView> {
                   : ListView(
                 // padding: const EdgeInsets.all(16),
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    width: screenWidth,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['title'],
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(vertical: 12),
+                  //   width: screenWidth,
+                  //   decoration: BoxDecoration(
+                  //     gradient: const LinearGradient(
+                  //       begin: Alignment.topRight,
+                  //       end: Alignment.bottomLeft,
+                  //       stops: [0.0, 0.5, 0.95],
+                  //       colors: [
+                  //         Color(0xffffffff),
+                  //         Color(0xf5c6f6da),
+                  //         Color(0xf5c6f6da),
+                  //       ],
+                  //     ),
+                  //     borderRadius: BorderRadius.circular(12),
+                  //   ),
+                  //   child: Center(
+                  //     child: Text(
+                  //       activeConferenceList['title'],
+                  //       maxLines: 2,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: FTextStyle.listTitle.copyWith(fontSize: 16),
+                  //       textAlign: TextAlign.center,
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
+                  _buildDetailTile("Conference Name.",  activeConferenceList['title']),
                   _buildDetailTile("Registration No.", activeConferenceList['registrationN0']),
                   _buildDetailTile("From Date", activeConferenceList['fromDate']),
                   _buildDetailTile("To Date", activeConferenceList['toDate']),
