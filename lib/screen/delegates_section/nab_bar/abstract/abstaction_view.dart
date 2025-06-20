@@ -218,34 +218,7 @@ class _AbstractViewState extends State<AbstractView> {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 6),
                     child: ListView(
                                     children: [
-                    // Container(
-                    //   padding: const EdgeInsets.symmetric(vertical: 12),
-                    //   width: double.infinity,
-                    //   decoration: BoxDecoration(
-                    //     gradient: const LinearGradient(
-                    //       begin: Alignment.topRight,
-                    //       end: Alignment.bottomLeft,
-                    //       stops: [0.0, 0.5],
-                    //       colors: [
-                    //         Color(0xffffffff),
-                    // AppColors.appSky,
-                    //
-                    //
-                    //       ],
-                    //     ),
-                    //     // borderRadius: BorderRadius.circular(12),
-                    //   ),
-                    //   child: Center(
-                    //     child: Text(
-                    //       activeConferenceList['title'],
-                    //       maxLines: 2,
-                    //       overflow: TextOverflow.ellipsis,
-                    //       style: FTextStyle.listTitle.copyWith(fontSize: 16,color: AppColors.cardColor),
-                    //       textAlign: TextAlign.center,
-                    //     ),
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 20),
+
                     SizedBox(height: 10,),
                     _buildDetailTile(
                         'Conference Name',
@@ -358,7 +331,7 @@ class _AbstractViewState extends State<AbstractView> {
               child: Text(
                 "$title:",
                 style:
-                FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+                FTextStyle.subtitle.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
             const SizedBox(width: 8),
@@ -367,9 +340,9 @@ class _AbstractViewState extends State<AbstractView> {
               child: Text(
                 value,
                 style: valueColor != null
-                    ? FTextStyle.listTitleSub.copyWith(
+                    ? FTextStyle.style.copyWith(
                     color: valueColor, fontWeight: FontWeight.bold)
-                    : FTextStyle.listTitleSub,
+                    : FTextStyle.style,
               ),
             ),
           ],

@@ -53,11 +53,12 @@ class _ScannerDetailsState extends State<ScannerDetails> {
                   : Container(
 
                     decoration: BoxDecoration(color: AppColors.gray_2,),
-                    child: Icon(
-                                    Icons.qr_code_scanner,
-                                    size: 180,
-                                    color: AppColors.aboutUsHeadingColor,
-                                  ),
+                    child: Image.asset(
+                      "assets/images/attendance_scanner.png",
+                      width: 180,
+                      height: 180,
+                      fit: BoxFit.contain,
+                    )
                   ),
             ),
             const SizedBox(height: 40),

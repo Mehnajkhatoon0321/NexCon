@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/fee/accomodation/accommodation_edit.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/fee/accomodation/accomondation_fee_view.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
 
 import '../../../../../../utils/colours.dart';
 import '../../../../../../utils/font_text_Style.dart';
-import '../../../../../organizer_section/accommodation/accomondation_view.dart';
+
 class Accommodation extends StatefulWidget {
   const Accommodation({super.key});
 
@@ -81,6 +82,7 @@ class _AccommodationState extends State<Accommodation> {
       'accommodationCategory': "Category",
       "ratePerDay": "1200",
       "currency": "4",
+      'status':"Success"
     },
     {
       "id":"2",
@@ -88,6 +90,17 @@ class _AccommodationState extends State<Accommodation> {
       'accommodationCategory': "Category",
       "ratePerDay": "1288",
       "currency": "4",
+      'status':"Pending"
+
+
+    },{
+      "id":"2",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'accommodationCategory': "Category",
+      "ratePerDay": "1288",
+      "currency": "4",
+      'status':"Not Registered"
+
 
     },
 
@@ -100,6 +113,7 @@ class _AccommodationState extends State<Accommodation> {
       'accommodationCategory': "Category",
       "ratePerDay": "1200",
       "currency": "4",
+      'status':"Success"
     },
     {
       "id":"2",
@@ -107,6 +121,15 @@ class _AccommodationState extends State<Accommodation> {
       'accommodationCategory': "Category",
       "ratePerDay": "1288",
       "currency": "4",
+      'status':"Pending"
+
+    }, {
+      "id":"2",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'accommodationCategory': "Category",
+      "ratePerDay": "1288",
+      "currency": "4",
+      'status':"Not Registered"
 
     },
 
@@ -145,52 +168,52 @@ class _AccommodationState extends State<Accommodation> {
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: (displayType == 'desktop' || displayType == 'tablet')
-                  ? 70
-                  : 37,
-              child: ElevatedButton(
-                  onPressed: () async {
-
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AccommodationEdit(isEdit: '',)
-                      ),
-
-                    );
-                    //     .then((result) {
-                    //   // Handle the result from the edit screen
-                    //   if (result[0]) {
-                    //     data.clear();
-                    //     pageNo = 1;
-                    //     hasMoreData = true;
-                    //     totalPages = 0;
-                    //     BlocProvider.of<AllRequesterBloc>(context)
-                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                    //   }
-                    // }
-                    // );
-
-                    // );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                      backgroundColor: Colors.white),
-                  child: Text(
-                    "Add",
-                    style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.appSky,fontSize: 13),
-                  )),
-            ),
-          )
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: SizedBox(
+        //       height: (displayType == 'desktop' || displayType == 'tablet')
+        //           ? 70
+        //           : 37,
+        //       child: ElevatedButton(
+        //           onPressed: () async {
+        //
+        //
+        //             Navigator.push(
+        //               context,
+        //               MaterialPageRoute(
+        //                   builder: (context) => AccommodationEdit(isEdit: '', title: '',)
+        //               ),
+        //
+        //             );
+        //             //     .then((result) {
+        //             //   // Handle the result from the edit screen
+        //             //   if (result[0]) {
+        //             //     data.clear();
+        //             //     pageNo = 1;
+        //             //     hasMoreData = true;
+        //             //     totalPages = 0;
+        //             //     BlocProvider.of<AllRequesterBloc>(context)
+        //             //         .add(AddCartDetailHandler("", pageNo, pageSize));
+        //             //   }
+        //             // }
+        //             // );
+        //
+        //             // );
+        //           },
+        //           style: ElevatedButton.styleFrom(
+        //               shape: RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.circular(26),
+        //               ),
+        //               backgroundColor: Colors.white),
+        //           child: Text(
+        //             "Add",
+        //             style: FTextStyle.loginBtnStyle
+        //                 .copyWith(color: AppColors.appSky,fontSize: 13),
+        //           )),
+        //     ),
+        //   )
+        // ],
 
       ),
 
@@ -204,7 +227,7 @@ class _AccommodationState extends State<Accommodation> {
               children: [
                 _buildToggleButton('Upcoming', 0),
                 const SizedBox(width: 8.0),
-                _buildToggleButton('Past', 1),
+                _buildToggleButton('Previous', 1),
               ],
             ),
           ),
@@ -328,9 +351,7 @@ class _AccommodationState extends State<Accommodation> {
 
         final title = item['title'] ?? 'Unknown Title';
         final id = item['id'] ?? 'Unknown Title';
-        final accommodationCategory = item['accommodationCategory'] ?? 'N/A';
-        final ratePerDay = item['ratePerDay'] ?? 'N/A';
-        final currency = item['currency'] ?? 'N/A';
+
 
 
 
@@ -366,105 +387,339 @@ class _AccommodationState extends State<Accommodation> {
                     ),
 
 
-                    Text(
-                      'Accommodation Category: $accommodationCategory',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ), Text(
-                      'Rate Per Day/ Per Person: $ratePerDay',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ), Text(
-                      'Currency: $currency',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-
 
 
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AccommodationEdit(isEdit: 'Yes',)
-                                  ),
-
-                                );
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 35,
-
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF0db050),
-                                  // Green for edit
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10,),
-
-                            GestureDetector(
-                              onTap: () {
-                                CommonPopups.showDeleteCustomPopup(
-                                  context,
-                                  "Are you sure you want to delete?",
-                                      () {
-                                    // Handle delete logic
-                                  },
-                                );
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(
-                                  color: Colors.red, // Red for delete
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ],
+                        const Text(
+                            'Booking Status: ', style: FTextStyle.listTitle),
+                        Text(
+                          item['status'],
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: item['status'] == "Success"
+                                ? Colors.green
+                                : Colors.orange,
+                          ),
                         ),
                       ],
                     ),
+                    if (item['status'] == 'Success')
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(height: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccomondationFeeView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         FeePageView(id: "",
+                              //
+                              //         ),
+                              //   ),
+                              // );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.appBlue,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.save_alt_rounded,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    if (item['status'] == 'Pending')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccomondationFeeView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AccommodationEdit(title: title, isEdit: '',)
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF0db050),
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  CommonPopups.showDeleteCustomPopup(
+                                    context,
+                                    "Are you sure you want to delete?",
+                                        () {
+                                      // Handle delete logic
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red, // Red for delete
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    if (item['status'] == 'Not Registered')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccomondationFeeView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AccommodationEdit(title: title, isEdit: '',)  ),
+
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF0db050),
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  CommonPopups.showDeleteCustomPopup(
+                                    context,
+                                    "Are you sure you want to delete?",
+                                        () {
+                                      // Handle delete logic
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red, // Red for delete
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+
+
+
 
 
 
@@ -491,11 +746,8 @@ class _AccommodationState extends State<Accommodation> {
         final item = inactiveConferenceList[index];
 
         final title = item['title'] ?? 'Unknown Title';
-        final id = item['id'] ?? 'Unknown Title';
-        final accommodationCategory = item['accommodationCategory'] ?? 'N/A';
-        final ratePerDay = item['ratePerDay'] ?? 'N/A';
-        final currency = item['currency'] ?? 'N/A';
 
+        final id = item['id'] ?? 'Unknown Title';
 
         return Container(
           // height: height * 0.24,
@@ -527,105 +779,419 @@ class _AccommodationState extends State<Accommodation> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-                    Text(
-                      'Accommodation Category: $accommodationCategory',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ), Text(
-                      'Rate Per Day/ Per Person: $ratePerDay',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ), Text(
-                      'Currency: $currency',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
 
 
 
 
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AccommodationEdit(isEdit: 'Yes',)
-                                  ),
-
-                                );
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 35,
-
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF0db050),
-                                  // Green for edit
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10,),
-                            GestureDetector(
-                              onTap: () {
-                                CommonPopups.showDeleteCustomPopup(
-                                  context,
-                                  "Are you sure you want to delete?",
-                                      () {
-                                    // Handle delete logic
-                                  },
-                                );
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(
-                                  color: Colors.red, // Red for delete
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ],
+                        const Text(
+                            'Booking Status: ', style: FTextStyle.listTitle),
+                        Text(
+                          item['status'],
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: item['status'] == "Success"
+                                ? Colors.green
+                                : Colors.orange,
+                          ),
                         ),
                       ],
                     ),
+                    if (item['status'] == 'Success')
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(height: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccomondationFeeView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         FeePageView(id: "",
+                              //
+                              //         ),
+                              //   ),
+                              // );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.appBlue,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.save_alt_rounded,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    if (item['status'] == 'Pending')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccomondationFeeView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            AccommodationEdit(title: title, isEdit: '',)
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF0db050),
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  CommonPopups.showDeleteCustomPopup(
+                                    context,
+                                    "Are you sure you want to delete?",
+                                        () {
+                                      // Handle delete logic
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red, // Red for delete
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    if (item['status'] == 'Not Registered')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AccomondationFeeView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              // GestureDetector(
+                              //   onTap: () {
+                              //     Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (context) =>
+                              //               AccommodationEdit(title: title, isEdit: '',)  ),
+                              //
+                              //     );
+                              //   },
+                              //   child: Container(
+                              //     height: 35,
+                              //     width: 35,
+                              //
+                              //     decoration: BoxDecoration(
+                              //       color: const Color(0xFF0db050),
+                              //       // Green for edit
+                              //       borderRadius: BorderRadius.circular(8),
+                              //       boxShadow: [
+                              //         BoxShadow(
+                              //           color: Colors.black.withOpacity(0.1),
+                              //           blurRadius: 6,
+                              //           offset: const Offset(0, 2),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     child: const Icon(
+                              //       Icons.add,
+                              //       color: Colors.white,
+                              //       size: 20,
+                              //     ),
+                              //   ),
+                              // ),
+                              // SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  CommonPopups.showDeleteCustomPopup(
+                                    context,
+                                    "Are you sure you want to delete?",
+                                        () {
+                                      // Handle delete logic
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red, // Red for delete
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+
+
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   crossAxisAlignment: CrossAxisAlignment.end,
+                    //   children: [
+                    //
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.end,
+                    //       crossAxisAlignment: CrossAxisAlignment.end,
+                    //       children: [
+                    //         GestureDetector(
+                    //           onTap: () {
+                    //             Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                   builder: (context) => AccommodationEdit(isEdit: 'Yes',)
+                    //               ),
+                    //
+                    //             );
+                    //           },
+                    //           child: Container(
+                    //             height: 35,
+                    //             width: 35,
+                    //
+                    //             decoration: BoxDecoration(
+                    //               color: const Color(0xFF0db050),
+                    //               // Green for edit
+                    //               borderRadius: BorderRadius.circular(8),
+                    //               boxShadow: [
+                    //                 BoxShadow(
+                    //                   color: Colors.black.withOpacity(0.1),
+                    //                   blurRadius: 6,
+                    //                   offset: const Offset(0, 2),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             child: const Icon(
+                    //               Icons.edit,
+                    //               color: Colors.white,
+                    //               size: 20,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         SizedBox(width: 10,),
+                    //
+                    //         GestureDetector(
+                    //           onTap: () {
+                    //             CommonPopups.showDeleteCustomPopup(
+                    //               context,
+                    //               "Are you sure you want to delete?",
+                    //                   () {
+                    //                 // Handle delete logic
+                    //               },
+                    //             );
+                    //           },
+                    //           child: Container(
+                    //             height: 35,
+                    //             width: 35,
+                    //             decoration: BoxDecoration(
+                    //               color: Colors.red, // Red for delete
+                    //               borderRadius: BorderRadius.circular(8),
+                    //               boxShadow: [
+                    //                 BoxShadow(
+                    //                   color: Colors.black.withOpacity(0.1),
+                    //                   blurRadius: 6,
+                    //                   offset: const Offset(0, 2),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             child: const Icon(
+                    //               Icons.delete,
+                    //               color: Colors.white,
+                    //               size: 20,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ],
+                    // ),
 
 
 

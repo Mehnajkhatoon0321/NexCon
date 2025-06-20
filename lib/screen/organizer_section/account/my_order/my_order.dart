@@ -21,72 +21,7 @@ class MyOrder extends StatefulWidget {
 }
 
 class _MyOrderState extends State<MyOrder> {
-  List<dynamic> inactiveConferenceList =
-  [
-    {
-      "id":"1",
-      "invoiceNumber":"1",
-      "payType":"Offline",
-      "creditPoint":"100",
-      "amount":"100",
-      "conferenceName": "4th International Science Communication Conference",
-      "couponCode":"19ISCC90",
-      "gst":"19ISCC90",
-      "discount":"19ISCC90",
-      "payAmount":"19ISCC90",
-      'bookingStatus': "Paid",
-      "purchaseDate": "2024-12-19",
-      'downloadReceipt': "assets/images/payment.png"
 
-    }, {
-      "id":"2",
-      "invoiceNumber":"1",
-      "payType":"Offline",
-      "creditPoint":"100",
-      "amount":"100",
-      "couponCode":"19ISCC90",
-    "conferenceName": "4th International Science Communication Conference",
-      "gst":"19ISCC90",
-      "discount":"19ISCC90",
-      "payAmount":"19ISCC90",
-      'bookingStatus': "Paid",
-      "purchaseDate": "2024-12-19",
-    'downloadReceipt': "assets/images/payment.png"
-
-    },{
-      "id":"3",
-      "invoiceNumber":"1",
-      "payType":"Online",
-      "creditPoint":"100",
-      "amount":"100",
-      "couponCode":"19ISCC90",
-      "gst":"19ISCC90",
-    "conferenceName": "4th International Science Communication Conference",
-      "discount":"19ISCC90",
-      "payAmount":"19ISCC90",
-      'bookingStatus': "Paid",
-      "purchaseDate": "2024-12-19",
-    'downloadReceipt': "assets/images/payment.png"
-
-    },{
-      "id":"4",
-      "invoiceNumber":"1",
-      "payType":"Online",
-      "creditPoint":"100",
-      "amount":"100",
-      "couponCode":"19ISCC90",
-    "conferenceName": "4th International Science Communication Conference",
-      "gst":"19ISCC90",
-      "discount":"19ISCC90",
-      "payAmount":"19ISCC90",
-      'bookingStatus': "Paid",
-      "purchaseDate": "2024-12-19",
-     'downloadReceipt': "assets/images/payment.png"
-
-    },
-
-
-  ];
 
 
 
@@ -169,7 +104,7 @@ class _MyOrderState extends State<MyOrder> {
     ),
   };
 
-
+  int _selectedIndex = 0;
   final TextEditingController controllerText = TextEditingController();
   bool isLoading = false;
   bool isInitialLoading = false;
@@ -204,285 +139,92 @@ class _MyOrderState extends State<MyOrder> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+    var width = MediaQuery.of(context).size.width;
+
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,
-        body: Column(
+   body: Column(
+      children: [
+      const SizedBox(height: 20),
+      // Toggle Buttons
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        child: Row(
           children: [
-            Expanded(
-              child: isLoading && inactiveConferenceList.isEmpty
-                  ? Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: ListView.builder(
-                  itemCount: 6,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-                  : (errorMessage != null || errorServerMessage.isNotEmpty)
-                  ? Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.error_outline, size: 40, color: Colors.red),
-                    SizedBox(height: 8),
-                      Text(
-                      " ${errorMessage ?? errorServerMessage}",
-                        style: FTextStyle.listTitle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              )
-                  : (inactiveConferenceList.isEmpty)
-                  ? const Center(
-                child: Text(
-                  "No data available.",
-                  style: FTextStyle.listTitle,
-                ),
-              )
-                  : Column(
-                    children: [
-                      SizedBox(height: 15,),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.04, vertical: 10),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(23.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                                offset: const Offset(0, 1),
-                              ),
-                            ],
-                          ),
-                          child: TextFormField(
-                            controller: controllerText,
-                            decoration: InputDecoration(
-                              hintText: 'Search',
-                              hintStyle: FTextStyle.formhintTxtStyle,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(23.0),
-                                borderSide: const BorderSide(
-                                    color: AppColors.appSky, width: 1.0),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(23.0),
-                                borderSide: const BorderSide(
-                                    color: AppColors.appSky, width: 1.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(23.0),
-                                borderSide: const BorderSide(
-                                    color: AppColors.appSky, width: 1.0),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 13.0, horizontal: 18.0),
-                              suffixIcon: _isTextEmpty
-                                  ? const Icon(Icons.search,
-                                  color: AppColors.appSky)
-                                  : IconButton(
-                                icon: const Icon(Icons.clear,
-                                    color: AppColors.appSky),
-                                onPressed: _clearText,
-                              ),
-                              fillColor: Colors.grey[100],
-                              filled: true,
-                            ),
-                            onChanged: _onSearchChanged,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: inactiveConferenceList.length,
-                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                          itemBuilder: (context, index) {
-                            final item = inactiveConferenceList[index];
-                            final bookingStatus = item['bookingStatus'] ?? 'Pending';
-                            final isPaid = bookingStatus.toLowerCase() == "paid";
-
-                            return Container(
-                               margin: const EdgeInsets.symmetric(vertical: 8),
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // Conference Title
-                                  Text(
-                                    "${item['id']}. ${item['conferenceName']}",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: FTextStyle.subtitle,
-
-                                  ),
-                                SizedBox(height: 8),
-
-                                  // Pay Type and Purchase Date
-                                  Row(
-                                    children: [
-                                      Icon(Icons.confirmation_number, size: 18, color:  AppColors.appSky),
-                                      const SizedBox(width: 6),
-                                      Text("Pay Type: ${item['payType']}", style: FTextStyle.style),
-                                      const Spacer(),
-                                      Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
-                                      const SizedBox(width: 6),
-                                      Text("${Constants.formatDate(item['purchaseDate'])}", style: FTextStyle.style),
-                                    ],
-                                  ),
-                             SizedBox(height: 4),
-
-                                  // Invoice
-                                  Row(
-                                    children: [
-                                      Icon(Icons.receipt_long, size: 18, color:AppColors.appSky),
-                                      const SizedBox(width: 6),
-                                      Expanded(
-                                        child: Text("Invoice No: ${item['invoiceNumber']}", style: FTextStyle.style),
-                                      ),
-                                    ],
-                                  ),
-                             SizedBox(height: 4),
-
-                                  // Payment Status
-                                  Row(
-                                    children: [
-                                      Icon(Icons.payments, size: 18, color: AppColors.appSky),
-                                      const SizedBox(width: 6),
-                                      const Text('Payment Status: ', style: FTextStyle.style),
-                                      Text(
-                                        bookingStatus,
-                                        style: FTextStyle.style.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: isPaid ? AppColors.appSky : Colors.orange,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                SizedBox(height: 4),
-
-
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          final orderId = item['id'] ?? '';
-                                          Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) => MyOrderView(id: orderId),
-                                                      ),
-                                          );
-                                        },
-                                        child: Container(
-                                          height: 35,
-                                          width: 35,
-
-                                          decoration: BoxDecoration(
-                                            color:AppColors.secondaryColour,
-                                            // Green for edit
-                                            borderRadius: BorderRadius.circular(8),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.1),
-                                                blurRadius: 6,
-                                                offset: const Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: const Icon(
-                                            Icons.remove_red_eye_outlined,
-                                            color: Colors.white,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [
-
-                                          SizedBox(width: 10,),
-                                          GestureDetector(
-                                            onTap: () {
-                                              CommonPopups.showDeleteCustomPopup(
-                                                context,
-                                                "Are you sure you want to delete?",
-                                                    () {
-                                                  // Handle delete logic
-                                                },
-                                              );
-                                            },
-                                            child: Container(
-                                              height: 35,
-                                              width: 35,
-                                              decoration: BoxDecoration(
-                                                color: Colors.red, // Red for delete
-                                                borderRadius: BorderRadius.circular(8),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black.withOpacity(0.1),
-                                                    blurRadius: 6,
-                                                    offset: const Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: const Icon(
-                                                Icons.delete,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      )
-
-                    ],
-                  ),
-            ),
+            _buildToggleButton('Upcoming', 0),
+            const SizedBox(width: 8.0),
+            _buildToggleButton('Previous'
+                '', 1),
           ],
         ),
+      ),
+      const SizedBox(height: 10),
+      // Search Bar
+      Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.04, vertical: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(23.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 4,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: TextFormField(
+            controller: controllerText,
+            decoration: InputDecoration(
+              hintText: 'Search',
+              hintStyle: FTextStyle.formhintTxtStyle,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(23.0),
+                borderSide: const BorderSide(
+                    color: AppColors.appSky, width: 1.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(23.0),
+                borderSide: const BorderSide(
+                    color: AppColors.appSky, width: 1.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(23.0),
+                borderSide: const BorderSide(
+                    color: AppColors.appSky, width: 1.0),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                  vertical: 13.0, horizontal: 18.0),
+              suffixIcon: _isTextEmpty
+                  ? const Icon(Icons.search,
+                  color: AppColors.appSky)
+                  : IconButton(
+                icon: const Icon(Icons.clear,
+                    color: AppColors.appSky),
+                onPressed: _clearText,
+              ),
+              fillColor: Colors.grey[100],
+              filled: true,
+            ),
+            onChanged: _onSearchChanged,
+          ),
+        ),
+      ),
+
+      // Active/Inactive Content
+      Expanded(
+        child: _selectedIndex == 0
+            ? _buildActiveSegment(height, width)
+            : _buildInActiveSegment(height, width),
+      ),
+      ],
+    ),
       ),
     );
   }
@@ -506,6 +248,793 @@ class _MyOrderState extends State<MyOrder> {
     });
   }
 
+  Widget _buildActiveSegment(double height, double width) {
+    List<dynamic> activeConferenceList =
+    [
+      {
+        "id":"1",
+        "invoiceNumber":"1",
+        "payType":"Offline",
+        "creditPoint":"100",
+        "amount":"100",
+        "conferenceName": "4th International Science Communication Conference",
+        "couponCode":"19ISCC90",
+        "gst":"19ISCC90",
+        "discount":"19ISCC90",
+        "payAmount":"19ISCC90",
+        'status': "Pending",
+        "purchaseDate": "2024-12-19",
+        'downloadReceipt': "assets/images/payment.png"
+
+      }, {
+      "id":"2",
+      "invoiceNumber":"1",
+      "payType":"Offline",
+      "creditPoint":"100",
+      "amount":"100",
+      "couponCode":"19ISCC90",
+      "conferenceName": "4th International Science Communication Conference",
+      "gst":"19ISCC90",
+      "discount":"19ISCC90",
+      "payAmount":"19ISCC90",
+      'status': "Paid",
+      "purchaseDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+
+    },{
+      "id":"3",
+      "invoiceNumber":"1",
+      "payType":"Online",
+      "creditPoint":"100",
+      "amount":"100",
+      "couponCode":"19ISCC90",
+      "gst":"19ISCC90",
+      "conferenceName": "4th International Science Communication Conference",
+      "discount":"19ISCC90",
+      "payAmount":"19ISCC90",
+      'status': "Paid",
+      "purchaseDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+
+    },{
+      "id":"4",
+      "invoiceNumber":"1",
+      "payType":"Online",
+      "creditPoint":"100",
+      "amount":"100",
+      "couponCode":"19ISCC90",
+      "conferenceName": "4th International Science Communication Conference",
+      "gst":"19ISCC90",
+      "discount":"19ISCC90",
+      "payAmount":"19ISCC90",
+      'status': "Pending",
+      "purchaseDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+
+    },
+
+
+    ];
+    return   ListView.builder(
+      itemCount: activeConferenceList.length,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      itemBuilder: (context, index) {
+        final item = activeConferenceList[index];
+        final status = item['status'] ?? 'Pending';
+        final isPaid = status.toLowerCase() == "paid";
+
+        return Container(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Conference Title
+              Text(
+                "${item['id']}. ${item['conferenceName']}",
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: FTextStyle.subtitle,
+
+              ),
+              SizedBox(height: 8),
+
+              // Pay Type and Purchase Date
+              Row(
+                children: [
+                  Icon(Icons.confirmation_number, size: 18, color:  AppColors.appSky),
+                  const SizedBox(width: 6),
+                  Text("Pay Type: ${item['payType']}", style: FTextStyle.style),
+                  const Spacer(),
+                  Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
+                  const SizedBox(width: 6),
+                  Text("${Constants.formatDate(item['purchaseDate'])}", style: FTextStyle.style),
+                ],
+              ),
+              SizedBox(height: 4),
+
+              // Invoice
+
+              // Payment Status
+              Row(
+                children: [
+                  Icon(Icons.payments, size: 18, color: AppColors.appSky),
+                  const SizedBox(width: 6),
+                  const Text('Payment Status: ', style: FTextStyle.style),
+                  Text(
+                    status,
+                    style: FTextStyle.style.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: isPaid ? AppColors.appSky : Colors.red,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+
+
+                  if (item['status'] == 'Paid')
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MyOrderView(id: item['id'].toString()??"",
+
+                                    ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+
+                            decoration: BoxDecoration(
+                              color:AppColors.secondaryColour,
+                              // Green for edit
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.remove_red_eye_outlined,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10,),
+
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         FeePageView(id: "",
+                            //
+                            //         ),
+                            //   ),
+                            // );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+
+                            decoration: BoxDecoration(
+                              color:AppColors.appBlue,
+                              // Green for edit
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.save_alt_rounded,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+
+
+                      ],
+                    ),
+
+
+                  if (item['status'] == 'Pending')
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MyOrderView(id: item['id'].toString()??"",
+
+                                    ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+
+                            decoration: BoxDecoration(
+                              color:AppColors.secondaryColour,
+                              // Green for edit
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.remove_red_eye_outlined,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(width: 10,),
+
+                        // GestureDetector(
+                        //   onTap: () async {
+                        //
+                        //
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => PaperReviewOrganizationRegistration(isEdit: 'yes', title:  item['conferenceName'],)
+                        //       ),
+                        //
+                        //     );
+                        //
+                        //     //     .then((result) {
+                        //     //   // Handle the result from the edit screen
+                        //     //   if (result[0]) {
+                        //     //     data.clear();
+                        //     //     pageNo = 1;
+                        //     //     hasMoreData = true;
+                        //     //     totalPages = 0;
+                        //     //     BlocProvider.of<AllRequesterBloc>(context)
+                        //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                        //     //   }
+                        //     // }
+                        //     // );
+                        //
+                        //     // );
+                        //   },
+                        //
+                        //   child: Container(
+                        //     height: 35,
+                        //     width: 35,
+                        //
+                        //     decoration: BoxDecoration(
+                        //       color: const Color(0xFF0db050), // Green for edit
+                        //       borderRadius: BorderRadius.circular(8),
+                        //       boxShadow: [
+                        //         BoxShadow(
+                        //           color: Colors.black.withOpacity(0.1),
+                        //           blurRadius: 6,
+                        //           offset: const Offset(0, 2),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.edit,
+                        //       color: Colors.white,
+                        //       size: 20,
+                        //     ),
+                        //   ),
+                        // ),
+                        //
+                        //
+                        // SizedBox(width: 10,),
+                        GestureDetector(
+                          onTap: () {
+                            CommonPopups
+                                .showDeleteCustomPopup(
+                              context,
+                              "Are you sure you want to delete?",
+                                  () {
+                                // BlocProvider.of<
+                                //     AllRequesterBloc>(
+                                //     context)
+                                //     .add(DeleteBillingHandlers(
+                                //     data[index]
+                                //     [
+                                //     'id']));
+                              },
+                            );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+                            decoration: BoxDecoration(
+                              color: Colors.red, // Red for delete
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+
+                ],
+              )
+
+
+            ],
+          ),
+        );
+      },
+    );
+  }
+  // Inactive Segment
+  Widget _buildInActiveSegment(double height, double width) {
+    List<dynamic> inactiveConferenceList =
+    [
+      {
+        "id":"1",
+        "invoiceNumber":"1",
+        "payType":"Offline",
+        "creditPoint":"100",
+        "amount":"100",
+        "conferenceName": "4th International Science Communication Conference",
+        "couponCode":"19ISCC90",
+        "gst":"19ISCC90",
+        "discount":"19ISCC90",
+        "payAmount":"19ISCC90",
+        'status': "Pending",
+        "purchaseDate": "2024-12-19",
+        'downloadReceipt': "assets/images/payment.png"
+
+      }, {
+      "id":"2",
+      "invoiceNumber":"1",
+      "payType":"Offline",
+      "creditPoint":"100",
+      "amount":"100",
+      "couponCode":"19ISCC90",
+      "conferenceName": "4th International Science Communication Conference",
+      "gst":"19ISCC90",
+      "discount":"19ISCC90",
+      "payAmount":"19ISCC90",
+      'status': "Paid",
+      "purchaseDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+
+    },{
+      "id":"3",
+      "invoiceNumber":"1",
+      "payType":"Online",
+      "creditPoint":"100",
+      "amount":"100",
+      "couponCode":"19ISCC90",
+      "gst":"19ISCC90",
+      "conferenceName": "4th International Science Communication Conference",
+      "discount":"19ISCC90",
+      "payAmount":"19ISCC90",
+      'status': "Paid",
+      "purchaseDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+
+    },{
+      "id":"4",
+      "invoiceNumber":"1",
+      "payType":"Online",
+      "creditPoint":"100",
+      "amount":"100",
+      "couponCode":"19ISCC90",
+      "conferenceName": "4th International Science Communication Conference",
+      "gst":"19ISCC90",
+      "discount":"19ISCC90",
+      "payAmount":"19ISCC90",
+      'status': "Pending",
+      "purchaseDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+
+    },
+
+
+    ];
+
+    return   ListView.builder(
+      itemCount: inactiveConferenceList.length,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      itemBuilder: (context, index) {
+        final item = inactiveConferenceList[index];
+        final status = item['status'] ?? 'Pending';
+        final isPaid = status.toLowerCase() == "paid";
+
+        return Container(
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Conference Title
+              Text(
+                "${item['id']}. ${item['conferenceName']}",
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: FTextStyle.subtitle,
+
+              ),
+              SizedBox(height: 8),
+
+              // Pay Type and Purchase Date
+              Row(
+                children: [
+                  Icon(Icons.confirmation_number, size: 18, color:  AppColors.appSky),
+                  const SizedBox(width: 6),
+                  Text("Pay Type: ${item['payType']}", style: FTextStyle.style),
+                  const Spacer(),
+                  Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
+                  const SizedBox(width: 6),
+                  Text("${Constants.formatDate(item['purchaseDate'])}", style: FTextStyle.style),
+                ],
+              ),
+              SizedBox(height: 4),
+
+              // Invoice
+
+              // Payment Status
+              Row(
+                children: [
+                  Icon(Icons.payments, size: 18, color: AppColors.appSky),
+                  const SizedBox(width: 6),
+                  const Text('Payment Status: ', style: FTextStyle.style),
+                  Text(
+                    status,
+                    style: FTextStyle.style.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: isPaid ? AppColors.appSky : Colors.red,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 4),
+
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+
+
+                  if (item['status'] == 'Paid')
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MyOrderView(id: item['id'].toString()??"",
+
+                                    ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+
+                            decoration: BoxDecoration(
+                              color:AppColors.secondaryColour,
+                              // Green for edit
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.remove_red_eye_outlined,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10,),
+
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         FeePageView(id: "",
+                            //
+                            //         ),
+                            //   ),
+                            // );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+
+                            decoration: BoxDecoration(
+                              color:AppColors.appBlue,
+                              // Green for edit
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.save_alt_rounded,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+
+
+                      ],
+                    ),
+
+
+                  if (item['status'] == 'Pending')
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MyOrderView(id: item['id'].toString()??"",
+
+                                    ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+
+                            decoration: BoxDecoration(
+                              color:AppColors.secondaryColour,
+                              // Green for edit
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.remove_red_eye_outlined,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(width: 10,),
+
+                        // GestureDetector(
+                        //   onTap: () async {
+                        //
+                        //
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => PaperReviewOrganizationRegistration(isEdit: 'yes', title:  item['conferenceName'],)
+                        //       ),
+                        //
+                        //     );
+                        //
+                        //     //     .then((result) {
+                        //     //   // Handle the result from the edit screen
+                        //     //   if (result[0]) {
+                        //     //     data.clear();
+                        //     //     pageNo = 1;
+                        //     //     hasMoreData = true;
+                        //     //     totalPages = 0;
+                        //     //     BlocProvider.of<AllRequesterBloc>(context)
+                        //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                        //     //   }
+                        //     // }
+                        //     // );
+                        //
+                        //     // );
+                        //   },
+                        //
+                        //   child: Container(
+                        //     height: 35,
+                        //     width: 35,
+                        //
+                        //     decoration: BoxDecoration(
+                        //       color: const Color(0xFF0db050), // Green for edit
+                        //       borderRadius: BorderRadius.circular(8),
+                        //       boxShadow: [
+                        //         BoxShadow(
+                        //           color: Colors.black.withOpacity(0.1),
+                        //           blurRadius: 6,
+                        //           offset: const Offset(0, 2),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.edit,
+                        //       color: Colors.white,
+                        //       size: 20,
+                        //     ),
+                        //   ),
+                        // ),
+                        //
+                        //
+                        // SizedBox(width: 10,),
+                        GestureDetector(
+                          onTap: () {
+                            CommonPopups
+                                .showDeleteCustomPopup(
+                              context,
+                              "Are you sure you want to delete?",
+                                  () {
+                                // BlocProvider.of<
+                                //     AllRequesterBloc>(
+                                //     context)
+                                //     .add(DeleteBillingHandlers(
+                                //     data[index]
+                                //     [
+                                //     'id']));
+                              },
+                            );
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 35,
+                            decoration: BoxDecoration(
+                              color: Colors.red, // Red for delete
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+
+                ],
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Toggle Button Widget
+  Widget _buildToggleButton(String text, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.appSky, // Green 0DB050
+              AppColors.secondaryColour, // Blue 023E8A
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+
 
 
 
@@ -521,4 +1050,8 @@ class _MyOrderState extends State<MyOrder> {
       //     .add(GetBillingListHandler("", pageNo, pageSize));
     });
   }
+
+
+
+
 }

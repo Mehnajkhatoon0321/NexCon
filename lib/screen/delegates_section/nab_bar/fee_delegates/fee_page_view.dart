@@ -214,72 +214,32 @@ class _FeePageViewState extends State<FeePageView> {
               )
                   : Padding(
                     padding: const EdgeInsets.all(18.0),
-                    child: ListView(
-                                    // padding: const EdgeInsets.all(16),
-                                    children: [
-                    // Container(
-                    //   padding: const EdgeInsets.symmetric(vertical: 12),
-                    //   width: screenWidth,
-                    //   // decoration: BoxDecoration(
-                    //   //   gradient: const LinearGradient(
-                    //   //     begin: Alignment.topRight,
-                    //   //     end: Alignment.bottomLeft,
-                    //   //     stops: [0.0, 0.5, 0.95],
-                    //   //     colors: [
-                    //   //       Color(0xffffffff),
-                    //   //       Color(0xf5c6f6da),
-                    //   //       Color(0xf5c6f6da),
-                    //   //     ],
-                    //   //   ),
-                    //   //   borderRadius: BorderRadius.circular(12),
-                    //   // ),
-                    //   decoration: BoxDecoration(
-                    //     gradient: const LinearGradient(
-                    //       begin: Alignment.topRight,
-                    //       end: Alignment.bottomLeft,
-                    //       stops: [0.0, 0.5],
-                    //       colors: [
-                    //         Color(0xffffffff),
-                    //         AppColors.appSky,
-                    //
-                    //
-                    //       ],
-                    //     ),
-                    //     // borderRadius: BorderRadius.circular(12),
-                    //   ),
-                    //   child: Center(
-                    //     child: Text(
-                    //       activeConferenceList['title'],
-                    //       maxLines: 2,
-                    //       overflow: TextOverflow.ellipsis,
-                    //       style: FTextStyle.listTitle.copyWith(fontSize: 16,color: AppColors.cardColor),
-                    //       textAlign: TextAlign.center,
-                    //     ),
-                    //   ),
-                    // ),
+                    child:
+                    ListView(
+                      children: [
+                        _buildDetailTile("Conference Name", activeConferenceList['title']),
+                        _buildDetailTile("Registration No.", activeConferenceList['registrationN0']),
+                        _buildDetailTile("Payment Mode", activeConferenceList['paymentMode']),
+                        _buildDetailTile("Amount", activeConferenceList['amount']),
+                        _buildDetailTile("Bank Name", activeConferenceList['bankName']),
+                        _buildDetailTile("Transaction Number", activeConferenceList['tnNumber']),
+                        _buildDetailTile("Transaction Date", activeConferenceList['tnDate']),
+                        _buildDetailTile("Fee Payment Date", activeConferenceList['feeDate']),
+                        _buildDetailTile(
+                          "Booking Status",
+                          activeConferenceList['bookingStatus'],
+                          valueColor: activeConferenceList['bookingStatus'] == "Success"
+                              ? AppColors.appSky
+                              : Colors.red,
+                        ),
+                        if (activeConferenceList['couponCode']?.isNotEmpty ?? false)
+                          _buildDetailTile("Coupon Code", activeConferenceList['couponCode']),
+                        if (activeConferenceList['downloadReceipt'] != null)
+                          Image.asset(activeConferenceList['downloadReceipt']),
+                      ],
+                    )
 
-
-                    _buildDetailTile(
-                        'Conference Name',
-                        activeConferenceList['title']),
-                    _buildDetailTile("From Date", activeConferenceList['fromDate']),
-                    _buildDetailTile("To Date", activeConferenceList['toDate']),
-                    _buildDetailTile("Registration No.", activeConferenceList['registrationN0']),
-
-                    _buildDetailTile("Payment Mode", activeConferenceList['paymentMode']),
-                    _buildDetailTile("Amount", activeConferenceList['amount']),
-                    _buildDetailTile("Bank Name", activeConferenceList['bankName']),
-                    _buildDetailTile("Coupon Code", activeConferenceList['couponCode']),
-                    _buildDetailTile("Fee Payment Date", activeConferenceList['feeDate']),
-                    _buildDetailTile("Booking Status", activeConferenceList['bookingStatus'],
-                        valueColor: activeConferenceList['bookingStatus'] == "Success"
-                            ? AppColors.appSky
-                            : Colors.orange),
-                    _buildDetailTile("Transaction Date", activeConferenceList['tnDate']),
-                    _buildDetailTile("Transaction Number", activeConferenceList['tnDate']),
-                                    ],
-                                  ),
-                  ),
+              ),
             ),
           ],
         ),

@@ -7,7 +7,8 @@ import 'package:nexcon/utils/form_field_style.dart';
 
 class SetCheckoutSetCheckInAdd extends StatefulWidget {
   String isEdit;
-   SetCheckoutSetCheckInAdd({ required this.isEdit,super.key});
+  String title;
+   SetCheckoutSetCheckInAdd({ required this.isEdit, required this.title,super.key});
 
   @override
   State<SetCheckoutSetCheckInAdd> createState() => _SetCheckoutSetCheckInAddState();
@@ -95,45 +96,59 @@ class _SetCheckoutSetCheckInAddState extends State<SetCheckoutSetCheckInAdd> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: height * 0.01),
-
-                Text(
-                  "Select Conference Category",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: DropdownButtonFormField<String>(
-                    key: _conferenceCategoryKey,
-                    value: conferenceCategoryTitleName,
-                    isExpanded: true,
-                    hint: const Text(
-                      "Select Conference Category",
-                      style: FTextStyle.formhintTxtStyle,
+                widget.isEdit.isNotEmpty ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                      widget.title,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                    ),
-                    items: conferenceTitleName.map((category) {
-                      return DropdownMenuItem<String>(
-                        value: category,
-                        child: Text(
-                          category,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: const TextStyle(fontSize: 15),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        conferenceCategoryTitleName = newValue;
-                      });
-                      // Validate only this dropdown on change
-                      _conferenceCategoryKey.currentState?.validate();
-                    },
-                    decoration: FormFieldStyle.dropDown.copyWith(
-                      errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
-                    ),
-                    validator: _validateDropdown,
+                      style: FTextStyle.subheading
                   ),
+                ):
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Select Conference Category",
+                      style: FTextStyle.SubHeadingTxtStyle,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: DropdownButtonFormField<String>(
+                        key: _conferenceCategoryKey,
+                        value: conferenceCategoryTitleName,
+                        isExpanded: true,
+                        hint: const Text(
+                          "Select Conference Category",
+                          style: FTextStyle.formhintTxtStyle,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        items: conferenceTitleName.map((category) {
+                          return DropdownMenuItem<String>(
+                            value: category,
+                            child: Text(
+                              category,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            conferenceCategoryTitleName = newValue;
+                          });
+                          // Validate only this dropdown on change
+                          _conferenceCategoryKey.currentState?.validate();
+                        },
+                        decoration: FormFieldStyle.dropDown.copyWith(
+                          errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
+                        ),
+                        validator: _validateDropdown,
+                      ),
+                    ),
+                  ],
                 ),
 
 

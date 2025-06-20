@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/custom_popup.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
+import 'package:nexcon/utils/no_space_input_formatter_class.dart';
 import 'package:nexcon/utils/validator_utils.dart';
 class AbstractSubmissionDeadlines extends StatefulWidget {
   const AbstractSubmissionDeadlines({super.key});
@@ -13,7 +15,8 @@ class AbstractSubmissionDeadlines extends StatefulWidget {
   State<AbstractSubmissionDeadlines> createState() => _AbstractSubmissionDeadlinesState();
 }
 
-class _AbstractSubmissionDeadlinesState extends State<AbstractSubmissionDeadlines> {
+class _AbstractSubmissionDeadlinesState extends State<AbstractSubmissionDeadlines>  {
+  String? conferenceTitleName;
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -92,126 +95,146 @@ class _AbstractSubmissionDeadlinesState extends State<AbstractSubmissionDeadline
       ],
     ),
   };
-  late final FocusNode _conferenceFocusNode = FocusNode();
-  final GlobalKey<FormFieldState<String>> conferenceCategoryKey = GlobalKey<FormFieldState<String>>();
-
-
-  String? selectedConference;
-  bool isButtonEnabled=false;
-  final List<String> conferenceOptions = ['TechConf 2025', 'HealthSummit', 'EduExpo'];
-  final TextEditingController _conferenceController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-
-  late final GlobalKey<FormFieldState<String>> validFromKey = GlobalKey<FormFieldState<String>>();
-
-  final TextEditingController _validFromController = TextEditingController();
-
+  final GlobalKey<FormFieldState> _deadlineDateKey = GlobalKey<FormFieldState>();
+  final FocusNode _deadlineDateFocusNode = FocusNode();
+  final TextEditingController _deadlineDateController = TextEditingController();
+  bool isSubmissionEnabled = true;
+  final formKey = GlobalKey<FormState>();
+  late final GlobalKey<FormFieldState<String>> _conferenceKey =
+  GlobalKey<FormFieldState<String>>();
+  late final FocusNode _selectconferenceFocusNode = FocusNode();
+  List<String> conferenceCategory = [
+    'Human Resource',
+    'Computer Science',
+  ];
   @override
+
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        backgroundColor:AppColors.appSky, // Customize app bar color
+        backgroundColor: AppColors.appSky,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-            size: 28,
-          ), // Menu icon
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 28),
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Abstract Submission Deadlines',
+          'Abstract Deadlines',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _formKey,
-          onChanged: () {
-            final isValid =
-                selectedConference != null &&
-                    _conferenceController.text.isNotEmpty ;
-            ;
-
-            setState(() {
-              isButtonEnabled = isValid;
-            });
-          },
-          child: ListView(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Conference Name Dropdown
-              Text("Select Conference Name", style: FTextStyle.SubHeadingTxtStyle),
-              const SizedBox(height: 6),
-              DropdownButtonFormField<String>(
-                value: selectedConference,
-                isExpanded: true,
-                key: conferenceCategoryKey,
-                hint: const Text("Select Conference", style: FTextStyle.formhintTxtStyle),
-                items: conferenceOptions.map((conf) {
-                  return DropdownMenuItem<String>(
-                    value: conf,
-                    child: Text(conf, style: const TextStyle(fontSize: 14)),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() => selectedConference = value);
-                  conferenceCategoryKey.currentState?.validate();
-                },
-                decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                  errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+              Text(
+                "Conference Category",
+                style: FTextStyle.SubHeadingTxtStyle,
+              ).animateOnPageLoad(
+                  animationsMap['imageOnPageLoadAnimation2']!),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 10.0),
+                child: DropdownButtonFormField<String>(
+                  key: _conferenceKey,
+                  focusNode: _selectconferenceFocusNode,
+                  value: conferenceTitleName,
+                  hint: const Text(
+                    "Select Conference Category",
+                    style: FTextStyle.formhintTxtStyle,
+                  ),
+                  items: conferenceCategory
+                      .map((category) => DropdownMenuItem(
+                    value: category,
+                    child: Container(
+                        constraints:  BoxConstraints(maxWidth: 200),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 0.0),
+                          child: Text(category),
+                        )),
+                  ))
+                      .toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      conferenceTitleName = newValue;
+                    });
+                    _conferenceKey.currentState?.validate(); // Validate only this field
+                  },
+                  decoration: FormFieldStyle.dropDown,
+                  validator: ValidatorUtils.model,
                 ),
-                validator: (value) => value == null ? "Please select a conference" : null,
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
+              Text(
+                "Deadline Date",
+                style: FTextStyle.formLabelTxtStyle,
+              ).animateOnPageLoad(
+                animationsMap['imageOnPageLoadAnimation2']!,
+              ),
 
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  key: _deadlineDateKey,
+                  focusNode: _deadlineDateFocusNode,
+                  keyboardType: TextInputType.text,
+                  controller: _deadlineDateController,
+                  inputFormatters: [NoSpaceFormatter()],
+                  decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                    hintText: "dd-mm-yyyy",
+                    suffixIcon: IconButton(
+                      icon: const Icon(
+                        Icons.calendar_today,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () async {
+                        await CustomPopUp.selectDate(context, _deadlineDateController);
 
-
-              Text("Generation Receipt Date-Organizer", style: FTextStyle.SubHeadingTxtStyle),
-
-              const SizedBox(height: 6),
-
-              TextFormField(
-                key: validFromKey,
-                controller: _validFromController,
-                readOnly: true,
-                decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                  hintText: "Select Start Date",
-                  suffixIcon: const Icon(Icons.calendar_today, size: 20),
+                        // ✅ Trigger validation after date is picked
+                        if (_deadlineDateKey.currentState != null) {
+                          _deadlineDateKey.currentState!.validate();
+                        }
+                      },
+                    ),
+                  ),
+                  validator: ValidatorUtils.dateValidator,
+                  onTap: () {
+                    setState(() {});
+                  },
+                ).animateOnPageLoad(
+                  animationsMap['imageOnPageLoadAnimation2']!,
                 ),
-                onTap: () async {
-                  final DateTime? picked = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100),
-                  );
-                  if (picked != null) {
-                    setState(() {
-                      _validFromController.text = DateFormat('yyyy-MM-dd').format(picked);
-                      // _validFromController.text = picked.toIso8601String().split('T').first;
-                    });
-                    validFromKey.currentState?.validate();
+              ),
 
 
-                  }
+
+              const SizedBox(height: 16),
+              Text("Enable Abstract Submission:", style: FTextStyle.formLabelTxtStyle),
+              const SizedBox(height: 8),
+              SwitchListTile(
+                title: Text(
+                  isSubmissionEnabled ? "On" : "Off",
+                  style: TextStyle(
+                    color: isSubmissionEnabled ? AppColors.appSky : Colors.grey,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                activeColor: AppColors.appSky, // switch thumb color when ON
+                activeTrackColor: Colors.blueAccent.shade100, // track color when ON
+                value: isSubmissionEnabled,
+                onChanged: (val) {
+                  setState(() {
+                    isSubmissionEnabled = val;
+                  });
                 },
-                validator: ValidatorUtils.model,
-              ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
+              ),
 
-
-
-              const SizedBox(height: 45),
-
+              const SizedBox(height: 26),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -227,37 +250,38 @@ class _AbstractSubmissionDeadlinesState extends State<AbstractSubmissionDeadline
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.pop(context);
-                        // You can add submission logic here
+                      // Validate entire form on submit button pressed
+                      if (formKey.currentState!.validate()) {
+                        // All validations passed, proceed
+                        // Navigator.pop(context);
                       } else {
-                        // Handle invalid form state
+                        // Errors will show for all invalid fields
                       }
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
-                      minimumSize: const Size(95, 35),
+                      // minimumSize: const Size(93, 32),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10),
                       child: Text(
-                        "Save",
+                        "Submit",
                         style: FTextStyle.loginBtnStyle,
                       ),
                     ),
                   ),
                 ),
               ),
-
             ],
           ),
         ),
       ),
     );
   }
+
 }

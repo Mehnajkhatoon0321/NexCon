@@ -8,7 +8,7 @@ import 'package:nexcon/screen/delegates_section/nab_bar/abstract/abstract.dart';
 
 
 import 'package:nexcon/screen/delegates_section/paper_delegates/paper_delegates.dart';
-import 'package:nexcon/screen/organizer_section/accommodation/accomodation.dart';
+
 import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/about.dart';
 import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
@@ -19,8 +19,9 @@ import 'package:nexcon/screen/sideMenu/delegates_side_menu/my_receipt.dart';
 import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/abstract_organizer/abstract_theam/abstract_organizer.dart';
 import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/paper_organizer/paper_organizer.dart';
 import 'package:nexcon/screen/sideMenu/organizer/accommodation/accomodation_category.dart';
-import 'package:nexcon/screen/sideMenu/organizer/attendance/manual_attendance.dart';
-import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_attendance.dart';
+import 'package:nexcon/screen/sideMenu/organizer/attendance/manual_attendance/manual_attendance.dart';
+import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_code/qr_attendance.dart';
+import 'package:nexcon/screen/sideMenu/organizer/conference_list.dart';
 import 'package:nexcon/screen/sideMenu/organizer/how_works_organizer.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/manage_program.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/print_program.dart';
@@ -92,6 +93,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
       filteredList = [
 
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
+        {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
         {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Organization'},
         {
           'icon': Icons.my_library_books_outlined,
@@ -121,35 +123,35 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         },
 
 
-        {
-          'icon': Icons.home_filled,
-          'subtitle': 'Registration',
-          'title': [
-            {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
-            {'icon': Icons.perm_contact_cal, 'subtitle': 'Free Registration'}
-          ]
-        },
+        // {
+        //   'icon': Icons.home_filled,
+        //   'subtitle': 'Registration',
+        //   'title': [
+        //     {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
+        //     {'icon': Icons.perm_contact_cal, 'subtitle': 'Free Registration'}
+        //   ]
+        // },
 
 
-        {
-          'icon': Icons.timelapse_rounded,
-          'subtitle': 'Schedule & Program',
-          'title': [
-            {
-              'icon': Icons.person,
-              'subtitle': 'Schedule',
-              'sub': [
-                {'icon': Icons.person, 'subsection': 'Manage Schedule'},
-                {'icon': Icons.perm_contact_cal, 'subsection': 'Print Schedule'}
-              ]
-            },
-            {'icon': Icons.perm_contact_cal, 'subtitle': 'Program', 'sub': [
-              {'icon': Icons.person, 'subsection': 'Manage Program'},
-              {'icon': Icons.perm_contact_cal, 'subsection': 'Print Program'}
-            ]}
-          ]
-        },
-
+        // {
+        //   'icon': Icons.timelapse_rounded,
+        //   'subtitle': 'Schedule & Program',
+        //   'title': [
+        //     {
+        //       'icon': Icons.person,
+        //       'subtitle': 'Schedule',
+        //       'sub': [
+        //         {'icon': Icons.person, 'subsection': 'Manage Schedule'},
+        //         {'icon': Icons.perm_contact_cal, 'subsection': 'Print Schedule'}
+        //       ]
+        //     },
+        //     {'icon': Icons.perm_contact_cal, 'subtitle': 'Program', 'sub': [
+        //       {'icon': Icons.person, 'subsection': 'Manage Program'},
+        //       {'icon': Icons.perm_contact_cal, 'subsection': 'Print Program'}
+        //     ]}
+        //   ]
+        // },
+        //
 
 
 
@@ -169,6 +171,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
               {'icon': Icons.add_home, 'subsection': 'Accommodation'},
 
             ]},
+
             { 'icon': Icons.cases_sharp,'subtitle': 'Fee', 'sub': [
               {'icon': Icons.app_registration, 'subsection': 'Registration'},
                 {'icon': Icons.home_work_rounded, 'subsection': 'Accommodation Fee'},
@@ -179,7 +182,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
             {'icon': Icons.discount, 'subtitle': 'Coupons'},
             {'icon': Icons.punch_clock, 'subtitle': 'Set-Check-In/Check-Out'},
-            {'icon': Icons.report, 'subtitle': 'Reports'},
+            // {'icon': Icons.report, 'subtitle': 'Reports'},
 
           ]
         },
@@ -394,6 +397,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 // Helper method to handle navigation
   void _handleNavigation(String subtitle) {
     switch (subtitle) {
+      case 'Delegates Registration':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'Delegates Registration',)),
+        );
+        break;
       case 'Change Password':
         Navigator.push(
           context,
@@ -424,11 +433,11 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const AccommodationScreen()),
         );
         break;
-      case 'Accommodation Organizer':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const AccommodationOrganizationScreen()),
-        );
+      // case 'Accommodation Organizer':
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => const AccommodationOrganizationScreen()),
+      //   );
         break;
       case 'My Profile Details':
         Navigator.push(
@@ -511,12 +520,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
   }
   void _subtitleHandleNavigation(String subtitle) {
     switch (subtitle) {
-      case 'Delegates Registration':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  DelegatesRegistration()),
-        );
-        break;
+      // case 'Delegates Registration':
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) =>  DelegatesRegistration()),
+      //   );
+      //   break;
       case 'Free Registration':
         Navigator.push(
           context,
@@ -527,13 +536,13 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         case 'Manual Attendance':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  ManualAttendance()),
+          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'ManualAttendance',)),
         );
         break;
         case 'QR Attendance':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  QRScannerScreen()),
+          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'QRAttendance',)),
         );
         break;
 

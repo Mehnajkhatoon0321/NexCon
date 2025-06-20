@@ -191,54 +191,33 @@ class _MyOrderViewState extends State<MyOrderView> {
                   ? const Center(
                 child: Text("No data available.", style: FTextStyle.listTitle),
               )
-                  : ListView(
-                // padding: const EdgeInsets.all(16),
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    width: screenWidth,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['conferenceName'],
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                  : Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ListView(
+                                    // padding: const EdgeInsets.all(16),
+                                    children: [
+
+
+                    _buildDetailTile("Conference Name", activeConferenceList['conferenceName']),
+                    _buildDetailTile("Invoice Number", activeConferenceList['invoiceNumber']),
+
+                    _buildDetailTile("Credit Point", activeConferenceList['creditPoint']),
+                    _buildDetailTile("Amount", activeConferenceList['amount']),
+                    _buildDetailTile("Pay Type", activeConferenceList['payType']),
+                    _buildDetailTile("Coupon Code", activeConferenceList['couponCode']),
+                    _buildDetailTile("GST", activeConferenceList['gst']),
+                    _buildDetailTile("Discount", activeConferenceList['discount']),
+                    _buildDetailTile("Pay Amount", activeConferenceList['payAmount']),
+                    _buildDetailTile("Purchase Date", activeConferenceList['purchaseDate']),
+
+                    _buildDetailTile("Payment Status", activeConferenceList['bookingStatus'],
+                        valueColor: activeConferenceList['bookingStatus'] == "Success"
+                            ? AppColors.appSky
+                            : Colors.orange),
+
+                                    ],
+                                  ),
                   ),
-                  const SizedBox(height: 20),
-                  _buildDetailTile("Invoice Number", activeConferenceList['invoiceNumber']),
-
-                  _buildDetailTile("Credit Point", activeConferenceList['creditPoint']),
-                  _buildDetailTile("Amount", activeConferenceList['amount']),
-                  _buildDetailTile("Pay Type", activeConferenceList['payType']),
-                  _buildDetailTile("Coupon Code", activeConferenceList['couponCode']),
-                  _buildDetailTile("GST", activeConferenceList['gst']),
-                  _buildDetailTile("Discount", activeConferenceList['discount']),
-                  _buildDetailTile("Pay Amount", activeConferenceList['payAmount']),
-                  _buildDetailTile("Purchase Date", activeConferenceList['purchaseDate']),
-
-                  _buildDetailTile("Payment Status", activeConferenceList['bookingStatus'],
-                      valueColor: activeConferenceList['bookingStatus'] == "Success"
-                          ? AppColors.appSky
-                          : Colors.orange),
-
-                ],
-              ),
             ),
           ],
         ),

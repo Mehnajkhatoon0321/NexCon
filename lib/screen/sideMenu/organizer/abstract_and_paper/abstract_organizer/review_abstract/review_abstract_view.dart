@@ -123,6 +123,10 @@ class _ReviewAbstractViewState extends State<ReviewAbstractView> {
     'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
     "proposalType": "Lorem",
     "paperTitle":"vbncnbnnbnn",
+    "authorNAme":"authorNAme",
+    "presentAuthorName":"Mahi",
+    "keyword":"keyword",
+    "description":"description",
     "dateOfSubmission":"12-05-2023",
     "status":"Success",
     "feeStatus":"Success",
@@ -229,42 +233,29 @@ class _ReviewAbstractViewState extends State<ReviewAbstractView> {
         : SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            height: height * 0.06,
-            width: screenWidth,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: [0.0, 0.5, 0.95],
-                colors: [
-                  Color(0xffffffff),
-                  Color(0xf5c6f6da),
-                  Color(0xf5c6f6da),
-                ],
-              ),
-            ),
-            child: Center(
-              child: Text(
-                activeConferenceList['conferenceName'],
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: FTextStyle.listTitle,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                _buildDetailTile(
+                    'Conference Name',
+                    activeConferenceList['conferenceName']),
                 _buildDetailTile("Proposal Type",
                     activeConferenceList['proposalType']),
                 _buildDetailTile("Date Of Submission",
                     activeConferenceList['dateOfSubmission']),
                 _buildDetailTile(
                     "Paper Title", activeConferenceList['paperTitle']),
+                _buildDetailTile(
+                    "Author Name", activeConferenceList['authorNAme']),
+                _buildDetailTile(
+                    "Author Presenting Name", activeConferenceList['presentAuthorName']),
+                _buildDetailTile(
+                    "Keywords", activeConferenceList['keyword']),
+                _buildDetailTile(
+                    "Description", activeConferenceList['description']),
                 _buildDetailTile("Remark", activeConferenceList['Remark']),
                 _buildDetailTile(
                   "Booking Status",
@@ -298,11 +289,14 @@ class _ReviewAbstractViewState extends State<ReviewAbstractView> {
                     // Display Title
                   // Show download row only for specific status
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
                             "Download ",
                             style: FTextStyle.listTitle,
                           ),
+                          SizedBox(width: 30,),
                           IconButton(
                             icon: Icon(
                               Icons.download_rounded,
@@ -365,7 +359,7 @@ class _ReviewAbstractViewState extends State<ReviewAbstractView> {
                   flex: 4,
                   child: Text(
                     "$title:",
-                    style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+                    style: FTextStyle.subtitle.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -374,9 +368,9 @@ class _ReviewAbstractViewState extends State<ReviewAbstractView> {
                   child: Text(
                     value,
                     style: valueColor != null
-                        ? FTextStyle.listTitleSub.copyWith(
+                        ? FTextStyle.style.copyWith(
                         color: valueColor, fontWeight: FontWeight.bold)
-                        : FTextStyle.listTitleSub,
+                        : FTextStyle.style,
                   ),
                 ),
               ],

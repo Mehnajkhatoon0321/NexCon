@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
+import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/scanner_details.dart';
+import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_edit.dart';
+import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_view.dart';
 import 'package:nexcon/screen/organizer_section/upgrade_plan/upgrade_plan.dart';
 
 import 'package:nexcon/utils/colours.dart';
@@ -62,14 +66,17 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                 children: [
                   _buildStatCard("Total Conferences", "200", Icons.event),
                   _buildStatCard("Total Registrations", "500", Icons.people),
-                  _buildStatCard("Total  Credits Balance", "200", Icons.account_balance_wallet),
+                  _buildStatCard("Total  Credits Balance", "200",
+                      Icons.account_balance_wallet),
                 ],
               ),
               SizedBox(height: 24),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => UpgradePlan())),
+                  onTap: () =>
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => UpgradePlan())),
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -85,7 +92,9 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                         // stops: [0.2, 0.9],
                       ),
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: [BoxShadow(color: AppColors.shadowColor, blurRadius: 6)],
+                      boxShadow: [
+                        BoxShadow(color: AppColors.shadowColor, blurRadius: 6)
+                      ],
                     ),
                     child: Row(
                       children: [
@@ -94,9 +103,12 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Upgrade Membership", style: FTextStyle.listTitle.copyWith(color: Colors.white)),
+                            Text("Upgrade Membership",
+                                style: FTextStyle.listTitle.copyWith(
+                                    color: Colors.white)),
                             SizedBox(height: 4),
-                            Text("Basic Plan", style: FTextStyle.style.copyWith(color: Colors.white70)),
+                            Text("Basic Plan", style: FTextStyle.style.copyWith(
+                                color: Colors.white70)),
                           ],
                         ),
                       ],
@@ -144,7 +156,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
             SizedBox(height: 8),
             Text(value, style: FTextStyle.listTitle),
             SizedBox(height: 4),
-            Text(title, style: FTextStyle.label,textAlign: TextAlign.center,),
+            Text(title, style: FTextStyle.label, textAlign: TextAlign.center,),
           ],
         ),
       ),
@@ -152,7 +164,7 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
   }
 
   Widget _buildConferenceTile(Map<String, dynamic> item) {
-    return Container(
+    return  Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.cardColor,
@@ -163,13 +175,17 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(item['conferenceName'] ?? '', style: FTextStyle.subtitle),
+          Text(item['conferenceName'] ?? '',           style: FTextStyle.subtitle,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,),
           SizedBox(height: 4),
           Row(
             children: [
-              Icon(Icons.date_range, size: 18, color: AppColors.secondYellowColour),
+              Icon(Icons.date_range, size: 18,
+                  color: AppColors.secondYellowColour),
               SizedBox(width: 6),
-              Text("${Constants.formatDate(item['fromDate'])}  → ${Constants.formatDate(item['toDate'])}", style: FTextStyle.style),
+              Text("${Constants.formatDate(item['fromDate'])}  → ${Constants
+                  .formatDate(item['toDate'])}", style: FTextStyle.style),
             ],
           ),
           SizedBox(height: 4),
@@ -180,25 +196,202 @@ class _MyDashboardOrganizerState extends State<MyDashboardOrganizer> {
                 children: [
                   Icon(Icons.how_to_reg, size: 18, color: AppColors.appSky),
                   SizedBox(width: 4),
-                  Text("Registrations: ${item['registration']}", style: FTextStyle.style),
+                  Text("Registrations: ${item['registration']}",
+                      style: FTextStyle.style),
                 ],
               ),
               Row(
                 children: [
                   Icon(Icons.access_time, size: 18, color: Colors.orange),
                   SizedBox(width: 4),
-                  Text("Waiting: ${item['registrationWait']}", style: FTextStyle.style),
+                  Text("Waiting: ${item['registrationWait']}",
+                      style: FTextStyle.style),
                 ],
               ),
             ],
           ),
+          SizedBox(height: 2,),
+          Row(
+            children: [
+              const Text(
+                  'Booking Status: ', style: FTextStyle.style),
+              Text(
+                  item['bookingStatus'],
+                  style: FTextStyle.style.copyWith(color: item['bookingStatus'] == "Approved"
+                      ? AppColors.appSky
+                      : Colors.orange,                     fontWeight: FontWeight.bold,)
 
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+
+              SizedBox(width: 10,),
+              // GestureDetector(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) =>
+              //               ScannerDetails()
+              //       ),
+              //     );
+              //   },
+              //   child: Container(
+              //     height: 35,
+              //     width: 35,
+              //
+              //     decoration: BoxDecoration(
+              //       color:AppColors.secondYellowColour,
+              //       // Green for edit
+              //       borderRadius: BorderRadius.circular(8),
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: Colors.black.withOpacity(0.1),
+              //           blurRadius: 6,
+              //           offset: const Offset(0, 2),
+              //         ),
+              //       ],
+              //     ),
+              //     child: const Icon(
+              //       Icons.qr_code_scanner,
+              //       color: Colors.white,
+              //       size: 20,
+              //     ),
+              //   ),
+              // ), SizedBox(width: 10,),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MyConferenceOrganizerView(id: item['id'].toString(),
+
+                          ),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 35,
+                  width: 35,
+
+                  decoration: BoxDecoration(
+                    color:AppColors.secondaryColour,
+                    // Green for edit
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.remove_red_eye_outlined,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
+              ),
+              SizedBox(width: 10,),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyConferenceOrganizerEdit(isEdit: 'yes', title: item['conferenceName'],
+
+                        ),
+                      )
+                  );  },
+
+                child: Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0db050),
+                    // Green background
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          // Column(
+          //   children: [
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.end,
+          //       crossAxisAlignment: CrossAxisAlignment.end,
+          //       children: [
+          //         SizedBox(width: 10,),
+          //         GestureDetector(
+          //           onTap: () {
+          //             Navigator.push(
+          //               context,
+          //               MaterialPageRoute(
+          //                 builder: (context) =>
+          //                     MyConferenceOrganizerView(id: item['id']
+          //                         .toString(),
+          //
+          //                     ),
+          //               ),
+          //             );
+          //           },
+          //           child: Container(
+          //             height: 32,
+          //             width: 35,
+          //
+          //             decoration: BoxDecoration(
+          //               color: AppColors.secondaryColour,
+          //               // Green for edit
+          //               borderRadius: BorderRadius.circular(8),
+          //               boxShadow: [
+          //                 BoxShadow(
+          //                   color: Colors.black.withOpacity(0.1),
+          //                   blurRadius: 6,
+          //                   offset: const Offset(0, 2),
+          //                 ),
+          //               ],
+          //             ),
+          //             child: const Icon(
+          //               Icons.remove_red_eye_outlined,
+          //               color: Colors.white,
+          //               size: 20,
+          //             ),
+          //           ),
+          //         ),
+          //         SizedBox(width: 10,),
+          //
+          //       ],
+          //     ),
+          //     const SizedBox(height: 4),
+          //   ],
+          // ),
         ],
       ),
     );
+
   }
+
+
+
+
+
 }
-
-
-
-

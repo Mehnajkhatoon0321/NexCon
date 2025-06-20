@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
@@ -262,46 +263,7 @@ class _AccommodationDelegatesView extends State<AccommodationDelegatesView> {
                   : Column(
                 children: [
 
-                  // Container(
-                  //   height: height * 0.06,
-                  //   width: screenWidth,
-                  //   // decoration: const BoxDecoration(
-                  //   //   gradient: LinearGradient(
-                  //   //     begin: Alignment.topRight,
-                  //   //     end: Alignment.bottomLeft,
-                  //   //     stops: [0.0, 0.5, 0.95, 0.95],
-                  //   //     colors: [
-                  //   //       Color(0xffffffff),
-                  //   //       Color(0xf5c6f6da),
-                  //   //       Color(0xf5c6f6da),
-                  //   //       Color(0xf5c6f6da),
-                  //   //     ],
-                  //   //   ),
-                  //   // ),
-                  //   decoration: BoxDecoration(
-                  //     gradient: const LinearGradient(
-                  //       begin: Alignment.topRight,
-                  //       end: Alignment.bottomLeft,
-                  //       stops: [0.0, 0.9],
-                  //       colors: [
-                  //         Color(0xffffffff),
-                  //         AppColors.appSky,
-                  //
-                  //
-                  //       ],
-                  //     ),
-                  //     // borderRadius: BorderRadius.circular(12),
-                  //   ),
-                  //   child: Center(
-                  //     child: Text(
-                  //       activeConferenceList['title'],
-                  //       maxLines: 2,
-                  //       overflow: TextOverflow.ellipsis,
-                  //       style: FTextStyle.listTitle.copyWith(fontSize: 16,color: AppColors.cardColor),
-                  //       textAlign: TextAlign.center,
-                  //     ),
-                  //   ),
-                  // ),
+
 
 
                   Padding(
@@ -314,37 +276,37 @@ class _AccommodationDelegatesView extends State<AccommodationDelegatesView> {
                             'Conference Name',
                             activeConferenceList['title']),
                         _buildDetailTile(
-                            'No. of persons:',
+                            'No. of persons',
                             activeConferenceList['numberPerson']),
                         _buildDetailTile(
-                            'No. of Days:',
+                            'No. of Days',
                             activeConferenceList['numberDays']),
                         _buildDetailTile(
-                            'From Date:',
-                            activeConferenceList['fromDate']),
+                            'From Date',
+                          Constants.formatDate(activeConferenceList['fromDate'])),
                         _buildDetailTile(
-                            'To Date:',
-                            activeConferenceList['toDate']),
+                            'To Date',
+                          Constants.formatDate(activeConferenceList['toDate'])),
                         _buildDetailTile(
-                            'Amount:',
+                            'Amount',
                             activeConferenceList['amount']),
                         _buildDetailTile(
-                            'Payment Mode:',
+                            'Payment Mode',
                             activeConferenceList['paymentMode']),
                         _buildDetailTile(
-                            'Bank Name:',
+                            'Bank Name',
                             activeConferenceList["bankName"]),
                         _buildDetailTile(
-                            'Date of Payment:',
-                            activeConferenceList['tnDate']),
+                            'Date of Payment',
+                          Constants.formatDate( activeConferenceList['tnDate'])),
                         _buildDetailTile(
-                            'Booking Status:',
+                            'Booking Status',
                             activeConferenceList['bookingStatus'],
                             valueColor: activeConferenceList['bookingStatus'] == "Success"
                                 ? Colors.green
                                 : Colors.orange),
                         _buildDetailTile(
-                            'Fee Status:',
+                            'Fee Status',
                             activeConferenceList['feeStatus'],
                             valueColor: activeConferenceList['feeStatus'] == "Success"
                                 ? Colors.green

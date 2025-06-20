@@ -5,6 +5,7 @@ import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 class PaperReviewOrganizer extends StatefulWidget {
   String id ;
    PaperReviewOrganizer({ required this.id,super.key});
@@ -13,7 +14,30 @@ class PaperReviewOrganizer extends StatefulWidget {
   State<PaperReviewOrganizer> createState() => _PaperReviewOrganizerState();
 }
 
-class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
+class _PaperReviewOrganizerState extends State<PaperReviewOrganizer>{
+  Map<String, dynamic> activeConferenceList =
+  {
+    "id":"1",
+    'title': "30th ISCB International Conference (ISCBC-2025)",
+
+
+    'proposalType': "Oral",
+    'paperTitle': "Paper Title",
+    'ramark': "Remark",
+    'paperStatus': "Pending",
+    'subtitle': "Lorem",
+    'authorName': "Author Name",
+    'authorNamePresenting': "Author Name Presenting",
+    'keyword': "keyword",
+    'description': "description ",
+
+    "dateOfDate": "23-11-2025",
+    "fromDate": "23-11-2025",
+    "toDate": "24-12-2025",
+    'abstracTopic': "30th ISCB International Conference (ISCBC-2025)",
+  }
+
+  ;
 
 
   final animationsMap = {
@@ -96,59 +120,41 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
   };
 
 
+
+
+
   bool isInitialLoading = false;
 
 
   @override
   void dispose() {
+
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-  }
 
+
+  }
   Map<String, dynamic> errorServerMessage = {};
   String? errorMessage;
-  Map<String, dynamic> activeConferenceList =
-  {
-    "id": "1",
-    'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-    "proposalType": "Lorem",
-    "paperTitle": "vbncnbnnbnn",
-    "dateOfSubmission": "12-05-2023",
-    "status": "Success",
-    "feeStatus": "Success",
-    "Remark": "Chsnge some thingx",
-
-
-  };
 
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    var height = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType
-        .toString()
-        .split('.')
-        .last;
+    var displayType = valueType.toString().split('.').last;
 
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(
-          textScaler: const TextScaler.linear(1.0)),
+      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor:AppColors.backgroundColor,
         appBar: AppBar(
-          backgroundColor: AppColors.appSky, // Customize app bar color
+          backgroundColor:AppColors.appSky, // Customize app bar color
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -160,10 +166,11 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
             },
           ),
           title: Text(
-            'Full Paper View',
-            style: FTextStyle.HeadingTxtWhiteStyle,
+            'Paper View',
+            style: FTextStyle.appBarTitleWhite,
           ),
           centerTitle: true,
+
         ),
         body: Column(
           children: [
@@ -208,117 +215,100 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
                 child: Text("No data available.",
                     style: FTextStyle.listTitle),
               )
-                  : ListView(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
+                  : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 6),
+                child: ListView(
+                  children: [
+
+                    SizedBox(height: 10,),
+                    _buildDetailTile(
+                        'Conference Name',
+                        activeConferenceList['title']),
+                    _buildDetailTile(
+                      "Paper Title",
+                      activeConferenceList['paperTitle'],
                     ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['conferenceName'], // Correct key
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
+                    _buildDetailTile(
+                      "Proposal Type",
+                      activeConferenceList['proposalType'],
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  _buildDetailTile(
-                    "Proposal Type",
-                    activeConferenceList['proposalType'], // Correct key
-                  ),
-                  _buildDetailTile(
-                    "Paper Title",
-                    activeConferenceList['paperTitle'], // Correct key
-                  ),
-                  _buildDetailTile(
-                    "Date of Submission",
-                    activeConferenceList['dateOfSubmission'], // Correct key
-                  ),
-                  _buildDetailTile(
-                    "Status",
-                    activeConferenceList['status'], // Correct key
-                  ),
-                  _buildDetailTile(
-                    "Fee Status",
-                    activeConferenceList['feeStatus'], // Correct key
-                  ),
-                  _buildDetailTile(
-                    "Remark",
-                    activeConferenceList['Remark'], // Correct key
-                  ),
-                  // Add the Download Section here
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 2),
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 4,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Display Title
-                          // Show download row only for specific status
-                          Row(
-                            children: [
-                              const Text(
-                                "Download ",
-                                style: FTextStyle.listTitle,
+                    _buildDetailTile(
+                      "Author(s) Name",
+                      activeConferenceList['authorName'],
+                    ),
+                    _buildDetailTile(
+                      "Presenting Author(s) Name",
+                      activeConferenceList['authorNamePresenting'],
+                    ),
+                    _buildDetailTile(
+                      'Keywords',
+                      activeConferenceList['keyword'],
+                    ),
+                    _buildDetailTile(
+                      'Description',
+                      activeConferenceList['description'],
+                    ),
+
+
+                    _buildDetailTile(
+                      "Paper Status",
+                      activeConferenceList['paperStatus'],
+                    ),
+                    _buildDetailTile(
+                      "Date of Submission",
+                      activeConferenceList['dateOfDate'],
+                    ),
+
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                "Paper Upload",
+                                style:
+                                FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              SizedBox(width: 50,),
-                              IconButton(
-                                icon: Icon(
-                                  Icons.download_rounded,
-                                  color: AppColors.appSky, // Color based on status
-                                ),
-                                onPressed: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text("Download fee receipt..."),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              flex: 6,
+                              child: _buildImage(activeConferenceList['gst_file']),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+
+                  ],
+                ),
               ),
             ),
           ],
         ),
 
+
+
       ),
     );
   }
-
   Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -343,8 +333,8 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
               flex: 4,
               child: Text(
                 "$title:",
-                style: FTextStyle.listTitle.copyWith(
-                    fontWeight: FontWeight.w600),
+                style:
+                FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
             const SizedBox(width: 8),
@@ -362,5 +352,40 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer> {
         ),
       ),
     );
+  }
+
+  Widget _buildImage(String? fileName) {
+    if (fileName == null || fileName.isEmpty) {
+      return const Text('No upload available.');
+    }
+
+    // Check file extension
+    String extension = fileName.split('.').last.toLowerCase();
+
+    // Assuming the fileName is a complete URL for network images
+    String fileUrl = '/public/uploads/vendor/$fileName';
+
+    if (extension == 'jpeg' || extension == 'jpg' || extension == 'png') {
+      return Image.network(fileUrl, width: 200, height: 200); // Increased size
+    } else if (extension == 'pdf') {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () async {
+              if (await canLaunch(fileUrl)) {
+                await launch(fileUrl);
+              } else {
+                // Optionally show an error message or alert to the user
+                throw 'Could not launch $fileUrl';
+              }
+            },
+            child: const Text('View Pdf', style: TextStyle(color: Colors.blue)),
+          ),
+        ],
+      );
+    } else {
+      return const Text('Unsupported file type.');
+    }
   }
 }

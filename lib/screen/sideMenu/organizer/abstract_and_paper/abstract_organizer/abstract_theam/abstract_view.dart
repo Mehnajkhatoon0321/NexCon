@@ -7,6 +7,7 @@ import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 class AbstractOrganizerView extends StatefulWidget {
   String id;
   AbstractOrganizerView({required this.id,super.key});
@@ -20,13 +21,16 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
   {
     "id":"1",
     'title': "30th ISCB International Conference (ISCBC-2025)",
-    'abstracTopic': "30th ISCB International Conference (ISCBC-2025)",
 
-    'subtitle': "Lorem",
 
+
+    'ramark': "Remark",
+    'paperStatus': "Pending",
+    'abstracTopic': "Lorem",
+
+    "dateOfDate": "23-11-2025",
     "fromDate": "23-11-2025",
     "toDate": "24-12-2025",
-
   }
 
   ;
@@ -144,7 +148,7 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor:AppColors.backgroundColor,
         appBar: AppBar(
           backgroundColor:AppColors.appSky, // Customize app bar color
           leading: IconButton(
@@ -158,8 +162,8 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
             },
           ),
           title: Text(
-            'Abstract Session/Themes View',
-            style: FTextStyle.HeadingTxtWhiteStyle,
+            'Abstract Paper View',
+            style: FTextStyle.appBarTitleWhite,
           ),
           centerTitle: true,
 
@@ -207,49 +211,65 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
                 child: Text("No data available.",
                     style: FTextStyle.listTitle),
               )
-                  : ListView(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
+                  : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 6),
+                child: ListView(
+                  children: [
+                    // Container(
+                    //   padding: const EdgeInsets.symmetric(vertical: 12),
+                    //   width: double.infinity,
+                    //   decoration: BoxDecoration(
+                    //     gradient: const LinearGradient(
+                    //       begin: Alignment.topRight,
+                    //       end: Alignment.bottomLeft,
+                    //       stops: [0.0, 0.5],
+                    //       colors: [
+                    //         Color(0xffffffff),
+                    // AppColors.appSky,
+                    //
+                    //
+                    //       ],
+                    //     ),
+                    //     // borderRadius: BorderRadius.circular(12),
+                    //   ),
+                    //   child: Center(
+                    //     child: Text(
+                    //       activeConferenceList['title'],
+                    //       maxLines: 2,
+                    //       overflow: TextOverflow.ellipsis,
+                    //       style: FTextStyle.listTitle.copyWith(fontSize: 16,color: AppColors.cardColor),
+                    //       textAlign: TextAlign.center,
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 20),
+                    SizedBox(height: 10,),
+                    _buildDetailTile(
+                        'Conference Name',
+                        activeConferenceList['title']),
+
+                    _buildDetailTile(
+                      "Abstract Session/Themes",
+                      activeConferenceList['abstracTopic'],
                     ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['title'],
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
+
+                    _buildDetailTile(
+                      "Remark",
+                      activeConferenceList['ramark'],
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  _buildDetailTile(
-                    "Abstract Topic",
-                    activeConferenceList['abstracTopic'],
-                  ),
-                  _buildDetailTile(
-                    "From Date",
-                    activeConferenceList['fromDate'],
-                  ),
-                  _buildDetailTile(
-                    "To Date",
-                    activeConferenceList['toDate'],
-                  ),
-                  // Add more fields if necessary
-                ],
+                    _buildDetailTile(
+                      "Abstract Paper Status",
+                      activeConferenceList['paperStatus'],
+                    ),
+                    _buildDetailTile(
+                      "Date of Submission",
+                      activeConferenceList['dateOfDate'],
+                    ),
+
+
+
+                  ],
+                ),
               ),
             ),
           ],
@@ -281,11 +301,11 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 4,
+              flex: 5,
               child: Text(
                 "$title:",
                 style:
-                FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+                FTextStyle.subtitle.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
             const SizedBox(width: 8),
@@ -294,9 +314,9 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
               child: Text(
                 value,
                 style: valueColor != null
-                    ? FTextStyle.listTitleSub.copyWith(
+                    ? FTextStyle.style.copyWith(
                     color: valueColor, fontWeight: FontWeight.bold)
-                    : FTextStyle.listTitleSub,
+                    : FTextStyle.style,
               ),
             ),
           ],

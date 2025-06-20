@@ -46,77 +46,56 @@ class _DelegatesRegistrationViewState
           },
         ),
         title: Text(
-          'Registration Details',
+          'Delegates Registration Details',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: detail.map((data) {
-            return Container(
-              // margin: const EdgeInsets.only(bottom: 24),
-              // decoration: BoxDecoration(
-              //   color: Colors.white,
-              //   borderRadius: BorderRadius.circular(20),
-              //   boxShadow: [
-              //     BoxShadow(
-              //       color: Colors.black12.withOpacity(0.1),
-              //       blurRadius: 12,
-              //       offset: const Offset(0, 4),
-              //     ),
-              //   ],
-              // ),
-              child: Column(
-                children: [
-                  Container(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: detail.map((data) {
+              return Container(
+                // margin: const EdgeInsets.only(bottom: 24),
+                // decoration: BoxDecoration(
+                //   color: Colors.white,
+                //   borderRadius: BorderRadius.circular(20),
+                //   boxShadow: [
+                //     BoxShadow(
+                //       color: Colors.black12.withOpacity(0.1),
+                //       blurRadius: 12,
+                //       offset: const Offset(0, 4),
+                //     ),
+                //   ],
+                // ),
+                child: Column(
+                  children: [
 
-                    // width: screenWidth,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        data['title'].toString(),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
+                    buildDetailRow("Registration No", data["Registration No"]),
+                    buildDetailRow("Conference  Name",   data['title']),
+                    buildDetailRow("Delegates Category", data["delegatesCategory"]),
+                    buildDetailRow("Delegate Name", data["delegatesName"]),
+                    buildDetailRow("Gender", data["sex"]),
 
-                  // const SizedBox(height: 16),
-                  // const Divider(thickness: 1, color: Colors.grey),
-                  const SizedBox(height: 12),
-                  buildDetailRow("Delegate Name", data["delegatesName"]),
-                  buildDetailRow("Registration No", data["Registration No"]),
-                  buildDetailRow("Booking Status", data["bookingStatus"],
-                      valueColor: data["bookingStatus"] == "Approved"
-                          ? Colors.green
-                          : Colors.red),
-                  buildDetailRow("Category", data["delegatesCategory"]),
-                  buildDetailRow("Registration Date", data["registrationDate"]),
-                  buildDetailRow("Country", data["country"]),
-                  buildDetailRow("City", data["city"]),
-                  buildDetailRow("Gender", data["sex"]),
-                  buildDetailRow("Email", data["email"]),
-                ],
-              ),
-            );
-          }).toList(),
+                    buildDetailRow("Email", data["email"]),
+                    buildDetailRow("Country", data["country"]),
+                    buildDetailRow("City", data["city"]),
+
+                    buildDetailRow("Registration Date", data["registrationDate"]),
+                    // buildDetailRow("Booking Status", data["bookingStatus"],
+                    //     valueColor: data["bookingStatus"] == "Approved"
+                    //         ? Colors.green
+                    //         : Colors.red),
+
+
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );

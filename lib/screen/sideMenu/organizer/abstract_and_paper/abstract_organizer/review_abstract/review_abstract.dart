@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/abstract_organizer/review_abstract/review_abstract_paper.dart';
 import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/abstract_organizer/review_abstract/review_abstract_view.dart';
 import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
 import '../../../../../../utils/colours.dart';
+import '../abstract_theam/abstract_organizer_edit.dart';
 class ReviewAbstractOrganizer extends StatefulWidget {
   const ReviewAbstractOrganizer({super.key});
 
@@ -19,7 +21,7 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
   int totalPages = 0;
   int pageSize = 10;
   bool hasMoreData = true;
-
+  int _selectedIndex = 0;
   final controller = ScrollController();
   final TextEditingController controllerText = TextEditingController();
   bool isLoading = false;
@@ -64,41 +66,6 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
     });
   }
 
-  List<dynamic> inactiveConferenceList = [
-    {
-      "id":"1",
-      'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-      "proposalType": "Lorem",
-      "paperTitle":"vbncnbnnbnn",
-      "dateOfSubmission":"12-05-2023",
-      "status":"Approved",
-      "feeStatus":"sdbb",
-      "Remark":"Chsnge some thingx",
-
-
-    },  {
-      "id":"2",
-      'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-      "proposalType": "Lorem",
-      "paperTitle":"vbncnbnnbnn",
-      "dateOfSubmission":"12-05-2023",
-      "status":"Approved",
-      "feeStatus":"sdbb",
-      "Remark":"Chsnge some thingx",
-
-    },{
-      "id":"3",
-      ' conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-      "proposalType": "Lorem",
-      "paperTitle":"vbncnbnnbnn",
-      "dateOfSubmission":"12-05-2023",
-      "status":"Approved",
-      "feeStatus":"sdbb",
-      "Remark":"Chsnge some thingx",
-    },
-
-
-  ];
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -130,11 +97,21 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
       backgroundColor: AppColors.backgroundColor,
       body: Column(
         children: [
-          // const SizedBox(height: 20),
-          // Search Bar
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Row(
+              children: [
+                _buildToggleButton('Upcoming', 0),
+                const SizedBox(width: 8.0),
+                _buildToggleButton('Previous', 1),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.04, vertical: 15),
+                horizontal: 10, vertical: 10),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -185,154 +162,16 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
               ),
             ),
           ),
-
           Expanded(
-            child: ListView.builder(
-                itemCount: inactiveConferenceList.length,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemBuilder: (context, index) {
-                  final item = inactiveConferenceList[index];
-                  final bookingStatus = item['bookingStatus'] ?? 'Pending';
-                  return Container(
-                    // height: height * 0.16,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    padding: const EdgeInsets.all(26),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item['conferenceName'] ?? '',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: FTextStyle.listTitle,
-                              ),
-                              const SizedBox(height: 8),
-
-
-                              Text("Paper Title: ${item['paperTitle'] ?? ''}", style: FTextStyle.style),
-                              Text("Submission Date: ${item['dateOfSubmission'] ?? ''}", style: FTextStyle.style),
-                              Text("Status: ${item['status'] ?? ''}", style: FTextStyle.style),
+            child: _selectedIndex == 0
+                ? _buildActiveSegment(height, width)
+                : _buildInActiveSegment(height, width),
+          ),
+          // const SizedBox(height: 20),
+          // Search Bar
 
 
 
-                              const SizedBox(height: 10),
-
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-
-                                  GestureDetector(
-                                    onTap: () {
-
-                                    },
-                                    child: Container(
-                                      height: 35,
-                                      width: 35,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.contactUsBlueTextColor,
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.1),
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child:       IconButton(
-                                        icon: const Icon(Icons.download_rounded, color: Colors.white,),
-                                        onPressed: () {
-                                          // TODO: implement download logic
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            const SnackBar(content: Text("Download fee receipt...")),
-                                          );
-                                        },
-                                      ),
-                                   ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ReviewAbstractView(
-                                            id: item['id'].toString(),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      height: 35,
-                                      width: 35,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.secondaryColour,
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.1),
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: const Icon(Icons.remove_red_eye_outlined, color: Colors.white, size: 20),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  GestureDetector(
-                                    onTap: () {
-                                      CommonPopups.showDeleteCustomPopup(
-                                        context,
-                                        "Are you sure you want to delete?",
-                                            () {
-                                          // Handle delete logic
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      height: 35,
-                                      width: 35,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.1),
-                                            blurRadius: 6,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: const Icon(Icons.delete, color: Colors.white, size: 20),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  );
-                }
-            ),
-          )
           // Active/Inactive Content
 
         ],
@@ -340,7 +179,972 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
     );
   }
 
+  Widget _buildActiveSegment(double height, double width) {
 
+
+    List<dynamic> activeConferenceList =[
+      {
+        "id":"1",
+        'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Approved",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+
+
+      },  {
+        "id":"2",
+        'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Approved",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+
+      },{
+        "id":"3",
+        ' conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Not Upload",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+      },
+
+      {
+        "id":"4",
+        ' conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Pending For Review",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+      },
+
+    ];
+
+    return
+      ListView.builder(
+          itemCount: activeConferenceList.length,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemBuilder: (context, index) {
+            final item = activeConferenceList[index];
+            final bookingStatus = item['bookingStatus'] ?? 'Pending';
+            return Container(
+              // height: height * 0.16,
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item['conferenceName'] ?? '',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.subtitle,
+                        ),
+
+                        Text("Paper Status: ${item['status'] ?? ''}", style: FTextStyle.style),
+
+
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+
+
+                            if (item['status'] == 'Approved')
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ReviewAbstractView(id: item['id'].toString()??"",
+
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.secondaryColour,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove_red_eye_outlined,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,),
+
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) =>
+                                      //         FeePageView(id: "",
+                                      //
+                                      //         ),
+                                      //   ),
+                                      // );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.appBlue,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.save_alt_rounded,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+
+
+                                ],
+                              ),
+
+                            if (item['status'] == 'Not Upload')
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ReviewAbstractView(id: item['id'].toString()??"",
+
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.secondaryColour,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove_red_eye_outlined,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+
+                                  SizedBox(width: 10,),
+                                  //
+                                  // GestureDetector(
+                                  //   onTap: () async {
+                                  //
+                                  //
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => ReviewAbstractPaperRegistration(isEdit: '', title:  item['conferenceName'],)
+                                  //       ),
+                                  //
+                                  //     );
+                                  //     //     .then((result) {
+                                  //     //   // Handle the result from the edit screen
+                                  //     //   if (result[0]) {
+                                  //     //     data.clear();
+                                  //     //     pageNo = 1;
+                                  //     //     hasMoreData = true;
+                                  //     //     totalPages = 0;
+                                  //     //     BlocProvider.of<AllRequesterBloc>(context)
+                                  //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                                  //     //   }
+                                  //     // }
+                                  //     // );
+                                  //
+                                  //     // );
+                                  //   },
+                                  //
+                                  //   child: Container(
+                                  //     height: 35,
+                                  //     width: 35,
+                                  //
+                                  //     decoration: BoxDecoration(
+                                  //       color: const Color(0xFF0db050), // Green for edit
+                                  //       borderRadius: BorderRadius.circular(8),
+                                  //       boxShadow: [
+                                  //         BoxShadow(
+                                  //           color: Colors.black.withOpacity(0.1),
+                                  //           blurRadius: 6,
+                                  //           offset: const Offset(0, 2),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     child: const Icon(
+                                  //       Icons.add,
+                                  //       color: Colors.white,
+                                  //       size: 20,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  //
+                                  //
+                                  // SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups
+                                          .showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // BlocProvider.of<
+                                          //     AllRequesterBloc>(
+                                          //     context)
+                                          //     .add(DeleteBillingHandlers(
+                                          //     data[index]
+                                          //     [
+                                          //     'id']));
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (item['status'] == 'Pending For Review')
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ReviewAbstractView(id: item['id'].toString()??"",
+
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.secondaryColour,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove_red_eye_outlined,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+
+                                  SizedBox(width: 10,),
+
+                                  // GestureDetector(
+                                  //   onTap: () async {
+                                  //
+                                  //
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => AbstractOrganizerEdit(isEdit: 'yes', title:  item['conferenceName'],)
+                                  //       ),
+                                  //
+                                  //     );
+                                  //
+                                  //     //     .then((result) {
+                                  //     //   // Handle the result from the edit screen
+                                  //     //   if (result[0]) {
+                                  //     //     data.clear();
+                                  //     //     pageNo = 1;
+                                  //     //     hasMoreData = true;
+                                  //     //     totalPages = 0;
+                                  //     //     BlocProvider.of<AllRequesterBloc>(context)
+                                  //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                                  //     //   }
+                                  //     // }
+                                  //     // );
+                                  //
+                                  //     // );
+                                  //   },
+                                  //
+                                  //   child: Container(
+                                  //     height: 35,
+                                  //     width: 35,
+                                  //
+                                  //     decoration: BoxDecoration(
+                                  //       color: const Color(0xFF0db050), // Green for edit
+                                  //       borderRadius: BorderRadius.circular(8),
+                                  //       boxShadow: [
+                                  //         BoxShadow(
+                                  //           color: Colors.black.withOpacity(0.1),
+                                  //           blurRadius: 6,
+                                  //           offset: const Offset(0, 2),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     child: const Icon(
+                                  //       Icons.edit,
+                                  //       color: Colors.white,
+                                  //       size: 20,
+                                  //     ),
+                                  //   ),
+                                  // ),
+
+
+                                  SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups
+                                          .showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // BlocProvider.of<
+                                          //     AllRequesterBloc>(
+                                          //     context)
+                                          //     .add(DeleteBillingHandlers(
+                                          //     data[index]
+                                          //     [
+                                          //     'id']));
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+
+
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+            );
+          }
+      );
+
+  }
+  Widget _buildInActiveSegment(double height, double width) {
+
+
+
+    List<dynamic> inactiveConferenceList = [
+      {
+        "id":"1",
+        'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Approved",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+
+
+      },  {
+        "id":"2",
+        'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Not Upload",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+
+      },
+      {
+        "id":"3",
+        ' conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Approved",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+      }, {
+        "id":"4",
+        ' conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
+        "proposalType": "Lorem",
+        "paperTitle":"vbncnbnnbnn",
+        "dateOfSubmission":"12-05-2023",
+        "status":"Pending For Review",
+        "feeStatus":"sdbb",
+        "Remark":"Chsnge some thingx",
+      },
+
+
+    ];
+
+    return
+      ListView.builder(
+          itemCount: inactiveConferenceList.length,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemBuilder: (context, index) {
+            final item = inactiveConferenceList[index];
+            final bookingStatus = item['bookingStatus'] ?? 'Pending';
+            return Container(
+              // height: height * 0.16,
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item['conferenceName'] ?? '',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: FTextStyle.subtitle,
+                        ),
+
+
+
+                      Text("Paper Status: ${item['status'] ?? ''}", style: FTextStyle.style),
+
+
+
+
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+
+
+                            if (item['status'] == 'Approved')
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ReviewAbstractView(id: item['id'].toString()??"",
+
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.secondaryColour,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove_red_eye_outlined,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,),
+
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) =>
+                                      //         FeePageView(id: "",
+                                      //
+                                      //         ),
+                                      //   ),
+                                      // );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.appBlue,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.save_alt_rounded,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+
+
+                                ],
+                              ),
+
+                            if (item['status'] == 'Not Upload')
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ReviewAbstractView(id: item['id'].toString()??"",
+
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.secondaryColour,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove_red_eye_outlined,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+
+                                  SizedBox(width: 10,),
+
+                                  // GestureDetector(
+                                  //   onTap: () async {
+                                  //
+                                  //
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => ReviewAbstractPaperRegistration(isEdit: '', title:  item['conferenceName'],)
+                                  //       ),
+                                  //
+                                  //     );
+                                  //     //     .then((result) {
+                                  //     //   // Handle the result from the edit screen
+                                  //     //   if (result[0]) {
+                                  //     //     data.clear();
+                                  //     //     pageNo = 1;
+                                  //     //     hasMoreData = true;
+                                  //     //     totalPages = 0;
+                                  //     //     BlocProvider.of<AllRequesterBloc>(context)
+                                  //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                                  //     //   }
+                                  //     // }
+                                  //     // );
+                                  //
+                                  //     // );
+                                  //   },
+                                  //
+                                  //   child: Container(
+                                  //     height: 35,
+                                  //     width: 35,
+                                  //
+                                  //     decoration: BoxDecoration(
+                                  //       color: const Color(0xFF0db050), // Green for edit
+                                  //       borderRadius: BorderRadius.circular(8),
+                                  //       boxShadow: [
+                                  //         BoxShadow(
+                                  //           color: Colors.black.withOpacity(0.1),
+                                  //           blurRadius: 6,
+                                  //           offset: const Offset(0, 2),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     child: const Icon(
+                                  //       Icons.add,
+                                  //       color: Colors.white,
+                                  //       size: 20,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  //
+                                  //
+                                  // SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups
+                                          .showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // BlocProvider.of<
+                                          //     AllRequesterBloc>(
+                                          //     context)
+                                          //     .add(DeleteBillingHandlers(
+                                          //     data[index]
+                                          //     [
+                                          //     'id']));
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (item['status'] == 'Pending For Review')
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ReviewAbstractView(id: item['id'].toString()??"",
+
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color:AppColors.secondaryColour,
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.remove_red_eye_outlined,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+
+                                  SizedBox(width: 10,),
+
+                                  // GestureDetector(
+                                  //   onTap: () async {
+                                  //
+                                  //
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) => AbstractOrganizerEdit(isEdit: 'yes', title:  item['conferenceName'],)
+                                  //       ),
+                                  //
+                                  //     );
+                                  //
+                                  //     //     .then((result) {
+                                  //     //   // Handle the result from the edit screen
+                                  //     //   if (result[0]) {
+                                  //     //     data.clear();
+                                  //     //     pageNo = 1;
+                                  //     //     hasMoreData = true;
+                                  //     //     totalPages = 0;
+                                  //     //     BlocProvider.of<AllRequesterBloc>(context)
+                                  //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
+                                  //     //   }
+                                  //     // }
+                                  //     // );
+                                  //
+                                  //     // );
+                                  //   },
+                                  //
+                                  //   child: Container(
+                                  //     height: 35,
+                                  //     width: 35,
+                                  //
+                                  //     decoration: BoxDecoration(
+                                  //       color: const Color(0xFF0db050), // Green for edit
+                                  //       borderRadius: BorderRadius.circular(8),
+                                  //       boxShadow: [
+                                  //         BoxShadow(
+                                  //           color: Colors.black.withOpacity(0.1),
+                                  //           blurRadius: 6,
+                                  //           offset: const Offset(0, 2),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     child: const Icon(
+                                  //       Icons.edit,
+                                  //       color: Colors.white,
+                                  //       size: 20,
+                                  //     ),
+                                  //   ),
+                                  // ),
+
+
+                                  SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups
+                                          .showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // BlocProvider.of<
+                                          //     AllRequesterBloc>(
+                                          //     context)
+                                          //     .add(DeleteBillingHandlers(
+                                          //     data[index]
+                                          //     [
+                                          //     'id']));
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+
+
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+            );
+          }
+      );
+
+  }
+  Widget _buildToggleButton(String text, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.appSky, // Green 0DB050
+              AppColors.secondaryColour, // Blue 023E8A
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
 
   void _clearText() {
     controllerText.clear();
@@ -354,5 +1158,6 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
       //     .add(GetBillingListHandler("", pageNo, pageSize));
     });
   }
+
 
 }

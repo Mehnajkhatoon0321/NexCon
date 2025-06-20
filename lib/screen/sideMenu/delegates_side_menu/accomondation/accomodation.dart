@@ -5,9 +5,10 @@ import 'package:nexcon/screen/sideMenu/delegates_side_menu/accomondation/accomod
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
+import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
-import '../../../organizer_section/accommodation/accomondation_view.dart';
+
 import 'accomondation_view.dart';
 
 class AccommodationScreen extends StatefulWidget {
@@ -234,34 +235,36 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
   // Active Segment
   Widget _buildActiveSegment(double height, double width) {
     List<dynamic> activeConferenceList = [
+
       {
         "id":"1",
-        'title': "30th ISCB International Conference (ISCBC-2025)",
-        'paymentMode': "PhonePay",
-        'tnNumber': "2343546446",
-        'tnDate': "2023-12-10",
-        'bankName': "HDFC",
-        'amount': "23424343",
-        'status': "Not Registered",
-        'feeStatus': "Pending",
-        "numberPerson": "2",
-        "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
-        'downloadReceipt': "assets/images/payment.png"
-      },
-      { "id":"2",
         'title': "4th International Science Communication Conference & 24th Indian Science Communication Conference",
         'paymentMode': "PhonePay",
         'tnNumber': "2343546446",
         'tnDate': "2023-12-10",
         'bankName': "HDFC ",
         'amount': "23424343",
-        'status': "Pending",
+        'status': "Success",
         "numberPerson": "2",
         "numberDays": "4",
         "fromDate": "23-11-2025",
         "toDate": "24-12-2025",
+        'downloadReceipt': "assets/images/payment.png"
+      },
+      {
+        "id":"2",
+        'title': "30th ISCB International Conference (ISCBC-2025)",
+        'paymentMode': "PhonePay",
+        'tnNumber': "2343546446",
+        'tnDate': "2023-12-10",
+        'bankName': "HDFC",
+        'amount': "23424343",
+        'status': "Pending",
+        'feeStatus': "Pending",
+        "numberPerson": "2",
+        "numberDays": "4",
+        "fromDate": "2024-12-19",
+        "toDate": "2024-12-19",
         'downloadReceipt': "assets/images/payment.png"
       },
       { "id":"3",
@@ -275,8 +278,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
+        "fromDate": "2024-12-19",
+        "toDate": "2024-12-19",
         'downloadReceipt': "assets/images/payment.png"
       },
       { "id":"3",
@@ -290,8 +293,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
+        "fromDate": "2024-12-19",
+        "toDate": "2024-12-19",
         'downloadReceipt': "assets/images/payment.png"
       }
     ];
@@ -344,20 +347,20 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                         title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle
+                        style: FTextStyle.subtitle
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'From Date: $fromDate',
+                            'From Date: ${Constants.formatDate(fromDate)}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: FTextStyle.style,
                           ),
                           Text(
-                            'To Date: $toDate',
+                            'To Date: ${Constants.formatDate(toDate)}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: FTextStyle.style,
@@ -749,8 +752,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
+        "fromDate": "2024-12-19",
+        "toDate": "2024-12-19",
         'downloadReceipt': "assets/images/payment.png"
       },
       { "id":"3",
@@ -764,8 +767,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
+        "fromDate": "2024-12-19",
+        "toDate": "2024-12-19",
         'downloadReceipt': "assets/images/payment.png"
       },
       { "id":"3",
@@ -779,8 +782,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         'feeStatus': "Pending",
         "numberPerson": "2",
         "numberDays": "4",
-        "fromDate": "23-11-2025",
-        "toDate": "24-12-2025",
+        "fromDate": "2024-12-19",
+        "toDate": "2024-12-19",
         'downloadReceipt': "assets/images/payment.png"
       }
     ];
@@ -828,20 +831,20 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                           title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.listTitle
+                          style: FTextStyle.subtitle
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'From Date: $fromDate',
+                            'From Date: ${Constants.formatDate(fromDate)}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: FTextStyle.style,
                           ),
                           Text(
-                            'To Date: $toDate',
+                            'To Date: ${Constants.formatDate(toDate)}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: FTextStyle.style,

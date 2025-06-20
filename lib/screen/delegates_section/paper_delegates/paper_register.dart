@@ -272,50 +272,7 @@ class _PaperRegisterState extends State<PaperRegister>{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height:height*0.01 ,),
-                  // Text(
-                  //   "Select Conference ",
-                  //   style: FTextStyle.SubHeadingTxtStyle,
-                  // ).animateOnPageLoad(
-                  //     animationsMap['imageOnPageLoadAnimation2']!),
-                  // Padding(
-                  //   padding:
-                  //   const EdgeInsets.symmetric(vertical: 10.0),
-                  //   child: DropdownButtonFormField<String>(
-                  //     key: _conferenceCategoryKey,
-                  //     focusNode: _selectconferenceCategoryFocusNode,
-                  //     value: conferenceCategoryTitleName,
-                  //     isExpanded: true, // ✅ Prevent horizontal overflow
-                  //     hint: const Text(
-                  //       "Select Conference ",
-                  //       style: FTextStyle.formhintTxtStyle,
-                  //       overflow: TextOverflow.ellipsis,
-                  //     ),
-                  //     items: conferenceTitleName.map((category) {
-                  //       return DropdownMenuItem<String>(
-                  //         value: category,
-                  //         child: Text(
-                  //           category,
-                  //           overflow: TextOverflow.ellipsis,
-                  //           maxLines: 1,
-                  //           style: const TextStyle(fontSize: 14),
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //     onChanged: (newValue) {
-                  //       setState(() {
-                  //         conferenceCategoryTitleName = newValue;
-                  //       });
-                  //       _conferenceCategoryKey.currentState?.validate();
-                  //     },
-                  //     decoration: FormFieldStyle.dropDown.copyWith(
-                  //       errorStyle: const TextStyle(
-                  //         color: AppColors.errorColor,  // Or any other color you'd like
-                  //         fontSize: 12,
-                  //       ),
-                  //     ),
-                  //     validator: ValidatorUtils.model,
-                  //   ),
-                  // ),
+
 
 
                   Text(

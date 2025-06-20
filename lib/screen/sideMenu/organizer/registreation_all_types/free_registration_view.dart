@@ -7,6 +7,8 @@ import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
+
+import 'fee_registration_for_delegates.dart';
 class FreeRegistrationView extends StatefulWidget {
   String id;
    FreeRegistrationView({required this.id,super.key});
@@ -30,6 +32,8 @@ class _FreeRegistrationViewState extends State<FreeRegistrationView>{
     'amount': "23424343",
     'bookingStatus': "Pending",
     'feeDate': "23-11-2025",
+    'check_date': "23-11-2025",
+    'check_number': "2025",
     "fromDate": "23-11-2025",
     "toDate": "24-12-2025",
     'downloadReceipt': "assets/images/payment.png"
@@ -145,7 +149,7 @@ class _FreeRegistrationViewState extends State<FreeRegistrationView>{
 
 
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
+data:  MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
         backgroundColor: const Color(0xFFF9F9F9),
         appBar: AppBar(
@@ -207,54 +211,90 @@ class _FreeRegistrationViewState extends State<FreeRegistrationView>{
               )
                   : (activeConferenceList.isEmpty)
                   ? const Center(
-                child: Text("No data available.", style: FTextStyle.listTitle),
+                child: Text("No activeConferenceList available.", style: FTextStyle.listTitle),
               )
-                  : ListView(
-                // padding: const EdgeInsets.all(16),
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    width: screenWidth,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
+                  :
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Title row with optional edit icon
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Registration Fee Details",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          if (activeConferenceList['bookingStatus']?.toLowerCase() == 'pending')
+                            IconButton(
+                              icon: const Icon(Icons.edit, color:AppColors.appSky),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FeeRegistrationForDelegates(
+
+                                    ),
+                                  ),
+                                );
+                                // Handle edit action here
+                                // Navigator.of(context).pop(); // Close dialog or open edit screen
+                                // TODO: Implement your edit logic
+                              },
+                            ),
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['title'],
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                        textAlign: TextAlign.center,
+
+                      const SizedBox(height: 16),
+
+                      _buildDetailTile("Registration No.", activeConferenceList['registrationN0']),
+                      _buildDetailTile("Delegate Name", activeConferenceList['delegateName']),
+                      _buildDetailTile("Payment Mode", activeConferenceList['paymentMode']),
+                      _buildDetailTile("Cheque/ Draft/ Transaction Date", activeConferenceList['check_date']),
+                      _buildDetailTile("Cheque/ Draft/ Transaction Number", activeConferenceList['check_number']),
+                      _buildDetailTile("Bank Name", activeConferenceList['bankName']),
+                      _buildDetailTile("Amount", activeConferenceList['amount']),
+                      _buildDetailTile("Coupon Code", activeConferenceList['couponCode']),
+                      _buildDetailTile("Fee Payment Date", activeConferenceList['feeDate']),
+
+                      // For Download Receipt, show download icon if not empty
+                      _buildDetailTileWithIcon(
+                        title: "Download Receipts",
+                        value: activeConferenceList['downloadReceipt'],
+                        icon: activeConferenceList['downloadReceipt']?.isNotEmpty == true
+                            ? Icons.download
+                            : null,
+                        onIconPressed: () {
+                          // Handle download action here
+                          print('Download receipt tapped');
+                        },
                       ),
-                    ),
+
+                      _buildDetailTile(
+                        "Booking Status",
+                        activeConferenceList['bookingStatus'],
+                        valueColor: activeConferenceList['bookingStatus']?.toLowerCase() == "success"
+                            ? Colors.green
+                            : Colors.orange,
+                      ),
+
+                      // const SizedBox(height: 20),
+                      // Align(
+                      //   alignment: Alignment.center,
+                      //   child: TextButton(
+                      //     onPressed: () => Navigator.of(context).pop(),
+                      //     child: const Text("Close"),
+                      //   ),
+                      // ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  _buildDetailTile("From Date", activeConferenceList['fromDate']),
-                  _buildDetailTile("To Date", activeConferenceList['toDate']),
-                  _buildDetailTile("Registration No.", activeConferenceList['registrationN0']),
-                  _buildDetailTile("Delegate Name", activeConferenceList['delegateName']),
-                  _buildDetailTile("Payment Mode", activeConferenceList['paymentMode']),
-                  _buildDetailTile("Amount", activeConferenceList['amount']),
-                  _buildDetailTile("Bank Name", activeConferenceList['bankName']),
-                  _buildDetailTile("Coupon Code", activeConferenceList['couponCode']),
-                  _buildDetailTile("Fee Payment Date", activeConferenceList['feeDate']),
-                  _buildDetailTile("Booking Status", activeConferenceList['bookingStatus'],
-                      valueColor: activeConferenceList['bookingStatus'] == "Success"
-                          ? Colors.green
-                          : Colors.orange),
-                  _buildDetailTile("Transaction Date", activeConferenceList['tnDate']),
-                  _buildDetailTile("Transaction Number", activeConferenceList['tnDate']),
-                ],
+                ),
               ),
             ),
           ],
@@ -262,15 +302,61 @@ class _FreeRegistrationViewState extends State<FreeRegistrationView>{
       ),
     );
   }
+  //
+  // Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+  //   return Container(
+  //     margin: const EdgeInsets.only(bottom: 12),
+  //     padding: const EdgeInsets.all(14),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(12),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.black12,
+  //           blurRadius: 4,
+  //           offset: Offset(0, 2),
+  //         ),
+  //       ],
+  //     ),
+  //     child: Row(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Expanded(
+  //           flex: 4,
+  //           child: Text(
+  //             "$title:",
+  //             style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+  //           ),
+  //         ),
+  //         const SizedBox(width: 8),
+  //         Expanded(
+  //           flex: 6,
+  //           child: Text(
+  //             value,
+  //             style: valueColor != null
+  //                 ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
+  //                 : FTextStyle.listTitleSub,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+  Widget _buildDetailTileWithIcon({
+    required String title,
+    String? value,
+    IconData? icon,
+    VoidCallback? onIconPressed,
+    Color? valueColor,
+  }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 4,
@@ -279,30 +365,76 @@ class _FreeRegistrationViewState extends State<FreeRegistrationView>{
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            flex: 4,
             child: Text(
-              "$title:",
-              style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          const SizedBox(width: 8),
+          if (icon != null)
+            IconButton(
+              icon: Icon(icon, color: AppColors.appSky),
+              onPressed: onIconPressed,
+            )
+          else
+            Expanded(
+              child: Text(
+                value ?? '',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  color: valueColor ?? Colors.black,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+// Your original _buildDetailTile can remain unchanged for other rows
+  Widget _buildDetailTile(String title, String? value, {Color? valueColor}) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
           Expanded(
-            flex: 6,
             child: Text(
-              value,
-              style: valueColor != null
-                  ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
-                  : FTextStyle.listTitleSub,
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              value ?? '',
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                color: valueColor ?? Colors.black,
+              ),
             ),
           ),
         ],
       ),
     );
   }
-
-
 
 }

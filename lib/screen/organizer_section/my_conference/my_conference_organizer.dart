@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
+
+import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_edit.dart';
 import 'package:nexcon/screen/organizer_section/my_conference/my_conference_organizer_view.dart';
+
 
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/constant.dart';
@@ -78,6 +82,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       "fromDate": "2024-12-19",
       "toDate": "2024-12-20",
       "registration": "200",
+      "registrationWait": "200",
 
     },
     {
@@ -88,6 +93,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       "fromDate": "2024-12-19",
       "toDate": "2024-12-20",
       "registration": "200",
+      "registrationWait": "200",
     },
   ];
   List<dynamic> inactiveConferenceList = [
@@ -99,6 +105,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       "fromDate": "2024-12-19",
       "toDate": "2024-12-20",
       "registration": "200",
+      "registrationWait": "200",
     },
     {
       "id": "2",
@@ -108,6 +115,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       "fromDate": "2024-12-19",
       "toDate": "2024-12-20",
       "registration": "200",
+      "registrationWait": "200",
     },
   ];
   @override
@@ -208,168 +216,230 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       itemBuilder: (context, index) {
         final item = activeConferenceList[index];
-        return Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                item['conferenceName'],
-               style: FTextStyle.subtitle,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
-                  const SizedBox(width: 4),
-                  Text(
-                      "${Constants.formatDate(item['fromDate'])} → ${Constants.formatDate(item['toDate'])}",
-                      style: FTextStyle.style
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Icon(Icons.app_registration, size: 18, color:AppColors.appSky),
-                  const SizedBox(width: 4),
-                  Text(
-                    "Total Registration: ${item['registration']}",
-                      style: FTextStyle.style
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Icon(Icons.access_time_rounded, size: 18, color: Colors.orange[600]),
-
-                  const SizedBox(width: 4),
-                  Text(
-                    "Registration Wait List: ${item['registrationWaitList']}",
-                      style: FTextStyle.style
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                      'Booking Status: ', style: FTextStyle.style),
-                  Text(
-                    item['bookingStatus'],
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: item['bookingStatus'] == "Approved"
-                          ? AppColors.appSky
-                          : Colors.orange,
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 7),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppColors.cardColor,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [BoxShadow(color: AppColors.shadowColor, blurRadius: 6)],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(item['conferenceName'] ?? '',           style: FTextStyle.subtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,),
+                SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(Icons.date_range, size: 18,
+                        color: AppColors.secondYellowColour),
+                    SizedBox(width: 6),
+                    Text("${Constants.formatDate(item['fromDate'])}  → ${Constants
+                        .formatDate(item['toDate'])}", style: FTextStyle.style),
+                  ],
+                ),
+                SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.how_to_reg, size: 18, color: AppColors.appSky),
+                        SizedBox(width: 4),
+                        Text("Registrations: ${item['registration']}",
+                            style: FTextStyle.style),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Icon(Icons.access_time, size: 18, color: Colors.orange),
+                        SizedBox(width: 4),
+                        Text("Waiting: ${item['registrationWait']}",
+                            style: FTextStyle.style),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 2,),
+                Row(
+                  children: [
+                    const Text(
+                        'Booking Status: ', style: FTextStyle.style),
+                    Text(
+                      item['bookingStatus'],
+                      style: FTextStyle.style.copyWith(color: item['bookingStatus'] == "Approved"
+                          ? AppColors.appSky
+                          : Colors.orange,                     fontWeight: FontWeight.bold,)
 
-              // Column(
-              //   children: [
-              //     Row(
-              //       mainAxisAlignment: MainAxisAlignment.end,
-              //       crossAxisAlignment: CrossAxisAlignment.end,
-              //       children: [
-              //
-              //         SizedBox(width: 10,),
-              //
-              //         GestureDetector(
-              //           onTap: () {
-              //             Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                 builder: (context) =>
-              //                     MyConferenceOrganizerView(id: item['id'].toString(),
-              //
-              //                     ),
-              //               ),
-              //             );
-              //           },
-              //           child: Container(
-              //             height: 35,
-              //             width: 35,
-              //
-              //             decoration: BoxDecoration(
-              //               color:AppColors.secondaryColour,
-              //               // Green for edit
-              //               borderRadius: BorderRadius.circular(8),
-              //               boxShadow: [
-              //                 BoxShadow(
-              //                   color: Colors.black.withOpacity(0.1),
-              //                   blurRadius: 6,
-              //                   offset: const Offset(0, 2),
-              //                 ),
-              //               ],
-              //             ),
-              //             child: const Icon(
-              //               Icons.remove_red_eye_outlined,
-              //               color: Colors.white,
-              //               size: 20,
-              //             ),
-              //           ),
-              //         ),
-              //         SizedBox(width: 10,),
-              //         GestureDetector(
-              //           // onTap: () {
-              //           //   _showEditDialog(
-              //           //     context,
-              //           //     item['conferenceId'], // Pass the selected ID for identification
-              //           //         () {
-              //           //
-              //           //     },
-              //           //     item['category'], // Pass the initial category of the selected item
-              //           //   );
-              //           // },
-              //           child: Container(
-              //             height: 35,
-              //             width: 35,
-              //             decoration: BoxDecoration(
-              //               color: const Color(0xFF0db050),
-              //               // Green background
-              //               borderRadius: BorderRadius.circular(8),
-              //               boxShadow: [
-              //                 BoxShadow(
-              //                   color: Colors.black.withOpacity(0.1),
-              //                   blurRadius: 6,
-              //                   offset: const Offset(0, 2),
-              //                 ),
-              //               ],
-              //             ),
-              //             child: const Icon(
-              //               Icons.edit,
-              //               color: Colors.white,
-              //               size: 20,
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //     const SizedBox(height: 4),
-              //   ],
-              // ),
-            ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+
+                    SizedBox(width: 10,),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) =>
+                    //               ScannerDetails()
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: Container(
+                    //     height: 35,
+                    //     width: 35,
+                    //
+                    //     decoration: BoxDecoration(
+                    //       color:AppColors.secondYellowColour,
+                    //       // Green for edit
+                    //       borderRadius: BorderRadius.circular(8),
+                    //       boxShadow: [
+                    //         BoxShadow(
+                    //           color: Colors.black.withOpacity(0.1),
+                    //           blurRadius: 6,
+                    //           offset: const Offset(0, 2),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     child: const Icon(
+                    //       Icons.qr_code_scanner,
+                    //       color: Colors.white,
+                    //       size: 20,
+                    //     ),
+                    //   ),
+                    // ), SizedBox(width: 10,),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                MyConferenceOrganizerView(id: item['id'].toString(),
+
+                                ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 35,
+                        width: 35,
+
+                        decoration: BoxDecoration(
+                          color:AppColors.secondaryColour,
+                          // Green for edit
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.remove_red_eye_outlined,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyConferenceOrganizerEdit(isEdit: 'yes', title: item['conferenceName'],
+
+                              ),
+                            )
+                        );  },
+
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0db050),
+                          // Green background
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                // Column(
+                //   children: [
+                //     Row(
+                //       mainAxisAlignment: MainAxisAlignment.end,
+                //       crossAxisAlignment: CrossAxisAlignment.end,
+                //       children: [
+                //         SizedBox(width: 10,),
+                //         GestureDetector(
+                //           onTap: () {
+                //             Navigator.push(
+                //               context,
+                //               MaterialPageRoute(
+                //                 builder: (context) =>
+                //                     MyConferenceOrganizerView(id: item['id']
+                //                         .toString(),
+                //
+                //                     ),
+                //               ),
+                //             );
+                //           },
+                //           child: Container(
+                //             height: 32,
+                //             width: 35,
+                //
+                //             decoration: BoxDecoration(
+                //               color: AppColors.secondaryColour,
+                //               // Green for edit
+                //               borderRadius: BorderRadius.circular(8),
+                //               boxShadow: [
+                //                 BoxShadow(
+                //                   color: Colors.black.withOpacity(0.1),
+                //                   blurRadius: 6,
+                //                   offset: const Offset(0, 2),
+                //                 ),
+                //               ],
+                //             ),
+                //             child: const Icon(
+                //               Icons.remove_red_eye_outlined,
+                //               color: Colors.white,
+                //               size: 20,
+                //             ),
+                //           ),
+                //         ),
+                //         SizedBox(width: 10,),
+                //
+                //       ],
+                //     ),
+                //     const SizedBox(height: 4),
+                //   ],
+                // ),
+              ],
+            ),
           ),
         );
       },
@@ -414,110 +484,137 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       itemBuilder: (context, index) {
         final item = inactiveConferenceList[index];
-        return Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                item['conferenceName'],
-                style: FTextStyle.subtitle,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(Icons.calendar_today, size: 18, color: AppColors.secondYellowColour),
-                  const SizedBox(width: 4),
-                  Text(
-                      "${Constants.formatDate(item['fromDate'])} → ${Constants.formatDate(item['toDate'])}",
-                      style: FTextStyle.style
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Row(
-                children: [
-                  Icon(Icons.app_registration, size: 18, color: AppColors.appSky),
-                  const SizedBox(width: 4),
-                  Text(
-                      "Total Registration: ${item['registration']}",
-                      style: FTextStyle.style
-                  ),
-                ],
-              ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 7),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppColors.cardColor,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [BoxShadow(color: AppColors.shadowColor, blurRadius: 6)],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(item['conferenceName'] ?? '',           style: FTextStyle.subtitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,),
+                SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(Icons.date_range, size: 18,
+                        color: AppColors.secondYellowColour),
+                    SizedBox(width: 6),
+                    Text("${Constants.formatDate(item['fromDate'])}  → ${Constants
+                        .formatDate(item['toDate'])}", style: FTextStyle.style),
+                  ],
+                ),
+                SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(Icons.how_to_reg, size: 18, color: AppColors.appSky),
+                    SizedBox(width: 4),
+                    Text("Registrations: ${item['registration']}",
+                        style: FTextStyle.style),
+                  ],
+                ),
+                SizedBox(height: 2,),
+                Row(
+                  children: [
+                    const Text(
+                        'Booking Status: ', style: FTextStyle.style),
+                    Text(
+                        item['bookingStatus'],
+                        style: FTextStyle.style.copyWith(color: item['bookingStatus'] == "Approved"
+                            ? AppColors.appSky
+                            : Colors.orange,                     fontWeight: FontWeight.bold,)
 
-              const SizedBox(height: 4),
-
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                      'Booking Status: ', style: FTextStyle.style),
-                  Text(
-                    item['bookingStatus'],
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: item['bookingStatus'] == "Approved"
-                          ? AppColors.appSky
-                          : Colors.orange,
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   children: [
-              //     // View Icon
-              //     InkWell(
-              //       borderRadius: BorderRadius.circular(8),
-              //       onTap: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => MyConferenceOrganizerView(
-              //               id: item['id'],
-              //             ),
-              //           ),
-              //         );
-              //       },
-              //       child: Container(
-              //         height: 35,
-              //         width: 35,
-              //         decoration: BoxDecoration(
-              //           color: AppColors.secondaryColour,
-              //           borderRadius: BorderRadius.circular(8),
-              //         ),
-              //         child: const Icon(
-              //           Icons.remove_red_eye_outlined,
-              //           color: Colors.white,
-              //           size: 20,
-              //         ),
-              //       ),
-              //     ),
-              //     const SizedBox(width: 12),
-              //
-              //   ],
-              // ),
+                  ],
+                ),
+                SizedBox(height: 2,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
 
-            ],
+
+                    SizedBox(width: 10,),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                MyConferenceOrganizerView(id: item['id'].toString(),
+
+                                ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 35,
+                        width: 35,
+
+                        decoration: BoxDecoration(
+                          color:AppColors.secondaryColour,
+                          // Green for edit
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.remove_red_eye_outlined,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyConferenceOrganizerEdit(isEdit: 'yes', title: item['conferenceName'],
+
+                              ),
+                            )
+                        );  },
+
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0db050),
+                          // Green background
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+              ],
+            ),
           ),
         );
       },
@@ -562,6 +659,8 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
       ),
     );
   }
+
+
 
 
 

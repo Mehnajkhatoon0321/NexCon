@@ -175,7 +175,7 @@ class _SetCheckOutState extends State<SetCheckOut> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SetCheckoutSetCheckInAdd(isEdit: '',)
+                          builder: (context) => SetCheckoutSetCheckInAdd(isEdit: '', title: '',)
                       ),
 
                     );
@@ -427,7 +427,7 @@ SizedBox(height: 10,),
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SetCheckoutSetCheckInAdd(isEdit: 'Yes',)
+                                      builder: (context) => SetCheckoutSetCheckInAdd(isEdit: 'Yes', title: title,)
                                   ),
 
                                 );

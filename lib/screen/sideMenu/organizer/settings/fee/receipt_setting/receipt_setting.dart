@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/fee/receipt_setting/receipt_setting_add.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/fee/receipt_setting/receipt_view.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
 
@@ -74,6 +75,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
     {
       "id":"1",
       'title': "30th ISCB International Conference (ISCBC-2025)",
+      'status': "Success",
       'seal_stamp': "Seal.pdf",
       'signature': "signature.pdf",
       'receipt_date_organizer': "12-10-2025",
@@ -83,6 +85,16 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
 
     {
       "id":"2",
+      'status': "Pending",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'seal_stamp': "Seal.pdf",
+      'signature': "signature.pdf",
+      'receipt_date_organizer': "12-10-2025",
+      'receipt_date_delegate': "12-10-2025",
+
+    }, {
+      "id":"3",
+      'status': "Not Registered",
       'title': "30th ISCB International Conference (ISCBC-2025)",
       'seal_stamp': "Seal.pdf",
       'signature': "signature.pdf",
@@ -97,6 +109,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
     {
       "id":"1",
       'title': "30th ISCB International Conference (ISCBC-2025)",
+      'status': "Success",
       'seal_stamp': "Seal.pdf",
       'signature': "signature.pdf",
       'receipt_date_organizer': "12-10-2025",
@@ -106,6 +119,16 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
 
     {
       "id":"2",
+      'status': "Pending",
+      'title': "30th ISCB International Conference (ISCBC-2025)",
+      'seal_stamp': "Seal.pdf",
+      'signature': "signature.pdf",
+      'receipt_date_organizer': "12-10-2025",
+      'receipt_date_delegate': "12-10-2025",
+
+    }, {
+      "id":"3",
+      'status': "Not Registered",
       'title': "30th ISCB International Conference (ISCBC-2025)",
       'seal_stamp': "Seal.pdf",
       'signature': "signature.pdf",
@@ -145,56 +168,56 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
           },
         ),
         title: Text(
-          'Reciept Setting List',
+          'Receipt Setting List',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: (displayType == 'desktop' || displayType == 'tablet')
-                  ? 70
-                  : 37,
-              child: ElevatedButton(
-                  onPressed: () async {
-
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ReceiptSettingAdd(isEdit: '',)
-                      ),
-
-                    );
-                    //     .then((result) {
-                    //   // Handle the result from the edit screen
-                    //   if (result[0]) {
-                    //     data.clear();
-                    //     pageNo = 1;
-                    //     hasMoreData = true;
-                    //     totalPages = 0;
-                    //     BlocProvider.of<AllRequesterBloc>(context)
-                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                    //   }
-                    // }
-                    // );
-
-                    // );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                      backgroundColor: Colors.white),
-                  child: Text(
-                    "Add",
-                    style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.appSky,fontSize: 13),
-                  )),
-            ),
-          )
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: SizedBox(
+        //       height: (displayType == 'desktop' || displayType == 'tablet')
+        //           ? 70
+        //           : 37,
+        //       child: ElevatedButton(
+        //           onPressed: () async {
+        //
+        //
+        //             Navigator.push(
+        //               context,
+        //               MaterialPageRoute(
+        //                   builder: (context) => ReceiptSettingAdd(isEdit: '',)
+        //               ),
+        //
+        //             );
+        //             //     .then((result) {
+        //             //   // Handle the result from the edit screen
+        //             //   if (result[0]) {
+        //             //     data.clear();
+        //             //     pageNo = 1;
+        //             //     hasMoreData = true;
+        //             //     totalPages = 0;
+        //             //     BlocProvider.of<AllRequesterBloc>(context)
+        //             //         .add(AddCartDetailHandler("", pageNo, pageSize));
+        //             //   }
+        //             // }
+        //             // );
+        //
+        //             // );
+        //           },
+        //           style: ElevatedButton.styleFrom(
+        //               shape: RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.circular(26),
+        //               ),
+        //               backgroundColor: Colors.white),
+        //           child: Text(
+        //             "Add",
+        //             style: FTextStyle.loginBtnStyle
+        //                 .copyWith(color: AppColors.appSky,fontSize: 13),
+        //           )),
+        //     ),
+        //   )
+        // ],
       ),
 
       body: Column(
@@ -333,13 +356,6 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
         final title = item['title'] ?? 'Unknown Title';
         final id = item['id'] ?? 'Unknown Title';
 
-        final dataDelegate = item['receipt_date_delegate'] ?? 'N/A';
-        final dataOrganizer = item['receipt_date_organizer'] ?? 'N/A';
-
-        final signature = item['signature'] ?? 'N/A';
-        final seal_stamp = item['seal_stamp'] ?? 'N/A';
-
-        final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
 
         return Container(
@@ -372,124 +388,452 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Text(
+//                           'Delegate Date:$dataDelegate',
+//                           maxLines: 1,
+//                           overflow: TextOverflow.ellipsis,
+//                           style: FTextStyle.style,
+//                         ),
+//
+//                       ],
+//                     ),
+//
+//                     Text(
+//                       'Organizer Date:$dataOrganizer',
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                       style: FTextStyle.style,
+//                     ),
+// Text(
+//                       'Signature: $signature',
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                       style: FTextStyle.style,
+//                     ),
+//
+// Text(
+//                       'Seal Stamp: $seal_stamp',
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                       style: FTextStyle.style,
+//                     ),
+
+
+
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Text(
+                            'Receipt Status: ', style: FTextStyle.listTitle),
                         Text(
-                          'Delegate Date:$dataDelegate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
-                        ),
-
-                      ],
-                    ),
-
-                    Text(
-                      'Organizer Date:$dataOrganizer',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-Text(
-                      'Signature: $signature',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-
-Text(
-                      'Seal Stamp: $seal_stamp',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-
-
-
-
-
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ReceiptSettingAdd(isEdit: 'Yes',)
-                              ),
-
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF0db050),
-                              // Green for edit
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 20,
-                            ),
+                          item['status'],
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: item['status'] == "Success"
+                                ? Colors.green
+                                : Colors.orange,
                           ),
                         ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-
-                            SizedBox(width: 10,),
-                            GestureDetector(
-                              onTap: () {
-                                CommonPopups.showDeleteCustomPopup(
-                                  context,
-                                  "Are you sure you want to delete?",
-                                      () {
-                                    // Handle delete logic
-                                  },
-                                );
-                              },
-                              child: Container(
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(
-                                  color: Colors.red, // Red for delete
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
-                                ),
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
+                    if (item['status'] == 'Success')
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(height: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ReceiptView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          GestureDetector(
+                            onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         FeePageView(id: "",
+                              //
+                              //         ),
+                              //   ),
+                              // );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.appBlue,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.save_alt_rounded,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    if (item['status'] == 'Pending')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ReceiptView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ReceiptSettingAdd(title: title, isEdit: '',)
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF0db050),
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  CommonPopups.showDeleteCustomPopup(
+                                    context,
+                                    "Are you sure you want to delete?",
+                                        () {
+                                      // Handle delete logic
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red, // Red for delete
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    if (item['status'] == 'Not Registered')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ReceiptView(id: id,
+
+                                      ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+
+                              decoration: BoxDecoration(
+                                color:AppColors.secondaryColour,
+                                // Green for edit
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ReceiptSettingAdd(title: title, isEdit: '',)  ),
+
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF0db050),
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  CommonPopups.showDeleteCustomPopup(
+                                    context,
+                                    "Are you sure you want to delete?",
+                                        () {
+                                      // Handle delete logic
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red, // Red for delete
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+
+
+
+
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   crossAxisAlignment: CrossAxisAlignment.end,
+                    //   children: [
+                    //     GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => ReceiptSettingAdd(isEdit: 'Yes',)
+                    //           ),
+                    //
+                    //         );
+                    //       },
+                    //       child: Container(
+                    //         height: 35,
+                    //         width: 35,
+                    //
+                    //         decoration: BoxDecoration(
+                    //           color: const Color(0xFF0db050),
+                    //           // Green for edit
+                    //           borderRadius: BorderRadius.circular(8),
+                    //           boxShadow: [
+                    //             BoxShadow(
+                    //               color: Colors.black.withOpacity(0.1),
+                    //               blurRadius: 6,
+                    //               offset: const Offset(0, 2),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //         child: const Icon(
+                    //           Icons.edit,
+                    //           color: Colors.white,
+                    //           size: 20,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //
+                    //     Row(
+                    //       mainAxisAlignment: MainAxisAlignment.end,
+                    //       crossAxisAlignment: CrossAxisAlignment.end,
+                    //       children: [
+                    //
+                    //         SizedBox(width: 10,),
+                    //         GestureDetector(
+                    //           onTap: () {
+                    //             CommonPopups.showDeleteCustomPopup(
+                    //               context,
+                    //               "Are you sure you want to delete?",
+                    //                   () {
+                    //                 // Handle delete logic
+                    //               },
+                    //             );
+                    //           },
+                    //           child: Container(
+                    //             height: 35,
+                    //             width: 35,
+                    //             decoration: BoxDecoration(
+                    //               color: Colors.red, // Red for delete
+                    //               borderRadius: BorderRadius.circular(8),
+                    //               boxShadow: [
+                    //                 BoxShadow(
+                    //                   color: Colors.black.withOpacity(0.1),
+                    //                   blurRadius: 6,
+                    //                   offset: const Offset(0, 2),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             child: const Icon(
+                    //               Icons.delete,
+                    //               color: Colors.white,
+                    //               size: 20,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ],
+                    // ),
 
 
 
@@ -519,95 +863,496 @@ Text(
         final title = item['title'] ?? 'Unknown Title';
         final id = item['id'] ?? 'Unknown Title';
 
-        final dataDelegate = item['receipt_date_delegate'] ?? 'N/A';
-        final dataOrganizer = item['receipt_date_organizer'] ?? 'N/A';
-
-        final signature = item['signature'] ?? 'N/A';
-        final seal_stamp = item['seal_stamp'] ?? 'N/A';
 
 
 
-            return Container(
-          // height: height * 0.24,
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+            return  Container(
+              // height: height * 0.24,
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: Row(
-            children: [
-              // Left Column: Payment Details
-              Expanded(
-                child:
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Row(
+                children: [
+                  // Left Column: Payment Details
+                  Expanded(
+                    child:
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Delegate Date:$dataDelegate',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: FTextStyle.style,
+                            title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: FTextStyle.listTitle
                         ),
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Text(
+//                           'Delegate Date:$dataDelegate',
+//                           maxLines: 1,
+//                           overflow: TextOverflow.ellipsis,
+//                           style: FTextStyle.style,
+//                         ),
+//
+//                       ],
+//                     ),
+//
+//                     Text(
+//                       'Organizer Date:$dataOrganizer',
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                       style: FTextStyle.style,
+//                     ),
+// Text(
+//                       'Signature: $signature',
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                       style: FTextStyle.style,
+//                     ),
+//
+// Text(
+//                       'Seal Stamp: $seal_stamp',
+//                       maxLines: 1,
+//                       overflow: TextOverflow.ellipsis,
+//                       style: FTextStyle.style,
+//                     ),
+
+
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                                'Receipt Status: ', style: FTextStyle.listTitle),
+                            Text(
+                              item['status'],
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: item['status'] == "Success"
+                                    ? Colors.green
+                                    : Colors.orange,
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (item['status'] == 'Success')
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(height: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ReceiptView(id: id,
+
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.secondaryColour,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         FeePageView(id: "",
+                                  //
+                                  //         ),
+                                  //   ),
+                                  // );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.appBlue,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.save_alt_rounded,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        if (item['status'] == 'Pending')
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ReceiptView(id: id,
+
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.secondaryColour,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ReceiptSettingAdd(title: title, isEdit: '',)
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF0db050),
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups.showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // Handle delete logic
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        if (item['status'] == 'Not Registered')
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ReceiptView(id: id,
+
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.secondaryColour,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  // GestureDetector(
+                                  //   onTap: () {
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //           builder: (context) =>
+                                  //               ReceiptSettingAdd(title: title, isEdit: '',)  ),
+                                  //
+                                  //     );
+                                  //   },
+                                  //   child: Container(
+                                  //     height: 35,
+                                  //     width: 35,
+                                  //
+                                  //     decoration: BoxDecoration(
+                                  //       color: const Color(0xFF0db050),
+                                  //       // Green for edit
+                                  //       borderRadius: BorderRadius.circular(8),
+                                  //       boxShadow: [
+                                  //         BoxShadow(
+                                  //           color: Colors.black.withOpacity(0.1),
+                                  //           blurRadius: 6,
+                                  //           offset: const Offset(0, 2),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     child: const Icon(
+                                  //       Icons.add,
+                                  //       color: Colors.white,
+                                  //       size: 20,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups.showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // Handle delete logic
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+
+
+
+
+
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.end,
+                        //   crossAxisAlignment: CrossAxisAlignment.end,
+                        //   children: [
+                        //     GestureDetector(
+                        //       onTap: () {
+                        //         Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) => ReceiptSettingAdd(isEdit: 'Yes',)
+                        //           ),
+                        //
+                        //         );
+                        //       },
+                        //       child: Container(
+                        //         height: 35,
+                        //         width: 35,
+                        //
+                        //         decoration: BoxDecoration(
+                        //           color: const Color(0xFF0db050),
+                        //           // Green for edit
+                        //           borderRadius: BorderRadius.circular(8),
+                        //           boxShadow: [
+                        //             BoxShadow(
+                        //               color: Colors.black.withOpacity(0.1),
+                        //               blurRadius: 6,
+                        //               offset: const Offset(0, 2),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //         child: const Icon(
+                        //           Icons.edit,
+                        //           color: Colors.white,
+                        //           size: 20,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //
+                        //     Row(
+                        //       mainAxisAlignment: MainAxisAlignment.end,
+                        //       crossAxisAlignment: CrossAxisAlignment.end,
+                        //       children: [
+                        //
+                        //         SizedBox(width: 10,),
+                        //         GestureDetector(
+                        //           onTap: () {
+                        //             CommonPopups.showDeleteCustomPopup(
+                        //               context,
+                        //               "Are you sure you want to delete?",
+                        //                   () {
+                        //                 // Handle delete logic
+                        //               },
+                        //             );
+                        //           },
+                        //           child: Container(
+                        //             height: 35,
+                        //             width: 35,
+                        //             decoration: BoxDecoration(
+                        //               color: Colors.red, // Red for delete
+                        //               borderRadius: BorderRadius.circular(8),
+                        //               boxShadow: [
+                        //                 BoxShadow(
+                        //                   color: Colors.black.withOpacity(0.1),
+                        //                   blurRadius: 6,
+                        //                   offset: const Offset(0, 2),
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //             child: const Icon(
+                        //               Icons.delete,
+                        //               color: Colors.white,
+                        //               size: 20,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ),
+
+
 
                       ],
                     ),
+                  ),
+                  // Right Column: Action Buttons
 
-                    Text(
-                      'Organizer Date:$dataOrganizer',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-                    Text(
-                      'Signature: $signature',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-
-                    Text(
-                      'Seal Stamp: $seal_stamp',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-
-
-
-
-
-
-
-
-
-
-                  ],
-                ),
+                ],
               ),
-              // Right Column: Action Buttons
-
-            ],
-          ),
-        );
+            );
       },
     );
   }

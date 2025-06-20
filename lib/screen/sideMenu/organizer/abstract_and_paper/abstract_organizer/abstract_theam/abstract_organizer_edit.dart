@@ -6,9 +6,10 @@ import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/validator_utils.dart';
 class AbstractOrganizerEdit extends StatefulWidget {
-  String conferenceName;
-  String  abstractSession;
-   AbstractOrganizerEdit({required this.conferenceName,required this.abstractSession,super.key});
+
+  String isEdit;
+  String title;
+   AbstractOrganizerEdit({required this.isEdit,required this.title,super.key});
 
   @override
   State<AbstractOrganizerEdit> createState() => _AbstractOrganizerEditState();
@@ -94,10 +95,6 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
     ),
   };
   String? conferenceCategoryTitleName;
-  List<String> conferenceTitleName = [
-    '4th International Science Communication Conference',
-    '5th International Tech & Innovation Summit',
-  ];
 
   late final GlobalKey<FormFieldState<String>> _conferenceCategoryKey =
   GlobalKey<FormFieldState<String>>();
@@ -155,7 +152,7 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
             },
           ),
           title: Text(
-            'Create Abstract Session/Themes',
+            widget.isEdit.isNotEmpty ? "Edit Abstract Session/Themes" : 'Create Abstract Session/Themes',
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
@@ -190,51 +187,13 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height:height*0.01 ,),
+
                 Text(
-                  "Select Conference Category",
-                  style: FTextStyle.SubHeadingTxtStyle,
+                  "${widget.title}",
+                  style: FTextStyle.subheading,
                 ).animateOnPageLoad(
                     animationsMap['imageOnPageLoadAnimation2']!),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 10.0),
-                  child: DropdownButtonFormField<String>(
-                    key: _conferenceCategoryKey,
-                    focusNode: _selectconferenceCategoryFocusNode,
-                    value: conferenceCategoryTitleName,
-                    isExpanded: true, // ✅ Prevent horizontal overflow
-                    hint: const Text(
-                      "Select Conference Category",
-                      style: FTextStyle.formhintTxtStyle,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: conferenceTitleName.map((category) {
-                      return DropdownMenuItem<String>(
-                        value: category,
-                        child: Text(
-                          category,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        conferenceCategoryTitleName = newValue;
-                      });
-                      _conferenceCategoryKey.currentState?.validate();
-                    },
-                    decoration: FormFieldStyle.dropDown.copyWith(
-                      errorStyle: const TextStyle(
-                        color: AppColors.errorColor,  // Or any other color you'd like
-                        fontSize: 12,
-                      ),
-                    ),
-                    validator: ValidatorUtils.model,
-                  ),
-                ),
+                SizedBox(height: 15,),
                 Text(
                   "Abstract Session/Themes",
                   style: FTextStyle.SubHeadingTxtStyle,
@@ -305,7 +264,7 @@ class _AbstractOrganizerEditState extends State<AbstractOrganizerEdit> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
-                          child: Text("Update", style: FTextStyle.loginBtnStyle),
+                          child: Text(widget.isEdit.isNotEmpty ? "Update" : "Submit", style: FTextStyle.loginBtnStyle),
                         ),
                       ),
                     ),

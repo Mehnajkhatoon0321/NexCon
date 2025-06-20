@@ -29,6 +29,7 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
     'bookingStatus': "Pending",
     'feeStatus': "Pending",
     "numberPerson": "2",
+    "delegateName": "2",
     "numberDays": "4",
     "fromDate": "23-11-2025",
     "toDate": "24-12-2025",
@@ -274,80 +275,63 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
                 child: Text("No data available.",
                     style: FTextStyle.listTitle),
               )
-                  : Column(
-                children: [
-                  Container(
-                    height: height * 0.06,
-                    width: screenWidth,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [0.0, 0.5, 0.95, 0.95],
-                        colors: [
-                          Color(0xffffffff),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
-                          Color(0xf5c6f6da),
+                  : SingleChildScrollView(
+                    child: Column(
+                                    children: [
+                            
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildDetailTile(
+                              'Conference Name:',
+                              activeConferenceList['title']),
+                          _buildDetailTile(
+                              'Delegate Name:',
+                              activeConferenceList['delegateName']),
+                          _buildDetailTile(
+                              'No. of persons:',
+                              activeConferenceList['numberPerson']),
+                          _buildDetailTile(
+                              'No. of Days:',
+                              activeConferenceList['numberDays']),
+                          _buildDetailTile(
+                              'From Date:',
+                              activeConferenceList['fromDate']),
+                          _buildDetailTile(
+                              'To Date:',
+                              activeConferenceList['toDate']),
+                          _buildDetailTile(
+                              'Amount:',
+                              activeConferenceList['amount']),
+                          _buildDetailTile(
+                              'Payment Mode:',
+                              activeConferenceList['paymentMode']),
+                          _buildDetailTile(
+                              'Bank Name:',
+                              activeConferenceList["bankName"]),
+                          _buildDetailTile(
+                              'Date of Payment:',
+                              activeConferenceList['tnDate']),
+                          _buildDetailTile(
+                              'Booking Status:',
+                              activeConferenceList['bookingStatus'],
+                              valueColor: activeConferenceList['bookingStatus'] == "Success"
+                                  ? Colors.green
+                                  : Colors.orange),
+                          _buildDetailTile(
+                              'Fee Status:',
+                              activeConferenceList['feeStatus'],
+                              valueColor: activeConferenceList['feeStatus'] == "Success"
+                                  ? Colors.green
+                                  : Colors.orange),
                         ],
                       ),
                     ),
-                    child: Center(
-                      child: Text(
-                        activeConferenceList['title'],
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: FTextStyle.listTitle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                                    ],
+                                  ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildDetailTile(
-                            'No. of persons:',
-                            activeConferenceList['numberPerson']),
-                        _buildDetailTile(
-                            'No. of Days:',
-                            activeConferenceList['numberDays']),
-                        _buildDetailTile(
-                            'From Date:',
-                            activeConferenceList['fromDate']),
-                        _buildDetailTile(
-                            'To Date:',
-                            activeConferenceList['toDate']),
-                        _buildDetailTile(
-                            'Amount:',
-                            activeConferenceList['amount']),
-                        _buildDetailTile(
-                            'Payment Mode:',
-                            activeConferenceList['paymentMode']),
-                        _buildDetailTile(
-                            'Bank Name:',
-                            activeConferenceList["bankName"]),
-                        _buildDetailTile(
-                            'Date of Payment:',
-                            activeConferenceList['tnDate']),
-                        _buildDetailTile(
-                            'Booking Status:',
-                            activeConferenceList['bookingStatus'],
-                            valueColor: activeConferenceList['bookingStatus'] == "Success"
-                                ? Colors.green
-                                : Colors.orange),
-                        _buildDetailTile(
-                            'Fee Status:',
-                            activeConferenceList['feeStatus'],
-                            valueColor: activeConferenceList['feeStatus'] == "Success"
-                                ? Colors.green
-                                : Colors.orange),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),
@@ -377,7 +361,7 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
           Expanded(
             flex: 4,
             child: Text(
-              "$title:",
+              "$title",
               style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
             ),
           ),

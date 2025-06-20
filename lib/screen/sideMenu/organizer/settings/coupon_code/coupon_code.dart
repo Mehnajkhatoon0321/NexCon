@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/coupon_code/add_coupon_code.dart';
+import 'package:nexcon/screen/sideMenu/organizer/settings/coupon_code/coupon_view.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
 import 'package:nexcon/utils/common_popups.dart';
@@ -72,41 +73,420 @@ class _CouponCodeState extends State<CouponCode> {
   List<dynamic> activeConferenceList = [
     {
       "id":"1",
-      "titleName":"Title Name",
+      "titleName":"30th ISCB International Conference (ISCBC-2025)",
       "code":"sd4324",
       "discountTypes":"DiscountType",
       "validFrom":"12-04-2025",
       "validTo":"12-05-2025",
       "usageLimit":"",
-      "status":"active"
+      "status":"Success"
 
     },
 {
       "id":"2",
-      "titleName":"Title Name2",
+      "titleName":"30th ISCB International Conference (ISCBC-2025)2",
       "code":"sd4324",
       "discountTypes":"DiscountType",
       "validFrom":"12-04-2025",
       "validTo":"12-05-2025",
       "usageLimit":"2",
-      "status":"active"
+      "status":"Pending"
 
     },
     {
       "id":"3",
-      "titleName":"Title Name2",
+      "titleName":"30th ISCB International Conference (ISCBC-2025)2",
       "code":"sd4324",
       "discountTypes":"DiscountType",
       "validFrom":"12-04-2025",
       "validTo":"12-05-2025",
       "usageLimit":"2",
-      "status":"active"
+      "status":"Not Registered"
+
+    },
+
+
+  ];
+  List<dynamic> inactiveConferenceList = [
+    {
+      "id":"1",
+      "titleName":"30th ISCB International Conference (ISCBC-2025)",
+      "code":"sd4324",
+      "discountTypes":"DiscountType",
+      "validFrom":"12-04-2025",
+      "validTo":"12-05-2025",
+      "usageLimit":"",
+      "status":"Success"
+
+    },
+    {
+      "id":"2",
+      "titleName":"30th ISCB International Conference (ISCBC-2025)2",
+      "code":"sd4324",
+      "discountTypes":"DiscountType",
+      "validFrom":"12-04-2025",
+      "validTo":"12-05-2025",
+      "usageLimit":"2",
+      "status":"Pending"
+
+    },
+    {
+      "id":"3",
+      "titleName":"30th ISCB International Conference (ISCBC-2025)2",
+      "code":"sd4324",
+      "discountTypes":"DiscountType",
+      "validFrom":"12-04-2025",
+      "validTo":"12-05-2025",
+      "usageLimit":"2",
+      "status":"Not Registered"
 
     },
 
 
   ];
 
+  // @override
+  // Widget build(BuildContext context) {
+  //
+  //   var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
+  //   var displayType = valueType
+  //       .toString()
+  //       .split('.')
+  //       .last;
+  //   var height = MediaQuery.of(context).size.height;
+  //   var width = MediaQuery.of(context).size.width;
+  //   final screenWidth = MediaQuery
+  //       .of(context)
+  //       .size
+  //       .width;
+  //   return Scaffold(
+  //     backgroundColor: AppColors.backgroundColor,
+  //     appBar: AppBar(
+  //       backgroundColor:AppColors.appSky, // Customize app bar color
+  //       leading: IconButton(
+  //         icon: const Icon(
+  //           Icons.arrow_back_ios,
+  //           color: Colors.white,
+  //           size: 28,
+  //         ), // Menu icon
+  //         onPressed: () {
+  //           Navigator.pop(context);
+  //         },
+  //       ),
+  //       title: Text(
+  //         'Coupon Code',
+  //         style: FTextStyle.HeadingTxtWhiteStyle,
+  //       ),
+  //       centerTitle: true,
+  //       actions: [
+  //         Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: SizedBox(
+  //             height: (displayType == 'desktop' || displayType == 'tablet')
+  //                 ? 70
+  //                 : 37,
+  //             child: ElevatedButton(
+  //                 onPressed: () async {
+  //
+  //
+  //                   Navigator.push(
+  //                     context,
+  //                     MaterialPageRoute(
+  //                         builder: (context) => AddCouponCode(isEdit: '',)
+  //                     ),
+  //
+  //                   );
+  //                   //     .then((result) {
+  //                   //   // Handle the result from the edit screen
+  //                   //   if (result[0]) {
+  //                   //     data.clear();
+  //                   //     pageNo = 1;
+  //                   //     hasMoreData = true;
+  //                   //     totalPages = 0;
+  //                   //     BlocProvider.of<AllRequesterBloc>(context)
+  //                   //         .add(AddCartDetailHandler("", pageNo, pageSize));
+  //                   //   }
+  //                   // }
+  //                   // );
+  //
+  //                   // );
+  //                 },
+  //                 style: ElevatedButton.styleFrom(
+  //                     shape: RoundedRectangleBorder(
+  //                       borderRadius: BorderRadius.circular(26),
+  //                     ),
+  //                     backgroundColor: Colors.white),
+  //                 child: Text(
+  //                   "Create",
+  //                   style: FTextStyle.loginBtnStyle
+  //                       .copyWith(color: AppColors.appSky,fontSize: 13),
+  //                 )),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //
+  //     body: Column(
+  //       children: [
+  //         const SizedBox(height: 10),
+  //
+  //         // Search Bar
+  //         Padding(
+  //           padding: EdgeInsets.symmetric(
+  //               horizontal: screenWidth * 0.04, vertical: 10),
+  //           child: Container(
+  //             decoration: BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.circular(23.0),
+  //               boxShadow: [
+  //                 BoxShadow(
+  //                   color: Colors.black.withOpacity(0.2),
+  //                   spreadRadius: 2,
+  //                   blurRadius: 4,
+  //                   offset: const Offset(0, 1),
+  //                 ),
+  //               ],
+  //             ),
+  //             child: TextFormField(
+  //               controller: controllerText,
+  //               decoration: InputDecoration(
+  //                 hintText: 'Search',
+  //                 hintStyle: FTextStyle.formhintTxtStyle,
+  //                 border: OutlineInputBorder(
+  //                   borderRadius: BorderRadius.circular(23.0),
+  //                   borderSide: const BorderSide(
+  //                       color: AppColors.appSky, width: 1.0),
+  //                 ),
+  //                 enabledBorder: OutlineInputBorder(
+  //                   borderRadius: BorderRadius.circular(23.0),
+  //                   borderSide: const BorderSide(
+  //                       color: AppColors.appSky, width: 1.0),
+  //                 ),
+  //                 focusedBorder: OutlineInputBorder(
+  //                   borderRadius: BorderRadius.circular(23.0),
+  //                   borderSide: const BorderSide(
+  //                       color: AppColors.appSky, width: 1.0),
+  //                 ),
+  //                 contentPadding: const EdgeInsets.symmetric(
+  //                     vertical: 13.0, horizontal: 18.0),
+  //                 suffixIcon: _isTextEmpty
+  //                     ? const Icon(Icons.search,
+  //                     color: AppColors.appSky)
+  //                     : IconButton(
+  //                   icon: const Icon(Icons.clear,
+  //                       color: AppColors.appSky),
+  //                   onPressed: _clearText,
+  //                 ),
+  //                 fillColor: Colors.grey[100],
+  //                 filled: true,
+  //               ),
+  //               onChanged: _onSearchChanged,
+  //             ),
+  //           ),
+  //         ),
+  //
+  //         // Active/Inactive Content
+  //         Expanded(
+  //           child:     ListView.builder(
+  //           itemCount: activeConferenceList.length,
+  //           padding: const EdgeInsets.symmetric(horizontal: 16),
+  //           itemBuilder: (context, index) {
+  //             final item = activeConferenceList[index];
+  //
+  //             // Provide default values for null fields
+  //             final title = item['titleName'] ?? 'Unknown Title';
+  //             final id = item['id'] ?? '0';
+  //
+  //             final couponCode = item['code'] ?? 'N/A';
+  //             final discountTypes = item['discountTypes'] ?? 'N/A';
+  //             final validFrom = item['validFrom'] ?? 'N/A';
+  //             final validTo = item['validTo'] ?? 'N/A';
+  //             final usageLimit = item['usageLimit'] ?? 'N/A';
+  //
+  //             final bookingStatus = item['bookingStatus'] ?? 'Pending';
+  //
+  //
+  //             return Container(
+  //               // height: height * 0.24,
+  //               margin: const EdgeInsets.symmetric(vertical: 8),
+  //               padding: const EdgeInsets.all(16),
+  //               decoration: BoxDecoration(
+  //                 color: Colors.white,
+  //                 borderRadius: BorderRadius.circular(16),
+  //                 boxShadow: [
+  //                   BoxShadow(
+  //                     color: Colors.black.withOpacity(0.1),
+  //                     blurRadius: 8,
+  //                     offset: const Offset(0, 4),
+  //                   ),
+  //                 ],
+  //               ),
+  //               child: Row(
+  //                 children: [
+  //                   // Left Column: Payment Details
+  //                   Expanded(
+  //               child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   // Title
+  //                   Text(
+  //                     title,
+  //                     maxLines: 2,
+  //                     overflow: TextOverflow.ellipsis,
+  //                     style: FTextStyle.listTitle,
+  //                   ),
+  //
+  //                   const SizedBox(height: 8),
+  //
+  //                   // Coupon Info
+  //                   Text(
+  //                     'Coupon Code: $couponCode',
+  //                     maxLines: 1,
+  //                     overflow: TextOverflow.ellipsis,
+  //                     style: FTextStyle.style,
+  //                   ),
+  //                   Text(
+  //                     'Discount Types: $discountTypes',
+  //                     maxLines: 1,
+  //                     overflow: TextOverflow.ellipsis,
+  //                     style: FTextStyle.style,
+  //                   ),
+  //                   Text(
+  //                     'Usage Limit: $usageLimit',
+  //                     maxLines: 1,
+  //                     overflow: TextOverflow.ellipsis,
+  //                     style: FTextStyle.style,
+  //                   ),
+  //
+  //
+  //
+  //                   // Valid From/To in Row
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                     children: [
+  //                       Expanded(
+  //                         child: Text(
+  //                           'Valid From: $validFrom',
+  //                           maxLines: 1,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           style: FTextStyle.style,
+  //                         ),
+  //                       ),
+  //                       const SizedBox(width: 10),
+  //                       Expanded(
+  //                         child: Text(
+  //                           'Valid To: $validTo',
+  //                           maxLines: 1,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           style: FTextStyle.style,
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //
+  //
+  //
+  //                   // Booking Status
+  //                   Row(
+  //                     children: [
+  //                       const Text('Booking Status: ', style: FTextStyle.listTitle),
+  //                       Text(
+  //                         bookingStatus,
+  //                         style: TextStyle(
+  //                           fontSize: 14,
+  //                           fontWeight: FontWeight.bold,
+  //                           color: bookingStatus == "Success" ? Colors.green : Colors.orange,
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //
+  //                   const SizedBox(height: 12),
+  //
+  //                   // Action Buttons
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.end,
+  //                     children: [
+  //                       GestureDetector(
+  //                         onTap: () {
+  //                           Navigator.push(
+  //                             context,
+  //                             MaterialPageRoute(
+  //                               builder: (context) => AddCouponCode(isEdit: 'Yes'),
+  //                             ),
+  //                           );
+  //                         },
+  //                         child: Container(
+  //                           height: 35,
+  //                           width: 35,
+  //                           decoration: BoxDecoration(
+  //                             color: const Color(0xFF0db050),
+  //                             borderRadius: BorderRadius.circular(8),
+  //                             boxShadow: [
+  //                               BoxShadow(
+  //                                 color: Colors.black.withOpacity(0.1),
+  //                                 blurRadius: 6,
+  //                                 offset: const Offset(0, 2),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                           child: const Icon(
+  //                             Icons.edit,
+  //                             color: Colors.white,
+  //                             size: 20,
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       const SizedBox(width: 10),
+  //                       GestureDetector(
+  //                         onTap: () {
+  //                           CommonPopups.showDeleteCustomPopup(
+  //                             context,
+  //                             "Are you sure you want to delete?",
+  //                                 () {
+  //                               // Handle delete logic
+  //                             },
+  //                           );
+  //                         },
+  //                         child: Container(
+  //                           height: 35,
+  //                           width: 35,
+  //                           decoration: BoxDecoration(
+  //                             color: Colors.red,
+  //                             borderRadius: BorderRadius.circular(8),
+  //                             boxShadow: [
+  //                               BoxShadow(
+  //                                 color: Colors.black.withOpacity(0.1),
+  //                                 blurRadius: 6,
+  //                                 offset: const Offset(0, 2),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                           child: const Icon(
+  //                             Icons.delete,
+  //                             color: Colors.white,
+  //                             size: 20,
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //
+  //
+  //             ),
+  //               ]),
+  //             );
+  //           },
+  //         )
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Toggle Button Widget
   @override
   Widget build(BuildContext context) {
 
@@ -122,7 +502,7 @@ class _CouponCodeState extends State<CouponCode> {
         .size
         .width;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor:AppColors.appSky, // Customize app bar color
         leading: IconButton(
@@ -133,6 +513,7 @@ class _CouponCodeState extends State<CouponCode> {
           ), // Menu icon
           onPressed: () {
             Navigator.pop(context);
+
           },
         ),
         title: Text(
@@ -140,58 +521,70 @@ class _CouponCodeState extends State<CouponCode> {
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: (displayType == 'desktop' || displayType == 'tablet')
-                  ? 70
-                  : 37,
-              child: ElevatedButton(
-                  onPressed: () async {
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: SizedBox(
+        //       height: (displayType == 'desktop' || displayType == 'tablet')
+        //           ? 70
+        //           : 37,
+        //       child: ElevatedButton(
+        //           onPressed: () async {
+        //
+        //
+        //             Navigator.push(
+        //               context,
+        //               MaterialPageRoute(
+        //                   builder: (context) => AddCouponCode(isEdit: '', title: '',)
+        //               ),
+        //
+        //             );
+        //             //     .then((result) {
+        //             //   // Handle the result from the edit screen
+        //             //   if (result[0]) {
+        //             //     data.clear();
+        //             //     pageNo = 1;
+        //             //     hasMoreData = true;
+        //             //     totalPages = 0;
+        //             //     BlocProvider.of<AllRequesterBloc>(context)
+        //             //         .add(AddCartDetailHandler("", pageNo, pageSize));
+        //             //   }
+        //             // }
+        //             // );
+        //
+        //             // );
+        //           },
+        //           style: ElevatedButton.styleFrom(
+        //               shape: RoundedRectangleBorder(
+        //                 borderRadius: BorderRadius.circular(26),
+        //               ),
+        //               backgroundColor: Colors.white),
+        //           child: Text(
+        //             "Add",
+        //             style: FTextStyle.loginBtnStyle
+        //                 .copyWith(color: AppColors.appSky,fontSize: 13),
+        //           )),
+        //     ),
+        //   )
+        // ],
 
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddCouponCode(isEdit: '',)
-                      ),
-
-                    );
-                    //     .then((result) {
-                    //   // Handle the result from the edit screen
-                    //   if (result[0]) {
-                    //     data.clear();
-                    //     pageNo = 1;
-                    //     hasMoreData = true;
-                    //     totalPages = 0;
-                    //     BlocProvider.of<AllRequesterBloc>(context)
-                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                    //   }
-                    // }
-                    // );
-
-                    // );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                      backgroundColor: Colors.white),
-                  child: Text(
-                    "Create",
-                    style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.appSky,fontSize: 13),
-                  )),
-            ),
-          )
-        ],
       ),
 
       body: Column(
         children: [
+          const SizedBox(height: 20),
+          // Toggle Buttons
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Row(
+              children: [
+                _buildToggleButton('Upcoming', 0),
+                const SizedBox(width: 8.0),
+                _buildToggleButton('Previous', 1),
+              ],
+            ),
+          ),
           const SizedBox(height: 10),
-
           // Search Bar
           Padding(
             padding: EdgeInsets.symmetric(
@@ -249,199 +642,9 @@ class _CouponCodeState extends State<CouponCode> {
 
           // Active/Inactive Content
           Expanded(
-            child:     ListView.builder(
-            itemCount: activeConferenceList.length,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemBuilder: (context, index) {
-              final item = activeConferenceList[index];
-
-              // Provide default values for null fields
-              final title = item['titleName'] ?? 'Unknown Title';
-              final id = item['id'] ?? '0';
-
-              final couponCode = item['code'] ?? 'N/A';
-              final discountTypes = item['discountTypes'] ?? 'N/A';
-              final validFrom = item['validFrom'] ?? 'N/A';
-              final validTo = item['validTo'] ?? 'N/A';
-              final usageLimit = item['usageLimit'] ?? 'N/A';
-
-              final bookingStatus = item['bookingStatus'] ?? 'Pending';
-
-
-              return Container(
-                // height: height * 0.24,
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    // Left Column: Payment Details
-                    Expanded(
-                child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Title
-                    Text(
-                      title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.listTitle,
-                    ),
-
-                    const SizedBox(height: 8),
-
-                    // Coupon Info
-                    Text(
-                      'Coupon Code: $couponCode',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-                    Text(
-                      'Discount Types: $discountTypes',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-                    Text(
-                      'Usage Limit: $usageLimit',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: FTextStyle.style,
-                    ),
-
-
-
-                    // Valid From/To in Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Valid From: $validFrom',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: FTextStyle.style,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'Valid To: $validTo',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: FTextStyle.style,
-                          ),
-                        ),
-                      ],
-                    ),
-
-
-
-                    // Booking Status
-                    Row(
-                      children: [
-                        const Text('Booking Status: ', style: FTextStyle.listTitle),
-                        Text(
-                          bookingStatus,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: bookingStatus == "Success" ? Colors.green : Colors.orange,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    // Action Buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddCouponCode(isEdit: 'Yes'),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF0db050),
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () {
-                            CommonPopups.showDeleteCustomPopup(
-                              context,
-                              "Are you sure you want to delete?",
-                                  () {
-                                // Handle delete logic
-                              },
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-
-
-              ),
-                ]),
-              );
-            },
-          )
+            child: _selectedIndex == 0
+                ? _buildActiveSegment(height, width)
+                : _buildInActiveSegment(height, width),
           ),
         ],
       ),
@@ -449,9 +652,921 @@ class _CouponCodeState extends State<CouponCode> {
   }
 
   // Toggle Button Widget
+  Widget _buildToggleButton(String text, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.appSky, // Green 0DB050
+              AppColors.secondaryColour, // Blue 023E8A
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          color: _selectedIndex == index ? AppColors.appSky: Colors.transparent,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: _selectedIndex == index ? AppColors.appSky : Colors.grey[400]!,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: _selectedIndex == index ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Active Segment
+  Widget _buildActiveSegment(double height, double width) {
 
 
 
+    return           ListView.builder(
+      itemCount: activeConferenceList.length,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      itemBuilder: (context, index) {
+        final item = activeConferenceList[index];
+
+        // Provide default values for null fields
+        final title = item['titleName'] ?? 'Unknown Title';
+        final id = item['id'] ?? '0';
+
+
+
+        return Container(
+          // height: height * 0.24,
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+              children: [
+                // Left Column: Payment Details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Title
+                      Text(
+                        title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: FTextStyle.subtitle,
+                      ),
+
+                      // const SizedBox(height: 8),
+                      //
+                      // // Coupon Info
+                      // Text(
+                      //   'Coupon Code: $couponCode',
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: FTextStyle.style,
+                      // ),
+                      // Text(
+                      //   'Discount Types: $discountTypes',
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: FTextStyle.style,
+                      // ),
+                      // Text(
+                      //   'Usage Limit: $usageLimit',
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: FTextStyle.style,
+                      // ),
+                      //
+                      //
+                      //
+                      // // Valid From/To in Row
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Expanded(
+                      //       child: Text(
+                      //         'Valid From: $validFrom',
+                      //         maxLines: 1,
+                      //         overflow: TextOverflow.ellipsis,
+                      //         style: FTextStyle.style,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 10),
+                      //     Expanded(
+                      //       child: Text(
+                      //         'Valid To: $validTo',
+                      //         maxLines: 1,
+                      //         overflow: TextOverflow.ellipsis,
+                      //         style: FTextStyle.style,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      //
+                      //
+                      //
+                      // // Booking Status
+                      //
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                           Text(
+                              'Status: ', style: FTextStyle.subtitle),
+                          Text(
+                            item['status'],
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: item['status'] == "Success"
+                                  ? Colors.green
+                                  : Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (item['status'] == 'Success')
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(height: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CouponView(id: id,
+
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         FeePageView(id: "",
+                                //
+                                //         ),
+                                //   ),
+                                // );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.appBlue,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.save_alt_rounded,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      if (item['status'] == 'Pending')
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CouponView(id: id,
+
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddCouponCode(title: title, isEdit: '',)
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF0db050),
+                                      // Green for edit
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.edit,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10,),
+                                GestureDetector(
+                                  onTap: () {
+                                    CommonPopups.showDeleteCustomPopup(
+                                      context,
+                                      "Are you sure you want to delete?",
+                                          () {
+                                        // Handle delete logic
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red, // Red for delete
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      if (item['status'] == 'Not Registered')
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CouponView(id: id,
+
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddCouponCode(title: title, isEdit: '',)  ),
+
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF0db050),
+                                      // Green for edit
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10,),
+                                GestureDetector(
+                                  onTap: () {
+                                    CommonPopups.showDeleteCustomPopup(
+                                      context,
+                                      "Are you sure you want to delete?",
+                                          () {
+                                        // Handle delete logic
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red, // Red for delete
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+
+                    ],
+                  ),
+
+
+                ),
+              ]),
+        );
+      },
+    );
+
+  }
+
+  // Inactive Segment
+  Widget _buildInActiveSegment(double height, double width) {
+
+    return           ListView.builder(
+      itemCount: inactiveConferenceList.length,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      itemBuilder: (context, index) {
+        final item = inactiveConferenceList[index];
+
+        // Provide default values for null fields
+        final title = item['titleName'] ?? 'Unknown Title';
+        final id = item['id'] ?? '0';
+
+
+
+
+        return Container(
+          // height: height * 0.24,
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+              children: [
+                // Left Column: Payment Details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Title
+                      Text(
+                        title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: FTextStyle.subtitle,
+                      ),
+
+                      // const SizedBox(height: 8),
+                      //
+                      // // Coupon Info
+                      // Text(
+                      //   'Coupon Code: $couponCode',
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: FTextStyle.style,
+                      // ),
+                      // Text(
+                      //   'Discount Types: $discountTypes',
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: FTextStyle.style,
+                      // ),
+                      // Text(
+                      //   'Usage Limit: $usageLimit',
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: FTextStyle.style,
+                      // ),
+                      //
+                      //
+                      //
+                      // // Valid From/To in Row
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Expanded(
+                      //       child: Text(
+                      //         'Valid From: $validFrom',
+                      //         maxLines: 1,
+                      //         overflow: TextOverflow.ellipsis,
+                      //         style: FTextStyle.style,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 10),
+                      //     Expanded(
+                      //       child: Text(
+                      //         'Valid To: $validTo',
+                      //         maxLines: 1,
+                      //         overflow: TextOverflow.ellipsis,
+                      //         style: FTextStyle.style,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      //
+                      //
+                      //
+                      // // Booking Status
+                      //
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              'Status: ', style: FTextStyle.subtitle),
+                          Text(
+                            item['status'],
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: item['status'] == "Success"
+                                  ? Colors.green
+                                  : Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (item['status'] == 'Success')
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(height: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CouponView(id: id,
+
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                              onTap: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         FeePageView(id: "",
+                                //
+                                //         ),
+                                //   ),
+                                // );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.appBlue,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.save_alt_rounded,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      if (item['status'] == 'Pending')
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CouponView(id: id,
+
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddCouponCode(title: title, isEdit: '',)
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF0db050),
+                                      // Green for edit
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.edit,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10,),
+                                GestureDetector(
+                                  onTap: () {
+                                    CommonPopups.showDeleteCustomPopup(
+                                      context,
+                                      "Are you sure you want to delete?",
+                                          () {
+                                        // Handle delete logic
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red, // Red for delete
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      if (item['status'] == 'Not Registered')
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CouponView(id: id,
+
+                                        ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 35,
+                                width: 35,
+
+                                decoration: BoxDecoration(
+                                  color:AppColors.secondaryColour,
+                                  // Green for edit
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 6,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddCouponCode(title: title, isEdit: '',)  ),
+
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF0db050),
+                                      // Green for edit
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10,),
+                                GestureDetector(
+                                  onTap: () {
+                                    CommonPopups.showDeleteCustomPopup(
+                                      context,
+                                      "Are you sure you want to delete?",
+                                          () {
+                                        // Handle delete logic
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 35,
+                                    width: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red, // Red for delete
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+
+                    ],
+                  ),
+
+
+                ),
+              ]),
+        );
+      },
+    );
+  }
 
   void _clearText() {
     controllerText.clear();
@@ -465,5 +1580,7 @@ class _CouponCodeState extends State<CouponCode> {
       //     .add(GetBillingListHandler("", pageNo, pageSize));
     });
   }
+
+
 
 }

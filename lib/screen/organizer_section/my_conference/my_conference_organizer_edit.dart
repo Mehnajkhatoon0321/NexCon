@@ -15,17 +15,12 @@ import 'package:nexcon/utils/validator_utils.dart';
 import '../../sideMenu/common_section/privacy_policy.dart';
 import '../../sideMenu/common_section/term_condition.dart';
 class MyConferenceOrganizerEdit extends StatefulWidget {
-  String isEdit;
-  final String conferenceName;
-  final String fromdata;
-  final String todata;
-
+String isEdit;
+String title;
    MyConferenceOrganizerEdit({
     super.key,
-    required this.isEdit,
-    required this.conferenceName,
-    required this.fromdata,
-    required this.todata,
+required this.isEdit,
+required this.title
   });
 
   @override
@@ -166,8 +161,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _passwordConferenceKey =
   GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _conferenceKey =
-  GlobalKey<FormFieldState<String>>();
+
   late final FocusNode _emailConferenceFocusNode = FocusNode();
   late final FocusNode _mobileFocusNode = FocusNode();
   late final FocusNode _websiteNumberConferenceFocusNode = FocusNode();
@@ -185,13 +179,10 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
   late final FocusNode _cityFocusNode = FocusNode();
   late final FocusNode _countryFocusNode = FocusNode();
 
-  late final FocusNode _selectconferenceFocusNode = FocusNode();
+
   bool checkboxChecked = false;
   bool isButtonEnabled = false;
-  List<String> conferenceCategory = [
-    'Human Resource',
-    'Computer Science',
-  ];
+
   bool passwordVisible = false;
   bool isEmailFieldFocused = false;
   bool isPasswordFieldFocused = false;
@@ -268,46 +259,48 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      "Conference Category",
-                      style: FTextStyle.SubHeadingTxtStyle,
-                    ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation2']!),
-                    Padding(
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 10.0),
-                      child: DropdownButtonFormField<String>(
-                        key: _conferenceKey,
-                        focusNode: _selectconferenceFocusNode,
-                        value: conferenceTitleName,
-                        hint: const Text(
-                          "Select Conference Category",
-                          style: FTextStyle.formhintTxtStyle,
-                        ),
-                        items: conferenceCategory
-                            .map((category) => DropdownMenuItem(
-                          value: category,
-                          child: Container(
-                              constraints:  BoxConstraints(maxWidth: 200),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Text(category),
-                              )),
-                        ))
-                            .toList(),
-                        onChanged: (newValue) {
-                          setState(() {
-                            conferenceTitleName = newValue;
-                          });
-                          _conferenceKey.currentState?.validate(); // Validate only this field
-                        },
-                        decoration: FormFieldStyle.dropDown,
-                        validator: ValidatorUtils.model,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+
+
+                    // Text(
+                    //   "Conference Category",
+                    //   style: FTextStyle.SubHeadingTxtStyle,
+                    // ).animateOnPageLoad(
+                    //     animationsMap['imageOnPageLoadAnimation2']!),
+                    // Padding(
+                    //   padding:
+                    //   const EdgeInsets.symmetric(vertical: 10.0),
+                    //   child: DropdownButtonFormField<String>(
+                    //     key: _conferenceKey,
+                    //     focusNode: _selectconferenceFocusNode,
+                    //     value: conferenceTitleName,
+                    //     hint: const Text(
+                    //       "Select Conference Category",
+                    //       style: FTextStyle.formhintTxtStyle,
+                    //     ),
+                    //     items: conferenceCategory
+                    //         .map((category) => DropdownMenuItem(
+                    //       value: category,
+                    //       child: Container(
+                    //           constraints:  BoxConstraints(maxWidth: 200),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    //             child: Text(category),
+                    //           )),
+                    //     ))
+                    //         .toList(),
+                    //     onChanged: (newValue) {
+                    //       setState(() {
+                    //         conferenceTitleName = newValue;
+                    //       });
+                    //       _conferenceKey.currentState?.validate(); // Validate only this field
+                    //     },
+                    //     decoration: FormFieldStyle.dropDown,
+                    //     validator: ValidatorUtils.model,
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     Text(
                       "Name of Conference",
                       style: FTextStyle.SubHeadingTxtStyle,

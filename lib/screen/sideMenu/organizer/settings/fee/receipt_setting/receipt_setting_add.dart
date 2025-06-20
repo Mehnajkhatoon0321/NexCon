@@ -12,7 +12,8 @@ import '../../../../../../utils/colours.dart';
 import '../../../../../../utils/font_text_Style.dart';
 class ReceiptSettingAdd extends StatefulWidget {
   String isEdit;
-   ReceiptSettingAdd({required this.isEdit,super.key});
+  String title;
+   ReceiptSettingAdd({required this.isEdit,required this.title,super.key});
 
   @override
   State<ReceiptSettingAdd> createState() => _ReceiptSettingAddState();
@@ -166,31 +167,39 @@ class _ReceiptSettingAddState extends State<ReceiptSettingAdd> {
           child: ListView(
             children: [
               /// Conference Name Dropdown
-              Text("Select Conference Name", style: FTextStyle.SubHeadingTxtStyle),
-              const SizedBox(height: 6),
-              DropdownButtonFormField<String>(
-                value: selectedConference,
-                isExpanded: true,
-                key: conferenceCategoryKey,
-                hint: const Text("Select Conference", style: FTextStyle.formhintTxtStyle),
-                items: conferenceOptions.map((conf) {
-                  return DropdownMenuItem<String>(
-                    value: conf,
-                    child: Text(conf, style: const TextStyle(fontSize: 14)),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() => selectedConference = value);
-                  conferenceCategoryKey.currentState?.validate();
-                },
-                decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                  errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+              // Text("Select Conference Name", style: FTextStyle.SubHeadingTxtStyle),
+              // const SizedBox(height: 6),
+              // DropdownButtonFormField<String>(
+              //   value: selectedConference,
+              //   isExpanded: true,
+              //   key: conferenceCategoryKey,
+              //   hint: const Text("Select Conference", style: FTextStyle.formhintTxtStyle),
+              //   items: conferenceOptions.map((conf) {
+              //     return DropdownMenuItem<String>(
+              //       value: conf,
+              //       child: Text(conf, style: const TextStyle(fontSize: 14)),
+              //     );
+              //   }).toList(),
+              //   onChanged: (value) {
+              //     setState(() => selectedConference = value);
+              //     conferenceCategoryKey.currentState?.validate();
+              //   },
+              //   decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+              //     errorStyle: const TextStyle(color: AppColors.errorColor, fontSize: 12),
+              //     border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+              //     contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+              //   ),
+              //   validator: (value) => value == null ? "Please select a conference" : null,
+              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                    widget.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: FTextStyle.subheading
                 ),
-                validator: (value) => value == null ? "Please select a conference" : null,
               ),
-
               const SizedBox(height: 16),
 
               Text("Upload Seal/Stamp", style: FTextStyle.SubHeadingTxtStyle),

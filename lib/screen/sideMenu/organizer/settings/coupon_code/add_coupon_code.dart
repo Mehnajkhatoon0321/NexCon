@@ -9,7 +9,8 @@ import 'package:nexcon/utils/validator_utils.dart';
 import '../../../../../utils/form_field_style.dart';
 class AddCouponCode extends StatefulWidget {
   String isEdit;
-   AddCouponCode({required this.isEdit,key});
+  String title;
+   AddCouponCode({required this.isEdit,required this.title,key});
 
   @override
   State<AddCouponCode> createState() => _AddCouponCodeState();
@@ -252,42 +253,50 @@ class _AddCouponCodeState extends State<AddCouponCode> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
-
-                  Text(
-                    "Title",
-                    style: FTextStyle.SubHeadingTxtStyle,
-                  ).animateOnPageLoad(
-                      animationsMap['imageOnPageLoadAnimation2']!),
-
-                  const SizedBox(height: 5),
-                  TextFormField(
-                    focusNode: _titleFocusNode,
-                    key: titleKey,
-                    keyboardType: TextInputType.text,
-                    decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                      hintText: "Enter Presentation Title",
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                        widget.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: FTextStyle.subheading
                     ),
-                    controller: _titleController,
-                    validator: ValidatorUtils.model,
-                    onChanged: (value) {
-                      setState(() {
-                        // Validate only the name field
-                        titleKey.currentState?.validate();
-                      });
-                    },
-                    onTap: () {
-                      setState(() {
-                        isTitleFieldFocused == true;
-
-                        // Reset other fields if needed
-
-                      });
-                    },
-                  ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!,
                   ),
-                  const SizedBox(height: 5),
+                  //
+                  // Text(
+                  //   "Title",
+                  //   style: FTextStyle.SubHeadingTxtStyle,
+                  // ).animateOnPageLoad(
+                  //     animationsMap['imageOnPageLoadAnimation2']!),
+                  //
+                  // const SizedBox(height: 5),
+                  // TextFormField(
+                  //   focusNode: _titleFocusNode,
+                  //   key: titleKey,
+                  //   keyboardType: TextInputType.text,
+                  //   decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                  //     hintText: "Enter Presentation Title",
+                  //   ),
+                  //   controller: _titleController,
+                  //   validator: ValidatorUtils.model,
+                  //   onChanged: (value) {
+                  //     setState(() {
+                  //       // Validate only the name field
+                  //       titleKey.currentState?.validate();
+                  //     });
+                  //   },
+                  //   onTap: () {
+                  //     setState(() {
+                  //       isTitleFieldFocused == true;
+                  //
+                  //       // Reset other fields if needed
+                  //
+                  //     });
+                  //   },
+                  // ).animateOnPageLoad(
+                  //   animationsMap['imageOnPageLoadAnimation2']!,
+                  // ),
+                  // const SizedBox(height: 5),
 
 
                   Text("Code", style: FTextStyle.SubHeadingTxtStyle)

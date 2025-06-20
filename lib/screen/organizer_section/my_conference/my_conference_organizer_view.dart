@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
@@ -17,284 +18,249 @@ class MyConferenceOrganizerView extends StatefulWidget {
 }
 
 class _MyConferenceOrganizerViewState extends State<MyConferenceOrganizerView> {
-  Map<String, dynamic> activeConferenceList =
-  {
-    "id":"1",
-    "registrationN0":"1",
-    'title': "30th ISCB International Conference (ISCBC-2025)",
-    'paymentMode': "PhonePay",
-    'tnNumber': "2343546446",
-    'tnDate': "2023-12-10",
-
-    'bookingStatus': "Pending",
-    'feeDate': "23-11-2025",
-    "fromDate": "23-11-2025",
-    "toDate": "24-12-2025",
-  }
-
-  ;
-
-
-  final animationsMap = {
-    'columnOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 20.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 200.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 20.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 20.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(40.0, 0.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-      ],
-    ),
+  final Map<String, dynamic> featuresCategoryDetails = {
+    "id": "1",
+    "title": "30th ISCB International Conference (ISCBC-2025)",
+    "subTitle": "Theme: Current Trends in Chemical, Biological and Pharmaceutical Sciences: Impact on Health and Environment 2025-01-27 to 2025-01-29",
+    "imageConference": "assets/images/IndianConferences.png",
+    "organizationImage": "assets/images/conferencesOrganization.png",
+    "organizationName": "Indian Society of Chemists and Biologists",
+    "startDate": "2025-01-27",
+    "endDate": "2025-01-29",
+    "nameVenue": "Lucknow, Uttar Pradesh, India",
+    "addressVenue": "Lucknow, Uttar Pradesh, India",
+    "city": "Lucknow",
+    "contactPerson": "Dr. P.M.S. Chauhan",
+    "phone": "9695844884",
+    "email": "iscbconference@gmail.com",
+    "siteLink": "https://www.iscbconference.com"
   };
 
-
-
-
-
-  bool isLoading = false;
-
-
-
+  final double _cardPadding = 20;
   @override
-  void initState() {
-    super.initState();
-
-    // BlocProvider.of<AllRequesterBloc>(context)
-    //     .add(GetBillingListHandler("", pageNo, pageSize));
-
-  }
-  Map<String, dynamic> errorServerMessage = {};
-  String? errorMessage;
-
-
-
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-
-
-    return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF9F9F9),
-        appBar: AppBar(
-          backgroundColor: AppColors.appSky,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-              size: 26,
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-          title: Text(
-            'Conference Details',
-            style: FTextStyle.HeadingTxtWhiteStyle,
-          ),
-          centerTitle: true,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor:AppColors.appSky, // Customize app bar color
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 28,
+          ), // Menu icon
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: Column(
+        title: Text(
+          'Conference Details',
+          style: FTextStyle.HeadingTxtWhiteStyle.copyWith(fontWeight: FontWeight.w600),
+        ),
+        centerTitle: true,
+      ),
+      backgroundColor:AppColors.backgroundColor,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: isLoading && activeConferenceList.isEmpty
-                  ? Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Container(
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              )
-                  : (errorMessage != null || errorServerMessage.isNotEmpty)
-                  ? Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    " errorMessage ?? errorServerMessag",
-                    style: FTextStyle.listTitle,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
-                  : (activeConferenceList.isEmpty)
-                  ? const Center(
-                child: Text("No data available.", style: FTextStyle.listTitle),
-              )
-                  : ListView(
-                // padding: const EdgeInsets.all(16),
+            /// Title
+            Text(
+                featuresCategoryDetails["title"]!,
+                style: FTextStyle.subheading
+            ),
+            const SizedBox(height: 8),
+
+            /// Subtitle
+            Text(
+              featuresCategoryDetails["subTitle"]!,
+              style:FTextStyle.style,
+              textAlign: TextAlign.justify,
+            ),
+
+            const SizedBox(height: 24),
+
+            /// Organizer Info
+            _buildInfoTile("Organized By", featuresCategoryDetails["organizationName"]!),
+
+            const SizedBox(height: 16),
+
+            /// Dates & Logo
+            _buildCard(
+              child: Row(
                 children: [
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(vertical: 12),
-                  //   width: screenWidth,
-                  //   decoration: BoxDecoration(
-                  //     gradient: const LinearGradient(
-                  //       begin: Alignment.topRight,
-                  //       end: Alignment.bottomLeft,
-                  //       stops: [0.0, 0.5, 0.95],
-                  //       colors: [
-                  //         Color(0xffffffff),
-                  //         Color(0xf5c6f6da),
-                  //         Color(0xf5c6f6da),
-                  //       ],
-                  //     ),
-                  //     borderRadius: BorderRadius.circular(12),
-                  //   ),
-                  //   child: Center(
-                  //     child: Text(
-                  //       activeConferenceList['title'],
-                  //       maxLines: 2,
-                  //       overflow: TextOverflow.ellipsis,
-                  //       style: FTextStyle.listTitle.copyWith(fontSize: 16),
-                  //       textAlign: TextAlign.center,
-                  //     ),
-                  //   ),
-                  // ),
-                  const SizedBox(height: 20),
-                  _buildDetailTile("Conference Name.",  activeConferenceList['title']),
-                  _buildDetailTile("Registration No.", activeConferenceList['registrationN0']),
-                  _buildDetailTile("From Date", activeConferenceList['fromDate']),
-                  _buildDetailTile("To Date", activeConferenceList['toDate']),
-
-                  _buildDetailTile("Booking Status", activeConferenceList['bookingStatus'],
-                      valueColor: activeConferenceList['bookingStatus'] == "Success"
-                          ? AppColors.appSky
-                          : Colors.orange),
-
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildLabelValue("Start Date", Constants.formatDate(featuresCategoryDetails["startDate"])),
+                        const SizedBox(height: 12),
+                        _buildLabelValue("End Date", Constants.formatDate(featuresCategoryDetails["endDate"])),
+                      ],
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      featuresCategoryDetails["organizationImage"]!,
+                      height: 60,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ],
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            /// Venue Info
+            _buildMinimalSection(
+              icon: Icons.location_on_outlined,
+
+              title: "Venue",
+              data: {
+                "Venue": featuresCategoryDetails["nameVenue"],
+                "Address": featuresCategoryDetails["addressVenue"],
+                "City": featuresCategoryDetails["city"],
+              },
+            ),
+
+            const SizedBox(height: 20),
+
+            /// Contact Info
+            _buildMinimalSection(
+              icon: Icons.mail_outline,
+              title: "Contact",
+              data: {
+                "Person": featuresCategoryDetails["contactPerson"],
+                "Phone": featuresCategoryDetails["phone"],
+                "Email": featuresCategoryDetails["email"],
+                "Website": featuresCategoryDetails["siteLink"],
+              },
+              enableLinks: true,
+            ),
+
+            const SizedBox(height: 32),
           ],
         ),
       ),
     );
   }
-
-  Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+  Widget _buildCard({required Widget child}) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
-            blurRadius: 4,
-            offset: Offset(0, 2),
+            blurRadius: 5,
+            offset: Offset(0, 4),
           ),
         ],
       ),
-      child: Row(
+      child: child,
+    );
+  }
+
+  Widget _buildLabelValue(String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+        const SizedBox(height: 4),
+        Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+      ],
+    );
+  }
+
+  Widget _buildInfoTile(String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style:FTextStyle.style),
+        const SizedBox(height: 4),
+        Text(value, style:FTextStyle.subheading),
+      ],
+    );
+  }
+
+  Widget _buildMinimalSection({
+    required IconData icon,
+    required String title,
+    required Map<String, String?> data,
+    bool enableLinks = false,
+  }) {
+    return _buildCard(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 4,
-            child: Text(
-              "$title:",
-              style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
-            ),
+          Row(
+            children: [
+              Icon(icon, size: 20, color: AppColors.secondYellowColour),
+              const SizedBox(width: 8),
+              Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            ],
           ),
-          const SizedBox(width: 8),
-          Expanded(
-            flex: 6,
-            child: Text(
-              value,
-              style: valueColor != null
-                  ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
-                  : FTextStyle.listTitleSub,
-            ),
-          ),
+          const SizedBox(height: 16),
+          ...data.entries.map((e) {
+            final key = e.key;
+            final value = e.value ?? "";
+            final isLink = (key.toLowerCase() == "email" || key.toLowerCase() == "website");
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      "$key:",
+                      style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: isLink && enableLinks
+                        ? GestureDetector(
+                      onTap: () {
+
+                        if (key.toLowerCase() == "email") {
+                          Constants.launchEmail;
+                        } else if (key.toLowerCase() == "website") {
+                          Constants.launchWebsite(value);
+                        } else if (key.toLowerCase().contains("phone") || key.toLowerCase().contains("whatsapp")) {
+                          Constants.launchWhatsApp(value.replaceAll(RegExp(r'[^0-9]'), '')); // clean phone number
+                        }
+
+
+                      },
+                      child: Text(
+                        value,
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 14,
+
+                        ),
+                      ),
+                    )
+                        : Text(
+                      value,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
         ],
       ),
     );
   }
-
 
 
 }
