@@ -200,8 +200,7 @@ class _MyOrderViewState extends State<MyOrderView> {
 
                     _buildDetailTile("Conference Name", activeConferenceList['conferenceName']),
                     _buildDetailTile("Invoice Number", activeConferenceList['invoiceNumber']),
-
-                    _buildDetailTile("Credit Point", activeConferenceList['creditPoint']),
+                                      _buildDetailTile("Credit Point", activeConferenceList['creditPoint']),
                     _buildDetailTile("Amount", activeConferenceList['amount']),
                     _buildDetailTile("Pay Type", activeConferenceList['payType']),
                     _buildDetailTile("Coupon Code", activeConferenceList['couponCode']),

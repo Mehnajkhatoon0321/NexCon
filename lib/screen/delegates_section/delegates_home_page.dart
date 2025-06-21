@@ -206,7 +206,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
         ),
         title:Text(
           _navBarItems[_selectedIndex]['title'],
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
 

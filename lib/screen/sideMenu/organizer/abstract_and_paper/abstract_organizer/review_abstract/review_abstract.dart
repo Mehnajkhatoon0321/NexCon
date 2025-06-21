@@ -65,7 +65,51 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
       //     GetBillingListHandler(searchQuery, pageNo, pageSize));
     });
   }
+  List<dynamic> activeConferenceList =[
+    {
+      "id":"1",
+      'conferenceName': "DelegatesName",
+      "proposalType": "Lorem",
+      "paperTitle":"vbncnbnnbnn",
+      "dateOfSubmission":"12-05-2023",
+      "status":"Approved",
+      "feeStatus":"sdbb",
+      "Remark":"Chsnge some thingx",
 
+
+    },  {
+      "id":"2",
+      'conferenceName': "DelegatesName",
+      "proposalType": "Lorem",
+      "paperTitle":"vbncnbnnbnn",
+      "dateOfSubmission":"12-05-2023",
+      "status":"Approved",
+      "feeStatus":"sdbb",
+      "Remark":"Chsnge some thingx",
+
+    },{
+      "id":"3",
+      'conferenceName': "DelegatesName",
+      "proposalType": "Lorem",
+      "paperTitle":"vbncnbnnbnn",
+      "dateOfSubmission":"12-05-2023",
+      "status":"Not Upload",
+      "feeStatus":"sdbb",
+      "Remark":"Chsnge some thingx",
+    },
+
+    {
+      "id":"4",
+      'conferenceName': "DelegatesName",
+      "proposalType": "Lorem",
+      "paperTitle":"vbncnbnnbnn",
+      "dateOfSubmission":"12-05-2023",
+      "status":"Pending",
+      "feeStatus":"sdbb",
+      "Remark":"Chsnge some thingx",
+    },
+
+  ];
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -97,18 +141,18 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
       backgroundColor: AppColors.backgroundColor,
       body: Column(
         children: [
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Row(
-              children: [
-                _buildToggleButton('Upcoming', 0),
-                const SizedBox(width: 8.0),
-                _buildToggleButton('Previous', 1),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
+          // const SizedBox(height: 20),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          //   child: Row(
+          //     children: [
+          //       _buildToggleButton('Upcoming', 0),
+          //       const SizedBox(width: 8.0),
+          //       _buildToggleButton('Previous', 1),
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(height: 10),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: 10, vertical: 10),
@@ -163,10 +207,420 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
             ),
           ),
           Expanded(
-            child: _selectedIndex == 0
-                ? _buildActiveSegment(height, width)
-                : _buildInActiveSegment(height, width),
+      child: ListView.builder(
+      itemCount: activeConferenceList.length,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      itemBuilder: (context, index) {
+      final item = activeConferenceList[index];
+      final bookingStatus = item['bookingStatus'] ?? 'Pending';
+      return Container(
+      // height: height * 0.16,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+      BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 8,
+      offset: const Offset(0, 4),
+      ),
+      ],
+      ),
+      child: Row(
+      children: [
+      Expanded(
+      child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+      Text(
+      item['conferenceName'] ?? '',
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: FTextStyle.subtitle,
+      ),
+
+      Text("Paper Status: ${item['status'] ?? ''}", style: FTextStyle.style),
+
+        Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+
+
+      if (item['status'] == 'Approved')
+      Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+      GestureDetector(
+      onTap: () {
+      Navigator.push(
+      context,
+      MaterialPageRoute(
+      builder: (context) =>
+      ReviewAbstractView(id: item['id'].toString()??"",
+
+      ),
+      ),
+      );
+      },
+      child: Container(
+      height: 35,
+      width: 35,
+
+      decoration: BoxDecoration(
+      color:AppColors.secondaryColour,
+      // Green for edit
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+      BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+      ),
+      ],
+      ),
+      child: const Icon(
+      Icons.remove_red_eye_outlined,
+      color: Colors.white,
+      size: 20,
+      ),
+      ),
+      ),
+      SizedBox(width: 10,),
+
+      GestureDetector(
+      onTap: () {
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) =>
+      //         FeePageView(id: "",
+      //
+      //         ),
+      //   ),
+      // );
+      },
+      child: Container(
+      height: 35,
+      width: 35,
+
+      decoration: BoxDecoration(
+      color:AppColors.appBlue,
+      // Green for edit
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+      BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+      ),
+      ],
+      ),
+      child: const Icon(
+      Icons.save_alt_rounded,
+      color: Colors.white,
+      size: 20,
+      ),
+      ),
+      ),
+
+
+      ],
+      ),
+
+      if (item['status'] == 'Not Upload')
+      Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+      GestureDetector(
+      onTap: () {
+      Navigator.push(
+      context,
+      MaterialPageRoute(
+      builder: (context) =>
+      ReviewAbstractView(id: item['id'].toString()??"",
+
+      ),
+      ),
+      );
+      },
+      child: Container(
+      height: 35,
+      width: 35,
+
+      decoration: BoxDecoration(
+      color:AppColors.secondaryColour,
+      // Green for edit
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+      BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+      ),
+      ],
+      ),
+      child: const Icon(
+      Icons.remove_red_eye_outlined,
+      color: Colors.white,
+      size: 20,
+      ),
+      ),
+      ),
+
+      SizedBox(width: 10,),
+      //
+      // GestureDetector(
+      //   onTap: () async {
+      //
+      //
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //           builder: (context) => ReviewAbstractPaperRegistration(isEdit: '', title:  item['conferenceName'],)
+      //       ),
+      //
+      //     );
+      //     //     .then((result) {
+      //     //   // Handle the result from the edit screen
+      //     //   if (result[0]) {
+      //     //     data.clear();
+      //     //     pageNo = 1;
+      //     //     hasMoreData = true;
+      //     //     totalPages = 0;
+      //     //     BlocProvider.of<AllRequesterBloc>(context)
+      //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
+      //     //   }
+      //     // }
+      //     // );
+      //
+      //     // );
+      //   },
+      //
+      //   child: Container(
+      //     height: 35,
+      //     width: 35,
+      //
+      //     decoration: BoxDecoration(
+      //       color: const Color(0xFF0db050), // Green for edit
+      //       borderRadius: BorderRadius.circular(8),
+      //       boxShadow: [
+      //         BoxShadow(
+      //           color: Colors.black.withOpacity(0.1),
+      //           blurRadius: 6,
+      //           offset: const Offset(0, 2),
+      //         ),
+      //       ],
+      //     ),
+      //     child: const Icon(
+      //       Icons.add,
+      //       color: Colors.white,
+      //       size: 20,
+      //     ),
+      //   ),
+      // ),
+      //
+      //
+      // SizedBox(width: 10,),
+      GestureDetector(
+      onTap: () {
+      CommonPopups
+          .showDeleteCustomPopup(
+      context,
+      "Are you sure you want to delete?",
+      () {
+      // BlocProvider.of<
+      //     AllRequesterBloc>(
+      //     context)
+      //     .add(DeleteBillingHandlers(
+      //     data[index]
+      //     [
+      //     'id']));
+      },
+      );
+      },
+      child: Container(
+      height: 35,
+      width: 35,
+      decoration: BoxDecoration(
+      color: Colors.red, // Red for delete
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+      BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+      ),
+      ],
+      ),
+      child: const Icon(
+      Icons.delete,
+      color: Colors.white,
+      size: 20,
+      ),
+      ),
+      ),
+      ],
+      ),
+      if (item['status'] == 'Pending')
+      Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+      GestureDetector(
+      onTap: () {
+      Navigator.push(
+      context,
+      MaterialPageRoute(
+      builder: (context) =>
+      ReviewAbstractView(id: item['id'].toString()??"",
+
+      ),
+      ),
+      );
+      },
+      child: Container(
+      height: 35,
+      width: 35,
+
+      decoration: BoxDecoration(
+      color:AppColors.secondaryColour,
+      // Green for edit
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+      BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+      ),
+      ],
+      ),
+      child: const Icon(
+      Icons.remove_red_eye_outlined,
+      color: Colors.white,
+      size: 20,
+      ),
+      ),
+      ),
+
+      SizedBox(width: 10,),
+
+      GestureDetector(
+        onTap: () async {
+
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ReviewAbstractPaperRegistration(isEdit: 'yes', title:  item['conferenceName'],)
+            ),
+
+          );
+
+          //     .then((result) {
+          //   // Handle the result from the edit screen
+          //   if (result[0]) {
+          //     data.clear();
+          //     pageNo = 1;
+          //     hasMoreData = true;
+          //     totalPages = 0;
+          //     BlocProvider.of<AllRequesterBloc>(context)
+          //         .add(AddCartDetailHandler("", pageNo, pageSize));
+          //   }
+          // }
+          // );
+
+          // );
+        },
+
+        child: Container(
+          height: 35,
+          width: 35,
+
+          decoration: BoxDecoration(
+            color: const Color(0xFF0db050), // Green for edit
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
+          child: const Icon(
+            Icons.edit,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+      ),
+
+
+      SizedBox(width: 10,),
+      GestureDetector(
+      onTap: () {
+      CommonPopups
+          .showDeleteCustomPopup(
+      context,
+      "Are you sure you want to delete?",
+      () {
+      // BlocProvider.of<
+      //     AllRequesterBloc>(
+      //     context)
+      //     .add(DeleteBillingHandlers(
+      //     data[index]
+      //     [
+      //     'id']));
+      },
+      );
+      },
+      child: Container(
+      height: 35,
+      width: 35,
+      decoration: BoxDecoration(
+      color: Colors.red, // Red for delete
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+      BoxShadow(
+      color: Colors.black.withOpacity(0.1),
+      blurRadius: 6,
+      offset: const Offset(0, 2),
+      ),
+      ],
+      ),
+      child: const Icon(
+      Icons.delete,
+      color: Colors.white,
+      size: 20,
+      ),
+      ),
+      ),
+      ],
+      ),
+
+
+
+      ],
+      )
+      ],
+      ),
+      ),
+
+      ],
+      ),
+      );
+      }
+      ),
+    )
+          // Expanded(
+          //   child: _selectedIndex == 0
+          //       ? _buildActiveSegment(height, width)
+          //       : _buildInActiveSegment(height, width),
+          // ),
           // const SizedBox(height: 20),
           // Search Bar
 
@@ -182,51 +636,7 @@ class _ReviewAbstractOrganizerState extends State<ReviewAbstractOrganizer> {
   Widget _buildActiveSegment(double height, double width) {
 
 
-    List<dynamic> activeConferenceList =[
-      {
-        "id":"1",
-        'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-        "proposalType": "Lorem",
-        "paperTitle":"vbncnbnnbnn",
-        "dateOfSubmission":"12-05-2023",
-        "status":"Approved",
-        "feeStatus":"sdbb",
-        "Remark":"Chsnge some thingx",
 
-
-      },  {
-        "id":"2",
-        'conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-        "proposalType": "Lorem",
-        "paperTitle":"vbncnbnnbnn",
-        "dateOfSubmission":"12-05-2023",
-        "status":"Approved",
-        "feeStatus":"sdbb",
-        "Remark":"Chsnge some thingx",
-
-      },{
-        "id":"3",
-        ' conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-        "proposalType": "Lorem",
-        "paperTitle":"vbncnbnnbnn",
-        "dateOfSubmission":"12-05-2023",
-        "status":"Not Upload",
-        "feeStatus":"sdbb",
-        "Remark":"Chsnge some thingx",
-      },
-
-      {
-        "id":"4",
-        ' conferenceName': "18th Indian Science Communication Congress (ISCC-2018)",
-        "proposalType": "Lorem",
-        "paperTitle":"vbncnbnnbnn",
-        "dateOfSubmission":"12-05-2023",
-        "status":"Pending For Review",
-        "feeStatus":"sdbb",
-        "Remark":"Chsnge some thingx",
-      },
-
-    ];
 
     return
       ListView.builder(

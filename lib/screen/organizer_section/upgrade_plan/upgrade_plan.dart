@@ -32,7 +32,7 @@ class _UpgradePlanState extends State<UpgradePlan> {
         ),
         title: Text(
           'Upgrade Membership',
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
       ),

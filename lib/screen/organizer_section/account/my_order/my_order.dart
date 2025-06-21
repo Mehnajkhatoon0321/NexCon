@@ -377,7 +377,7 @@ class _MyOrderState extends State<MyOrder> {
                     status,
                     style: FTextStyle.style.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: isPaid ? AppColors.appSky : Colors.red,
+                      color: isPaid ? AppColors.textSecondaryPrimaryColor : Colors.red,
                     ),
                   ),
                 ],
@@ -567,44 +567,44 @@ class _MyOrderState extends State<MyOrder> {
                         //
                         //
                         // SizedBox(width: 10,),
-                        GestureDetector(
-                          onTap: () {
-                            CommonPopups
-                                .showDeleteCustomPopup(
-                              context,
-                              "Are you sure you want to delete?",
-                                  () {
-                                // BlocProvider.of<
-                                //     AllRequesterBloc>(
-                                //     context)
-                                //     .add(DeleteBillingHandlers(
-                                //     data[index]
-                                //     [
-                                //     'id']));
-                              },
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.red, // Red for delete
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     CommonPopups
+                        //         .showDeleteCustomPopup(
+                        //       context,
+                        //       "Are you sure you want to delete?",
+                        //           () {
+                        //         // BlocProvider.of<
+                        //         //     AllRequesterBloc>(
+                        //         //     context)
+                        //         //     .add(DeleteBillingHandlers(
+                        //         //     data[index]
+                        //         //     [
+                        //         //     'id']));
+                        //       },
+                        //     );
+                        //   },
+                        //   child: Container(
+                        //     height: 35,
+                        //     width: 35,
+                        //     decoration: BoxDecoration(
+                        //       color: Colors.red, // Red for delete
+                        //       borderRadius: BorderRadius.circular(8),
+                        //       boxShadow: [
+                        //         BoxShadow(
+                        //           color: Colors.black.withOpacity(0.1),
+                        //           blurRadius: 6,
+                        //           offset: const Offset(0, 2),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.delete,
+                        //       color: Colors.white,
+                        //       size: 20,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
 
@@ -751,7 +751,7 @@ class _MyOrderState extends State<MyOrder> {
                     status,
                     style: FTextStyle.style.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: isPaid ? AppColors.appSky : Colors.red,
+                      color: isPaid ? AppColors.textSecondaryPrimaryColor : Colors.red,
                     ),
                   ),
                 ],
@@ -943,44 +943,44 @@ class _MyOrderState extends State<MyOrder> {
                         //
                         //
                         // SizedBox(width: 10,),
-                        GestureDetector(
-                          onTap: () {
-                            CommonPopups
-                                .showDeleteCustomPopup(
-                              context,
-                              "Are you sure you want to delete?",
-                                  () {
-                                // BlocProvider.of<
-                                //     AllRequesterBloc>(
-                                //     context)
-                                //     .add(DeleteBillingHandlers(
-                                //     data[index]
-                                //     [
-                                //     'id']));
-                              },
-                            );
-                          },
-                          child: Container(
-                            height: 35,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              color: Colors.red, // Red for delete
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 6,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.delete,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     CommonPopups
+                        //         .showDeleteCustomPopup(
+                        //       context,
+                        //       "Are you sure you want to delete?",
+                        //           () {
+                        //         // BlocProvider.of<
+                        //         //     AllRequesterBloc>(
+                        //         //     context)
+                        //         //     .add(DeleteBillingHandlers(
+                        //         //     data[index]
+                        //         //     [
+                        //         //     'id']));
+                        //       },
+                        //     );
+                        //   },
+                        //   child: Container(
+                        //     height: 35,
+                        //     width: 35,
+                        //     decoration: BoxDecoration(
+                        //       color: Colors.red, // Red for delete
+                        //       borderRadius: BorderRadius.circular(8),
+                        //       boxShadow: [
+                        //         BoxShadow(
+                        //           color: Colors.black.withOpacity(0.1),
+                        //           blurRadius: 6,
+                        //           offset: const Offset(0, 2),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     child: const Icon(
+                        //       Icons.delete,
+                        //       color: Colors.white,
+                        //       size: 20,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
 

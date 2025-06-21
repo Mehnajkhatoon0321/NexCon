@@ -163,7 +163,7 @@ class _AbstractOrganizerViewState extends State<AbstractOrganizerView> {
           ),
           title: Text(
             'Abstract Paper View',
-            style: FTextStyle.appBarTitleWhite,
+            style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
 

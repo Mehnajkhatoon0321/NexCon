@@ -221,7 +221,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
           ),
           title:  Text(
             'Bank Data',
-            style: FTextStyle.appBarTitleWhite,
+            style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
         ),

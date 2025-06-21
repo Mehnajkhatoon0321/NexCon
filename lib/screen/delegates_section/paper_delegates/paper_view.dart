@@ -167,7 +167,7 @@ class _PaperViewState extends State<PaperView> {
           ),
           title: Text(
             'Paper View',
-            style: FTextStyle.appBarTitleWhite,
+            style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
 

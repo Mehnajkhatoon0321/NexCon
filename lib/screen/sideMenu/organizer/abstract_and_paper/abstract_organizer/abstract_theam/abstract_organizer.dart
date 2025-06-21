@@ -117,7 +117,7 @@ class _AbstractOrganizerState extends State<AbstractOrganizer> {
         ),
         title: Text(
           'Abstract Session/Themes',
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
 
         centerTitle: true,

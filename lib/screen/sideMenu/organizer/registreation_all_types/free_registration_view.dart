@@ -302,46 +302,6 @@ data:  MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0))
       ),
     );
   }
-  //
-  // Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
-  //   return Container(
-  //     margin: const EdgeInsets.only(bottom: 12),
-  //     padding: const EdgeInsets.all(14),
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.circular(12),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.black12,
-  //           blurRadius: 4,
-  //           offset: Offset(0, 2),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Row(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Expanded(
-  //           flex: 4,
-  //           child: Text(
-  //             "$title:",
-  //             style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
-  //           ),
-  //         ),
-  //         const SizedBox(width: 8),
-  //         Expanded(
-  //           flex: 6,
-  //           child: Text(
-  //             value,
-  //             style: valueColor != null
-  //                 ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
-  //                 : FTextStyle.listTitleSub,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _buildDetailTileWithIcon({
     required String title,

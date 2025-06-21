@@ -237,7 +237,7 @@ class _AccommodationRegisterState extends State<AccommodationRegister> {
         ),
         title: Text(
           'Accommodation Apply',
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
       ),

@@ -204,7 +204,7 @@ class _MyReceiptState extends State<MyReceipt> {
           ),
           title: Text(
             'My Receipts',
-            style: FTextStyle.appBarTitleWhite,
+            style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
 

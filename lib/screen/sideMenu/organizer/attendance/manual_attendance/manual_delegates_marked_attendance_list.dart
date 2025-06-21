@@ -7,6 +7,7 @@ import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
 import '../../registreation_all_types/fee_registration_for_delegates.dart';
+import 'manual_attendance.dart';
 class ManualDelegatesMarkedAttendanceList extends StatefulWidget {
   const ManualDelegatesMarkedAttendanceList({super.key});
 
@@ -198,44 +199,86 @@ class _ManualDelegatesMarkedAttendanceListState extends State<ManualDelegatesMar
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 SizedBox(height: 10,),
-                SizedBox(
-                  height:
-                  35,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      height:
+                      35,
 
-                  child: ElevatedButton(
-                    onPressed: () async {
+                      child: ElevatedButton(
+                        onPressed: () async {
 
-                      if (selectedIds.isEmpty) {
+                          if (selectedIds.isEmpty) {
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('No items selected. Please select at least one item.'),
-                            duration: Duration(seconds: 2),
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('No items selected. Please select at least one item.'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          } else {
+
+                            // BlocProvider.of<AllRequesterBloc>(context).add(UnitActionHandler(
+                            //   userID: PrefUtils.getUserId().toString(),
+                            //   btnAssign: 'approve',
+                            //   userRole: PrefUtils.getRole(),
+                            //   count: selectedIds, // Count of selected IDs
+                            // ));
+                          }
+
+
+
+
+
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(26),
+                          ),
+                          backgroundColor: Colors.green,
+                        ),
+                        child: Text("Mark Attendance", style: FTextStyle.emailProfile),
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  QRScannerScreen()
                           ),
                         );
-                      } else {
+                      },
+                      child: Container(
+                        height: 35,
+                        width: 35,
 
-                        // BlocProvider.of<AllRequesterBloc>(context).add(UnitActionHandler(
-                        //   userID: PrefUtils.getUserId().toString(),
-                        //   btnAssign: 'approve',
-                        //   userRole: PrefUtils.getRole(),
-                        //   count: selectedIds, // Count of selected IDs
-                        // ));
-                      }
-
-
-
-
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
+                        decoration: BoxDecoration(
+                          color:AppColors.secondYellowColour,
+                          // Green for edit
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 6,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.qr_code_scanner,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ),
-                      backgroundColor: Colors.green,
                     ),
-                    child: Text("Marked as Attendance", style: FTextStyle.emailProfile),
-                  ),
+
+
+                  ],
                 ),
 SizedBox(height: 20,),
                 Container(
@@ -349,7 +392,7 @@ SizedBox(height: 20,),
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             /// Title
-                            Text(item['title'] ?? '',
+                            Text(item['delegatesName'] ?? '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: FTextStyle.subtitle),
@@ -360,7 +403,7 @@ SizedBox(height: 20,),
                                 const Icon(Icons.person, size: 16, color: Colors.grey),
                                 const SizedBox(width: 6),
                                 Text(
-                                  "Delegates Name: ${item['delegatesName']}",
+                                  "Category Name: ${item['title']}",
                                   style: FTextStyle.style,
                                 ),
                               ],
@@ -397,7 +440,7 @@ SizedBox(height: 20,),
                               ],
                             ),
 
-                            const SizedBox(height: 12),
+                            // const SizedBox(height: 12),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -410,7 +453,7 @@ SizedBox(height: 20,),
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => FeeRegistrationForDelegates(
+                                            builder: (context) => ManualAttendance(
 
                                             ),
                                           ),
@@ -425,7 +468,7 @@ SizedBox(height: 20,),
                                         minimumSize: const Size(80, 30),
                                       ),
                                       child: Text(
-                                        "Marked Attendance",
+                                        "Mark Attendance Manually",
                                         style: FTextStyle.loginBtnStyle.copyWith(
                                           fontSize: 12,
                                         ),

@@ -32,6 +32,8 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
     "delegateName": "2",
     "numberDays": "4",
     "fromDate": "23-11-2025",
+    "chequeTransactionDate": "23-11-2025",
+    "chequeTransactionNumber": "1223434",
     "toDate": "24-12-2025",
     'downloadReceipt': "assets/images/payment.png"
   }
@@ -326,6 +328,19 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
                               valueColor: activeConferenceList['feeStatus'] == "Success"
                                   ? Colors.green
                                   : Colors.orange),
+                          _buildDetailTileWithIcon(
+                            title: "Download Receipts",
+                            value: activeConferenceList['downloadReceipt'],
+                            icon: activeConferenceList['downloadReceipt']?.isNotEmpty == true
+                                ? Icons.download
+                                : null,
+                            onIconPressed: () {
+                              // Handle download action here
+                              print('Download receipt tapped');
+                            },
+                          ),
+
+
                         ],
                       ),
                     ),
@@ -340,14 +355,14 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
       ),
     );
   }
-  Widget _buildDetailTile(String title, String value, {Color? valueColor}) {
+  Widget _buildDetailTile(String title, String? value, {Color? valueColor}) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 4,
@@ -356,25 +371,78 @@ class _AccommodationOrganizationViewState extends State<AccommodationOrganizatio
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            flex: 4,
             child: Text(
-              "$title",
-              style: FTextStyle.listTitle.copyWith(fontWeight: FontWeight.w600),
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 10),
           Expanded(
-            flex: 6,
             child: Text(
-              value,
-              style: valueColor != null
-                  ? FTextStyle.listTitleSub.copyWith(color: valueColor, fontWeight: FontWeight.bold)
-                  : FTextStyle.listTitleSub,
+              value ?? '',
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                color: valueColor ?? Colors.black,
+              ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+// Modified helper widget to support optional icon button
+  Widget _buildDetailTileWithIcon({
+    required String title,
+    String? value,
+    IconData? icon,
+    VoidCallback? onIconPressed,
+    Color? valueColor,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          if (icon != null)
+            IconButton(
+              icon: Icon(icon, color: AppColors.appSky),
+              onPressed: onIconPressed,
+            )
+          else
+            Expanded(
+              child: Text(
+                value ?? '',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  color: valueColor ?? Colors.black,
+                ),
+              ),
+            ),
         ],
       ),
     );

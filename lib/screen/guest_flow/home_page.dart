@@ -374,11 +374,11 @@ class _HomePageState extends State<HomePage>
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(messages[_currentTextIndex]['title'], style: FTextStyle.appBarTitleWhite),
+                      Text(messages[_currentTextIndex]['title'], style: FTextStyle.HeadingTxtWhiteStyle),
                       SizedBox(height: 6),
                       Text(
                         messages[_currentTextIndex]['subtitle'],
-                        style: FTextStyle.appBarTitleWhite.copyWith(fontSize: 15, color: AppColors.backgroundColor),
+                        style: FTextStyle.HeadingTxtWhiteStyle.copyWith(fontSize: 15, color: AppColors.backgroundColor),
                         maxLines: 2,
                       ),
                       SizedBox(height: 14),
@@ -400,7 +400,7 @@ class _HomePageState extends State<HomePage>
                         ),
                         child: Text(
                           messages[_currentTextIndex]['buttonText'],
-                          style: FTextStyle.appBarTitleWhite.copyWith(fontSize: 15),
+                          style: FTextStyle.HeadingTxtWhiteStyle.copyWith(fontSize: 15),
                         ),
                       ),
                     ],

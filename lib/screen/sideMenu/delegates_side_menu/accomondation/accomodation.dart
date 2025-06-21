@@ -106,7 +106,7 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
         ),
         title: Text(
           'Accommodation',
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
 

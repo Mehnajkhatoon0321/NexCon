@@ -21,7 +21,7 @@ import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/paper_organi
 import 'package:nexcon/screen/sideMenu/organizer/accommodation/accomodation_category.dart';
 import 'package:nexcon/screen/sideMenu/organizer/attendance/manual_attendance/manual_attendance.dart';
 import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_code/qr_attendance.dart';
-import 'package:nexcon/screen/sideMenu/organizer/conference_list.dart';
+import 'package:nexcon/screen/sideMenu/organizer/registreation_all_types/conference_list.dart';
 import 'package:nexcon/screen/sideMenu/organizer/how_works_organizer.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/manage_program.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/print_program.dart';
@@ -93,6 +93,14 @@ class _SideMenuScreenState extends State<SideMenuScreen>
       filteredList = [
 
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
+        {
+          'icon': Icons.library_books_sharp,
+          'subtitle': 'Attendance',
+          // 'title': [
+          //   {'icon': Icons.punch_clock, 'subtitle': 'Manual Attendance'},
+          //   {'icon': Icons.report, 'subtitle': 'QR Attendance'},
+          // ]
+        },
         {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
         {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Organization'},
         {
@@ -113,14 +121,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
             ]}
           ]
         },
-        {
-          'icon': Icons.library_books_sharp,
-          'subtitle': 'Attendance',
-          'title': [
-            {'icon': Icons.punch_clock, 'subtitle': 'Manual Attendance'},
-            {'icon': Icons.report, 'subtitle': 'QR Attendance'},
-          ]
-        },
+
 
 
         // {
@@ -463,6 +464,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => const HowWorksScreen()),
         );
         break;
+        case 'Attendance':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'Attendance',)),
+        );
+        break;
       case 'Conferences':
         Navigator.push(
           context,
@@ -472,8 +479,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         case 'Accommodation Organization':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const AccommodationCategoryOrganization()),
+          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'AccommodationOrganization',)),
         );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const AccommodationCategoryOrganization()),
+        // );
         break;
       case 'How Its Works Delegate':
         Navigator.push(
@@ -539,12 +550,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'ManualAttendance',)),
         );
         break;
-        case 'QR Attendance':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'QRAttendance',)),
-        );
-        break;
+        // case 'QR Attendance':
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'QRAttendance',)),
+        // );
+        // break;
 
         //Deadline-Subtitle
       case 'Delegate Category':
@@ -619,20 +630,32 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         case 'Review Full Paper':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  FullPaperReview()),
+          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'ReviewFullPaper',)),
         );
+        // case 'Review Full Paper':
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) =>  FullPaperReview()),
+        // );
         break;
         case 'Manage Abstract Session/Themes':
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) =>  AbstractOrganizer()),
         );
-        break; case 'Review Abstracts':
+        break;
+        case 'Review Abstracts':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  ReviewAbstractOrganizer()),
+          MaterialPageRoute(builder: (context) =>  DelegatesRegistration(pageTypes: 'ReviewAbstracts',)),
         );
         break;
+        // case 'Review Abstracts':
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) =>  ReviewAbstractOrganizer()),
+        // );
+        // break;
 //deadlines
 
       case 'Total Registration':

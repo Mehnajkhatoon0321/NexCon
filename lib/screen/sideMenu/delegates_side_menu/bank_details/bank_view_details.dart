@@ -63,7 +63,7 @@ class _ViewBankDetailsState extends State<ViewBankDetails> {
         ),
         title:  Text(
           'View Details',
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
       ),

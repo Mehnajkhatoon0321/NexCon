@@ -313,12 +313,12 @@ class FTextStyle {
 
 
 //change ui
-  static const TextStyle appBarTitleWhite = TextStyle(
-    color: Colors.white,
-    fontSize: 20,
-    fontWeight: FontWeight.w700, // Bold
-    fontFamily: 'Montserrat', // Use global font
-  );
+//   static  TextStyle HeadingTxtWhiteStyle = TextStyle(
+//     color: Colors.white,
+//     fontSize: 15.sp,
+//     fontWeight: FontWeight.w700, // Bold
+//     fontFamily: 'Montserrat', // Use global font
+//   );
 
   // Navigation Bar Selected Style
   static const TextStyle navBarSelectedStyle = TextStyle(

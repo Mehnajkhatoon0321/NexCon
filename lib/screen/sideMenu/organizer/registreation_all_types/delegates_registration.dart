@@ -10,7 +10,10 @@ import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
-import '../conference_list.dart';
+import '../abstract_and_paper/abstract_organizer/review_abstract/review_abstract.dart';
+import '../abstract_and_paper/paper_organizer/paper_organizer.dart';
+import '../accommodation/accomodation_category.dart';
+import 'conference_list.dart';
 import 'delegates_registration_view.dart';
 
 class DelegatesRegistration extends StatefulWidget {
@@ -211,7 +214,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
         ),
         title: Text(
           'Delegate Registrations Conference',
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
       ),
@@ -390,18 +393,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
                     padding: const EdgeInsets.all(2.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        if(widget.pageTypes=='QRAttendance') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DelegatesRegisterNameList(
-
-                                  ),
-                            ),
-                          );
-                        }
-                     else if(widget.pageTypes=='ManualAttendance') {
+                       if(widget.pageTypes=='Attendance') {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -412,6 +404,37 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
                             ),
                           );
                         }
+                       else if(widget.pageTypes=='AccommodationOrganization') {
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) =>
+                                 AccommodationCategoryOrganization(
+
+                                 ),
+                           ),
+                         );
+                       }  else if(widget.pageTypes=='ReviewFullPaper') {
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) =>
+                                 FullPaperReview(
+
+                                 ),
+                           ),
+                         );
+                       }
+        else if(widget.pageTypes=='ReviewAbstracts') {
+        Navigator.push(
+        context,
+        MaterialPageRoute(
+        builder: (context) =>
+        ReviewAbstractOrganizer(
+
+        ),
+        ),
+        );}
                         else{
                           Navigator.push(
                             context,
@@ -503,18 +526,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
                     padding: const EdgeInsets.all(2.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        if(widget.pageTypes=='QRAttendance') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DelegatesRegisterNameList(
-
-                                  ),
-                            ),
-                          );
-                        }
-                        else if(widget.pageTypes=='ManualAttendance') {
+                   if(widget.pageTypes=='Attendance') {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -525,6 +537,38 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
                             ),
                           );
                         }
+                   else if(widget.pageTypes=='AccommodationOrganization') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  AccommodationCategoryOrganization(
+
+                                  ),
+                            ),
+                          );
+                        }  else if(widget.pageTypes=='ReviewAbstracts') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ReviewAbstractOrganizer(
+
+                                  ),
+                            ),
+                          );
+                        }
+                   else if(widget.pageTypes=='ReviewFullPaper') {
+                     Navigator.push(
+                       context,
+                       MaterialPageRoute(
+                         builder: (context) =>
+                             FullPaperReview(
+
+                             ),
+                       ),
+                     );
+                   }
                         else{
                           Navigator.push(
                             context,
@@ -754,44 +798,5 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
 
 
 
-  Widget _buildDetailTile(String title, String? value, {Color? valueColor}) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6.0),
-      padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              value ?? '',
-              textAlign: TextAlign.end,
-              style: TextStyle(
-                color: valueColor ?? Colors.black,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 }

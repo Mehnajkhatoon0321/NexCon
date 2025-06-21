@@ -132,7 +132,7 @@ class _ManualAttendanceState extends State<ManualAttendance> {
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.appSky,
-        title: const Text("Manual Attendance", style:FTextStyle.appBarTitleWhite),
+        title:  Text("Manual Attendance", style:FTextStyle.HeadingTxtWhiteStyle),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white),

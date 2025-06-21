@@ -27,7 +27,7 @@ class _HowWorksDelegatesState extends State<HowWorksDelegates> {
         ),
         title: Text(
           'How its works delegate',
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
       ),

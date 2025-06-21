@@ -93,7 +93,7 @@ class _AccommodationEditState extends State<AccommodationEdit> {
         title: Text(
           widget.isEdit.isNotEmpty ? "Edit Accommodation" : "Create Accommodation",
 
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
       ),

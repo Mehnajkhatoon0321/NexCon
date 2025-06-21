@@ -167,7 +167,7 @@ class _PaperReviewOrganizerState extends State<PaperReviewOrganizer>{
           ),
           title: Text(
             'Paper View',
-            style: FTextStyle.appBarTitleWhite,
+            style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
 

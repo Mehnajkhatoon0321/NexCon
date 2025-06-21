@@ -166,7 +166,7 @@ class _AbstractViewState extends State<AbstractView> {
           ),
           title: Text(
             'Abstract Paper View',
-            style: FTextStyle.appBarTitleWhite,
+            style: FTextStyle.HeadingTxtWhiteStyle,
           ),
           centerTitle: true,
 

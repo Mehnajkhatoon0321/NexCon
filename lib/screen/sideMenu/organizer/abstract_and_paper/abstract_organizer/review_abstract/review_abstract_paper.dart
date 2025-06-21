@@ -197,7 +197,7 @@ class _ReviewAbstractPaperRegistrationState extends State<ReviewAbstractPaperReg
             },
           ),
           title: Text(
-            widget.isEdit.isNotEmpty ? 'Edit Abstract ' : 'Create Abstract',
+            widget.isEdit.isNotEmpty ? 'Edit Abstract Session/Themes' : 'Create Abstract Session/Themes',
 
             style: FTextStyle.HeadingTxtWhiteStyle,
           ),

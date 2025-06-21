@@ -7,7 +7,7 @@ import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
-import 'registreation_all_types/fee_registration_for_delegates.dart';
+import 'fee_registration_for_delegates.dart';
 class ConferenceList extends StatefulWidget {
   const ConferenceList({super.key});
 

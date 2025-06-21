@@ -76,7 +76,70 @@ class _AccommodationCategoryOrganizationState extends State<AccommodationCategor
       //     GetBillingListHandler(searchQuery, pageNo, pageSize));
     });
   }
+  List<dynamic> activeConferenceList = [
 
+    {
+      "id":"1",
+      'title': "Delegates Name",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC ",
+      'amount': "23424343",
+      'status': "Success",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "23-11-2025",
+      "toDate": "24-12-2025",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    {
+      "id":"2",
+      'title': "Delegates Name",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'status': "Pending",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    { "id":"3",
+      'title': "Delegates Name",
+      'paymentMode': "COD",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'status': "Success",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+    },
+    { "id":"3",
+      'title': "Delegates Name",
+      'paymentMode': "PhonePay",
+      'tnNumber': "2343546446",
+      'tnDate': "2023-12-10",
+      'bankName': "HDFC",
+      'amount': "23424343",
+      'status': "Success",
+      'feeStatus': "Pending",
+      "numberPerson": "2",
+      "numberDays": "4",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-19",
+      'downloadReceipt': "assets/images/payment.png"
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +170,8 @@ class _AccommodationCategoryOrganizationState extends State<AccommodationCategor
           },
         ),
         title: Text(
-          'Accommodation',
-          style: FTextStyle.appBarTitleWhite,
+          'Delegates Accommodation  Lists',
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
 
@@ -116,18 +179,18 @@ class _AccommodationCategoryOrganizationState extends State<AccommodationCategor
 
       body: Column(
         children: [
-          const SizedBox(height: 20),
+          // const SizedBox(height: 20),
           // Toggle Buttons
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Row(
-              children: [
-                _buildToggleButton('Upcoming', 0),
-                const SizedBox(width: 8.0),
-                _buildToggleButton('Previous', 1),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          //   child: Row(
+          //     children: [
+          //       _buildToggleButton('Upcoming', 0),
+          //       const SizedBox(width: 8.0),
+          //       _buildToggleButton('Previous', 1),
+          //     ],
+          //   ),
+          // ),
           const SizedBox(height: 10),
           // Search Bar
           Padding(
@@ -183,13 +246,421 @@ class _AccommodationCategoryOrganizationState extends State<AccommodationCategor
               ),
             ),
           ),
+      Expanded(
+        child: ListView.builder(
+          itemCount: activeConferenceList.length,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemBuilder: (context, index) {
+            final item = activeConferenceList[index];
 
-          // Active/Inactive Content
-          Expanded(
-            child: _selectedIndex == 0
-                ? _buildActiveSegment(height, width)
-                : _buildInActiveSegment(height, width),
-          ),
+            // Provide default values for null fields
+            final title = item['title'] ?? 'Unknown Title';
+            final id = item['id'] ?? 'Unknown Title';
+
+            final fromDate = item['fromDate'] ?? 'N/A';
+            final toDate = item['toDate'] ?? 'N/A';
+
+            final bookingStatus = item['status'] ?? 'Pending';
+
+
+            return Container(
+              // height: height * 0.24,
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  // Left Column: Payment Details
+                  Expanded(
+                    child:
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: FTextStyle.subtitle
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'From Date: ${Constants.formatDate(fromDate)}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: FTextStyle.style,
+                            ),
+                            Text(
+                              'To Date: ${Constants.formatDate(toDate)}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: FTextStyle.style,
+                            ),
+                          ],
+                        ),
+
+
+
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                                'Booking Status: ', style: FTextStyle.listTitle),
+                            Text(
+                              bookingStatus,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: bookingStatus == "Success"
+                                    ? Colors.green
+                                    : Colors.orange,
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (item['status'] == 'Success')
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(height: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AccommodationOrganizationView(id: id,
+
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.secondaryColour,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         FeePageView(id: "",
+                                  //
+                                  //         ),
+                                  //   ),
+                                  // );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.appBlue,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.save_alt_rounded,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        if (item['status'] == 'Pending')
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AccommodationOrganizationView(id: id,
+
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.secondaryColour,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AccommodationRegistrationEdit(title: title,)
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF0db050),
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups.showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // Handle delete logic
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        if (item['status'] == 'Not Registered')
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AccommodationOrganizationView(id: id,
+
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+
+                                  decoration: BoxDecoration(
+                                    color:AppColors.secondaryColour,
+                                    // Green for edit
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AccommodationRegistrationEdit(title: title,)  ),
+
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF0db050),
+                                        // Green for edit
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10,),
+                                  GestureDetector(
+                                    onTap: () {
+                                      CommonPopups.showDeleteCustomPopup(
+                                        context,
+                                        "Are you sure you want to delete?",
+                                            () {
+                                          // Handle delete logic
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.red, // Red for delete
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1),
+                                            blurRadius: 6,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+
+
+                      ],
+                    ),
+                  ),
+                  // Right Column: Action Buttons
+
+                ],
+              ),
+            );
+          },
+        ),
+      )
+
+          // // Active/Inactive Content
+          // Expanded(
+          //   child: _selectedIndex == 0
+          //       ? _buildActiveSegment(height, width)
+          //       : _buildInActiveSegment(height, width),
+          // ),
         ],
       ),
     );

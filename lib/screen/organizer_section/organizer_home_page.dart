@@ -114,7 +114,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
         ),
         title: Text(
           _navBarItems[_selectedIndex]['title'],
-          style: FTextStyle.appBarTitleWhite,
+          style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
         actions: _selectedIndex == 3
