@@ -976,7 +976,8 @@ class _OrganizationRegisterDetailsState extends State<OrganizationRegisterDetail
                               child: IconTheme(
                                 data: const IconThemeData(
                                   color: AppColors.appSky,
-                                  size: 20,
+                                  size: 18,
+
                                 ),
                                 child: Icon(
                                   checkboxChecked

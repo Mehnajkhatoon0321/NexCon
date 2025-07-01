@@ -143,9 +143,6 @@ class _FeePageViewState extends State<FeePageView> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),

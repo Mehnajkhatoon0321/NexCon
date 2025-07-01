@@ -32,7 +32,85 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
     "email": "iscbconference@gmail.com",
     "siteLink": "https://www.iscbconference.com"
   };
-
+  bool isLoading = false;
+  final animationsMap = {
+    'columnOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: const Offset(0.0, 20.0),
+          end: const Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: const Offset(0.0, 20.0),
+          end: const Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 400.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 400.ms,
+          duration: 600.ms,
+          begin: const Offset(0.0, 20.0),
+          end: const Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'imageOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: const Offset(40.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
   final double _cardPadding = 20;
   @override
   @override
@@ -66,7 +144,8 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
             Text(
               featuresCategoryDetails["title"]!,
               style: FTextStyle.subheading
-            ),
+            ).animateOnPageLoad(animationsMap[
+            'imageOnPageLoadAnimation2']!),
             const SizedBox(height: 8),
 
             /// Subtitle
@@ -74,7 +153,9 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
               featuresCategoryDetails["subTitle"]!,
               style:FTextStyle.style,
               textAlign: TextAlign.justify,
-            ),
+            ).animateOnPageLoad(animationsMap[
+          'imageOnPageLoadAnimation2']!),
+      const SizedBox(height: 8),
 
             const SizedBox(height: 24),
 
@@ -107,7 +188,9 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
                     ),
                   ),
                 ],
-              ),
+              ).animateOnPageLoad(animationsMap[
+              'imageOnPageLoadAnimation2']!),
+
             ),
 
             const SizedBox(height: 20),
@@ -160,16 +243,19 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
         ],
       ),
       child: child,
-    );
+    ).animateOnPageLoad(animationsMap[
+    'imageOnPageLoadAnimation2']!);
   }
 
   Widget _buildLabelValue(String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+        Text(label, style: TextStyle(fontSize: 13, color: Colors.grey[600])).animateOnPageLoad(animationsMap[
+    'imageOnPageLoadAnimation2']!),
         const SizedBox(height: 4),
-        Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+        Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)).animateOnPageLoad(animationsMap[
+    'imageOnPageLoadAnimation2']!),
       ],
     );
   }
@@ -248,7 +334,8 @@ class _MyConferenceDelegatesViewState extends State<MyConferenceDelegatesView> {
                         : Text(
                       value,
                       style: const TextStyle(fontSize: 14),
-                    ),
+                    ).animateOnPageLoad(animationsMap[
+                    'imageOnPageLoadAnimation2']!),
                   ),
                 ],
               ),

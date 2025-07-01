@@ -214,8 +214,8 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                             );
                           },
                           child: Container(
-                            height: 40,
-                            width: 40,
+                            height: 18,
+                            width: 18,
                             decoration: BoxDecoration(
                               color: const Color(0xFF0db050),
                               // Green background
@@ -229,9 +229,9 @@ class _DelegatesCategoryPageState extends State<DelegatesCategoryPage> {
                               ],
                             ),
                             child: const Icon(
-                              Icons.edit,
+                               Icons.edit_outlined,
                               color: Colors.white,
-                              size: 20,
+                              size: 18,
                             ),
                           ),
                         ),

@@ -286,8 +286,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       );
       },
       child: Container(
-      height: 35,
-      width: 35,
+      height: 32,
+      width: 32,
 
       decoration: BoxDecoration(
       color:AppColors.secondaryColour,
@@ -304,7 +304,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       child: const Icon(
       Icons.remove_red_eye_outlined,
       color: Colors.white,
-      size: 20,
+      size: 18,
+
       ),
       ),
       ),
@@ -323,8 +324,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       // );
       },
       child: Container(
-      height: 35,
-      width: 35,
+      height: 32,
+      width: 32,
 
       decoration: BoxDecoration(
       color:AppColors.appBlue,
@@ -341,7 +342,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       child: const Icon(
       Icons.save_alt_rounded,
       color: Colors.white,
-      size: 20,
+      size: 18,
+
       ),
       ),
       ),
@@ -368,8 +370,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       );
       },
       child: Container(
-      height: 35,
-      width: 35,
+      height: 32,
+      width: 32,
 
       decoration: BoxDecoration(
       color:AppColors.secondaryColour,
@@ -386,7 +388,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       child: const Icon(
       Icons.remove_red_eye_outlined,
       color: Colors.white,
-      size: 20,
+      size: 18,
       ),
       ),
       ),
@@ -438,7 +440,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       //     child: const Icon(
       //       Icons.add,
       //       color: Colors.white,
-      //       size: 20,
+      //       size: 18,
+
       //     ),
       //   ),
       // ),
@@ -463,8 +466,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       );
       },
       child: Container(
-      height: 35,
-      width: 35,
+      height: 32,
+      width: 32,
       decoration: BoxDecoration(
       color: Colors.red, // Red for delete
       borderRadius: BorderRadius.circular(8),
@@ -503,8 +506,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       );
       },
       child: Container(
-      height: 35,
-      width: 35,
+      height: 32,
+      width: 32,
 
       decoration: BoxDecoration(
       color:AppColors.secondaryColour,
@@ -572,7 +575,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
             ],
           ),
           child: const Icon(
-            Icons.edit,
+             Icons.edit_outlined,
             color: Colors.white,
             size: 20,
           ),
@@ -599,8 +602,8 @@ class _FullPaperReviewState extends State<FullPaperReview> {
       );
       },
       child: Container(
-      height: 35,
-      width: 35,
+      height: 32,
+      width: 32,
       decoration: BoxDecoration(
       color: Colors.red, // Red for delete
       borderRadius: BorderRadius.circular(8),
@@ -771,7 +774,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.remove_red_eye_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -808,7 +811,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.save_alt_rounded,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -853,7 +856,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.remove_red_eye_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -905,7 +908,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                 //     child: const Icon(
                                 //       Icons.add,
                                 //       color: Colors.white,
-                                //       size: 20,
+                                //        size: 18,
                                 //     ),
                                 //   ),
                                 // ),
@@ -946,7 +949,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.delete,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -988,7 +991,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.remove_red_eye_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -1039,9 +1042,9 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                 //       ],
                                 //     ),
                                 //     child: const Icon(
-                                //       Icons.edit,
+                                //        Icons.edit_outlined,
                                 //       color: Colors.white,
-                                //       size: 20,
+                                //        size: 18,
                                 //     ),
                                 //   ),
                                 // ),
@@ -1082,7 +1085,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.delete,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -1220,7 +1223,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.remove_red_eye_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -1257,7 +1260,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.save_alt_rounded,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -1302,7 +1305,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.remove_red_eye_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -1354,7 +1357,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                 //     child: const Icon(
                                 //       Icons.add,
                                 //       color: Colors.white,
-                                //       size: 20,
+                                //        size: 18,
                                 //     ),
                                 //   ),
                                 // ),
@@ -1395,7 +1398,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.delete,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -1437,7 +1440,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.remove_red_eye_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),
@@ -1488,9 +1491,9 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                 //       ],
                                 //     ),
                                 //     child: const Icon(
-                                //       Icons.edit,
+                                //        Icons.edit_outlined,
                                 //       color: Colors.white,
-                                //       size: 20,
+                                //        size: 18,
                                 //     ),
                                 //   ),
                                 // ),
@@ -1531,7 +1534,7 @@ class _FullPaperReviewState extends State<FullPaperReview> {
                                     child: const Icon(
                                       Icons.delete,
                                       color: Colors.white,
-                                      size: 20,
+                                       size: 18,
                                     ),
                                   ),
                                 ),

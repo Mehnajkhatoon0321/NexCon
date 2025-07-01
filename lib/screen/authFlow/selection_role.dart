@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nexcon/api_services/all_module_role/commons_api/auth_flow/auth_flow_bloc.dart';
+
 import 'package:nexcon/screen/authFlow/login_screen.dart';
 import 'package:nexcon/screen/guest_flow/home_page.dart';
 import 'package:nexcon/utils/colours.dart';
@@ -124,28 +127,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                                   ),
                                                 ),
                                               ),
-                                              // Visibility(
-                                              //   visible: (isSelectedRole == 'isselect organizer'),
-                                              //   child: Positioned(
-                                              //     bottom: 0,
-                                              //     right: 0,
-                                              //     child: Padding(
-                                              //       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
-                                              //       child: Container(
-                                              //         decoration: BoxDecoration(
-                                              //           color: Colors.white,
-                                              //           borderRadius: BorderRadius.circular(15.0),
-                                              //         ),
-                                              //         child:
-                                              //         Image.asset(
-                                              //           "assets/images/filledTick.png",
-                                              //           height: 30,
-                                              //           width: 30,
-                                              //         ),
-                                              //       ),
-                                              //     ),
-                                              //   ),
-                                              // ),
+
 
                                               Visibility(
                                                 visible: (isSelectedRole == 'isselect organizer'),
@@ -273,13 +255,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                                     shadowColor: AppColors.boarderColour,
                                     side: const BorderSide(color: Colors.white),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      "CONTINUE",
-                                      style: FTextStyle.listTitleBig.
-                                      copyWith(color: Colors.white, letterSpacing: 1.0),
-                                    ),
+                                  child: Text(
+                                    "CONTINUE",
+                                    style: FTextStyle.listTitleBig.
+                                    copyWith(color: Colors.white, letterSpacing: 1.0),
                                   ),
                                 ),
                               ),
@@ -331,7 +310,10 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
   void navigatorScreen() {
     Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
 
-      return  LoginScreen(  selectedRole: isSelectedRole,);
+      return  BlocProvider(
+  create: (context) => AuthFlowBloc(),
+  child: LoginScreen(  selectedRole: isSelectedRole,),
+);
 
     }));
   }

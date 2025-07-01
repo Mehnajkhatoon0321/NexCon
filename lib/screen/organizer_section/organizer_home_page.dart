@@ -19,7 +19,8 @@ import '../authFlow/organizer_my_profile/my_profile_organizer.dart';
 import 'account/my_order/my_order.dart';
 class OrganizerHomePage extends StatefulWidget {
   final String selectedRole;
-  const OrganizerHomePage({required this.selectedRole,super.key});
+  final bool isOrganizer;
+  const OrganizerHomePage({required this.selectedRole,super.key, required this.isOrganizer});
 
   @override
   State<OrganizerHomePage> createState() => _OrganizerHomePageState();
@@ -29,7 +30,7 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
   int _selectedIndex = 0;
   bool _isLogoutDialogVisible = false;
   final List<Map<String, dynamic>> _navBarItems = [
-    {"title": "Organizer Dashboard", "icon": Icons.dashboard},
+    {"title": "Dashboard", "icon": Icons.dashboard},
     {"title": "My Conference", "icon": Icons.event},
     {"title": "My Order", "icon": Icons.receipt_long},
     {"title": "My Profile", "icon": Icons.person},
@@ -38,12 +39,17 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
   final List<Map<String, dynamic>> _customMenuItems = [
     {"title": "Upgrade Wait List", "icon": Icons.access_alarm_sharp, "value": "upgradeWait"},
     {"title": "Conference Register Here", "icon": Icons.app_registration, "value": "registerHere"},
-    {"title": "Edit Profile", "icon": Icons.edit, "value": "edit"},
+    {"title": "Edit Profile", "icon":  Icons.edit_outlined, "value": "edit"},
     {"title": "Change Password", "icon": Icons.password, "value": "changePassword"},
 
     {"title": "Logout", "icon": Icons.logout, "value": "logout"},
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.isOrganizer ? 1 : 0;
+  }
 
   Widget _getPage(int index) {
     switch (index) {
@@ -196,7 +202,8 @@ class _OrganizerHomePageState extends State<OrganizerHomePage> {
                                     child: Row(
                                       children: [
                                         Icon(item['icon'],
-                                            size: 20, color: Colors.black54),
+                                            size: 18,
+                              color: Colors.black54),
                                         const SizedBox(width: 12),
                                         Expanded(
                                           child: Text(

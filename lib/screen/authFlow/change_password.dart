@@ -145,24 +145,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor:AppColors.appSky, // Customize app bar color
-        //   leading: IconButton(
-        //     icon: const Icon(
-        //       Icons.arrow_back_ios,
-        //       color: Colors.white,
-        //       size: 28,
-        //     ), // Menu icon
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //   ),
-        //   title: Text(
-        //     'Change Password',
-        //     style: FTextStyle.HeadingTxtWhiteStyle,
-        //   ),
-        //   centerTitle: true,
-        // ),
+
         backgroundColor: AppColors.backgroundColor,
         body: SingleChildScrollView(
           child: Padding(
@@ -427,7 +410,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                        borderRadius: BorderRadius.circular(30),
                      ),
                      backgroundColor:
-                     isButtonEnabled ? AppColors.appSky :  AppColors.formFieldBorderColour,
+                      AppColors.appSky ,
                      // Button color depending on the enabled state
                      minimumSize: const Size(double.infinity, 50),
                      // Minimum height

@@ -1022,7 +1022,8 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                               child: IconTheme(
                                 data: const IconThemeData(
                                   color: AppColors.appSky,
-                                  size: 20,
+                                  size: 18,
+
                                 ),
                                 child: Icon(
                                   checkboxChecked

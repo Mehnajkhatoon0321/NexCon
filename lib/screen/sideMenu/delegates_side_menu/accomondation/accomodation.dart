@@ -533,8 +533,8 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                                   );
                                 },
                                 child: Container(
-                                  height: 35,
-                                  width: 35,
+                                  height: 32,
+                                  width: 32,
 
                                   decoration: BoxDecoration(
                                     color: const Color(0xFF0db050),
@@ -549,9 +549,9 @@ class _AccommodationScreenState extends State<AccommodationScreen>{
                                     ],
                                   ),
                                   child: const Icon(
-                                    Icons.edit,
+                                     Icons.edit_outlined,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
                                   ),
                                 ),
                               ),

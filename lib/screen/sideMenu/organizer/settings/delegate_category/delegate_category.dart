@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/delegate_category/add_delegate_category.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
@@ -97,71 +98,51 @@ class _DelegateCategoryState extends State<DelegateCategory> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        backgroundColor:AppColors.appSky, // Customize app bar color
+        backgroundColor: AppColors.appSky,
+        elevation: 0, // Optional: removes AppBar shadow for flat minimalist look
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.white,
-            size: 28,
-          ), // Menu icon
-          onPressed: () {
-            Navigator.pop(context);
-          },
+            size: 24, // Slightly smaller for minimal feel
+          ),
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Delegate Category',
-          style: FTextStyle.HeadingTxtWhiteStyle,
+          style: FTextStyle.HeadingTxtWhiteStyle.copyWith(
+            fontSize: 18.sp, // Ensure scaling with ScreenUtil
+            fontWeight: FontWeight.w700,
+          ),
         ),
         centerTitle: true,
-
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: (displayType == 'desktop' || displayType == 'tablet')
-                  ? 70
-                  : 37,
-              child: ElevatedButton(
-                  onPressed: () async {
-
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddDelegateCategory()
-                      ),
-
-                    );
-                    //     .then((result) {
-                    //   // Handle the result from the edit screen
-                    //   if (result[0]) {
-                    //     data.clear();
-                    //     pageNo = 1;
-                    //     hasMoreData = true;
-                    //     totalPages = 0;
-                    //     BlocProvider.of<AllRequesterBloc>(context)
-                    //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                    //   }
-                    // }
-                    // );
-
-                    // );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(26),
-                      ),
-                      backgroundColor: Colors.white),
-                  child: Text(
-                    "Apply",
-                    style: FTextStyle.loginBtnStyle
-                        .copyWith(color: AppColors.appSky,fontSize: 13),
-                  )),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddDelegateCategory()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 4.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(26),
+                ),
+                elevation: 0, // optional for flat minimal button
+              ),
+              child: Text(
+                "Apply",
+                style: FTextStyle.subheading
+              ),
             ),
-          )
+          ),
         ],
-
       ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

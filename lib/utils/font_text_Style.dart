@@ -152,8 +152,8 @@ class FTextStyle {
   );
   static TextStyle nameProfile = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 16.sp,
-    // fontWeight: FontWeight.w400,
+    fontSize: 17.sp,
+     fontWeight: FontWeight.w400,
     color: Colors.white,
   );
 
@@ -168,8 +168,8 @@ class FTextStyle {
 
   static TextStyle drawerText = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 14.sp,
-    fontWeight: FontWeight.bold,
+    fontSize: 12.sp,
+    // fontWeight: FontWeight.bold,
     color: AppColors.drawerTextColor,
   );
   static TextStyle drawerButton1Text = TextStyle(

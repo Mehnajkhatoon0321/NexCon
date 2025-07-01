@@ -172,52 +172,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: SizedBox(
-        //       height: (displayType == 'desktop' || displayType == 'tablet')
-        //           ? 70
-        //           : 37,
-        //       child: ElevatedButton(
-        //           onPressed: () async {
-        //
-        //
-        //             Navigator.push(
-        //               context,
-        //               MaterialPageRoute(
-        //                   builder: (context) => ReceiptSettingAdd(isEdit: '',)
-        //               ),
-        //
-        //             );
-        //             //     .then((result) {
-        //             //   // Handle the result from the edit screen
-        //             //   if (result[0]) {
-        //             //     data.clear();
-        //             //     pageNo = 1;
-        //             //     hasMoreData = true;
-        //             //     totalPages = 0;
-        //             //     BlocProvider.of<AllRequesterBloc>(context)
-        //             //         .add(AddCartDetailHandler("", pageNo, pageSize));
-        //             //   }
-        //             // }
-        //             // );
-        //
-        //             // );
-        //           },
-        //           style: ElevatedButton.styleFrom(
-        //               shape: RoundedRectangleBorder(
-        //                 borderRadius: BorderRadius.circular(26),
-        //               ),
-        //               backgroundColor: Colors.white),
-        //           child: Text(
-        //             "Add",
-        //             style: FTextStyle.loginBtnStyle
-        //                 .copyWith(color: AppColors.appSky,fontSize: 13),
-        //           )),
-        //     ),
-        //   )
-        // ],
+
       ),
 
       body: Column(
@@ -388,39 +343,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.listTitle
                     ),
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           'Delegate Date:$dataDelegate',
-//                           maxLines: 1,
-//                           overflow: TextOverflow.ellipsis,
-//                           style: FTextStyle.style,
-//                         ),
-//
-//                       ],
-//                     ),
-//
-//                     Text(
-//                       'Organizer Date:$dataOrganizer',
-//                       maxLines: 1,
-//                       overflow: TextOverflow.ellipsis,
-//                       style: FTextStyle.style,
-//                     ),
-// Text(
-//                       'Signature: $signature',
-//                       maxLines: 1,
-//                       overflow: TextOverflow.ellipsis,
-//                       style: FTextStyle.style,
-//                     ),
-//
-// Text(
-//                       'Seal Stamp: $seal_stamp',
-//                       maxLines: 1,
-//                       overflow: TextOverflow.ellipsis,
-//                       style: FTextStyle.style,
-//                     ),
+
 
 
 
@@ -480,7 +403,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
+
                               ),
                             ),
                           ),
@@ -516,7 +440,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                               child: const Icon(
                                 Icons.save_alt_rounded,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
+
                               ),
                             ),
                           ),
@@ -558,7 +483,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
+
                               ),
                             ),
                           ),
@@ -578,8 +504,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   );
                                 },
                                 child: Container(
-                                  height: 35,
-                                  width: 35,
+                                  height: 32,
+                                  width: 32,
 
                                   decoration: BoxDecoration(
                                     color: const Color(0xFF0db050),
@@ -594,9 +520,9 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                     ],
                                   ),
                                   child: const Icon(
-                                    Icons.edit,
+                                     Icons.edit_outlined,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
                                   ),
                                 ),
                               ),
@@ -628,7 +554,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   child: const Icon(
                                     Icons.delete,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
+
                                   ),
                                 ),
                               ),
@@ -672,7 +599,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
+
                               ),
                             ),
                           ),
@@ -710,7 +638,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   child: const Icon(
                                     Icons.add,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
+
                                   ),
                                 ),
                               ),
@@ -742,7 +671,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   child: const Icon(
                                     Icons.delete,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
+
                                   ),
                                 ),
                               ),
@@ -755,85 +685,7 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
 
 
 
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.end,
-                    //   crossAxisAlignment: CrossAxisAlignment.end,
-                    //   children: [
-                    //     GestureDetector(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //               builder: (context) => ReceiptSettingAdd(isEdit: 'Yes',)
-                    //           ),
-                    //
-                    //         );
-                    //       },
-                    //       child: Container(
-                    //         height: 35,
-                    //         width: 35,
-                    //
-                    //         decoration: BoxDecoration(
-                    //           color: const Color(0xFF0db050),
-                    //           // Green for edit
-                    //           borderRadius: BorderRadius.circular(8),
-                    //           boxShadow: [
-                    //             BoxShadow(
-                    //               color: Colors.black.withOpacity(0.1),
-                    //               blurRadius: 6,
-                    //               offset: const Offset(0, 2),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //         child: const Icon(
-                    //           Icons.edit,
-                    //           color: Colors.white,
-                    //           size: 20,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //
-                    //     Row(
-                    //       mainAxisAlignment: MainAxisAlignment.end,
-                    //       crossAxisAlignment: CrossAxisAlignment.end,
-                    //       children: [
-                    //
-                    //         SizedBox(width: 10,),
-                    //         GestureDetector(
-                    //           onTap: () {
-                    //             CommonPopups.showDeleteCustomPopup(
-                    //               context,
-                    //               "Are you sure you want to delete?",
-                    //                   () {
-                    //                 // Handle delete logic
-                    //               },
-                    //             );
-                    //           },
-                    //           child: Container(
-                    //             height: 35,
-                    //             width: 35,
-                    //             decoration: BoxDecoration(
-                    //               color: Colors.red, // Red for delete
-                    //               borderRadius: BorderRadius.circular(8),
-                    //               boxShadow: [
-                    //                 BoxShadow(
-                    //                   color: Colors.black.withOpacity(0.1),
-                    //                   blurRadius: 6,
-                    //                   offset: const Offset(0, 2),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //             child: const Icon(
-                    //               Icons.delete,
-                    //               color: Colors.white,
-                    //               size: 20,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ],
-                    // ),
+
 
 
 
@@ -988,7 +840,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   child: const Icon(
                                     Icons.remove_red_eye_outlined,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
+
                                   ),
                                 ),
                               ),
@@ -1024,7 +877,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   child: const Icon(
                                     Icons.save_alt_rounded,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
+
                                   ),
                                 ),
                               ),
@@ -1066,7 +920,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   child: const Icon(
                                     Icons.remove_red_eye_outlined,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
+
                                   ),
                                 ),
                               ),
@@ -1086,8 +941,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
 
                                       decoration: BoxDecoration(
                                         color: const Color(0xFF0db050),
@@ -1102,9 +957,9 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                         ],
                                       ),
                                       child: const Icon(
-                                        Icons.edit,
+                                         Icons.edit_outlined,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
                                       ),
                                     ),
                                   ),
@@ -1120,8 +975,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
                                       decoration: BoxDecoration(
                                         color: Colors.red, // Red for delete
                                         borderRadius: BorderRadius.circular(8),
@@ -1136,7 +991,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                       child: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
+
                                       ),
                                     ),
                                   ),
@@ -1180,7 +1036,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   child: const Icon(
                                     Icons.remove_red_eye_outlined,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
+
                                   ),
                                 ),
                               ),
@@ -1218,7 +1075,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                   //     child: const Icon(
                                   //       Icons.add,
                                   //       color: Colors.white,
-                                  //       size: 20,
+                                  //       size: 18,
+
                                   //     ),
                                   //   ),
                                   // ),
@@ -1234,8 +1092,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
                                       decoration: BoxDecoration(
                                         color: Colors.red, // Red for delete
                                         borderRadius: BorderRadius.circular(8),
@@ -1250,7 +1108,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                                       child: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
+
                                       ),
                                     ),
                                   ),
@@ -1294,9 +1153,10 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                         //           ],
                         //         ),
                         //         child: const Icon(
-                        //           Icons.edit,
+                        //            Icons.edit_outlined,
                         //           color: Colors.white,
-                        //           size: 20,
+                        //           size: 18,
+
                         //         ),
                         //       ),
                         //     ),
@@ -1334,7 +1194,8 @@ class _ReceiptSettingState extends State<ReceiptSetting> {
                         //             child: const Icon(
                         //               Icons.delete,
                         //               color: Colors.white,
-                        //               size: 20,
+                        //               size: 18,
+
                         //             ),
                         //           ),
                         //         ),

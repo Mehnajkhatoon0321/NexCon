@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nexcon/api_services/all_module_role/delegates_api_services/all_delegates/all_delegates_bloc.dart';
 import 'package:nexcon/screen/authFlow/change_password.dart';
 import 'package:nexcon/screen/authFlow/selection_role.dart';
 import 'package:nexcon/screen/delegates_section/nab_bar/abstract/abstract.dart';
@@ -119,7 +121,7 @@ class _HomeDelegatesState extends State<HomeDelegates> {
     {"title": "My Profile", "icon": Icons.person},
   ];
   final List<Map<String, dynamic>> _customMenuItems = [
-    {"title": "Edit Profile", "icon": Icons.edit, "value": "edit"},
+    {"title": "Edit Profile", "icon":  Icons.edit_outlined, "value": "edit"},
     {"title": "Change Password", "icon": Icons.password, "value": "changePassword"},
 
     {"title": "Logout", "icon": Icons.logout, "value": "logout"},
@@ -130,7 +132,10 @@ class _HomeDelegatesState extends State<HomeDelegates> {
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return const MyConferencePage();
+        return  BlocProvider(
+  create: (context) => AllDelegatesBloc(),
+  child: MyConferencePage(),
+);
       case 1:
         return const AbstractScreen();
       case 2:
@@ -138,7 +143,10 @@ class _HomeDelegatesState extends State<HomeDelegates> {
       case 3:
         return const MyProfile();
       default:
-        return const MyConferencePage();
+        return  BlocProvider(
+          create: (context) => AllDelegatesBloc(),
+          child: MyConferencePage(),
+        );
     }
   }
 

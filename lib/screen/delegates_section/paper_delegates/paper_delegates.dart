@@ -366,7 +366,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
 
     return       ListView.builder(
       itemCount: abstractList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       itemBuilder: (context, index) {
         final item = abstractList[index];
         return Container(
@@ -438,8 +438,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color:AppColors.secondaryColour,
@@ -456,7 +456,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -474,8 +474,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               // );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color:AppColors.appBlue,
@@ -492,7 +492,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.save_alt_rounded,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -516,8 +516,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color:AppColors.secondaryColour,
@@ -534,7 +534,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -552,8 +552,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color: const Color(0xFF0db050),
@@ -568,9 +568,9 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                                 ],
                               ),
                               child: const Icon(
-                                Icons.edit,
+                                Icons.edit_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -586,8 +586,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
                               decoration: BoxDecoration(
                                 color: Colors.red, // Red for delete
                                 borderRadius: BorderRadius.circular(8),
@@ -602,7 +602,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.delete,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -627,8 +627,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color:AppColors.secondaryColour,
@@ -645,7 +645,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -683,7 +683,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                                   child: const Icon(
                                     Icons.add,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
                                   ),
                                 ),
                               ),
@@ -715,7 +715,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                                   child: const Icon(
                                     Icons.delete,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
                                   ),
                                 ),
                               ),
@@ -815,8 +815,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color:AppColors.secondaryColour,
@@ -833,7 +833,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -851,8 +851,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               // );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color:AppColors.appBlue,
@@ -869,7 +869,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.save_alt_rounded,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -893,8 +893,8 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 32,
+                              width: 32,
 
                               decoration: BoxDecoration(
                                 color:AppColors.secondaryColour,
@@ -911,7 +911,7 @@ class _PaperDelegatesState extends State<PaperDelegates>  {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),

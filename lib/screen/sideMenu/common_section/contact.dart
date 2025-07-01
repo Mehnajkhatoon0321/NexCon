@@ -481,7 +481,8 @@ class _ContactScreenState extends State<ContactScreen> {
                           child: Icon(
                             checkboxChecked ? Icons.check_box : Icons.check_box_outline_blank,
                             color: AppColors.appSky,
-                            size: 20,
+                            size: 18,
+
                           ),
                         ),
                         Expanded(

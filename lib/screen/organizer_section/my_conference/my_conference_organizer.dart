@@ -147,7 +147,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
           // Search Bar
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.04, vertical: 10),
+                horizontal: screenWidth * 0.03, vertical: 10),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -213,7 +213,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
   Widget _buildActiveSegment(double height, double width) {
     return ListView.builder(
       itemCount: activeConferenceList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       itemBuilder: (context, index) {
         final item = activeConferenceList[index];
         return Padding(
@@ -330,8 +330,8 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                         );
                       },
                       child: Container(
-                        height: 35,
-                        width: 35,
+                          height: 32,
+        width: 32,
 
                         decoration: BoxDecoration(
                           color:AppColors.secondaryColour,
@@ -365,8 +365,8 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                         );  },
 
                       child: Container(
-                        height: 35,
-                        width: 35,
+                          height: 32,
+        width: 32,
                         decoration: BoxDecoration(
                           color: const Color(0xFF0db050),
                           // Green background
@@ -380,64 +380,15 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                           ],
                         ),
                         child: const Icon(
-                          Icons.edit,
+                          Icons.edit_outlined,
                           color: Colors.white,
-                          size: 20,
+                          size: 18,
                         ),
                       ),
                     ),
                   ],
                 ),
-                // Column(
-                //   children: [
-                //     Row(
-                //       mainAxisAlignment: MainAxisAlignment.end,
-                //       crossAxisAlignment: CrossAxisAlignment.end,
-                //       children: [
-                //         SizedBox(width: 10,),
-                //         GestureDetector(
-                //           onTap: () {
-                //             Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                 builder: (context) =>
-                //                     MyConferenceOrganizerView(id: item['id']
-                //                         .toString(),
-                //
-                //                     ),
-                //               ),
-                //             );
-                //           },
-                //           child: Container(
-                //             height: 32,
-                //             width: 35,
-                //
-                //             decoration: BoxDecoration(
-                //               color: AppColors.secondaryColour,
-                //               // Green for edit
-                //               borderRadius: BorderRadius.circular(8),
-                //               boxShadow: [
-                //                 BoxShadow(
-                //                   color: Colors.black.withOpacity(0.1),
-                //                   blurRadius: 6,
-                //                   offset: const Offset(0, 2),
-                //                 ),
-                //               ],
-                //             ),
-                //             child: const Icon(
-                //               Icons.remove_red_eye_outlined,
-                //               color: Colors.white,
-                //               size: 20,
-                //             ),
-                //           ),
-                //         ),
-                //         SizedBox(width: 10,),
-                //
-                //       ],
-                //     ),
-                //     const SizedBox(height: 4),
-                //   ],
-                // ),
+
               ],
             ),
           ),
@@ -450,7 +401,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
     if (isLoading) {
       return ListView.builder(
         itemCount: 5,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
@@ -481,7 +432,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
     }
     return  ListView.builder(
       itemCount: inactiveConferenceList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       itemBuilder: (context, index) {
         final item = inactiveConferenceList[index];
         return Padding(
@@ -554,8 +505,8 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                         );
                       },
                       child: Container(
-                        height: 35,
-                        width: 35,
+                          height: 32,
+        width: 32,
 
                         decoration: BoxDecoration(
                           color:AppColors.secondaryColour,
@@ -589,24 +540,18 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                         );  },
 
                       child: Container(
-                        height: 35,
-                        width: 35,
+                          height: 32,
+        width: 32,
                         decoration: BoxDecoration(
                           color: const Color(0xFF0db050),
                           // Green background
                           borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 6,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
+
                         ),
                         child: const Icon(
-                          Icons.edit,
+                          Icons.edit_outlined,
                           color: Colors.white,
-                          size: 20,
+                          size: 18,
                         ),
                       ),
                     ),

@@ -64,6 +64,14 @@ static void setRoleSelection(String value) {
     final bool? value = Prefs.prefs?.getBool(SharedPrefsKeys.isLogin);
     return value ?? false;
   }
+  static void setUserId(int value) {
+    Prefs.prefs?.setString(SharedPrefsKeys.userId, value.toString());
+  }
+
+  static int getUserId() {
+    final String? value = Prefs.prefs?.getString(SharedPrefsKeys.userId);
+    return int.tryParse(value ?? '') ?? 0;
+  }
 
 }
 
@@ -75,4 +83,5 @@ class SharedPrefsKeys {
   static const userPassword = 'userPassword';
   static const userEmailLogin = 'userEmailLogin';
   static const isLogin = 'isLogin';
+  static const userId = 'userId';
 }

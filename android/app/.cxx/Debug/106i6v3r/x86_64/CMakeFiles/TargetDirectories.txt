@@ -1,0 +1,2 @@
+/Users/mehnajkhatoon/Desktop/Projects/smart_conference/NexCon/android/app/.cxx/Debug/106i6v3r/x86_64/CMakeFiles/edit_cache.dir
+/Users/mehnajkhatoon/Desktop/Projects/smart_conference/NexCon/android/app/.cxx/Debug/106i6v3r/x86_64/CMakeFiles/rebuild_cache.dir

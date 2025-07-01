@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 class AppColors extends MaterialColor {
   const AppColors(super.primary, super.swatch);
-  // static const Color appSky = Color(0xFF0DB050);
-  // static const Color appSky = Color(0xFF0537ff);
+
   static const Color appSkyDark = Color(0xFF0a248c);
 
   static const Color boarderColourThem = Color(0xFFbbccd3);

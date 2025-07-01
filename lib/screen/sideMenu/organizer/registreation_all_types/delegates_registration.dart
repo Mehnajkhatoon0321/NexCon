@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
 import 'package:nexcon/screen/sideMenu/organizer/attendance/manual_attendance/manual_delegates_marked_attendance_list.dart';
-import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_code/delegates_register_name_list.dart';
-import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_code/qr_attendance.dart';
+
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/common_popups.dart';
+
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
@@ -14,7 +12,7 @@ import '../abstract_and_paper/abstract_organizer/review_abstract/review_abstract
 import '../abstract_and_paper/paper_organizer/paper_organizer.dart';
 import '../accommodation/accomodation_category.dart';
 import 'conference_list.dart';
-import 'delegates_registration_view.dart';
+
 
 class DelegatesRegistration extends StatefulWidget {
   String pageTypes;
@@ -213,10 +211,10 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
           },
         ),
         title: Text(
-          'Delegate Registrations Conference',
+          'Registrations Conference List',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
-        centerTitle: true,
+
       ),
       body: Column(
         children: [
@@ -236,7 +234,7 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
           // Search Bar
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.04, vertical: 10),
+                horizontal: screenWidth * 0.03, vertical: 10),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -344,123 +342,83 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
   Widget _buildActiveSegment(double height, double width) {
     return ListView.builder(
       itemCount: activeConferenceList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       itemBuilder: (context, index) {
         final item = activeConferenceList[index];
-        final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
-        return Container(
-          margin: const EdgeInsets.only(bottom: 16),
-          padding: const EdgeInsets.all(16),
+
+        return  Container(
+          margin: const EdgeInsets.all( 5),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(18),
             border: Border.all(color: Colors.grey.shade100),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
-                blurRadius: 6,
-                offset: const Offset(0, 3),
+                blurRadius: 10,
+                spreadRadius: 2,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Title
-              Text(item['title'] ?? '',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: FTextStyle.subtitle),
+              /// 🔹 Title
+              Text(
+                item['title'] ?? '',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: FTextStyle.subtitle
+              ),
 
 
 
+              /// 🔹 Date Row
               Row(
                 children: [
-                  Icon(Icons.date_range, size: 18,
-                      color: AppColors.secondYellowColour),
-                  SizedBox(width: 6),
-                  Text("${Constants.formatDate(item['fromDate'])}  → ${Constants
-                      .formatDate(item['toDate'])}", style: FTextStyle.style),
+                  const Icon(Icons.date_range, size: 18, color: AppColors.secondYellowColour),
+                  const SizedBox(width: 6),
+                  Text(
+                    "${Constants.formatDate(item['fromDate'])}  → ${Constants.formatDate(item['toDate'])}",
+                    style: FTextStyle.style.copyWith(fontSize: 13),
+                  ),
                 ],
               ),
 
+              const SizedBox(height: 16),
+
+              /// 🔹 Button aligned at bottom right
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                       if(widget.pageTypes=='Attendance') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ManualDelegatesMarkedAttendanceList(
-
-                                  ),
-                            ),
-                          );
-                        }
-                       else if(widget.pageTypes=='AccommodationOrganization') {
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(
-                             builder: (context) =>
-                                 AccommodationCategoryOrganization(
-
-                                 ),
-                           ),
-                         );
-                       }  else if(widget.pageTypes=='ReviewFullPaper') {
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(
-                             builder: (context) =>
-                                 FullPaperReview(
-
-                                 ),
-                           ),
-                         );
-                       }
-        else if(widget.pageTypes=='ReviewAbstracts') {
-        Navigator.push(
-        context,
-        MaterialPageRoute(
-        builder: (context) =>
-        ReviewAbstractOrganizer(
-
-        ),
-        ),
-        );}
-                        else{
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ConferenceList(
-
-                                  ),
-                            ),
-                          );
-                        }
-
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        backgroundColor: AppColors.appSky,
-                        elevation: 2,
-                        minimumSize: const Size(80, 30),
-                      ),
-                      child: Text(
-                        "Delegates Registration List",
-                        style: FTextStyle.loginBtnStyle.copyWith(
-                          fontSize: 12,
-                        ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      if (widget.pageTypes == 'Attendance') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ManualDelegatesMarkedAttendanceList()));
+                      } else if (widget.pageTypes == 'AccommodationOrganization') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => AccommodationCategoryOrganization()));
+                      } else if (widget.pageTypes == 'ReviewFullPaper') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => FullPaperReview()));
+                      } else if (widget.pageTypes == 'ReviewAbstracts') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ReviewAbstractOrganizer()));
+                      } else {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ConferenceList()));
+                      }
+                    },
+                    label: Text(
+                      "Delegates Registration List",
+                      style: FTextStyle.loginBtnStyle.copyWith(fontSize: 13),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.appSky,
+                      foregroundColor: Colors.white,
+                      elevation: 4,
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                   ),
@@ -469,6 +427,8 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
             ],
           ),
         );
+
+
       },
     );
   }
@@ -477,305 +437,88 @@ class _DelegatesRegistrationState extends State<DelegatesRegistration> {
   Widget _buildInActiveSegment(double height, double width) {
     return ListView.builder(
       itemCount: inactiveConferenceList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12, ),
       itemBuilder: (context, index) {
         final item = inactiveConferenceList[index];
         final bookingStatus = item['bookingStatus'] ?? 'Pending';
 
-        return Container(
-          margin: const EdgeInsets.only(bottom: 16),
-          padding: const EdgeInsets.all(16),
+        return  Container(
+          margin: const EdgeInsets.all( 5),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(18),
             border: Border.all(color: Colors.grey.shade100),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
-                blurRadius: 6,
-                offset: const Offset(0, 3),
+                blurRadius: 10,
+                spreadRadius: 2,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// Title
-              Text(item['title'] ?? '',
+              /// 🔹 Title
+              Text(
+                  item['title'] ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: FTextStyle.subtitle),
-              Row(
-                children: [
-                  Icon(Icons.date_range, size: 18,
-                      color: AppColors.secondYellowColour),
-                  SizedBox(width: 6),
-                  Text("${Constants.formatDate(item['fromDate'])}  → ${Constants
-                      .formatDate(item['toDate'])}", style: FTextStyle.style),
-                ],
+                  style: FTextStyle.subtitle
               ),
 
 
 
+              /// 🔹 Date Row
+              Row(
+                children: [
+                  const Icon(Icons.date_range, size: 18, color: AppColors.secondYellowColour),
+                  const SizedBox(width: 6),
+                  Text(
+                    "${Constants.formatDate(item['fromDate'])}  → ${Constants.formatDate(item['toDate'])}",
+                    style: FTextStyle.style.copyWith(fontSize: 13),
+                  ),
+                ],
+              ),
 
+              const SizedBox(height: 16),
+
+              /// 🔹 Button aligned at bottom right
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                   if(widget.pageTypes=='Attendance') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ManualDelegatesMarkedAttendanceList(
-
-                                  ),
-                            ),
-                          );
-                        }
-                   else if(widget.pageTypes=='AccommodationOrganization') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  AccommodationCategoryOrganization(
-
-                                  ),
-                            ),
-                          );
-                        }  else if(widget.pageTypes=='ReviewAbstracts') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ReviewAbstractOrganizer(
-
-                                  ),
-                            ),
-                          );
-                        }
-                   else if(widget.pageTypes=='ReviewFullPaper') {
-                     Navigator.push(
-                       context,
-                       MaterialPageRoute(
-                         builder: (context) =>
-                             FullPaperReview(
-
-                             ),
-                       ),
-                     );
-                   }
-                        else{
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ConferenceList(
-
-                                  ),
-                            ),
-                          );
-                        }
-
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        backgroundColor: AppColors.appSky,
-                        elevation: 2,
-                        minimumSize: const Size(80, 30),
-                      ),
-                      child: Text(
-                        "Delegates Registration List",
-                        style: FTextStyle.loginBtnStyle.copyWith(
-                          fontSize: 12,
-                        ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      if (widget.pageTypes == 'Attendance') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ManualDelegatesMarkedAttendanceList()));
+                      } else if (widget.pageTypes == 'AccommodationOrganization') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => AccommodationCategoryOrganization()));
+                      } else if (widget.pageTypes == 'ReviewFullPaper') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => FullPaperReview()));
+                      } else if (widget.pageTypes == 'ReviewAbstracts') {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ReviewAbstractOrganizer()));
+                      } else {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => ConferenceList()));
+                      }
+                    },
+                    label: Text(
+                      "Delegates Registration List",
+                      style: FTextStyle.loginBtnStyle.copyWith(fontSize: 13),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.appSky,
+                      foregroundColor: Colors.white,
+                      elevation: 4,
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                   ),
                 ],
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   crossAxisAlignment: CrossAxisAlignment.end,
-              //   children: [
-              //
-              //     // Padding(
-              //     //   padding: const EdgeInsets.all(8.0),
-              //     //   child: Row(
-              //     //     mainAxisAlignment: MainAxisAlignment.end,
-              //     //     crossAxisAlignment: CrossAxisAlignment.end,
-              //     //     children: [
-              //     //       if (item['bookingStatus'] == 'Success')
-              //     //         Row(
-              //     //           mainAxisAlignment: MainAxisAlignment.end,
-              //     //           crossAxisAlignment: CrossAxisAlignment.end,
-              //     //           children: [
-              //     //             GestureDetector(
-              //     //               onTap: () {
-              //     //                 Navigator.push(
-              //     //                   context,
-              //     //                   MaterialPageRoute(
-              //     //                     builder: (context) =>
-              //     //                         DelegatesRegistrationView(
-              //     //                           id: "",
-              //     //                         ),
-              //     //                   ),
-              //     //                 );
-              //     //               },
-              //     //               child: Container(
-              //     //                 height: 35,
-              //     //                 width: 35,
-              //     //                 decoration: BoxDecoration(
-              //     //                   color: AppColors.secondaryColour,
-              //     //                   // Green for edit
-              //     //                   borderRadius: BorderRadius.circular(8),
-              //     //                   boxShadow: [
-              //     //                     BoxShadow(
-              //     //                       color: Colors.black.withOpacity(0.1),
-              //     //                       blurRadius: 6,
-              //     //                       offset: const Offset(0, 2),
-              //     //                     ),
-              //     //                   ],
-              //     //                 ),
-              //     //                 child: const Icon(
-              //     //                   Icons.remove_red_eye_outlined,
-              //     //                   color: Colors.white,
-              //     //                   size: 20,
-              //     //                 ),
-              //     //               ),
-              //     //             ),
-              //     //             SizedBox(
-              //     //               width: 10,
-              //     //             ),
-              //     //             GestureDetector(
-              //     //               onTap: () {
-              //     //                 // Navigator.push(
-              //     //                 //   context,
-              //     //                 //   MaterialPageRoute(
-              //     //                 //     builder: (context) =>
-              //     //                 //         FeePageView(id: "",
-              //     //                 //
-              //     //                 //         ),
-              //     //                 //   ),
-              //     //                 // );
-              //     //               },
-              //     //               child: Container(
-              //     //                 height: 35,
-              //     //                 width: 35,
-              //     //                 decoration: BoxDecoration(
-              //     //                   color: AppColors.appBlue,
-              //     //                   // Green for edit
-              //     //                   borderRadius: BorderRadius.circular(8),
-              //     //                   boxShadow: [
-              //     //                     BoxShadow(
-              //     //                       color: Colors.black.withOpacity(0.1),
-              //     //                       blurRadius: 6,
-              //     //                       offset: const Offset(0, 2),
-              //     //                     ),
-              //     //                   ],
-              //     //                 ),
-              //     //                 child: const Icon(
-              //     //                   Icons.save_alt_rounded,
-              //     //                   color: Colors.white,
-              //     //                   size: 20,
-              //     //                 ),
-              //     //               ),
-              //     //             ),
-              //     //           ],
-              //     //         ),
-              //     //
-              //     //       if (item['bookingStatus'] == 'Pending')
-              //     //         Row(
-              //     //           mainAxisAlignment: MainAxisAlignment.end,
-              //     //           crossAxisAlignment: CrossAxisAlignment.end,
-              //     //           children: [
-              //     //             GestureDetector(
-              //     //               onTap: () {
-              //     //                 Navigator.push(
-              //     //                   context,
-              //     //                   MaterialPageRoute(
-              //     //                     builder: (context) =>
-              //     //                         DelegatesRegistrationView(
-              //     //                           id: "",
-              //     //                         ),
-              //     //                   ),
-              //     //                 );
-              //     //               },
-              //     //               child: Container(
-              //     //                 height: 35,
-              //     //                 width: 35,
-              //     //                 decoration: BoxDecoration(
-              //     //                   color: AppColors.secondaryColour,
-              //     //                   // Green for edit
-              //     //                   borderRadius: BorderRadius.circular(8),
-              //     //                   boxShadow: [
-              //     //                     BoxShadow(
-              //     //                       color: Colors.black.withOpacity(0.1),
-              //     //                       blurRadius: 6,
-              //     //                       offset: const Offset(0, 2),
-              //     //                     ),
-              //     //                   ],
-              //     //                 ),
-              //     //                 child: const Icon(
-              //     //                   Icons.remove_red_eye_outlined,
-              //     //                   color: Colors.white,
-              //     //                   size: 20,
-              //     //                 ),
-              //     //               ),
-              //     //             ),
-              //     //             SizedBox(
-              //     //               width: 10,
-              //     //             ),
-              //     //             GestureDetector(
-              //     //               onTap: () {
-              //     //                 CommonPopups.showDeleteCustomPopup(
-              //     //                   context,
-              //     //                   "Are you sure you want to delete?",
-              //     //                       () {
-              //     //                     // BlocProvider.of<
-              //     //                     //     AllRequesterBloc>(
-              //     //                     //     context)
-              //     //                     //     .add(DeleteBillingHandlers(
-              //     //                     //     data[index]
-              //     //                     //     [
-              //     //                     //     'id']));
-              //     //                   },
-              //     //                 );
-              //     //               },
-              //     //               child: Container(
-              //     //                 height: 35,
-              //     //                 width: 35,
-              //     //                 decoration: BoxDecoration(
-              //     //                   color: Colors.red, // Red for delete
-              //     //                   borderRadius: BorderRadius.circular(8),
-              //     //                   boxShadow: [
-              //     //                     BoxShadow(
-              //     //                       color: Colors.black.withOpacity(0.1),
-              //     //                       blurRadius: 6,
-              //     //                       offset: const Offset(0, 2),
-              //     //                     ),
-              //     //                   ],
-              //     //                 ),
-              //     //                 child: const Icon(
-              //     //                   Icons.delete,
-              //     //                   color: Colors.white,
-              //     //                   size: 20,
-              //     //                 ),
-              //     //               ),
-              //     //             ),
-              //     //           ],
-              //     //         ),
-              //     //     ],
-              //     //   ),
-              //     // ),
-              //   ],
-              // ),
             ],
           ),
         );

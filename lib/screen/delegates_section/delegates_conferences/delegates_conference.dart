@@ -5,7 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
 
 import 'package:nexcon/screen/guest_flow/delegates_register_process/conference_category.dart';
-import 'package:nexcon/screen/guest_flow/delegates_register_process/conference_category_details.dart';
+
 import 'package:nexcon/screen/guest_flow/delegates_register_process/conference_sub_category.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';

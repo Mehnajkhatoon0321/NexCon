@@ -192,10 +192,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Column(
@@ -410,9 +407,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                               );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
-
+                                    height: 32,
+                                    width: 32,
                               decoration: BoxDecoration(
                                 color:AppColors.secondaryColour,
                                 // Green for edit
@@ -428,7 +424,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                               child: const Icon(
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -447,9 +443,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                               // );
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
-
+                                    height: 32,
+                                    width: 32,
                               decoration: BoxDecoration(
                                 color:AppColors.appBlue,
                                 // Green for edit
@@ -465,7 +460,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                               child: const Icon(
                                 Icons.save_alt_rounded,
                                 color: Colors.white,
-                                size: 20,
+                                size: 18,
                               ),
                             ),
                           ),
@@ -485,16 +480,15 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        AbstractView(id: item['id'].toString()??"",
+                                        AbstractView(id: item['id'].toString(),
 
                                         ),
                                   ),
                                 );
                               },
                               child: Container(
-                                height: 35,
-                                width: 35,
-
+                                      height: 32,
+                                    width: 32,
                                 decoration: BoxDecoration(
                                   color:AppColors.secondaryColour,
                                   // Green for edit
@@ -510,7 +504,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 child: const Icon(
                                   Icons.remove_red_eye_outlined,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -545,9 +539,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                               },
 
                               child: Container(
-                                height: 35,
-                                width: 35,
-
+                                      height: 32,
+                                    width: 32,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF0db050), // Green for edit
                                   borderRadius: BorderRadius.circular(8),
@@ -562,7 +555,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 child: const Icon(
                                   Icons.add,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -587,9 +580,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 );
                               },
                               child: Container(
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(
+                                      height: 32,
+                                    width: 32,                                decoration: BoxDecoration(
                                   color: Colors.red, // Red for delete
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
@@ -603,7 +595,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 child: const Icon(
                                   Icons.delete,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -627,9 +619,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 );
                               },
                               child: Container(
-                                height: 35,
-                                width: 35,
-
+                                      height: 32,
+                                    width: 32,
                                 decoration: BoxDecoration(
                                   color:AppColors.secondaryColour,
                                   // Green for edit
@@ -645,7 +636,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 child: const Icon(
                                   Icons.remove_red_eye_outlined,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -680,8 +671,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                               },
 
                               child: Container(
-                                height: 35,
-                                width: 35,
+                                height: 32,
+                                width: 32,
 
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF0db050), // Green for edit
@@ -695,9 +686,9 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                   ],
                                 ),
                                 child: const Icon(
-                                  Icons.edit,
+                                   Icons.edit_outlined,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -722,9 +713,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 );
                               },
                               child: Container(
-                                height: 35,
-                                width: 35,
-                                decoration: BoxDecoration(
+                                      height: 32,
+                                    width: 32,                                decoration: BoxDecoration(
                                   color: Colors.red, // Red for delete
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
@@ -738,7 +728,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 child: const Icon(
                                   Icons.delete,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -880,16 +870,15 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        AbstractView(id: item['id'].toString()??"",
+                                        AbstractView(id: item['id'].toString(),
 
                                         ),
                                   ),
                                 );
                               },
                               child: Container(
-                                height: 35,
-                                width: 35,
-
+                                      height: 32,
+                                    width: 32,
                                 decoration: BoxDecoration(
                                   color:AppColors.secondaryColour,
                                   // Green for edit
@@ -905,7 +894,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 child: const Icon(
                                   Icons.remove_red_eye_outlined,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -926,9 +915,8 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 // );
                               },
                               child: Container(
-                                height: 35,
-                                width: 35,
-
+                                      height: 32,
+                                    width: 32,
                                 decoration: BoxDecoration(
                                   color:AppColors.appBlue,
                                   // Green for edit
@@ -944,7 +932,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                 child: const Icon(
                                   Icons.save_alt_rounded,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -963,15 +951,15 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          AbstractView(id: item['id'].toString()??"",
+                                          AbstractView(id: item['id'].toString(),
 
                                           ),
                                     ),
                                   );
                                 },
                                 child: Container(
-                                  height: 35,
-                                  width: 35,
+                                  height: 32,
+                                  width: 32,
 
                                   decoration: BoxDecoration(
                                     color:AppColors.secondaryColour,
@@ -988,7 +976,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
                                   child: const Icon(
                                     Icons.remove_red_eye_outlined,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 18,
                                   ),
                                 ),
                               ),
@@ -1010,271 +998,7 @@ class _AbstractScreenState extends State<AbstractScreen> {
         },
       );
   }
-  @override
-  // Widget build(BuildContext context) {
-  //   var height = MediaQuery
-  //       .of(context)
-  //       .size
-  //       .height;
-  //   final screenWidth = MediaQuery
-  //       .of(context)
-  //       .size
-  //       .width;
-  //   var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-  //   var displayType = valueType
-  //       .toString()
-  //       .split('.')
-  //       .last;
-  //
-  //   return MediaQuery(
-  //     data: MediaQuery.of(context).copyWith(
-  //         textScaler: const TextScaler.linear(1.0)),
-  //     child: Scaffold(
-  //
-  //       backgroundColor: AppColors.backgroundColor,
-  //       body: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           SizedBox(height: 10,),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(
-  //                 horizontal: screenWidth * 0.04, vertical: 10),
-  //             child: Container(
-  //               decoration: BoxDecoration(
-  //                 color: Colors.white,
-  //                 borderRadius: BorderRadius.circular(23.0),
-  //                 boxShadow: [
-  //                   BoxShadow(
-  //                     color: Colors.black.withOpacity(0.2),
-  //                     spreadRadius: 2,
-  //                     blurRadius: 4,
-  //                     offset: const Offset(0, 1),
-  //                   ),
-  //                 ],
-  //               ),
-  //               child: TextFormField(
-  //                 controller: controllerText,
-  //                 decoration: FormFieldStyle.searchDecoration.copyWith(
-  //                   suffixIcon: _isTextEmpty
-  //                       ? const Icon(Icons.search,
-  //                       color: AppColors.appSky)
-  //                       : IconButton(
-  //                     icon: const Icon(Icons.clear,
-  //                         color: AppColors.appSky),
-  //                     onPressed: _clearText,
-  //                   ),
-  //                 ),
-  //                 onChanged:_onSearchChanged,
-  //               ),
-  //             ),
-  //           ),
-  //
-  //
-  //           const SizedBox(height: 10,),
-  //           Expanded(
-  //             child: ListView.builder(
-  //               itemCount: abstractList.length,
-  //               padding: const EdgeInsets.symmetric(horizontal: 16),
-  //               itemBuilder: (context, index) {
-  //                 final item = abstractList[index];
-  //                 return Container(
-  //                   // height: height*0.27,
-  //                   margin: const EdgeInsets.symmetric(vertical: 8),
-  //                   padding: const EdgeInsets.all( 16),
-  //                   decoration: BoxDecoration(
-  //                     color: Colors.white,
-  //                     borderRadius: BorderRadius.circular(16),
-  //                     boxShadow: [
-  //                       BoxShadow(
-  //                         color: Colors.black.withOpacity(0.1),
-  //                         blurRadius: 8,
-  //                         offset: const Offset(0, 4),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   child: Row(
-  //                     children: [
-  //                       // Left Column: Payment Details
-  //                       Expanded(
-  //                         child: Column(
-  //                           crossAxisAlignment: CrossAxisAlignment.start,
-  //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                           children: [
-  //                             Text(
-  //                               item['conferenceSelect'],
-  //                               maxLines: 2,
-  //                               overflow: TextOverflow.ellipsis,
-  //                               style: FTextStyle.listTitle,
-  //                             ),
-  //                             const SizedBox(height: 2),
-  //                             Text(
-  //                                 'Proposal Type: ${item['proposal_type']}',
-  //                                 maxLines: 1,
-  //                                 overflow: TextOverflow.ellipsis,
-  //                                 style: FTextStyle.style
-  //                             ),
-  //                             Text(
-  //                                 'Paper Title: ${item['paperTitle']}',
-  //                                 maxLines: 1,
-  //                                 overflow: TextOverflow.ellipsis,
-  //                                 style: FTextStyle.style
-  //                             ),
-  //
-  //                             Text(
-  //                               'Date of Submission: ${Constants.formatDate(item['dateSubmission'])}',
-  //                               style:FTextStyle.style,
-  //                               maxLines: 1,
-  //                               overflow: TextOverflow.ellipsis,
-  //                             ),
-  //
-  //                             Container(
-  //                               width: screenWidth/2,
-  //                               child: Text(
-  //                                 'Remarks: ${item['remark']}',
-  //                                 style: FTextStyle.style
-  //                                 ,  maxLines: 1,
-  //                                 overflow: TextOverflow.ellipsis,
-  //                               ),
-  //                             ),
-  //
-  //
-  //
-  //
-  //                             Row(
-  //                               children: [
-  //                                 const Text(
-  //                                     'Status: ',
-  //                                     style: FTextStyle.listTitle
-  //                                 ),
-  //                                 Text(
-  //                                   item['status'],
-  //                                   style: TextStyle(
-  //                                     fontSize: 14,
-  //                                     fontWeight: FontWeight.bold,
-  //                                     color: item['status'] == "Success"
-  //                                         ? AppColors.appSky
-  //                                         : Colors.orange,
-  //                                   ),
-  //                                 ),
-  //                               ],
-  //                             ),
-  //                             Row(
-  //                               mainAxisAlignment: MainAxisAlignment.end,
-  //                               crossAxisAlignment: CrossAxisAlignment.end,
-  //                               children: [
-  //                                 GestureDetector(
-  //                                   onTap: () async {
-  //
-  //
-  //                                     Navigator.push(
-  //                                       context,
-  //                                       MaterialPageRoute(
-  //                                           builder: (context) => AbstractionRegister(isEdit: 'yes',)
-  //                                       ),
-  //
-  //                                     );
-  //                                     //     .then((result) {
-  //                                     //   // Handle the result from the edit screen
-  //                                     //   if (result[0]) {
-  //                                     //     data.clear();
-  //                                     //     pageNo = 1;
-  //                                     //     hasMoreData = true;
-  //                                     //     totalPages = 0;
-  //                                     //     BlocProvider.of<AllRequesterBloc>(context)
-  //                                     //         .add(AddCartDetailHandler("", pageNo, pageSize));
-  //                                     //   }
-  //                                     // }
-  //                                     // );
-  //
-  //                                     // );
-  //                                   },
-  //
-  //                                   child: Container(
-  //                                     height: 35,
-  //                                     width: 35,
-  //
-  //                                     decoration: BoxDecoration(
-  //                                       color: const Color(0xFF0db050), // Green for edit
-  //                                       borderRadius: BorderRadius.circular(8),
-  //                                       boxShadow: [
-  //                                         BoxShadow(
-  //                                           color: Colors.black.withOpacity(0.1),
-  //                                           blurRadius: 6,
-  //                                           offset: const Offset(0, 2),
-  //                                         ),
-  //                                       ],
-  //                                     ),
-  //                                     child: const Icon(
-  //                                       Icons.edit,
-  //                                       color: Colors.white,
-  //                                       size: 20,
-  //                                     ),
-  //                                   ),
-  //                                 ),
-  //                                 SizedBox(width: 10,),
-  //                                 GestureDetector(
-  //                                   onTap: () {
-  //                                     CommonPopups
-  //                                         .showDeleteCustomPopup(
-  //                                       context,
-  //                                       "Are you sure you want to delete?",
-  //                                           () {
-  //                                         // BlocProvider.of<
-  //                                         //     AllRequesterBloc>(
-  //                                         //     context)
-  //                                         //     .add(DeleteBillingHandlers(
-  //                                         //     data[index]
-  //                                         //     [
-  //                                         //     'id']));
-  //                                       },
-  //                                     );
-  //                                   },
-  //                                   child: Container(
-  //                                     height: 35,
-  //                                     width: 35,
-  //                                     decoration: BoxDecoration(
-  //                                       color: Colors.red, // Red for delete
-  //                                       borderRadius: BorderRadius.circular(8),
-  //                                       boxShadow: [
-  //                                         BoxShadow(
-  //                                           color: Colors.black.withOpacity(0.1),
-  //                                           blurRadius: 6,
-  //                                           offset: const Offset(0, 2),
-  //                                         ),
-  //                                       ],
-  //                                     ),
-  //                                     child: const Icon(
-  //                                       Icons.delete,
-  //                                       color: Colors.white,
-  //                                       size: 20,
-  //                                     ),
-  //                                   ),
-  //                                 ),
-  //                               ],
-  //                             ),
-  //
-  //
-  //                           ],
-  //                         ),
-  //                       ),
-  //
-  //
-  //                     ],
-  //                   ),
-  //                 );
-  //               },
-  //             ),
-  //           ),
-  //
-  //
-  //
-  //
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+
   void _clearText() {
     controllerText.clear();
     setState(() {

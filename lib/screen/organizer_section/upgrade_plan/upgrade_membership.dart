@@ -300,48 +300,36 @@ class _UpgradeMembershipState extends State<UpgradeMembership> {
                   ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
                 ),
 
-                SizedBox(height:height*0.13 ,),
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.appSky,
-                          AppColors.secondaryColour,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+
+
+                        Navigator.pop(context);
+
+                        // print("Form is valid, proceed with submission.");
+                      } else {
+                        // Form is invalid
+                        // print("Form is invalid, please fill all required fields.");
+                      }
+                    },
+
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
+                      backgroundColor: AppColors.appSky,
+
+                      // Button color depending on the enabled state
+                      minimumSize: const Size(double.infinity, 50),
+                      // Minimum height
+                      maximumSize: const Size(double.infinity, 50),
+                      // elevation: 1 // Maximum height
                     ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-
-
-                          Navigator.pop(context);
-
-                          // print("Form is valid, proceed with submission.");
-                        } else {
-                          // Form is invalid
-                          // print("Form is invalid, please fill all required fields.");
-                        }
-                      },
-
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        minimumSize: const Size(95, 35),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-                        child: Text("Update", style: FTextStyle.loginBtnStyle),
-                      ),
-                    ),
+                    child: Text("Update", style: FTextStyle.loginBtnStyle),
                   ),
                 )
               ],

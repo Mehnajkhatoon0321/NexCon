@@ -38,7 +38,7 @@ class _AboutScreenState extends State<AboutScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("About Smart Conference",  style:FTextStyle.listTitle),
+            Text("About Smart Conference",  style:FTextStyle.headingMiddle),
           SizedBox(height: 10,),
             Text(
                   'Conferences are a platform where people from different parts of life come and share their knowledge and expertise with others and learn from their experiences. Our prime focus is to provide a common platform to connect people where they can learn from each other\'s experience, excel their skills, and grow together.\n\n'

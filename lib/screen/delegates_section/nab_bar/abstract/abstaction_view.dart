@@ -1,4 +1,4 @@
-import 'dart:async';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -8,7 +8,7 @@ import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../utils/commonFunction.dart';
+
 class AbstractView extends StatefulWidget {
   String id ;
    AbstractView({required this.id,super.key});
@@ -143,10 +143,7 @@ class _AbstractViewState extends State<AbstractView> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-    var valueType = CommonFunction.getMyDeviceType(MediaQuery.of(context));
-    var displayType = valueType.toString().split('.').last;
+
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),

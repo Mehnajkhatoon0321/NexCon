@@ -595,7 +595,8 @@ class _FeeRegistrationForDelegatesState extends State<FeeRegistrationForDelegate
                           child: IconTheme(
                             data: const IconThemeData(
                               color: AppColors.appSky,
-                              size: 20,
+                              size: 18,
+
                             ),
                             child: Icon(
                               checkboxChecked

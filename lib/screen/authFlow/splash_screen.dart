@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (BuildContext context) => OrganizerHomePage(
-              selectedRole: roleSelection,
+              selectedRole: roleSelection, isOrganizer: false,
             ),
           ),
               (route) => false,
@@ -110,45 +110,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-// void navigateUser(BuildContext context) {
-  //   bool isLoggedIn = PrefUtils.getIsLogin();
-  //   String roleSelection = PrefUtils.getRoleSelection();
-  //   // print("isLoggedIn: $isLoggedIn, roleSelection: $roleSelection");
-  //
-  //   if (isLoggedIn == true) {
-  //     if (roleSelection == "isselect organizer") {
-  //       // print("Navigating to OrganizerHomePage");
-  //       Navigator.of(context).pushAndRemoveUntil(
-  //         MaterialPageRoute(
-  //           builder: (BuildContext context) => OrganizerHomePage(
-  //             selectedRole: roleSelection,
-  //           ),
-  //         ),
-  //             (route) => false,
-  //       );
-  //     }
-  //     else if (roleSelection==""){
-  //
-  //       Navigator.of(context).pushAndRemoveUntil(
-  //         MaterialPageRoute(
-  //           builder: (BuildContext context) => HomeDelegates(
-  //             selectedRole: roleSelection,
-  //           ),
-  //         ),
-  //             (route) => false,
-  //       );
-  //     }
-  //   }
-  //   else {
-  //     // print("Navigating to RoleSelectionScreen");
-  //     Navigator.of(context).pushAndRemoveUntil(
-  //       MaterialPageRoute(
-  //         builder: (BuildContext context) => const RoleSelectionScreen(),
-  //       ),
-  //           (route) => false,
-  //     );
-  //   }
-  // }
+
 
 
 }

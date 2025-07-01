@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nexcon/api_services/all_module_role/delegates_api_services/all_delegates/all_delegates_bloc.dart';
 import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
 import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/scanner_details.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
+import '../../../../utils/flutter_flow_animations.dart' ;
 
 class MyConferencePage extends StatefulWidget {
   const MyConferencePage({super.key});
@@ -30,7 +34,28 @@ class _MyConferencePageState extends State<MyConferencePage> {
   bool isLoadingEdit = false;
   String searchQuery = "";
   bool _isTextEmpty = true;
+  final animationsMap = {
 
+    'imageOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        MoveEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: const Offset(40.0, 0.0),
+          end: const Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
   void paginationCall() {
     controller.addListener(() {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
@@ -66,7 +91,19 @@ class _MyConferencePageState extends State<MyConferencePage> {
       //     GetBillingListHandler(searchQuery, pageNo, pageSize));
     });
   }
+  @override
+  void initState() {
+    super.initState();
+    controllerText.addListener(() {
+      setState(() {
+        _isTextEmpty = controllerText.text.isEmpty;
+      });
+    });
 
+    BlocProvider.of<AllDelegatesBloc>(context)
+        .add(ConferenceListHandler("", pageNo, pageSize));
+    paginationCall();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +192,70 @@ class _MyConferencePageState extends State<MyConferencePage> {
       ),
     );
   }
-
+  List<dynamic> inactiveConferenceList =  [
+    {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "30th ISCB International Conference (ISCBC-2025)",
+      "category": "Accompanying Person",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20"
+    },  {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "4th International Science Communication Conference",
+      "fromDate": "2024-12-19",
+      "category": "Accompanying Person",
+      "toDate": "2024-12-20"
+    },
+    {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+    },
+    {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "4th International Science Communication Conference",
+      "category": "Accompanying Person",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20"
+    },
+    {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+    },  {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+    },
+    {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "4th International Science Communication Conference",
+      "category": "Accompanying Person",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20"
+    },
+    {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+    },
+  ];
   // Toggle Button Widget
   Widget _buildToggleButton(String text, int index) {
     return GestureDetector(
@@ -313,7 +413,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                           // maxLines: 2,
                           // overflow: TextOverflow.ellipsis,
                           style: FTextStyle.subtitle
-                        ),
+                        ).animateOnPageLoad(animationsMap[
+              'imageOnPageLoadAnimation2']!),
 
                         Row(
                           children: [
@@ -328,7 +429,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                               ),
                             ),
                           ],
-                        ),
+                        ).animateOnPageLoad(animationsMap[
+                        'imageOnPageLoadAnimation2']!),
                         Row(
                           children: [
                             Text(
@@ -342,7 +444,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                             ),
                             const SizedBox(width: 4),
                           ],
-                        ),
+                        ).animateOnPageLoad(animationsMap[
+                        'imageOnPageLoadAnimation2']!),
                         const SizedBox(height: 4),
 
                         Column(
@@ -364,8 +467,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                                     );
                                   },
                                   child: Container(
-                                    height: 35,
-                                    width: 35,
+                                    height: 32,
+                                    width: 32,
 
                                     decoration: BoxDecoration(
                                       color:AppColors.secondYellowColour,
@@ -382,7 +485,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                                     child: const Icon(
                                       Icons.qr_code_scanner,
                                       color: Colors.white,
-                                      size: 20,
+                                      size: 18,
                                     ),
                                   ),
                                 ), SizedBox(width: 10,),
@@ -399,8 +502,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                                     );
                                   },
                                   child: Container(
-                                    height: 35,
-                                    width: 35,
+                                    height: 32,
+                                    width: 32,
 
                                     decoration: BoxDecoration(
                                       color:AppColors.secondaryColour,
@@ -417,7 +520,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                                     child: const Icon(
                                       Icons.remove_red_eye_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                      size: 18,
                                     ),
                                   ),
                                 ),
@@ -434,8 +537,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                                     );
                                   },
                                   child: Container(
-                                    height: 35,
-                                    width: 35,
+                                    height: 32,
+                                    width: 32,
                                     decoration: BoxDecoration(
                                       color: const Color(0xFF0db050),
                                       // Green background
@@ -449,9 +552,9 @@ class _MyConferencePageState extends State<MyConferencePage> {
                                       ],
                                     ),
                                     child: const Icon(
-                                      Icons.edit,
+                                       Icons.edit_outlined,
                                       color: Colors.white,
-                                      size: 20,
+                                      size: 18,
                                     ),
                                   ),
                                 ),
@@ -459,7 +562,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                             ),
                             const SizedBox(height: 4),
                           ],
-                        ),
+                        ).animateOnPageLoad(animationsMap[
+                        'imageOnPageLoadAnimation2']!),
                       ],
                     ),
                   ),
@@ -474,70 +578,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
 
   // Inactive Segment
   Widget _buildInActiveSegment(double height, double width) {
-    List<dynamic> inactiveConferenceList =  [
-      {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "30th ISCB International Conference (ISCBC-2025)",
-        "category": "Accompanying Person",
-        "fromDate": "2024-12-19",
-        "toDate": "2024-12-20"
-      },  {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "4th International Science Communication Conference",
-        "fromDate": "2024-12-19",
-        "category": "Accompanying Person",
-        "toDate": "2024-12-20"
-      },
-      {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-      },
-      {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "4th International Science Communication Conference",
-        "category": "Accompanying Person",
-        "fromDate": "2024-12-19",
-        "toDate": "2024-12-20"
-      },
-      {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-      },  {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-      },
-      {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "4th International Science Communication Conference",
-        "category": "Accompanying Person",
-        "fromDate": "2024-12-19",
-        "toDate": "2024-12-20"
-      },
-      {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-      },
-    ];
+
     return
       ListView.builder(
       itemCount: inactiveConferenceList.length,
@@ -571,7 +612,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: FTextStyle.subtitle
-                    ),
+                    ).animateOnPageLoad(animationsMap[
+                'imageOnPageLoadAnimation2']!),
 
                     Row(
                       children: [
@@ -587,7 +629,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                           ),
                         ),
                       ],
-                    ),
+                    ).animateOnPageLoad(animationsMap[
+                    'imageOnPageLoadAnimation2']!),
                     Row(
 
                       children: [
@@ -603,7 +646,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                         ),
                         const SizedBox(width: 4),
                       ],
-                    ),
+                    ).animateOnPageLoad(animationsMap[
+                    'imageOnPageLoadAnimation2']!),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -621,8 +665,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                             );
                           },
                           child: Container(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
 
                             decoration: BoxDecoration(
                               color:AppColors.secondaryColour,
@@ -639,13 +683,14 @@ class _MyConferencePageState extends State<MyConferencePage> {
                             child: const Icon(
                               Icons.remove_red_eye_outlined,
                               color: Colors.white,
-                              size: 20,
+                              size: 18,
                             ),
                           ),
                         ),
 
                       ],
-                    ),
+                    ).animateOnPageLoad(animationsMap[
+                    'imageOnPageLoadAnimation2']!),
                   ],
                 ),
               ),

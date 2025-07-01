@@ -1,12 +1,17 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nexcon/api_services/all_module_role/commons_api/auth_flow/auth_flow_bloc.dart';
+
 import 'package:nexcon/screen/authFlow/organizer_register.dart';
 import 'package:nexcon/screen/delegates_section/delegates_home_page.dart';
 import 'package:nexcon/screen/guest_flow/delegates_register_process/featured_conferences.dart';
 import 'package:nexcon/screen/organizer_section/organizer_home_page.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/commonFunction.dart';
+import 'package:nexcon/utils/common_popups.dart';
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
@@ -16,7 +21,7 @@ import 'package:nexcon/utils/pref_utils.dart';
 import 'package:nexcon/utils/validator_utils.dart';
 
 import 'forgot_password.dart';
-
+import 'dart:developer' as developer;
 
 
 class LoginScreen extends StatefulWidget {
@@ -28,6 +33,13 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+Future<bool> _checkInternetConnection() async {
+  var connectivityResult = await Connectivity().checkConnectivity();
+  if (connectivityResult == ConnectivityResult.none) {
+    return false; // No internet connection
+  }
+  return true; // Internet connection is available
+}
 class _LoginScreenState extends State<LoginScreen> {
   final animationsMap = {
     'columnOnPageLoadAnimation1': AnimationInfo(
@@ -176,7 +188,112 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.cardColor,
-      body: Padding(
+      body: BlocConsumer<AuthFlowBloc, AuthFlowState>(
+        listener: (context, state) {
+          if (state is AuthFlowLoading) {
+            setState(() {
+              isLoading = true;
+            });
+          }
+
+
+          else if (state is LogSuccess) {
+            setState(() {
+              isLoading = false;
+              PrefUtils.setIsLogin(true);
+
+              if (checkboxChecked) {
+                PrefUtils.setUserEmailLogin(_email.text);
+                PrefUtils.setUserPassword(_password.text);
+              } else {
+                PrefUtils.getUserEmailLogin();  // 🔄 Only keep data if Remember Me
+                PrefUtils.getUserPassword();
+              }
+            });
+
+            Map<String, dynamic> data = state.logResponse;
+            developer.log('LoginResponse>>>>>>>>$data');
+
+            if (data.containsKey('token') && data.containsKey('user')) {
+              String bearerToken = data['token'];
+              Map<String, dynamic> user = data['user'];
+
+              if (user.containsKey('role')) {
+                String email = user['email'];
+                print("Email>>>>>>>>$email");
+                PrefUtils.setToken(bearerToken);
+                PrefUtils.setUserEmailLogin(email);  // still ok for session only
+
+
+
+                if (widget.selectedRole == 'isselect organizer') {
+                  setState(() {
+                    PrefUtils.setIsLogin(true);
+                    PrefUtils.setRoleSelection(widget.selectedRole);
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,),
+                    ),
+                  );
+                }
+
+                else {
+                  setState(() {
+                    PrefUtils.setIsLogin(true);
+                    PrefUtils.setRoleSelection("isselect delegate");
+                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          HomeDelegates( selectedRole: widget.selectedRole,),
+                    ),
+                  );
+                }
+
+              }
+              }
+            }
+
+          else if (state is LogFailure) {
+            setState(() {
+              isLoading = false;
+            });
+
+            CommonPopups.showCustomPopup(context, state.failureMessage);
+
+          }
+          else if(state is AuthServerFailure){
+            setState(() {
+              isLoading = false;
+            });
+            String errorMessage = state.error;
+            if (errorMessage.contains('SocketException') || errorMessage.contains('ClientException')) {
+              CommonPopups.showCustomPopup(
+                context,
+                "Network Error: Unable to connect to the server. Please check your internet connection.",
+              );
+            } else {
+              // Show the failure message for other errors
+              CommonPopups.showCustomPopup(context, errorMessage);
+            }
+
+
+          }
+        else  if (state is CheckNetworkLoginConnection) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+  builder: (context, state) {
+    return Padding(
         padding: EdgeInsets.symmetric(
           horizontal: (displayType == 'desktop' || displayType == 'tablet')
               ? 50
@@ -364,7 +481,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: IconTheme(
                           data: const IconThemeData(
                             color: AppColors.appSky,
-                            size: 20,
+                            size: 18,
+
                           ),
                           child: Icon(
                             checkboxChecked
@@ -409,17 +527,20 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: ElevatedButton(
-                onPressed: (){
+                onPressed: isButtonEnabled
+                    ? () async {
+                  FocusScope.of(context).unfocus(); // Dismiss keyboard
+
+                  final hasInternet = await _checkInternetConnection();
+                  if (!hasInternet) {
+                    CommonPopups.showCustomPopup(context, "Please check internet connection");
+                    return;
+                  }
+
                   if (formKey.currentState!.validate()) {
-                    // All fields are valid, proceed with submission
-                    setState(() {
-                      isLoading = true; // Start loading
-                    });
 
                     if (widget.selectedRole == 'isselect organizer') {
                       setState(() {
-                        // PrefUtils.setIsLogin(true);
-                        // PrefUtils.setRoleSelection("isselect organizer");
                         PrefUtils.setIsLogin(true);
                         PrefUtils.setRoleSelection(widget.selectedRole);
                       });
@@ -427,7 +548,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                           OrganizerHomePage(selectedRole: widget.selectedRole,),
+                              OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,),
                         ),
                       );
                     }
@@ -445,12 +566,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     }
-
-                  } else {
+                    // BlocProvider.of<AuthFlowBloc>(context).add(
+                    //   LogEventHandler(
+                    //     email: _email.text.trim(),
+                    //     password: _password.text.trim(),
+                    //
+                    //   ),
+                    // );
+                  }
+                  else {
                     // If any field is invalid, trigger validation error display
                     formKey.currentState!.validate();
                   }
-                },
+                }
+                    : null,
+
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -465,7 +595,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     // elevation: 1 // Maximum height
                     ),
                 child: Center(
-                  child: Text(
+                  child: isLoading
+    ? CircularProgressIndicator(
+    color: Colors.white)
+        : Text(
                     "Log in",
                     style: FTextStyle.loginBtnStyle,
                   ),
@@ -533,7 +666,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ],
         ),
-      ),
+      );
+  },
+),
     );
   }
+
 }

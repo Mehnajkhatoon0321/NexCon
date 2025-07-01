@@ -198,152 +198,154 @@ class _UpgradeWaitListState extends State<UpgradeWaitList> {
 
 
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height:height*0.01 ,),
-                Text(
-                  "Select Conference Category",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 10.0),
-                  child: DropdownButtonFormField<String>(
-                    key: _conferenceCategoryKey,
-                    focusNode: _selectconferenceCategoryFocusNode,
-                    value: conferenceCategoryTitleName,
-                    isExpanded: true, // ✅ Prevent horizontal overflow
-                    hint: const Text(
-                      "Select Conference Category",
-                      style: FTextStyle.formhintTxtStyle,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: conferenceTitleName.map((category) {
-                      return DropdownMenuItem<String>(
-                        value: category,
-                        child: Text(
-                          category,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        conferenceCategoryTitleName = newValue;
-                      });
-                      _conferenceCategoryKey.currentState?.validate();
-                    },
-                    decoration: FormFieldStyle.dropDown.copyWith(
-                      errorStyle: const TextStyle(
-                        color: AppColors.errorColor,  // Or any other color you'd like
-                        fontSize: 12,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height:height*0.01 ,),
+                  Text(
+                    "Select Conference Category",
+                    style: FTextStyle.SubHeadingTxtStyle,
+                  ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation2']!),
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 10.0),
+                    child: DropdownButtonFormField<String>(
+                      key: _conferenceCategoryKey,
+                      focusNode: _selectconferenceCategoryFocusNode,
+                      value: conferenceCategoryTitleName,
+                      isExpanded: true, // ✅ Prevent horizontal overflow
+                      hint: const Text(
+                        "Select Conference Category",
+                        style: FTextStyle.formhintTxtStyle,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    validator: ValidatorUtils.model,
-                  ),
-                ),
-                Text(
-                  "WaitList",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ).animateOnPageLoad(
-                    animationsMap['imageOnPageLoadAnimation2']!),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    key: _wishlistKey,
-                    focusNode: _wishlistFocusNode,
-                    controller: wishlistController,
-                    decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                      hintText: "Enter Waitlist ",
-                    ),
-                    validator: ValidatorUtils.model,
-                    onTap: () {
-                      setState(() {
-                        isWaitlistFieldFocused=true;
-                        isDelegateNumberFieldFocused=false;
-                        // Reset other fields if needed
-
-                      });
-                    },
-                  ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
-                ),
-                Text(
-                  "Delegate Number",
-                  style: FTextStyle.SubHeadingTxtStyle,
-                ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextFormField(
-                    key: _delegateNumberKey,
-                    focusNode: _delegateNumberFocusNode,
-                    controller: delegateNumberController,
-                    keyboardType: TextInputType.phone, // Ensure the correct keyboard is shown for number input
-                    decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
-                      hintText: "Enter Delegate Number",
-                    ),
-                    validator: ValidatorUtils.model,
-                    onTap: () {
-                      setState(() {
-                        isDelegateNumberFieldFocused=true;
-                        isWaitlistFieldFocused=false;
-                      });
-                    },
-                  ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
-                ),
-
-                SizedBox(height:height*0.13 ,),
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.appSky,
-                          AppColors.secondaryColour,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-
-
-                        Navigator.pop(context);
-
-                          // print("Form is valid, proceed with submission.");
-                        } else {
-                          // Form is invalid
-                          // print("Form is invalid, please fill all required fields.");
-                        }
+                      items: conferenceTitleName.map((category) {
+                        return DropdownMenuItem<String>(
+                          value: category,
+                          child: Text(
+                            category,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          conferenceCategoryTitleName = newValue;
+                        });
+                        _conferenceCategoryKey.currentState?.validate();
                       },
-
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        minimumSize: const Size(95, 35),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                      decoration: FormFieldStyle.dropDown.copyWith(
+                        errorStyle: const TextStyle(
+                          color: AppColors.errorColor,  // Or any other color you'd like
+                          fontSize: 12,
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
+                      validator: ValidatorUtils.model,
+                    ),
+                  ),
+                  Text(
+                    "WaitList",
+                    style: FTextStyle.SubHeadingTxtStyle,
+                  ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation2']!),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      key: _wishlistKey,
+                      focusNode: _wishlistFocusNode,
+                      controller: wishlistController,
+                      decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                        hintText: "Enter Waitlist ",
+                      ),
+                      validator: ValidatorUtils.model,
+                      onTap: () {
+                        setState(() {
+                          isWaitlistFieldFocused=true;
+                          isDelegateNumberFieldFocused=false;
+                          // Reset other fields if needed
+            
+                        });
+                      },
+                    ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
+                  ),
+                  Text(
+                    "Delegate Number",
+                    style: FTextStyle.SubHeadingTxtStyle,
+                  ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
+            
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: TextFormField(
+                      key: _delegateNumberKey,
+                      focusNode: _delegateNumberFocusNode,
+                      controller: delegateNumberController,
+                      keyboardType: TextInputType.phone, // Ensure the correct keyboard is shown for number input
+                      decoration: FormFieldStyle.defaultAddressInputDecoration.copyWith(
+                        hintText: "Enter Delegate Number",
+                      ),
+                      validator: ValidatorUtils.model,
+                      onTap: () {
+                        setState(() {
+                          isDelegateNumberFieldFocused=true;
+                          isWaitlistFieldFocused=false;
+                        });
+                      },
+                    ).animateOnPageLoad(animationsMap['imageOnPageLoadAnimation2']!),
+                  ),
+            
+                  SizedBox(height:height*0.13 ,),
+                  Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.appSky,
+                            AppColors.secondaryColour,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+            
+            
+                          Navigator.pop(context);
+            
+                            // print("Form is valid, proceed with submission.");
+                          } else {
+                            // Form is invalid
+                            // print("Form is invalid, please fill all required fields.");
+                          }
+                        },
+
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          backgroundColor: AppColors.appSky,
+
+                          // Button color depending on the enabled state
+                          minimumSize: const Size(double.infinity, 50),
+                          // Minimum height
+                          maximumSize: const Size(double.infinity, 50),
+                          // elevation: 1 // Maximum height
+                        ),
                         child: Text("Update", style: FTextStyle.loginBtnStyle),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

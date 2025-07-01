@@ -215,7 +215,7 @@ class _ConferenceListState extends State<ConferenceList> {
       Expanded(
         child: ListView.builder(
           itemCount: activeConferenceList.length,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           itemBuilder: (context, index) {
             final item = activeConferenceList[index];
             final bookingStatus = item['bookingStatus'] ?? 'Pending';
@@ -367,8 +367,8 @@ class _ConferenceListState extends State<ConferenceList> {
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
                                       decoration: BoxDecoration(
                                         color: AppColors.secondaryColour,
                                         // Green for edit
@@ -384,7 +384,7 @@ class _ConferenceListState extends State<ConferenceList> {
                                       child: const Icon(
                                         Icons.remove_red_eye_outlined,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
                                       ),
                                     ),
                                   ),
@@ -409,8 +409,8 @@ class _ConferenceListState extends State<ConferenceList> {
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
                                       decoration: BoxDecoration(
                                         color: AppColors.secondaryColour,
                                         // Green for edit
@@ -426,7 +426,7 @@ class _ConferenceListState extends State<ConferenceList> {
                                       child: const Icon(
                                         Icons.remove_red_eye_outlined,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
                                       ),
                                     ),
                                   ),
@@ -450,8 +450,8 @@ class _ConferenceListState extends State<ConferenceList> {
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
                                       decoration: BoxDecoration(
                                         color: Colors.red, // Red for delete
                                         borderRadius: BorderRadius.circular(8),
@@ -466,7 +466,7 @@ class _ConferenceListState extends State<ConferenceList> {
                                       child: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
                                       ),
                                     ),
                                   ),
@@ -534,7 +534,7 @@ class _ConferenceListState extends State<ConferenceList> {
                       ),
                       if (data['bookingStatus']?.toLowerCase() == 'pending')
                         IconButton(
-                          icon: const Icon(Icons.edit, color: Colors.orange),
+                          icon: const Icon(Icons.edit_outlined, color: Colors.orange),
                           onPressed: () {
                             // Handle edit action here
                             Navigator.of(context).pop(); // Close dialog or open edit screen

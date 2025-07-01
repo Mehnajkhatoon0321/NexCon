@@ -131,10 +131,7 @@ class _FeePageState extends State<FeePage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Column(
@@ -336,7 +333,7 @@ class _FeePageState extends State<FeePage> {
                           item['title'],
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style:FTextStyle.listTitle
+                          style:FTextStyle.subtitle
                       ),
                       const SizedBox(height: 2),
 
@@ -344,9 +341,9 @@ class _FeePageState extends State<FeePage> {
 
                       Row(
                         children: [
-                          const Text(
+                           Text(
                               'Payment Status: ',
-                              style: FTextStyle.listTitle
+                              style: FTextStyle.subtitle
                           ),
                           Text(
                             item['status'],
@@ -364,25 +361,22 @@ class _FeePageState extends State<FeePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: ElevatedButton(
+                          ElevatedButton(
 
-                              onPressed: () => _showBankDetailsDialog(context),
+                            onPressed: () => _showBankDetailsDialog(context),
 
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                backgroundColor: AppColors.appSky,
-                                elevation: 2,
-                                minimumSize: const Size(80, 30),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                              child: Text(
-                                "View Bank Details",
-                                style: FTextStyle.loginBtnStyle.copyWith(
-                                  fontSize: 12,
-                                ),
+                              backgroundColor: AppColors.appSky,
+                              elevation: 2,
+                              minimumSize: const Size(80, 30),
+                            ),
+                            child: Text(
+                              "View Bank Details",
+                              style: FTextStyle.loginBtnStyle.copyWith(
+                                fontSize: 12,
                               ),
                             ),
                           ),
@@ -412,8 +406,8 @@ class _FeePageState extends State<FeePage> {
                                           );
                                         },
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
 
                                           decoration: BoxDecoration(
                                             color:AppColors.secondaryColour,
@@ -430,7 +424,7 @@ class _FeePageState extends State<FeePage> {
                                           child: const Icon(
                                             Icons.remove_red_eye_outlined,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
@@ -450,8 +444,8 @@ class _FeePageState extends State<FeePage> {
                                           // );
                                         },
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
 
                                           decoration: BoxDecoration(
                                             color:AppColors.appBlue,
@@ -468,7 +462,7 @@ class _FeePageState extends State<FeePage> {
                                           child: const Icon(
                                             Icons.save_alt_rounded,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
@@ -495,8 +489,8 @@ class _FeePageState extends State<FeePage> {
 
                                         },
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
 
                                           decoration: BoxDecoration(
                                             color:AppColors.secondaryColour,
@@ -513,7 +507,7 @@ class _FeePageState extends State<FeePage> {
                                           child: const Icon(
                                             Icons.remove_red_eye_outlined,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
@@ -544,8 +538,8 @@ class _FeePageState extends State<FeePage> {
                                         },
 
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
 
                                           decoration: BoxDecoration(
                                             color: const Color(0xFF0db050), // Green for edit
@@ -561,7 +555,7 @@ class _FeePageState extends State<FeePage> {
                                           child: const Icon(
                                             Icons.add,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
@@ -586,8 +580,8 @@ class _FeePageState extends State<FeePage> {
                                           );
                                         },
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
                                           decoration: BoxDecoration(
                                             color: Colors.red, // Red for delete
                                             borderRadius: BorderRadius.circular(8),
@@ -602,7 +596,7 @@ class _FeePageState extends State<FeePage> {
                                           child: const Icon(
                                             Icons.delete,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
@@ -626,8 +620,8 @@ class _FeePageState extends State<FeePage> {
                                           );
                                         },
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
 
                                           decoration: BoxDecoration(
                                             color:AppColors.secondaryColour,
@@ -644,7 +638,7 @@ class _FeePageState extends State<FeePage> {
                                           child: const Icon(
                                             Icons.remove_red_eye_outlined,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
@@ -676,8 +670,8 @@ class _FeePageState extends State<FeePage> {
                                         },
 
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
 
                                           decoration: BoxDecoration(
                                             color: const Color(0xFF0db050), // Green for edit
@@ -691,9 +685,9 @@ class _FeePageState extends State<FeePage> {
                                             ],
                                           ),
                                           child: const Icon(
-                                            Icons.edit,
+                                             Icons.edit_outlined,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
@@ -718,8 +712,8 @@ class _FeePageState extends State<FeePage> {
                                           );
                                         },
                                         child: Container(
-                                          height: 35,
-                                          width: 35,
+                                                height: 32,
+                                    width: 32,
                                           decoration: BoxDecoration(
                                             color: Colors.red, // Red for delete
                                             borderRadius: BorderRadius.circular(8),
@@ -734,117 +728,13 @@ class _FeePageState extends State<FeePage> {
                                           child: const Icon(
                                             Icons.delete,
                                             color: Colors.white,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
 
-                                // GestureDetector(
-                                //   onTap: () {
-                                //     Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             FeePageView(id: "",
-                                //
-                                //             ),
-                                //       ),
-                                //     );
-                                //   },
-                                //   child: Container(
-                                //     height: 35,
-                                //     width: 35,
-                                //
-                                //     decoration: BoxDecoration(
-                                //       color:AppColors.secondaryColour,
-                                //       // Green for edit
-                                //       borderRadius: BorderRadius.circular(8),
-                                //       boxShadow: [
-                                //         BoxShadow(
-                                //           color: Colors.black.withOpacity(0.1),
-                                //           blurRadius: 6,
-                                //           offset: const Offset(0, 2),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //     child: const Icon(
-                                //       Icons.remove_red_eye_outlined,
-                                //       color: Colors.white,
-                                //       size: 20,
-                                //     ),
-                                //   ),
-                                // ),
-                                // SizedBox(width: 10,),
-                                // GestureDetector(
-                                //   onTap: () {
-                                //     Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(builder: (context) =>  PayRegistrationFee(bankName: item['bankName'], tnNumber: item['tnNumber'], date: item['tnDate'], amount: item['amount'], image: item['downloadReceipt'], title: item['title'], paymentMode: item['paymentMode'],)),
-                                //     );
-                                //   },
-                                //   child: Container(
-                                //     height: 35,
-                                //     width: 35,
-                                //
-                                //     decoration: BoxDecoration(
-                                //       color: const Color(0xFF0db050), // Green for edit
-                                //       borderRadius: BorderRadius.circular(8),
-                                //       boxShadow: [
-                                //         BoxShadow(
-                                //           color: Colors.black.withOpacity(0.1),
-                                //           blurRadius: 6,
-                                //           offset: const Offset(0, 2),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //     child: const Icon(
-                                //       Icons.edit,
-                                //       color: Colors.white,
-                                //       size: 20,
-                                //     ),
-                                //   ),
-                                // ),
-                                // SizedBox(width: 10,),
-                                // GestureDetector(
-                                //   onTap: () {
-                                //     CommonPopups
-                                //         .showDeleteCustomPopup(
-                                //       context,
-                                //       "Are you sure you want to delete?",
-                                //           () {
-                                //         // BlocProvider.of<
-                                //         //     AllRequesterBloc>(
-                                //         //     context)
-                                //         //     .add(DeleteBillingHandlers(
-                                //         //     data[index]
-                                //         //     [
-                                //         //     'id']));
-                                //       },
-                                //     );
-                                //   },
-                                //   child: Container(
-                                //     height: 35,
-                                //     width: 35,
-                                //     decoration: BoxDecoration(
-                                //       color: Colors.red, // Red for delete
-                                //       borderRadius: BorderRadius.circular(8),
-                                //       boxShadow: [
-                                //         BoxShadow(
-                                //           color: Colors.black.withOpacity(0.1),
-                                //           blurRadius: 6,
-                                //           offset: const Offset(0, 2),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //     child: const Icon(
-                                //       Icons.delete,
-                                //       color: Colors.white,
-                                //       size: 20,
-                                //     ),
-                                //   ),
-                                // ),
 
                               ],
                             ),
@@ -945,42 +835,16 @@ class _FeePageState extends State<FeePage> {
                           item['title'],
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style:FTextStyle.listTitle
+                          style:FTextStyle.subtitle
                       ),
                       const SizedBox(height: 2),
-                      // Text(
-                      //     'Payment Mode: ${item['paymentMode']}',
-                      //     maxLines: 1,
-                      //     overflow: TextOverflow.ellipsis,
-                      //     style: FTextStyle.style
-                      // ),
-                      //
-                      //
-                      // Text(
-                      //   'Date: ${Constants.formatDate(item['tnDate'])}',
-                      //   style:FTextStyle.style,
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      // ),
-                      //
-                      // Container(
-                      //   width: width/2,
-                      //   child: Text(
-                      //     'Amount: ${item['amount']}',
-                      //     style: FTextStyle.style
-                      //     ,  maxLines: 1,
-                      //     overflow: TextOverflow.ellipsis,
-                      //   ),
-                      // ),
-
-
 
 
                       Row(
                         children: [
-                          const Text(
+                           Text(
                               'Payment Status: ',
-                              style: FTextStyle.listTitle
+                              style: FTextStyle.subtitle
                           ),
                           Text(
                             item['status'],
@@ -1001,25 +865,22 @@ class _FeePageState extends State<FeePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: ElevatedButton(
+                            ElevatedButton(
 
-                                onPressed: () => _showBankDetailsDialog(context),
+                              onPressed: () => _showBankDetailsDialog(context),
 
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  backgroundColor: AppColors.appSky,
-                                  elevation: 2,
-                                  minimumSize: const Size(80, 30),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
-                                child: Text(
-                                  "View Bank Details",
-                                  style: FTextStyle.loginBtnStyle.copyWith(
-                                    fontSize: 12,
-                                  ),
+                                backgroundColor: AppColors.appSky,
+                                elevation: 2,
+                                minimumSize: const Size(80, 30),
+                              ),
+                              child: Text(
+                                "View Bank Details",
+                                style: FTextStyle.loginBtnStyle.copyWith(
+                                  fontSize: 12,
                                 ),
                               ),
                             ),
@@ -1042,8 +903,8 @@ class _FeePageState extends State<FeePage> {
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
 
                                       decoration: BoxDecoration(
                                         color:AppColors.secondaryColour,
@@ -1060,7 +921,7 @@ class _FeePageState extends State<FeePage> {
                                       child: const Icon(
                                         Icons.remove_red_eye_outlined,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
                                       ),
                                     ),
                                   ),
@@ -1080,8 +941,8 @@ class _FeePageState extends State<FeePage> {
                                       // );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
 
                                       decoration: BoxDecoration(
                                         color:AppColors.appBlue,
@@ -1098,7 +959,7 @@ class _FeePageState extends State<FeePage> {
                                       child: const Icon(
                                         Icons.save_alt_rounded,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
                                       ),
                                     ),
                                   ),
@@ -1120,8 +981,8 @@ class _FeePageState extends State<FeePage> {
                                 );
                               },
                               child: Container(
-                                height: 35,
-                                width: 35,
+                                height: 32,
+                                width: 32,
 
                                 decoration: BoxDecoration(
                                   color:AppColors.secondaryColour,
@@ -1138,7 +999,7 @@ class _FeePageState extends State<FeePage> {
                                 child: const Icon(
                                   Icons.remove_red_eye_outlined,
                                   color: Colors.white,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ),
@@ -1166,7 +1027,7 @@ class _FeePageState extends State<FeePage> {
                             //       ],
                             //     ),
                             //     child: const Icon(
-                            //       Icons.edit,
+                            //        Icons.edit_outlined,
                             //       color: Colors.white,
                             //       size: 20,
                             //     ),
@@ -1463,7 +1324,7 @@ class _FeePageState extends State<FeePage> {
   //                                       ],
   //                                     ),
   //                                     child: const Icon(
-  //                                       Icons.edit,
+  //                                        Icons.edit_outlined,
   //                                       color: Colors.white,
   //                                       size: 20,
   //                                     ),

@@ -421,7 +421,7 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                                         ),
                                       ),
                                       child: Icon(
-                                        Icons.edit,
+                                         Icons.edit_outlined,
                                         color: AppColors.appSky,
                                         size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                       ),
@@ -747,34 +747,37 @@ class _EditProfileOrganizerState extends State<EditProfileOrganizer> {
                 ),
               ),
 
-              const SizedBox(height: 45),
+
               Padding(
-                padding: const EdgeInsets.only(top: 23.0),
-                child: SizedBox(
-                  height: (displayType == 'desktop' || displayType == 'tablet') ? 70 : 40,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
+                padding: const EdgeInsets.all(18.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
 
 
-                        Navigator.pop(context);
+                      Navigator.pop(context);
 
-                        // print("Form is valid, proceed with submission.");
-                      } else {
-                        // Form is invalid
-                        // print("Form is invalid, please fill all required fields.");
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      backgroundColor: AppColors.appSky,
+                      // print("Form is valid, proceed with submission.");
+                    } else {
+                      // Form is invalid
+                      // print("Form is invalid, please fill all required fields.");
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Text(
-                      "Update",
-                      style: FTextStyle.loginBtnStyle,
-                    ),
+                    backgroundColor: AppColors.appSky,
+
+                    // Button color depending on the enabled state
+                    minimumSize: const Size(double.infinity, 50),
+                    // Minimum height
+                    maximumSize: const Size(double.infinity, 50),
+                    // elevation: 1 // Maximum height
+                  ),
+                  child: Text(
+                    "Update",
+                    style: FTextStyle.loginBtnStyle,
                   ),
                 ),
               ),

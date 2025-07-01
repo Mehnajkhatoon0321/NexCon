@@ -161,8 +161,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
   GlobalKey<FormFieldState<String>>();
   late final GlobalKey<FormFieldState<String>> _selectPaymentKey =
       GlobalKey<FormFieldState<String>>();
-  late final GlobalKey<FormFieldState<String>> _selectCategoryKey =
-      GlobalKey<FormFieldState<String>>();
+
   late final GlobalKey<FormFieldState<String>> _dateBirthKey =
       GlobalKey<FormFieldState<String>>();
 
@@ -183,7 +182,7 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
   late final FocusNode _dateBirthFocusNode = FocusNode();
 
   late final FocusNode _selectPaymentFocusNode = FocusNode();
-  late final FocusNode _selectCategoryFocusNode = FocusNode();
+
 
   bool checkboxChecked = false;
 

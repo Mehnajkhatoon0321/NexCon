@@ -182,7 +182,8 @@ class _ManualDelegatesMarkedAttendanceListState extends State<ManualDelegatesMar
           },
         ),
         title: Text(
-          'Delegate Registrations',
+          ''
+              'Delegate Registrations',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         centerTitle: true,
@@ -203,46 +204,47 @@ class _ManualDelegatesMarkedAttendanceListState extends State<ManualDelegatesMar
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    SizedBox(
-                      height:
-                      35,
-
-                      child: ElevatedButton(
-                        onPressed: () async {
-
-                          if (selectedIds.isEmpty) {
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('No items selected. Please select at least one item.'),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
-                          } else {
-
-                            // BlocProvider.of<AllRequesterBloc>(context).add(UnitActionHandler(
-                            //   userID: PrefUtils.getUserId().toString(),
-                            //   btnAssign: 'approve',
-                            //   userRole: PrefUtils.getRole(),
-                            //   count: selectedIds, // Count of selected IDs
-                            // ));
-                          }
-
-
-
-
-
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(26),
-                          ),
-                          backgroundColor: Colors.green,
-                        ),
-                        child: Text("Mark Attendance", style: FTextStyle.emailProfile),
-                      ),
-                    ),
                     SizedBox(width: 10,),
+                    ElevatedButton(
+                      onPressed: () async {
+
+                        if (selectedIds.isEmpty) {
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('No items selected. Please select at least one item.'),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        } else {
+
+                          // BlocProvider.of<AllRequesterBloc>(context).add(UnitActionHandler(
+                          //   userID: PrefUtils.getUserId().toString(),
+                          //   btnAssign: 'approve',
+                          //   userRole: PrefUtils.getRole(),
+                          //   count: selectedIds, // Count of selected IDs
+                          // ));
+                        }
+
+
+
+
+
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        backgroundColor:Colors.green,
+                        elevation: 2,
+                        minimumSize: const Size(60, 20),
+                      ),
+                        // backgroundColor: Colors.green,
+                      // ),
+                      child: Text("Mark Attendance",  style: FTextStyle.loginBtnStyle.copyWith(
+                        fontSize: 12,
+                      ),),
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -254,8 +256,8 @@ class _ManualDelegatesMarkedAttendanceListState extends State<ManualDelegatesMar
                         );
                       },
                       child: Container(
-                        height: 35,
-                        width: 35,
+                          height: 32,
+        width: 32,
 
                         decoration: BoxDecoration(
                           color:AppColors.secondYellowColour,
@@ -272,7 +274,8 @@ class _ManualDelegatesMarkedAttendanceListState extends State<ManualDelegatesMar
                         child: const Icon(
                           Icons.qr_code_scanner,
                           color: Colors.white,
-                          size: 20,
+                          size: 18,
+
                         ),
                       ),
                     ),
@@ -440,7 +443,7 @@ SizedBox(height: 20,),
                               ],
                             ),
 
-                            // const SizedBox(height: 12),
+                            const SizedBox(height: 12),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -465,7 +468,7 @@ SizedBox(height: 20,),
                                         ),
                                         backgroundColor: AppColors.appSky,
                                         elevation: 2,
-                                        minimumSize: const Size(80, 30),
+                                        minimumSize: const Size(60, 20),
                                       ),
                                       child: Text(
                                         "Mark Attendance Manually",
@@ -524,7 +527,7 @@ SizedBox(height: 20,),
                                         ),
                                         backgroundColor: AppColors.appSky,
                                         elevation: 2,
-                                        minimumSize: const Size(80, 30),
+                                        minimumSize: const Size(60, 20),
                                       ),
                                       child: Text(
                                         "Update Payment Status",

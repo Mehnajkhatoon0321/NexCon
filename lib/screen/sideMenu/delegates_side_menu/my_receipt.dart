@@ -357,8 +357,8 @@ Text(
                                       );
                                     },
                                     child: Container(
-                                      height: 35,
-                                      width: 35,
+                                      height: 32,
+                                      width: 32,
                                       decoration: BoxDecoration(
                                         color: Colors.red, // Red for delete
                                         borderRadius: BorderRadius.circular(8),
@@ -373,7 +373,8 @@ Text(
                                       child: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
-                                        size: 20,
+                                        size: 18,
+
                                       ),
                                     ),
                                   ),

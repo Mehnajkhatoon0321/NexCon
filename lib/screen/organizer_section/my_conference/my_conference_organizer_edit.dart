@@ -1057,38 +1057,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
 
           ],
         ),
-        // Stack(
-        //   children: [
-        //     Container(
-        //       color: AppColors.appSky,
-        //     ),
-        //     Center(
-        //       child:
-        //       Container(
-        //         // margin: EdgeInsets.only(
-        //         //     top: MediaQuery.of(context).size.height * 0.10),
-        //         decoration: BoxDecoration(
-        //             gradient: LinearGradient(
-        //                 begin: Alignment.topRight,
-        //                 end: Alignment.bottomLeft,
-        //                 stops: [
-        //                   0.2,
-        //                   0.5,
-        //                   0.95,
-        //                   0.3
-        //                 ],
-        //                 colors: [
-        //                   Color(0xffffffff),
-        //                   Color(0xf5c6f6da),
-        //                   Color(0xf5c6f6da),
-        //                   Color(0xf5c6f6da),
-        //                 ])),
-        //         child:
-        //
-        //       ),
-        //     )
-        //   ],
-        // ),
+
       ),
     );
   }

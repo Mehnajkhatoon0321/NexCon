@@ -400,7 +400,7 @@ class _EditProfileState extends State<EditProfile> {
                                         ),
                                       ),
                                       child: Icon(
-                                        Icons.edit,
+                                         Icons.edit_outlined,
                                         color: AppColors.appSky,
                                         size: (displayType == 'desktop' || displayType == 'tablet') ? 20.w : 20.0,
                                       ),

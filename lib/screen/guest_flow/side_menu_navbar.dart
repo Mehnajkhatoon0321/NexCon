@@ -12,16 +12,13 @@ import 'package:nexcon/screen/delegates_section/paper_delegates/paper_delegates.
 import 'package:nexcon/screen/organizer_section/upgrade_plan/plan_and_pricing.dart';
 import 'package:nexcon/screen/sideMenu/common_section/about.dart';
 import 'package:nexcon/screen/sideMenu/common_section/contact.dart';
+import 'package:nexcon/screen/sideMenu/common_section/support/disclaimer.dart';
 import 'package:nexcon/screen/sideMenu/delegates_side_menu/how_works_delegates.dart';
 
 import 'package:nexcon/screen/sideMenu/common_section/services.dart';
 import 'package:nexcon/screen/sideMenu/delegates_side_menu/my_receipt.dart';
 import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/abstract_organizer/abstract_theam/abstract_organizer.dart';
-import 'package:nexcon/screen/sideMenu/organizer/abstract_and_paper/paper_organizer/paper_organizer.dart';
-import 'package:nexcon/screen/sideMenu/organizer/accommodation/accomodation_category.dart';
-import 'package:nexcon/screen/sideMenu/organizer/attendance/manual_attendance/manual_attendance.dart';
-import 'package:nexcon/screen/sideMenu/organizer/attendance/qr_code/qr_attendance.dart';
-import 'package:nexcon/screen/sideMenu/organizer/registreation_all_types/conference_list.dart';
+
 import 'package:nexcon/screen/sideMenu/organizer/how_works_organizer.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/manage_program.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/print_program.dart';
@@ -29,8 +26,8 @@ import 'package:nexcon/screen/sideMenu/organizer/program_shedule/program/print_p
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/schedule/manage_schedule.dart';
 import 'package:nexcon/screen/sideMenu/organizer/program_shedule/schedule/print_schedule.dart';
 import 'package:nexcon/screen/sideMenu/organizer/registreation_all_types/delegates_registration.dart';
-import 'package:nexcon/screen/sideMenu/organizer/registreation_all_types/free_registration.dart';
-import 'package:nexcon/screen/sideMenu/organizer/settings/accomodation_category/accommodation_category.dart';
+
+
 import 'package:nexcon/screen/sideMenu/organizer/settings/coupon_code/coupon_code.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/abstract_submission_deadlines.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/deadlines/accommodation_deadlines.dart';
@@ -46,10 +43,10 @@ import 'package:nexcon/screen/sideMenu/organizer/settings/reports/reports.dart';
 import 'package:nexcon/screen/sideMenu/organizer/settings/setcheckout-setcheckin/setcheckout.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
-import 'package:nexcon/utils/pref_utils.dart';
+
 import '../sideMenu/delegates_side_menu/accomondation/accomodation.dart';
 import '../sideMenu/delegates_side_menu/bank_details/bank_details.dart';
-import '../sideMenu/organizer/abstract_and_paper/abstract_organizer/review_abstract/review_abstract.dart';
+
 import 'delegates_register_process/conference_category.dart';
 class SideMenuScreen extends StatefulWidget {
   final String selectedRole;
@@ -61,7 +58,7 @@ class SideMenuScreen extends StatefulWidget {
 
 class _SideMenuScreenState extends State<SideMenuScreen>
 {
-  bool _isLogoutDialogVisible = false;
+
   final List<Map<String, dynamic>> listItem = [
     {'icon': Icons.work_outline, 'subtitle': 'How Its Works Organizer'},
 
@@ -72,6 +69,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
 
     {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
+    {'icon': Icons.contact_mail, 'subtitle': 'Disclaimer'},
     // {'icon': Icons.password, 'subtitle': 'Change Password'},
     {'icon': Icons.login, 'subtitle': 'Login'},
 
@@ -96,10 +94,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         {
           'icon': Icons.library_books_sharp,
           'subtitle': 'Attendance',
-          // 'title': [
-          //   {'icon': Icons.punch_clock, 'subtitle': 'Manual Attendance'},
-          //   {'icon': Icons.report, 'subtitle': 'QR Attendance'},
-          // ]
+
         },
         {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
         {'icon': Icons.home_work_rounded, 'subtitle': 'Accommodation Organization'},
@@ -123,36 +118,6 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         },
 
 
-
-        // {
-        //   'icon': Icons.home_filled,
-        //   'subtitle': 'Registration',
-        //   'title': [
-        //     {'icon': Icons.person, 'subtitle': 'Delegates Registration'},
-        //     {'icon': Icons.perm_contact_cal, 'subtitle': 'Free Registration'}
-        //   ]
-        // },
-
-
-        // {
-        //   'icon': Icons.timelapse_rounded,
-        //   'subtitle': 'Schedule & Program',
-        //   'title': [
-        //     {
-        //       'icon': Icons.person,
-        //       'subtitle': 'Schedule',
-        //       'sub': [
-        //         {'icon': Icons.person, 'subsection': 'Manage Schedule'},
-        //         {'icon': Icons.perm_contact_cal, 'subsection': 'Print Schedule'}
-        //       ]
-        //     },
-        //     {'icon': Icons.perm_contact_cal, 'subtitle': 'Program', 'sub': [
-        //       {'icon': Icons.person, 'subsection': 'Manage Program'},
-        //       {'icon': Icons.perm_contact_cal, 'subsection': 'Print Program'}
-        //     ]}
-        //   ]
-        // },
-        //
 
 
 
@@ -183,7 +148,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
 
             {'icon': Icons.discount, 'subtitle': 'Coupons'},
             {'icon': Icons.punch_clock, 'subtitle': 'Set-Check-In/Check-Out'},
-            // {'icon': Icons.report, 'subtitle': 'Reports'},
+
 
           ]
         },
@@ -192,23 +157,17 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         {'icon': Icons.info, 'subtitle': 'About'},
         {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
         {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
-        //
-        // {'icon': Icons.password, 'subtitle': 'Change Password'},
-        // {'icon': Icons.exit_to_app, 'subtitle': 'Logout'},
+
       ];
     } else {
       // Default items for other roles
       filteredList = [
-        // {'icon': Icons.account_balance, 'subtitle': 'Bank Data'},
+
         {'icon': Icons.event, 'subtitle': 'All Conferences '},
         {'icon': Icons.padding_rounded, 'subtitle': 'Paper'},
         {'icon': Icons.home_filled, 'subtitle': 'Accommodation'},
         {'icon': Icons.work_outline, 'subtitle': 'How Its Works Delegate'},
-        // {'icon': Icons.summarize, 'subtitle': 'Abstract'},
 
-        // {'icon': Icons.receipt_long, 'subtitle': 'My Receipt'},
-
-        // {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
         {'icon': Icons.info, 'subtitle': 'About'},
         {'icon': Icons.miscellaneous_services, 'subtitle': 'Services'},
 
@@ -234,11 +193,15 @@ class _SideMenuScreenState extends State<SideMenuScreen>
             decoration: const BoxDecoration(
               color: AppColors.appSky,
             ),
-            currentAccountPicture: CircleAvatar(
-              
-              backgroundColor: Colors.white,
-              child: Icon(Icons.person, color: AppColors.appSky),
-            ),
+            // currentAccountPicture: Padding(
+            //   padding: const EdgeInsets.fromLTRB(8.0,8.0,0.0,0.0,),
+            //   child: CircleAvatar(
+            //
+            //     backgroundColor: Colors.white,
+            //
+            //     child: Icon(Icons.person, color: AppColors.appSky,c),
+            //   ),
+            // ),
           ),
 
           // Menu List
@@ -287,7 +250,8 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                                 key: PageStorageKey(childItem['subtitle']),
                                 leading: Icon(
                                   childItem['icon'],
-                                  size: 20,
+                                  size: 18,
+
                                   color: expandedSubItem == childItem['subtitle']
                                       ? Colors.black
                                       : AppColors.aboutUsHeadingColor,
@@ -311,15 +275,16 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                                 children: childItem['sub'].map<Widget>((subItem) {
                                   return Material(
                                     color: selectedSubSection == subItem['subsection']
-                                        ? Colors.green.shade100
+                                        ? Colors.blue.shade50
                                         : Colors.grey.shade400,
                                     child: ListTile(
                                       dense: true,
                                       leading: Icon(
                                         subItem['icon'],
-                                        size: 20,
+                                        size: 18,
+
                                         color: selectedSubSection == subItem['subsection']
-                                            ? Colors.green
+                                            ? AppColors.appSky
                                             : AppColors.aboutUsHeadingColor,
                                       ),
                                       title: Text(
@@ -330,7 +295,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: selectedSubSection == subItem['subsection']
-                                              ? Colors.green
+                                              ? AppColors.appSky
                                               : AppColors.aboutUsHeadingColor,
                                         ),
                                       ),
@@ -350,12 +315,13 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                               dense: true,
                               leading: Icon(
                                 childItem['icon'],
-                                size: 20,
+                                size: 18,
+
                                 color: AppColors.aboutUsHeadingColor,
                               ),
                               title: Text(
                                 childItem['subtitle'],
-                                style: FTextStyle.drawerText.copyWith(fontSize: 14),
+                                style: FTextStyle.drawerText.copyWith(fontSize: 14, ),
                               ),
                               onTap: () {
                                 _subtitleHandleNavigation(childItem['subtitle']);
@@ -371,12 +337,13 @@ class _SideMenuScreenState extends State<SideMenuScreen>
                     dense: true,
                     leading: Icon(
                       item['icon'],
-                      size: 20,
+                      size: 18,
+
                       color: AppColors.aboutUsHeadingColor,
                     ),
                     title: Text(
                       item['subtitle'],
-                      style: FTextStyle.drawerText.copyWith(fontSize: 14),
+                      style: FTextStyle.drawerText.copyWith(fontSize: 14, fontWeight: FontWeight.bold,),
                     ),
                     onTap: () {
                       _handleNavigation(item['subtitle']);
@@ -458,6 +425,12 @@ class _SideMenuScreenState extends State<SideMenuScreen>
           MaterialPageRoute(builder: (context) => ServicesScreen()),
         );
         break;
+        case 'Disclaimer':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Disclaimer()),
+        );
+        break;
       case 'How Its Works Organizer':
         Navigator.push(
           context,
@@ -537,12 +510,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
       //     MaterialPageRoute(builder: (context) =>  DelegatesRegistration()),
       //   );
       //   break;
-      case 'Free Registration':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  FreeRegistration()),
-        );
-        break;
+
 
         case 'Manual Attendance':
         Navigator.push(
@@ -565,12 +533,6 @@ class _SideMenuScreenState extends State<SideMenuScreen>
         );
         break;
 
-        case 'Accommodation Category':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>  AccommodationCategory()),
-        );
-        break;
    case 'Coupons':
         Navigator.push(
           context,

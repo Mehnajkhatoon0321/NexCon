@@ -748,7 +748,8 @@ class _DelegateRegisterState extends State<DelegateRegister> {
                               child: IconTheme(
                                 data: const IconThemeData(
                                   color: AppColors.appSky,
-                                  size: 20,
+                                  size: 18,
+
                                 ),
                                 child: Icon(
                                   checkboxChecked
@@ -918,36 +919,7 @@ class _DelegateRegisterState extends State<DelegateRegister> {
             ),
           ],
         ),
-        // Stack(
-        //   children: [
-        //     Container(
-        //       color: Colors.white,
-        //     ),
-        //     Center(
-        //       child: Container(
-        //         decoration: const BoxDecoration(
-        //             gradient: LinearGradient(
-        //                 begin: Alignment.topRight,
-        //                 end: Alignment.bottomLeft,
-        //                 stops: [
-        //               0.2,
-        //               0.5,
-        //               0.5,
-        //               0.3
-        //             ],
-        //                 colors: [
-        //               Color(0xffffffff),
-        //               Color(0xf9c6f6da),
-        //               Color(0xffc6f6da),
-        //               Color(0xffc6f6da),
-        //             ])),
-        //         child:
-        //
-        //
-        //       ),
-        //     )
-        //   ],
-        // ),
+
       ),
     );
   }

@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:nexcon/utils/colours.dart';
-import 'package:nexcon/utils/common_popups.dart';
+
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/flutter_flow_animations.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
-import 'package:shimmer/shimmer.dart';
+
 
 import 'my_order_view.dart';
 class MyOrder extends StatefulWidget {
@@ -165,7 +165,7 @@ class _MyOrderState extends State<MyOrder> {
       // Search Bar
       Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: width * 0.04, vertical: 10),
+            horizontal: width * 0.03, vertical: 10),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -317,7 +317,7 @@ class _MyOrderState extends State<MyOrder> {
     ];
     return   ListView.builder(
       itemCount: activeConferenceList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12,),
       itemBuilder: (context, index) {
         final item = activeConferenceList[index];
         final status = item['status'] ?? 'Pending';
@@ -325,7 +325,7 @@ class _MyOrderState extends State<MyOrder> {
 
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
@@ -337,7 +337,6 @@ class _MyOrderState extends State<MyOrder> {
               ),
             ],
           ),
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -382,7 +381,7 @@ class _MyOrderState extends State<MyOrder> {
                   ),
                 ],
               ),
-              SizedBox(height: 4),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -406,8 +405,8 @@ class _MyOrderState extends State<MyOrder> {
                             );
                           },
                           child: Container(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
 
                             decoration: BoxDecoration(
                               color:AppColors.secondaryColour,
@@ -424,7 +423,7 @@ class _MyOrderState extends State<MyOrder> {
                             child: const Icon(
                               Icons.remove_red_eye_outlined,
                               color: Colors.white,
-                              size: 20,
+                                  size: 18,
                             ),
                           ),
                         ),
@@ -432,19 +431,11 @@ class _MyOrderState extends State<MyOrder> {
 
                         GestureDetector(
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         FeePageView(id: "",
-                            //
-                            //         ),
-                            //   ),
-                            // );
+
                           },
                           child: Container(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
 
                             decoration: BoxDecoration(
                               color:AppColors.appBlue,
@@ -461,7 +452,7 @@ class _MyOrderState extends State<MyOrder> {
                             child: const Icon(
                               Icons.save_alt_rounded,
                               color: Colors.white,
-                              size: 20,
+                                  size: 18,
                             ),
                           ),
                         ),
@@ -489,8 +480,8 @@ class _MyOrderState extends State<MyOrder> {
                             );
                           },
                           child: Container(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
 
                             decoration: BoxDecoration(
                               color:AppColors.secondaryColour,
@@ -507,104 +498,14 @@ class _MyOrderState extends State<MyOrder> {
                             child: const Icon(
                               Icons.remove_red_eye_outlined,
                               color: Colors.white,
-                              size: 20,
+                                  size: 18,
                             ),
                           ),
                         ),
 
                         SizedBox(width: 10,),
 
-                        // GestureDetector(
-                        //   onTap: () async {
-                        //
-                        //
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => PaperReviewOrganizationRegistration(isEdit: 'yes', title:  item['conferenceName'],)
-                        //       ),
-                        //
-                        //     );
-                        //
-                        //     //     .then((result) {
-                        //     //   // Handle the result from the edit screen
-                        //     //   if (result[0]) {
-                        //     //     data.clear();
-                        //     //     pageNo = 1;
-                        //     //     hasMoreData = true;
-                        //     //     totalPages = 0;
-                        //     //     BlocProvider.of<AllRequesterBloc>(context)
-                        //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                        //     //   }
-                        //     // }
-                        //     // );
-                        //
-                        //     // );
-                        //   },
-                        //
-                        //   child: Container(
-                        //     height: 35,
-                        //     width: 35,
-                        //
-                        //     decoration: BoxDecoration(
-                        //       color: const Color(0xFF0db050), // Green for edit
-                        //       borderRadius: BorderRadius.circular(8),
-                        //       boxShadow: [
-                        //         BoxShadow(
-                        //           color: Colors.black.withOpacity(0.1),
-                        //           blurRadius: 6,
-                        //           offset: const Offset(0, 2),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     child: const Icon(
-                        //       Icons.edit,
-                        //       color: Colors.white,
-                        //       size: 20,
-                        //     ),
-                        //   ),
-                        // ),
-                        //
-                        //
-                        // SizedBox(width: 10,),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     CommonPopups
-                        //         .showDeleteCustomPopup(
-                        //       context,
-                        //       "Are you sure you want to delete?",
-                        //           () {
-                        //         // BlocProvider.of<
-                        //         //     AllRequesterBloc>(
-                        //         //     context)
-                        //         //     .add(DeleteBillingHandlers(
-                        //         //     data[index]
-                        //         //     [
-                        //         //     'id']));
-                        //       },
-                        //     );
-                        //   },
-                        //   child: Container(
-                        //     height: 35,
-                        //     width: 35,
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.red, // Red for delete
-                        //       borderRadius: BorderRadius.circular(8),
-                        //       boxShadow: [
-                        //         BoxShadow(
-                        //           color: Colors.black.withOpacity(0.1),
-                        //           blurRadius: 6,
-                        //           offset: const Offset(0, 2),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     child: const Icon(
-                        //       Icons.delete,
-                        //       color: Colors.white,
-                        //       size: 20,
-                        //     ),
-                        //   ),
-                        // ),
+
                       ],
                     ),
 
@@ -691,7 +592,7 @@ class _MyOrderState extends State<MyOrder> {
 
     return   ListView.builder(
       itemCount: inactiveConferenceList.length,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12,),
       itemBuilder: (context, index) {
         final item = inactiveConferenceList[index];
         final status = item['status'] ?? 'Pending';
@@ -699,7 +600,7 @@ class _MyOrderState extends State<MyOrder> {
 
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 8),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
@@ -756,7 +657,7 @@ class _MyOrderState extends State<MyOrder> {
                   ),
                 ],
               ),
-              SizedBox(height: 4),
+              SizedBox(height: 8),
 
 
               Row(
@@ -782,8 +683,8 @@ class _MyOrderState extends State<MyOrder> {
                             );
                           },
                           child: Container(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
 
                             decoration: BoxDecoration(
                               color:AppColors.secondaryColour,
@@ -800,7 +701,7 @@ class _MyOrderState extends State<MyOrder> {
                             child: const Icon(
                               Icons.remove_red_eye_outlined,
                               color: Colors.white,
-                              size: 20,
+                                  size: 18,
                             ),
                           ),
                         ),
@@ -819,8 +720,8 @@ class _MyOrderState extends State<MyOrder> {
                             // );
                           },
                           child: Container(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
 
                             decoration: BoxDecoration(
                               color:AppColors.appBlue,
@@ -837,7 +738,7 @@ class _MyOrderState extends State<MyOrder> {
                             child: const Icon(
                               Icons.save_alt_rounded,
                               color: Colors.white,
-                              size: 20,
+                                  size: 18,
                             ),
                           ),
                         ),
@@ -865,8 +766,8 @@ class _MyOrderState extends State<MyOrder> {
                             );
                           },
                           child: Container(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
 
                             decoration: BoxDecoration(
                               color:AppColors.secondaryColour,
@@ -883,104 +784,14 @@ class _MyOrderState extends State<MyOrder> {
                             child: const Icon(
                               Icons.remove_red_eye_outlined,
                               color: Colors.white,
-                              size: 20,
+                                  size: 18,
                             ),
                           ),
                         ),
 
                         SizedBox(width: 10,),
 
-                        // GestureDetector(
-                        //   onTap: () async {
-                        //
-                        //
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => PaperReviewOrganizationRegistration(isEdit: 'yes', title:  item['conferenceName'],)
-                        //       ),
-                        //
-                        //     );
-                        //
-                        //     //     .then((result) {
-                        //     //   // Handle the result from the edit screen
-                        //     //   if (result[0]) {
-                        //     //     data.clear();
-                        //     //     pageNo = 1;
-                        //     //     hasMoreData = true;
-                        //     //     totalPages = 0;
-                        //     //     BlocProvider.of<AllRequesterBloc>(context)
-                        //     //         .add(AddCartDetailHandler("", pageNo, pageSize));
-                        //     //   }
-                        //     // }
-                        //     // );
-                        //
-                        //     // );
-                        //   },
-                        //
-                        //   child: Container(
-                        //     height: 35,
-                        //     width: 35,
-                        //
-                        //     decoration: BoxDecoration(
-                        //       color: const Color(0xFF0db050), // Green for edit
-                        //       borderRadius: BorderRadius.circular(8),
-                        //       boxShadow: [
-                        //         BoxShadow(
-                        //           color: Colors.black.withOpacity(0.1),
-                        //           blurRadius: 6,
-                        //           offset: const Offset(0, 2),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     child: const Icon(
-                        //       Icons.edit,
-                        //       color: Colors.white,
-                        //       size: 20,
-                        //     ),
-                        //   ),
-                        // ),
-                        //
-                        //
-                        // SizedBox(width: 10,),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     CommonPopups
-                        //         .showDeleteCustomPopup(
-                        //       context,
-                        //       "Are you sure you want to delete?",
-                        //           () {
-                        //         // BlocProvider.of<
-                        //         //     AllRequesterBloc>(
-                        //         //     context)
-                        //         //     .add(DeleteBillingHandlers(
-                        //         //     data[index]
-                        //         //     [
-                        //         //     'id']));
-                        //       },
-                        //     );
-                        //   },
-                        //   child: Container(
-                        //     height: 35,
-                        //     width: 35,
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.red, // Red for delete
-                        //       borderRadius: BorderRadius.circular(8),
-                        //       boxShadow: [
-                        //         BoxShadow(
-                        //           color: Colors.black.withOpacity(0.1),
-                        //           blurRadius: 6,
-                        //           offset: const Offset(0, 2),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     child: const Icon(
-                        //       Icons.delete,
-                        //       color: Colors.white,
-                        //       size: 20,
-                        //     ),
-                        //   ),
-                        // ),
+
                       ],
                     ),
 

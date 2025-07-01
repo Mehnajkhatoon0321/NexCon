@@ -205,18 +205,18 @@ body: SingleChildScrollView(
                   Navigator.push(context, MaterialPageRoute(builder: (context) => UpgradeMembership()));
                 },
                 style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  minimumSize: const Size(100, 35),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
+                  backgroundColor: AppColors.appSky,
+
+                  // Button color depending on the enabled state
+                  minimumSize: const Size(double.infinity, 50),
+                  // Minimum height
+                  maximumSize: const Size(double.infinity, 50),
+                  // elevation: 1 // Maximum height
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-                  child: Text("Subscribe", style: FTextStyle.loginBtnStyle),
-                ),
+                child: Text("Subscribe", style: FTextStyle.loginBtnStyle),
               ),
             ),
           ),
