@@ -9,6 +9,9 @@ import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 
+import '../../../../api_services/services/custom_simmer_effect.dart';
+import '../../../../api_services/services/error_manage_screen.dart' show CustomErrorWidget;
+import '../../../../api_services/services/no_internet.dart' show NoNetworkWidget;
 import '../../../../utils/flutter_flow_animations.dart' ;
 
 class MyConferencePage extends StatefulWidget {
@@ -104,94 +107,6 @@ class _MyConferencePageState extends State<MyConferencePage> {
         .add(ConferenceListHandler("", pageNo, pageSize));
     paginationCall();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          // Toggle Buttons
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Row(
-              children: [
-                _buildToggleButton('Upcoming', 0),
-                const SizedBox(width: 8.0),
-                _buildToggleButton('Previous', 1),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          // Search Bar
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 10, vertical: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(23.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 4,
-                    offset: const Offset(0, 1),
-                  ),
-                ],
-              ),
-              child: TextFormField(
-                controller: controllerText,
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: FTextStyle.formhintTxtStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(23.0),
-                    borderSide: const BorderSide(
-                        color: AppColors.appSky, width: 1.0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(23.0),
-                    borderSide: const BorderSide(
-                        color: AppColors.appSky, width: 1.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(23.0),
-                    borderSide: const BorderSide(
-                        color: AppColors.appSky, width: 1.0),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 13.0, horizontal: 18.0),
-                  suffixIcon: _isTextEmpty
-                      ? const Icon(Icons.search,
-                      color: AppColors.appSky)
-                      : IconButton(
-                    icon: const Icon(Icons.clear,
-                        color: AppColors.appSky),
-                    onPressed: _clearText,
-                  ),
-                  fillColor: Colors.grey[100],
-                  filled: true,
-                ),
-                onChanged: _onSearchChanged,
-              ),
-            ),
-          ),
-
-          // Active/Inactive Content
-          Expanded(
-            child: _selectedIndex == 0
-                ? _buildActiveSegment(height, width)
-                : _buildInActiveSegment(height, width),
-          ),
-        ],
-      ),
-    );
-  }
   List<dynamic> inactiveConferenceList =  [
     {
       "conferenceId": "1232343543",
@@ -256,6 +171,209 @@ class _MyConferencePageState extends State<MyConferencePage> {
       "toDate": "2024-11-26"
     },
   ];
+  List<dynamic> activeConferenceList = [
+    {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "30th ISCB International Conference (ISCBC-2025)",
+      "category": "Accompanying Person",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20",
+      "submitted":true,
+      "submitAbstractStatus":"Review",
+
+    },  {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "4th International Science Communication Conference",
+      "fromDate": "2024-12-19",
+      "category": "Accompanying Person",
+      "toDate": "2024-12-20",
+      "submitted":false,
+      "submitAbstractStatus":"Pending",
+    },
+    {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+      ,"submitted":true,
+      "submitAbstractStatus":"Review",
+
+    },
+    {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "4th International Science Communication Conference",
+      "category": "Accompanying Person",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20"
+      ,"submitted":true,
+      "submitAbstractStatus":"Review",
+    },
+    {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+      ,"submitted":false,
+      "submitAbstractStatus":"Review",
+    },  {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+      ,"submitted":true,
+      "submitAbstractStatus":"Review",
+    },
+    {
+      "conferenceId": "1232343543",
+      "conferenceName":
+      "4th International Science Communication Conference",
+      "category": "Accompanying Person",
+      "fromDate": "2024-12-19",
+      "toDate": "2024-12-20"
+      ,"submitted":false,
+      "submitAbstractStatus":"Review",
+    },
+    {
+      "conferenceId": "1232343544",
+      "conferenceName":
+      "5th International Tech & Innovation Summit",
+      "category": "Accompanying Person",
+      "fromDate": "2024-11-25",
+      "toDate": "2024-11-26"
+      ,"submitted":true,
+      "submitAbstractStatus":"Review",
+    },
+  ];
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      body: Column(
+            children: [
+              const SizedBox(height: 20),
+              // Toggle Buttons
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                child: Row(
+                  children: [
+                    _buildToggleButton('Upcoming', 0),
+                    const SizedBox(width: 8.0),
+                    _buildToggleButton('Previous', 1),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              // Search Bar
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: 10, vertical: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(23.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: TextFormField(
+                    controller: controllerText,
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      hintStyle: FTextStyle.formhintTxtStyle,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(23.0),
+                        borderSide: const BorderSide(
+                            color: AppColors.appSky, width: 1.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(23.0),
+                        borderSide: const BorderSide(
+                            color: AppColors.appSky, width: 1.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(23.0),
+                        borderSide: const BorderSide(
+                            color: AppColors.appSky, width: 1.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 13.0, horizontal: 18.0),
+                      suffixIcon: _isTextEmpty
+                          ? const Icon(Icons.search,
+                          color: AppColors.appSky)
+                          : IconButton(
+                        icon: const Icon(Icons.clear,
+                            color: AppColors.appSky),
+                        onPressed: _clearText,
+                      ),
+                      fillColor: Colors.grey[100],
+                      filled: true,
+                    ),
+                    onChanged: _onSearchChanged,
+                  ),
+                ),
+              ),
+
+              // Active/Inactive Content
+              Expanded(
+                child: BlocConsumer<AllDelegatesBloc, AllDelegatesState>(
+                  listener: (context, state) {
+                    if (state is AllDelegatesExceptionFailure) {
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   SnackBar(content: Text("Error: ${state.error}")),
+                      // );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (_selectedIndex == 0) {
+                      if (state is AllDelegatesInitial ||
+                          state is AllDelegatesLoading) {
+                        return const CustomConferenceShimmer();
+                      } else if (state is CheckNetworkConnection) {
+                        return NoNetworkWidget(message: state.errorMessage);
+                      } else if (state is AllDelegatesFailure ||
+                          state is AllDelegatesServerFailure ||
+                          state is AllDelegatesExceptionFailure) {
+                        final error = state is AllDelegatesFailure
+                            ? state.failureMessage
+                            : state is AllDelegatesServerFailure
+                            ? state.error
+                            : (state as AllDelegatesExceptionFailure).error;
+                        return CustomErrorWidget(message: error);
+                      } else if (state is ConferenceSuccess) {
+                        activeConferenceList = state.logResponse['data'] ?? [];
+                        return _buildActiveSegment(height, width, activeConferenceList);
+                      } else {
+                        return const Center(child: Text("Unknown state"));
+                      }
+                    } else {
+                      return _buildInActiveSegment(height, width);
+                    }
+
+                  },
+                ),
+              ),
+            ],
+          ),
+    );
+  }
+
   // Toggle Button Widget
   Widget _buildToggleButton(String text, int index) {
     return GestureDetector(
@@ -296,89 +414,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
   }
 
   // Active Segment
-  Widget _buildActiveSegment(double height, double width) {
-    List<dynamic> activeConferenceList = [
-      {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "30th ISCB International Conference (ISCBC-2025)",
-        "category": "Accompanying Person",
-        "fromDate": "2024-12-19",
-        "toDate": "2024-12-20",
-        "submitted":true,
-        "submitAbstractStatus":"Review",
-
-      },  {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "4th International Science Communication Conference",
-        "fromDate": "2024-12-19",
-        "category": "Accompanying Person",
-        "toDate": "2024-12-20",
-        "submitted":false,
-        "submitAbstractStatus":"Pending",
-      },
-      {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-      ,"submitted":true,
-      "submitAbstractStatus":"Review",
-
-      },
-      {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "4th International Science Communication Conference",
-        "category": "Accompanying Person",
-        "fromDate": "2024-12-19",
-        "toDate": "2024-12-20"
-        ,"submitted":true,
-        "submitAbstractStatus":"Review",
-      },
-      {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-        ,"submitted":false,
-        "submitAbstractStatus":"Review",
-      },  {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-        ,"submitted":true,
-        "submitAbstractStatus":"Review",
-      },
-      {
-        "conferenceId": "1232343543",
-        "conferenceName":
-        "4th International Science Communication Conference",
-        "category": "Accompanying Person",
-        "fromDate": "2024-12-19",
-        "toDate": "2024-12-20"
-        ,"submitted":false,
-        "submitAbstractStatus":"Review",
-      },
-      {
-        "conferenceId": "1232343544",
-        "conferenceName":
-        "5th International Tech & Innovation Summit",
-        "category": "Accompanying Person",
-        "fromDate": "2024-11-25",
-        "toDate": "2024-11-26"
-        ,"submitted":true,
-        "submitAbstractStatus":"Review",
-      },
-    ];
+  Widget _buildActiveSegment(double height, double width, List<dynamic> activeConferenceList) {
 
     return
       ListView.builder(

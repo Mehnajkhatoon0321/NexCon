@@ -15,19 +15,20 @@ class NoNetworkWidget extends StatelessWidget {
         children: [
           // Lottie animation
           Lottie.asset(
-            'assets/animation/Network.json',
-            width: 220,
-            height: 220,
+            'assets/animations/network.json',
+            width: 200,
+            height: 200,
             fit: BoxFit.contain,
           ),
           const SizedBox(height: 20),
           // Message
           Text(
-            message ?? "No Internet Connection",
+            message ?? "No Internet Connection Available",
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: Colors.black54,
+
             ),
           ),
           const SizedBox(height: 20),

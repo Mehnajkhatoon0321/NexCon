@@ -60,11 +60,11 @@ class AllDelegatesBloc extends Bloc<AllDelegatesEvent, AllDelegatesState> {
           developer.log("🚨 500 Error: $responseError");
           emit(AllDelegatesServerFailure(responseError));
         } else {
-          developer.log("❌ Unexpected Error: ${response.statusCode}");
+          developer.log("❌Unexpected Error: ${response.statusCode}");
           emit(AllDelegatesExceptionFailure('Unexpected error occurred.'));
         }
       } catch (e) {
-        developer.log('❗ Exception caught: $e');
+        developer.log('❗Exception caught: $e');
         emit(AllDelegatesExceptionFailure('Exception occurred: $e'));
       }
     });
