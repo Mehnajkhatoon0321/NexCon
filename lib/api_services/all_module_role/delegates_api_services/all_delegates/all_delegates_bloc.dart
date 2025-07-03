@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
@@ -18,23 +19,25 @@ class AllDelegatesBloc extends Bloc<AllDelegatesEvent, AllDelegatesState> {
       // TODO: implement event handler
     });
 
-    //Conference list API
     on<ConferenceListHandler>((event, emit) async {
       final hasInternet = await ConnectivityService.isConnected();
+      print("📶 Real Network Status (Socket): $hasInternet");
+
 
       if (!hasInternet) {
-        developer.log('📡 No internet connection.');
-        emit(CheckNetworkConnection('No internet connection'));
+        emit(CheckNetworkConnection("No internet connection"));
         return;
       }
 
-      emit(AllDelegatesInitial()); // Show shimmer or loader on UI
+
+
+      emit(AllDelegatesInitial());
 
       try {
         final String authToken = PrefUtils.getToken();
         final int userId = PrefUtils.getUserId();
         final apiUrl = Uri.parse(
-          "${APIEndPoints.conferenceDelegatesList}$userId?page=${event.page}&per_page=${event.size}&search=${event.search}",
+          "${APIEndPoints.conferenceDelegatesList}/$userId?page=${event.page}&per_page=${event.size}&search=${event.search}",
         );
 
         developer.log("🌐 GET => $apiUrl");
@@ -64,10 +67,17 @@ class AllDelegatesBloc extends Bloc<AllDelegatesEvent, AllDelegatesState> {
           emit(AllDelegatesExceptionFailure('Unexpected error occurred.'));
         }
       } catch (e) {
-        developer.log('❗Exception caught: $e');
-        emit(AllDelegatesExceptionFailure('Exception occurred: $e'));
+      if (e is SocketException) {
+        emit(CheckNetworkConnection("Network error: Could not resolve host."));
+      } else {
+        emit(AllDelegatesExceptionFailure("Exception occurred: $e"));
       }
-    });
+      developer.log('❗Exception caught: $e');
+    }
+
+  });
+
+
 
   }
 }

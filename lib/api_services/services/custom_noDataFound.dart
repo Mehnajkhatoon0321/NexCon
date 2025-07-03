@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-class CustomErrorWidget extends StatelessWidget {
+class CustomNoFoundWidget extends StatelessWidget {
   final String? message;
   final VoidCallback? onRetry;
 
-  const CustomErrorWidget({super.key, this.message, this.onRetry});
+  const CustomNoFoundWidget({super.key, this.message, this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class CustomErrorWidget extends StatelessWidget {
         children: [
           // Lottie animation
           Lottie.asset(
-            'assets/animations/errorFailure.json',
+            'assets/animations/noDataFound.json',
             width: 200,
             height: 200,
             fit: BoxFit.contain,

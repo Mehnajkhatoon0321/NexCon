@@ -8,10 +8,14 @@ import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/constant.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../../api_services/services/custom_noDataFound.dart';
 import '../../../../api_services/services/custom_simmer_effect.dart';
+
+
 import '../../../../api_services/services/error_manage_screen.dart' show CustomErrorWidget;
-import '../../../../api_services/services/no_internet.dart' show NoNetworkWidget;
+import '../../../../api_services/services/no_internet.dart';
 import '../../../../utils/flutter_flow_animations.dart' ;
 
 class MyConferencePage extends StatefulWidget {
@@ -27,7 +31,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
 
   int pageNo = 1;
   int totalPages = 0;
-  int pageSize = 10;
+  int pageSize = 5;
   bool hasMoreData = true;
 
   final controller = ScrollController();
@@ -59,21 +63,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
       ],
     ),
   };
-  void paginationCall() {
-    controller.addListener(() {
-      if (controller.position.pixels == controller.position.maxScrollExtent) {
-        if (!isLoading && hasMoreData) {
-          pageNo++;
 
-          isInitialLoading = false;
-          isLoading = true;
-          //
-          // BlocProvider.of<AllRequesterBloc>(context)
-          //     .add(GetBillingListHandler(searchQuery, pageNo, pageSize));
-        }
-      }
-    });
-  }
+
 
   Timer? _debounce;
 
@@ -94,6 +85,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
       //     GetBillingListHandler(searchQuery, pageNo, pageSize));
     });
   }
+
   @override
   void initState() {
     super.initState();
@@ -107,7 +99,22 @@ class _MyConferencePageState extends State<MyConferencePage> {
         .add(ConferenceListHandler("", pageNo, pageSize));
     paginationCall();
   }
-  List<dynamic> inactiveConferenceList =  [
+  void paginationCall() {
+    controller.addListener(() {
+      if (controller.position.pixels == controller.position.maxScrollExtent) {
+        if (!isLoading && hasMoreData) {
+          pageNo++;
+
+          isInitialLoading = false;
+          isLoading = true;
+
+          BlocProvider.of<AllDelegatesBloc>(context)
+              .add(ConferenceListHandler(searchQuery, pageNo, pageSize));
+        }
+      }
+    });
+  }
+  List<dynamic> inactiveConferenceList = [
     {
       "conferenceId": "1232343543",
       "conferenceName":
@@ -115,7 +122,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
       "category": "Accompanying Person",
       "fromDate": "2024-12-19",
       "toDate": "2024-12-20"
-    },  {
+    }, {
       "conferenceId": "1232343543",
       "conferenceName":
       "4th International Science Communication Conference",
@@ -146,7 +153,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
       "category": "Accompanying Person",
       "fromDate": "2024-11-25",
       "toDate": "2024-11-26"
-    },  {
+    }, {
       "conferenceId": "1232343544",
       "conferenceName":
       "5th International Tech & Innovation Summit",
@@ -171,208 +178,168 @@ class _MyConferencePageState extends State<MyConferencePage> {
       "toDate": "2024-11-26"
     },
   ];
-  List<dynamic> activeConferenceList = [
-    {
-      "conferenceId": "1232343543",
-      "conferenceName":
-      "30th ISCB International Conference (ISCBC-2025)",
-      "category": "Accompanying Person",
-      "fromDate": "2024-12-19",
-      "toDate": "2024-12-20",
-      "submitted":true,
-      "submitAbstractStatus":"Review",
+  List<dynamic> activeConferenceList = [];
+  Map<String, dynamic> errorServerMessage = {};
+  String? errorMessage;
+  String? checkInternetAvailable;
 
-    },  {
-      "conferenceId": "1232343543",
-      "conferenceName":
-      "4th International Science Communication Conference",
-      "fromDate": "2024-12-19",
-      "category": "Accompanying Person",
-      "toDate": "2024-12-20",
-      "submitted":false,
-      "submitAbstractStatus":"Pending",
-    },
-    {
-      "conferenceId": "1232343544",
-      "conferenceName":
-      "5th International Tech & Innovation Summit",
-      "category": "Accompanying Person",
-      "fromDate": "2024-11-25",
-      "toDate": "2024-11-26"
-      ,"submitted":true,
-      "submitAbstractStatus":"Review",
 
-    },
-    {
-      "conferenceId": "1232343543",
-      "conferenceName":
-      "4th International Science Communication Conference",
-      "category": "Accompanying Person",
-      "fromDate": "2024-12-19",
-      "toDate": "2024-12-20"
-      ,"submitted":true,
-      "submitAbstractStatus":"Review",
-    },
-    {
-      "conferenceId": "1232343544",
-      "conferenceName":
-      "5th International Tech & Innovation Summit",
-      "category": "Accompanying Person",
-      "fromDate": "2024-11-25",
-      "toDate": "2024-11-26"
-      ,"submitted":false,
-      "submitAbstractStatus":"Review",
-    },  {
-      "conferenceId": "1232343544",
-      "conferenceName":
-      "5th International Tech & Innovation Summit",
-      "category": "Accompanying Person",
-      "fromDate": "2024-11-25",
-      "toDate": "2024-11-26"
-      ,"submitted":true,
-      "submitAbstractStatus":"Review",
-    },
-    {
-      "conferenceId": "1232343543",
-      "conferenceName":
-      "4th International Science Communication Conference",
-      "category": "Accompanying Person",
-      "fromDate": "2024-12-19",
-      "toDate": "2024-12-20"
-      ,"submitted":false,
-      "submitAbstractStatus":"Review",
-    },
-    {
-      "conferenceId": "1232343544",
-      "conferenceName":
-      "5th International Tech & Innovation Summit",
-      "category": "Accompanying Person",
-      "fromDate": "2024-11-25",
-      "toDate": "2024-11-26"
-      ,"submitted":true,
-      "submitAbstractStatus":"Review",
-    },
-  ];
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: Column(
-            children: [
-              const SizedBox(height: 20),
-              // Toggle Buttons
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Row(
-                  children: [
-                    _buildToggleButton('Upcoming', 0),
-                    const SizedBox(width: 8.0),
-                    _buildToggleButton('Previous', 1),
+        backgroundColor: AppColors.backgroundColor,
+        body: Column(
+          children: [
+            const SizedBox(height: 20),
+            // Toggle Buttons
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Row(
+                children: [
+                  _buildToggleButton('Upcoming', 0),
+                  const SizedBox(width: 8.0),
+                  _buildToggleButton('Previous', 1),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            // Search Bar
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 10, vertical: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(23.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
+                    ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              // Search Bar
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 10, vertical: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(23.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        spreadRadius: 2,
-                        blurRadius: 4,
-                        offset: const Offset(0, 1),
-                      ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    controller: controllerText,
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      hintStyle: FTextStyle.formhintTxtStyle,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(23.0),
-                        borderSide: const BorderSide(
-                            color: AppColors.appSky, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(23.0),
-                        borderSide: const BorderSide(
-                            color: AppColors.appSky, width: 1.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(23.0),
-                        borderSide: const BorderSide(
-                            color: AppColors.appSky, width: 1.0),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 13.0, horizontal: 18.0),
-                      suffixIcon: _isTextEmpty
-                          ? const Icon(Icons.search,
-                          color: AppColors.appSky)
-                          : IconButton(
-                        icon: const Icon(Icons.clear,
-                            color: AppColors.appSky),
-                        onPressed: _clearText,
-                      ),
-                      fillColor: Colors.grey[100],
-                      filled: true,
+                child: TextFormField(
+                  controller: controllerText,
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: FTextStyle.formhintTxtStyle,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(23.0),
+                      borderSide: const BorderSide(
+                          color: AppColors.appSky, width: 1.0),
                     ),
-                    onChanged: _onSearchChanged,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(23.0),
+                      borderSide: const BorderSide(
+                          color: AppColors.appSky, width: 1.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(23.0),
+                      borderSide: const BorderSide(
+                          color: AppColors.appSky, width: 1.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 13.0, horizontal: 18.0),
+                    suffixIcon: _isTextEmpty
+                        ? const Icon(Icons.search,
+                        color: AppColors.appSky)
+                        : IconButton(
+                      icon: const Icon(Icons.clear,
+                          color: AppColors.appSky),
+                      onPressed: _clearText,
+                    ),
+                    fillColor: Colors.grey[100],
+                    filled: true,
                   ),
+                  onChanged: _onSearchChanged,
                 ),
               ),
+            ),
 
-              // Active/Inactive Content
-              Expanded(
-                child: BlocConsumer<AllDelegatesBloc, AllDelegatesState>(
-                  listener: (context, state) {
-                    if (state is AllDelegatesExceptionFailure) {
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   SnackBar(content: Text("Error: ${state.error}")),
-                      // );
-                    }
-                  },
-                  builder: (context, state) {
-                    if (_selectedIndex == 0) {
-                      if (state is AllDelegatesInitial ||
-                          state is AllDelegatesLoading) {
-                        return const CustomConferenceShimmer();
-                      } else if (state is CheckNetworkConnection) {
-                        return NoNetworkWidget(message: state.errorMessage);
-                      } else if (state is AllDelegatesFailure ||
-                          state is AllDelegatesServerFailure ||
-                          state is AllDelegatesExceptionFailure) {
-                        final error = state is AllDelegatesFailure
-                            ? state.failureMessage
-                            : state is AllDelegatesServerFailure
-                            ? state.error
-                            : (state as AllDelegatesExceptionFailure).error;
-                        return CustomErrorWidget(message: error);
-                      } else if (state is ConferenceSuccess) {
-                        activeConferenceList = state.logResponse['data'] ?? [];
-                        return _buildActiveSegment(height, width, activeConferenceList);
-                      } else {
-                        return const Center(child: Text("Unknown state"));
-                      }
-                    } else {
-                      return _buildInActiveSegment(height, width);
+
+            // Other UI widgets like headers or toggle buttons
+
+            BlocListener<AllDelegatesBloc, AllDelegatesState>(
+              listener: (context, state) {
+                print("🌐 BLoC State: $state");
+
+                if (state is AllDelegatesInitial ||
+                    state is AllDelegatesLoading) {
+                  setState(() {
+                    isInitialLoading = true;
+
+                  });
+                } else if (state is ConferenceSuccess) {
+                  setState(() {
+                    var responseData = state.logResponse['list'];
+                    int totalItemCount = responseData["total"];
+                    totalPages = (totalItemCount / pageSize).ceil();
+
+                    if (pageNo == 1) {
+                      activeConferenceList.clear();
                     }
 
-                  },
-                ),
-              ),
-            ],
-          ),
+                    activeConferenceList.addAll(responseData['data']);
+
+                    isInitialLoading = false;
+                    isLoading = false; // Reset loading state
+
+                    if (pageNo==totalPages) {
+                      hasMoreData = false;
+                    }
+                  });
+                } else if (state is CheckNetworkConnection) {
+
+
+                  setState(() {
+                    isLoading = false;
+                    checkInternetAvailable = state.errorMessage;
+                    isInitialLoading = false;
+                  });
+                } else if (state is AllDelegatesFailure ||
+                    state is AllDelegatesServerFailure ||
+                    state is AllDelegatesExceptionFailure) {
+                  final error = state is AllDelegatesFailure ? state.failureMessage : state is AllDelegatesServerFailure
+                      ? state.error
+                      : (state as AllDelegatesExceptionFailure).error;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(error)),
+                  );
+                  setState(() {
+                    isLoading = false;
+                    isInitialLoading = false;
+                  });
+                }
+              },
+              child: const SizedBox(), // You can leave child empty
+            ),
+
+            // UI Rendering based on your local state
+            Expanded(
+              child: _selectedIndex != 0
+                  ? _buildInActiveSegment(height, width)
+                  :  _buildActiveSegment(height, width, activeConferenceList),
+            ),
+          ],
+        )
+
     );
+    ;
   }
+
+
+
 
   // Toggle Button Widget
   Widget _buildToggleButton(String text, int index) {
@@ -416,13 +383,42 @@ class _MyConferencePageState extends State<MyConferencePage> {
   // Active Segment
   Widget _buildActiveSegment(double height, double width, List<dynamic> activeConferenceList) {
 
+
+    if (isInitialLoading && activeConferenceList.isEmpty) {
+      return const CustomConferenceShimmer();
+    }
+    if (checkInternetAvailable != null && checkInternetAvailable!.isNotEmpty) {
+      return NoNetworkWidget();
+          }
+    if (errorMessage != null || errorServerMessage.isNotEmpty) {
+      return CustomErrorWidget(message: errorMessage ?? errorMessage);
+    }
+
+    if (activeConferenceList.isEmpty) {
+      return const CustomNoFoundWidget();
+    }
+
     return
+
+
+
       ListView.builder(
-          itemCount: activeConferenceList.length,
+          itemCount: activeConferenceList.length + 1, // 1 extra for footer
           padding: const EdgeInsets.symmetric(horizontal: 10),
+          controller: controller,
+
           itemBuilder: (context, index) {
-            final item = activeConferenceList[index];
-            return Container(
+
+
+            if (index < activeConferenceList.length) {
+              final item = activeConferenceList[index];
+              //
+              // // Handle case where item might be null
+              // if (item == null) {
+              //   return const CustomNoFoundWidget();
+              // }
+
+              return Container(
               // height: height * 0.16,
               margin: const EdgeInsets.symmetric(vertical: 8),
               padding: const EdgeInsets.all(20),
@@ -445,7 +441,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          item['conferenceName']!,
+                          item['conferenceName']??"--",
                           // maxLines: 2,
                           // overflow: TextOverflow.ellipsis,
                           style: FTextStyle.subtitle
@@ -457,7 +453,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                             Icon(Icons.calendar_today, size: 18, color:AppColors.secondYellowColour),
                             SizedBox(width: 10,),
                             Text(
-                              "${Constants.formatDate(item['fromDate'])} → ${Constants.formatDate(item['toDate'])}",
+                              "${Constants.formatDate(item['fromDate']??"--")} → ${Constants.formatDate(item['toDate']??"--")}",
                               style: FTextStyle.style.copyWith(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -475,7 +471,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                                "${item['category']}",
+                                "${item['category']}"??"--",
                                 style: FTextStyle.subtitle
                             ),
                             const SizedBox(width: 4),
@@ -608,7 +604,28 @@ class _MyConferencePageState extends State<MyConferencePage> {
               ),
             );
           }
+
+    if (hasMoreData && index == activeConferenceList.length) {
+    return const Center(
+    child: CircularProgressIndicator());
+    }
+
+    else if (activeConferenceList.length > 7 && index == activeConferenceList.length) {
+    // Show the "No more data." text if we are at the end and there are more than 10 items
+    return const Center(
+    child: Text("No more data.", style: FTextStyle.listTitle),
+    );
+    }
+    return null;
+
+    // If there's no more data to load, show a message
+    // return const Center(
+    //     child: Text("No more data.",
+    //         style: FTextStyle.listTitle));
+
+          }
             );
+
 
   }
 

@@ -16,8 +16,8 @@ class NoNetworkWidget extends StatelessWidget {
           // Lottie animation
           Lottie.asset(
             'assets/animations/network.json',
-            width: 200,
-            height: 200,
+            width: 180,
+            height: 180,
             fit: BoxFit.contain,
           ),
           const SizedBox(height: 20),

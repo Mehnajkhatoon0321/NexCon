@@ -6,8 +6,10 @@ sealed class AllDelegatesState {}
 final class AllDelegatesInitial extends AllDelegatesState {}
 class CheckNetworkConnection extends AllDelegatesState {
   final String errorMessage;
+
   CheckNetworkConnection(this.errorMessage);
 }
+
 final class AllDelegatesLoading extends AllDelegatesState {}
 final class AllDelegatesFailure extends AllDelegatesState {
 

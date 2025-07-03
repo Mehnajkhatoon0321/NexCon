@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nexcon/screen/authFlow/splash_screen.dart';
 import 'package:nexcon/utils/colours.dart';
+import 'package:nexcon/utils/connectivity_service.dart';
 import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/shared_preference.dart';
 
@@ -43,6 +44,7 @@ import 'package:nexcon/utils/shared_preference.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Prefs.init();
   runApp(const MyApp());
 }

@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nexcon/api_services/all_module_role/commons_api/auth_flow/auth_flow_bloc.dart';
+import 'package:nexcon/api_services/all_module_role/delegates_api_services/all_delegates/all_delegates_bloc.dart';
 
 import 'package:nexcon/screen/authFlow/organizer_register.dart';
 import 'package:nexcon/screen/delegates_section/delegates_home_page.dart';
@@ -219,11 +220,15 @@ class _LoginScreenState extends State<LoginScreen> {
               Map<String, dynamic> user = data['user'];
 
               if (user.containsKey('role')) {
+                String roleUser = user['role'].toString();
                 String email = user['email'];
+                int roleId = user['id'];
                 print("Email>>>>>>>>$email");
                 PrefUtils.setToken(bearerToken);
                 PrefUtils.setUserEmailLogin(email);  // still ok for session only
-
+                PrefUtils.setToken(bearerToken);
+                PrefUtils.setUserId(roleId);
+                // _navigateBasedOnRole(roleUser);
 
 
                 if (widget.selectedRole == 'isselect organizer') {
@@ -538,34 +543,40 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
 
                   if (formKey.currentState!.validate()) {
+                    BlocProvider.of<AuthFlowBloc>(context).add(
+                      LogEventHandler(
+                        email: _email.text.trim(),
+                        password: _password.text.trim(),
 
-                    if (widget.selectedRole == 'isselect organizer') {
-                      setState(() {
-                        PrefUtils.setIsLogin(true);
-                        PrefUtils.setRoleSelection(widget.selectedRole);
-                      });
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,),
-                        ),
-                      );
-                    }
-
-                    else {
-                      setState(() {
-                        PrefUtils.setIsLogin(true);
-                        PrefUtils.setRoleSelection("isselect delegate");
-                      });
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              HomeDelegates( selectedRole: widget.selectedRole,),
-                        ),
-                      );
-                    }
+                      ),
+                    );
+                    // if (widget.selectedRole == 'isselect organizer') {
+                    //   setState(() {
+                    //     PrefUtils.setIsLogin(true);
+                    //     PrefUtils.setRoleSelection(widget.selectedRole);
+                    //   });
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) =>
+                    //           OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,),
+                    //     ),
+                    //   );
+                    // }
+                    //
+                    // else {
+                    //   setState(() {
+                    //     PrefUtils.setIsLogin(true);
+                    //     PrefUtils.setRoleSelection("isselect delegate");
+                    //   });
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) =>
+                    //           HomeDelegates( selectedRole: widget.selectedRole,),
+                    //     ),
+                    //   );
+                    // }
                     // BlocProvider.of<AuthFlowBloc>(context).add(
                     //   LogEventHandler(
                     //     email: _email.text.trim(),
@@ -669,6 +680,34 @@ class _LoginScreenState extends State<LoginScreen> {
       );
   },
 ),
+    );
+  }
+
+
+  void _navigateBasedOnRole(String role) {
+    Widget nextPage;
+
+    switch (role) {
+      case 'isselect delegates':
+        nextPage = BlocProvider(
+          create: (context) => AllDelegatesBloc(),
+          child: HomeDelegates( selectedRole: widget.selectedRole,),
+        );
+        // Replace with your Admin screen widget
+        break;
+
+      case 'isselect organizer':
+        nextPage =  OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,);// Repl
+
+        // Replace with your User screen widget
+        break;
+      default:
+        return; // No navigation occurs if the role is not recognized
+    }
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => nextPage),
     );
   }
 
