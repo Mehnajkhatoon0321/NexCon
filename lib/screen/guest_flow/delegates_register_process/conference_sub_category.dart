@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nexcon/api_services/all_module_role/delegates_api_services/all_delegates/all_delegates_bloc.dart';
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
 import 'package:nexcon/utils/colours.dart';
 import 'package:nexcon/utils/constant.dart';
@@ -8,14 +10,20 @@ import 'package:nexcon/utils/font_text_Style.dart';
 import 'package:nexcon/utils/form_field_style.dart';
 import 'package:nexcon/utils/pref_utils.dart';
 
+import '../../../api_services/all_module_role/commons_api/auth_flow/auth_flow_bloc.dart';
 import '../../delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
 import 'conference_category_details.dart';
 
 class SubCategoryScreen extends StatefulWidget {
-final   String id;
-final  String  name;
-final String selected;
-   const SubCategoryScreen({super.key,required this.id,required this.name,required this.selected});
+  final String id;
+  final String name;
+  final String selected;
+
+  const SubCategoryScreen(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.selected});
 
   @override
   State<SubCategoryScreen> createState() => _SubCategoryScreenState();
@@ -24,63 +32,62 @@ final String selected;
 class _SubCategoryScreenState extends State<SubCategoryScreen> {
   List<Map<String, dynamic>> FeaturesList = [
     {
-      "id":"1",
+      "id": "1",
       "upComing": "Chemistry",
       "imageConference": "assets/images/IndianConferences.png",
       "title": "30th ISCB International Conference (ISCBC-2025)",
       "subtitle":
-      "Theme: Current Trends in Chemical, Biological and Pharmaceutical Sciences: Impact on Health and Environment 2025-01-27 to 2025-01-29 ",
+          "Theme: Current Trends in Chemical, Biological and Pharmaceutical Sciences: Impact on Health and Environment 2025-01-27 to 2025-01-29 ",
       "organizationImage": "assets/images/conferencesOrganization.png",
       "organizationText": "Indian Society of Chemists and Biologists",
     },
     {
-      "id":"2",
+      "id": "2",
       "upComing": "Science Communication",
       "imageConference": "assets/images/conferencesOrganization1.png",
       "title": "Global Science Summit 2025",
       "subtitle":
-      "Theme: Innovations in Science and Technology for a Sustainable Future 2025-01-27 to 2025-01-29 ",
+          "Theme: Innovations in Science and Technology for a Sustainable Future 2025-01-27 to 2025-01-29 ",
       "organizationImage": "assets/images/conferencesOrganization.png",
       "organizationText": "Global Science Network",
     },
     {
-      "id":"3",
+      "id": "3",
       "upComing": "Chemistry",
       "imageConference": "assets/images/IndianConferences.png",
       "title": "30th ISCB International Conference (ISCBC-2025)",
       "subtitle":
-      "Theme: Current Trends in Chemical, Biological and Pharmaceutical Sciences: Impact on Health and Environment 2025-01-27 to 2025-01-29 ",
+          "Theme: Current Trends in Chemical, Biological and Pharmaceutical Sciences: Impact on Health and Environment 2025-01-27 to 2025-01-29 ",
       "organizationImage": "assets/images/conferencesOrganization.png",
       "organizationText": "Indian Society of Chemists and Biologists",
     },
     {
-      "id":"4",
+      "id": "4",
       "upComing": "Science Communication",
       "imageConference": "assets/images/conferencesOrganization1.png",
       "title": "Global Science Summit 2025",
       "subtitle":
-      "Theme: Innovations in Science and Technology for a Sustainable Future 2025-01-27 to 2025-01-29 ",
+          "Theme: Innovations in Science and Technology for a Sustainable Future 2025-01-27 to 2025-01-29 ",
       "organizationImage": "assets/images/conferencesOrganization.png",
       "organizationText": "Global Science Network",
     },
-  {
-      "id":"5",
+    {
+      "id": "5",
       "upComing": "Science Communication",
       "imageConference": "assets/images/conferencesOrganization1.png",
       "title": "Global Science Summit 2025",
       "subtitle":
-      "Theme: Innovations in Science and Technology for a Sustainable Future 2025-01-27 to 2025-01-29 ",
+          "Theme: Innovations in Science and Technology for a Sustainable Future 2025-01-27 to 2025-01-29 ",
       "organizationImage": "assets/images/conferencesOrganization.png",
       "organizationText": "Global Science Network",
     },
-
-
   ];
   String searchQuery = "";
   bool _isTextEmpty = true;
   final TextEditingController controllerText = TextEditingController();
   bool isLoggedIn = PrefUtils.getIsLogin();
   String roleSelection = PrefUtils.getRoleSelection();
+
   void _clearText() {
     controllerText.clear();
     setState(() {
@@ -93,7 +100,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
       //     .add(GetBillingListHandler("", pageNo, pageSize));
     });
   }
+
   Timer? _debounce;
+
   void _onSearchChanged(String value) {
     setState(() {
       _isTextEmpty = value.isEmpty;
@@ -111,12 +120,11 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
       //     GetBillingListHandler(searchQuery, pageNo, pageSize));
     });
   }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -144,8 +152,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: width * 0.02, vertical: 10),
+              padding:
+                  EdgeInsets.symmetric(horizontal: width * 0.02, vertical: 10),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -163,29 +171,30 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   controller: controllerText,
                   decoration: FormFieldStyle.searchDecoration.copyWith(
                     suffixIcon: _isTextEmpty
-                        ? const Icon(Icons.search,
-                        color: AppColors.appSky)
+                        ? const Icon(Icons.search, color: AppColors.appSky)
                         : IconButton(
-                      icon: const Icon(Icons.clear,
-                          color: AppColors.appSky),
-                      onPressed: _clearText,
-                    ),
+                            icon: const Icon(Icons.clear,
+                                color: AppColors.appSky),
+                            onPressed: _clearText,
+                          ),
                   ),
-                  onChanged:_onSearchChanged,
+                  onChanged: _onSearchChanged,
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: GridView.builder(
-
-               // Enable scroll for the GridView if necessary
+                // Enable scroll for the GridView if necessary
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.73,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 5// Two columns
-                ),
+                    crossAxisCount: 2,
+                    // childAspectRatio: 0.73,
+                    childAspectRatio: 0.73,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 5 // Two columns
+                    ),
                 itemCount: FeaturesList.length,
 
                 itemBuilder: (context, index) {
@@ -193,17 +202,14 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Container(
-
-
-                       // height: height * 0.45, // Set fixed height for each card
+                      // height: height * 0.45, // Set fixed height for each card
                       // width: height * 0.3, // Set fixed width for each card
                       decoration: BoxDecoration(
-
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
-                          bottomRight:Radius.circular(10),
+                          bottomRight: Radius.circular(10),
                           bottomLeft: Radius.circular(10),
                         ),
                       ),
@@ -219,7 +225,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                 ),
                                 child: Image.asset(
                                   conference["imageConference"],
-                                  height: height * 0.10, // Set image height to half of the card
+                                  height: height * 0.10,
+                                  // Set image height to half of the card
                                   width: double.infinity,
                                   fit: BoxFit.cover,
                                 ),
@@ -228,7 +235,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                 left: 0,
                                 top: 4,
                                 child: Container(
-                                  width: width/4,
+                                  width: width / 4,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(
@@ -240,7 +247,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                     padding: const EdgeInsets.all(7.0),
                                     child: Text(
                                       conference["upComing"],
-                                      style: FTextStyle.listTitle.copyWith(fontSize: 12),
+                                      style: FTextStyle.listTitle
+                                          .copyWith(fontSize: 12),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -279,59 +287,68 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                     height: 55,
                                     child: Text(
                                       conference["subtitle"],
-                                      style: FTextStyle
-                                          .listTitleSub
+                                      style: FTextStyle.listTitleSub
                                           .copyWith(fontSize: 13),
                                       maxLines: 3,
-                                      overflow:
-                                      TextOverflow.ellipsis,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       GestureDetector(
-                                        onTap:(){
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => MyConferenceDelegatesView(id:conference['id'] ,),
+                                              builder: (context) =>
+                                                  MyConferenceDelegatesView(
+                                                id: conference['id'],
+                                              ),
                                             ),
                                           );
-
-                            },
+                                        },
                                         child: Text(
                                           "View",
-                                          style: FTextStyle.loginBtnStyle.copyWith(fontSize: 13,color: Colors.blue,),
+                                          style:
+                                              FTextStyle.loginBtnStyle.copyWith(
+                                            fontSize: 13,
+                                            color: Colors.blue,
+                                          ),
                                         ),
                                       ),
-
-
                                       ElevatedButton(
                                         onPressed: () {
-
-
-                                          if (isLoggedIn==true) {
+                                          if (isLoggedIn == true) {
                                             _showEditDialog(
                                               context,
-                                              conference['id'].toString(), // Pass the selected ID for identification
-                                                  () {
+                                              conference['id'].toString(),
+                                              // Pass the selected ID for identification
+                                              () {
                                                 // Refresh callback after the dialog is closed
-                                                print("Dialog Closed, Refresh Callback");
-                                                print("loginStatus ${PrefUtils.getIsLogin()}");
+                                                print(
+                                                    "Dialog Closed, Refresh Callback");
+                                                print(
+                                                    "loginStatus ${PrefUtils.getIsLogin()}");
                                               },
-                                              conference['category'], // Initial category
+                                              conference[
+                                                  'category'], // Initial category
                                             );
-                                          }
-                                          else {
+                                          } else {
                                             print('Not Logged In');
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => DelegateRegister(
-                                                  title: conference["title"],
-                                                  selectedRole: widget.selected,
+                                                builder: (context) =>
+                                                    BlocProvider(
+                                                  create: (context) =>
+                                                      AuthFlowBloc(),
+                                                  child: DelegateRegister(
+                                                    title: conference["title"],
+                                                    selectedRole:
+                                                        widget.selected,
+                                                  ),
                                                 ),
                                               ),
                                             );
@@ -339,23 +356,23 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                         },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(30),
+                                            borderRadius:
+                                                BorderRadius.circular(30),
                                           ),
                                           backgroundColor: AppColors.appSky,
                                           elevation: 2,
                                           minimumSize: const Size(80, 30),
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
                                         ),
                                         child: Text(
                                           "Register",
-                                          style: FTextStyle.loginBtnStyle.copyWith(fontSize: 12),
+                                          style: FTextStyle.loginBtnStyle
+                                              .copyWith(fontSize: 12),
                                         ),
                                       )
-
-
                                     ],
                                   ),
-
                                 ],
                               ),
                             ),
@@ -370,16 +387,15 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
           ],
         ),
       ),
-
     );
   }
+
   void _showEditDialog(
-      BuildContext context,
-      String selectedIds, // Pass the selected ID for identifying the category
-      Function refreshCallback,
-      String? initialCategory, // Pass the initial category, allowing null
-      )
-  {
+    BuildContext context,
+    String selectedIds, // Pass the selected ID for identifying the category
+    Function refreshCallback,
+    String? initialCategory, // Pass the initial category, allowing null
+  ) {
     final formKey = GlobalKey<FormState>();
     String? selectedCategory = initialCategory;
 
@@ -416,7 +432,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                       children: [
                         Text(
                           "Choose a Category",
-                          style:FTextStyle.subtitle,
+                          style: FTextStyle.subtitle,
                         ),
                         const SizedBox(height: 12),
                         // Dropdown for Category Selection
@@ -433,7 +449,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                             return DropdownMenuItem(
                               value: category,
                               child: Container(
-                                constraints: const BoxConstraints(maxWidth: 200), // Set maximum width
+                                constraints: const BoxConstraints(
+                                    maxWidth: 200), // Set maximum width
                                 child: Text(
                                   category,
                                   style: FTextStyle.style,
@@ -444,8 +461,10 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                           }).toList(),
                           onChanged: (newValue) {
                             setState(() {
-                              selectedCategory = newValue; // Update selected value
-                              isButtonEnabled = true; // Always enable when dropdown is not empty
+                              selectedCategory =
+                                  newValue; // Update selected value
+                              isButtonEnabled =
+                                  true; // Always enable when dropdown is not empty
                             });
                           },
                           decoration: InputDecoration(
@@ -467,7 +486,6 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                             return null;
                           },
                         ),
-
                       ],
                     ),
                   ),
@@ -484,8 +502,10 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                       },
                       child: Text(
                         "Cancel",
-                        overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
-                        softWrap: true, // Enable text wrapping
+                        overflow: TextOverflow.ellipsis,
+                        // Add ellipsis for overflow
+                        softWrap: true,
+                        // Enable text wrapping
 
                         style: TextStyle(
                           fontSize: 16,
@@ -497,14 +517,14 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     ElevatedButton(
                       onPressed: isButtonEnabled
                           ? () async {
-                        if (formKey.currentState!.validate()) {
-                          print("Selected Category: $selectedCategory");
+                              if (formKey.currentState!.validate()) {
+                                print("Selected Category: $selectedCategory");
 
-                          // Refresh the UI after updating the category
-                          refreshCallback();
-                          Navigator.of(context).pop();
-                        }
-                      }
+                                // Refresh the UI after updating the category
+                                refreshCallback();
+                                Navigator.of(context).pop();
+                              }
+                            }
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isButtonEnabled
@@ -522,7 +542,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                         "Post",
                         style: TextStyle(
                           fontSize: 16,
-                          color: isButtonEnabled ? Colors.white : Colors.grey[600],
+                          color:
+                              isButtonEnabled ? Colors.white : Colors.grey[600],
                         ),
                       ),
                     ),

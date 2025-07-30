@@ -161,7 +161,7 @@ class _MyConferenceOrganizerState extends State<MyConferenceOrganizer>  {
                   ),
                 ],
               ),
-              child: TextFormField(
+              child:  TextFormField( style: const TextStyle(color: Colors.black),
                 controller: controllerText,
                 decoration: InputDecoration(
                   hintText: 'Search',

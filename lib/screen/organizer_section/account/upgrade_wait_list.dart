@@ -257,7 +257,7 @@ class _UpgradeWaitListState extends State<UpgradeWaitList> {
                       animationsMap['imageOnPageLoadAnimation2']!),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: TextFormField(
+                    child:  TextFormField( style: const TextStyle(color: Colors.black),
                       key: _wishlistKey,
                       focusNode: _wishlistFocusNode,
                       controller: wishlistController,
@@ -282,7 +282,7 @@ class _UpgradeWaitListState extends State<UpgradeWaitList> {
             
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: TextFormField(
+                    child:  TextFormField( style: const TextStyle(color: Colors.black),
                       key: _delegateNumberKey,
                       focusNode: _delegateNumberFocusNode,
                       controller: delegateNumberController,

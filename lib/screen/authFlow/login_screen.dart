@@ -230,34 +230,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 PrefUtils.setUserId(roleId);
                 // _navigateBasedOnRole(roleUser);
 
-
-                if (widget.selectedRole == 'isselect organizer') {
-                  setState(() {
-                    PrefUtils.setIsLogin(true);
-                    PrefUtils.setRoleSelection(widget.selectedRole);
-                  });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,),
-                    ),
-                  );
-                }
-
-                else {
-                  setState(() {
-                    PrefUtils.setIsLogin(true);
-                    PrefUtils.setRoleSelection("isselect delegate");
-                  });
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          HomeDelegates( selectedRole: widget.selectedRole,),
-                    ),
-                  );
-                }
+                //
+                // if (widget.selectedRole == 'isselect organizer') {
+                //   setState(() {
+                //     PrefUtils.setIsLogin(true);
+                //     PrefUtils.setRoleSelection(widget.selectedRole);
+                //   });
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) =>
+                //           OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,),
+                //     ),
+                //   );
+                // }
+                //
+                // else {
+                //   setState(() {
+                //     PrefUtils.setIsLogin(true);
+                //     PrefUtils.setRoleSelection("isselect delegate");
+                //   });
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) =>
+                //           HomeDelegates( selectedRole: widget.selectedRole,),
+                //     ),
+                //   );
+                // }
 
               }
               }
@@ -688,7 +688,7 @@ class _LoginScreenState extends State<LoginScreen> {
     Widget nextPage;
 
     switch (role) {
-      case 'isselect delegates':
+      case 'delegates':
         nextPage = BlocProvider(
           create: (context) => AllDelegatesBloc(),
           child: HomeDelegates( selectedRole: widget.selectedRole,),
@@ -696,7 +696,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Replace with your Admin screen widget
         break;
 
-      case 'isselect organizer':
+      case 'organizer':
         nextPage =  OrganizerHomePage(selectedRole: widget.selectedRole, isOrganizer: false,);// Repl
 
         // Replace with your User screen widget

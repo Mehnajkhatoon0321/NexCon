@@ -325,7 +325,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _firstConferenceKey,
                         focusNode: _firstConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -366,7 +366,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _conferenceThemeKey,
                         focusNode: _conferenceThemeFocusNode,
                         keyboardType: TextInputType.name,
@@ -412,7 +412,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                                   animationsMap['imageOnPageLoadAnimation2']!),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                child: TextFormField(
+                                child:  TextFormField( style: const TextStyle(color: Colors.black),
                                   key: _dateBirthConferenceKey,
                                   focusNode: _dateBirthConferenceFocusNode,
                                   keyboardType: TextInputType.text,
@@ -466,7 +466,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                                   animationsMap['imageOnPageLoadAnimation2']!),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                child: TextFormField(
+                                child:  TextFormField( style: const TextStyle(color: Colors.black),
                                   key: _dateToConferenceKey,
                                   focusNode: _dateToConferenceFocusNode,
                                   keyboardType: TextInputType.text,
@@ -518,7 +518,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _gstConferenceKey,
                         focusNode: _gstConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -557,7 +557,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _nameVenueConferenceKey,
                         focusNode: _nameVenueConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -596,7 +596,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: addressVenueConferenceKey,
                         focusNode: addressVenueConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -635,7 +635,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: organizationNameConferenceKey,
                         focusNode: organizationNameConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -674,7 +674,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: contactPersoneConferenceKey,
                         focusNode: contactPersoneConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -713,7 +713,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _mobileKey,
                         focusNode: _mobileFocusNode,
                         keyboardType: TextInputType.number,
@@ -749,7 +749,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Text("${Constants.emailLabel}", style: FTextStyle.SubHeadingTxtStyle),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _emailConferenceKey,
                         focusNode: _emailConferenceFocusNode,
                         keyboardType: TextInputType.emailAddress,
@@ -847,7 +847,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _websiteNumberConferenceKey,
                         focusNode: _websiteNumberConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -884,7 +884,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                       animationsMap['imageOnPageLoadAnimation2']!,
                     ),
                     const SizedBox(height: 10),
-                    TextFormField(
+                     TextFormField( style: const TextStyle(color: Colors.black),
                       readOnly: true,
                       key: _uploadNameKey,
                       focusNode: _uploadNameNode,
@@ -947,7 +947,7 @@ class _ConferenceRegisterHereState extends State<ConferenceRegisterHere> {
                       animationsMap['imageOnPageLoadAnimation2']!,
                     ),
                     const SizedBox(height: 10),
-                    TextFormField(
+                     TextFormField( style: const TextStyle(color: Colors.black),
                       readOnly: true,
                       key: _uploadConferenceNameKey,
                       focusNode: _uploadConferenceNameNode,

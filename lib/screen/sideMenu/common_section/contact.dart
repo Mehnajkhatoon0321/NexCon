@@ -11,6 +11,7 @@ import 'package:nexcon/utils/form_field_style.dart';
 
 import 'package:nexcon/utils/pref_utils.dart';
 import 'package:nexcon/utils/validator_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -189,7 +190,11 @@ class _ContactScreenState extends State<ContactScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Phone: ",style: FTextStyle.listTitleSub,),
-                      Text("+91 8090367090",style: FTextStyle.listTitle,),
+                      GestureDetector(
+                        onTap: () => _launchPhone("+918090367090"),
+                        child: Text("+91 8090367090", style: FTextStyle.listTitle.copyWith(color: AppColors.appSky)),
+                      ),
+
                     ],
 
                   ),
@@ -198,7 +203,11 @@ class _ContactScreenState extends State<ContactScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Email: ",style: FTextStyle.listTitleSub,),
-                      Text("ravi@smartconference.in",style: FTextStyle.listTitle,),
+                      GestureDetector(
+                        onTap: () => _launchEmail("ravi@smartconference.in"),
+                        child: Text("ravi@smartconference.in", style: FTextStyle.listTitle.copyWith(color: AppColors.appSky)),
+                      ),
+
                     ],
 
                   ),
@@ -220,7 +229,8 @@ class _ContactScreenState extends State<ContactScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Phone: ",style: FTextStyle.listTitleSub,),
-                      Text("+91 9935237183",style: FTextStyle.listTitle,),
+                      GestureDetector(         onTap: () => _launchPhone("91 9935237183"),
+                          child: Text("+91 9935237183",style: FTextStyle.listTitle.copyWith(color: AppColors.appSky),)),
                     ],
 
                   ),
@@ -229,7 +239,8 @@ class _ContactScreenState extends State<ContactScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Email: ",style: FTextStyle.listTitleSub,),
-                      Text("support@smartconference.in",style: FTextStyle.listTitle,),
+                      GestureDetector(  onTap: () => _launchEmail("support@smartconference.in"),
+                          child: Text("support@smartconference.in",style: FTextStyle.listTitle.copyWith(color: AppColors.appSky),)),
                     ],
 
                   ),
@@ -255,7 +266,8 @@ class _ContactScreenState extends State<ContactScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Phone: ",style: FTextStyle.listTitleSub,),
-                      Text("+91 9935237183",style: FTextStyle.listTitle,),
+                      GestureDetector( onTap: () => _launchPhone("+91 9935237183"),
+                          child: Text("+91 9935237183",style: FTextStyle.listTitle.copyWith(color: AppColors.appSky),)),
                     ],
 
                   ),
@@ -264,7 +276,8 @@ class _ContactScreenState extends State<ContactScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Email: ",style: FTextStyle.listTitleSub,),
-                      Text("support@smartconference.in",style: FTextStyle.listTitle,),
+                      GestureDetector(onTap: () => _launchEmail("support@smartconference.in"),
+                          child: Text("support@smartconference.in",style: FTextStyle.listTitle.copyWith(color: AppColors.appSky),)),
                     ],
 
                   ),
@@ -276,7 +289,7 @@ class _ContactScreenState extends State<ContactScreen> {
             Divider(height: 1,thickness: 1.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
-              child: Text("Regd. Office:",style: FTextStyle.headingMiddle,),
+              child: Text("Register Office:",style: FTextStyle.headingMiddle,),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10),
@@ -627,5 +640,27 @@ class _ContactScreenState extends State<ContactScreen> {
     _mobileFocusNode.unfocus();
     _emailFocusNode.unfocus();
     _messageFocusNode.unfocus();
+  }
+
+}
+void _launchPhone(String phoneNumber) async {
+  final Uri url = Uri(scheme: 'tel', path: phoneNumber);
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    // Could show a snackbar or error dialog
+    print("Could not launch phone dialer");
+  }
+}
+
+void _launchEmail(String email) async {
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: email,
+  );
+  if (await canLaunchUrl(emailLaunchUri)) {
+    await launchUrl(emailLaunchUri);
+  } else {
+    print("Could not launch email app");
   }
 }

@@ -309,7 +309,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _firstConferenceKey,
                         focusNode: _firstConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -350,7 +350,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _conferenceThemeKey,
                         focusNode: _conferenceThemeFocusNode,
                         keyboardType: TextInputType.name,
@@ -396,7 +396,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                                   animationsMap['imageOnPageLoadAnimation2']!),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                child: TextFormField(
+                                child:  TextFormField( style: const TextStyle(color: Colors.black),
                                   key: _dateBirthConferenceKey,
                                   focusNode: _dateBirthConferenceFocusNode,
                                   keyboardType: TextInputType.text,
@@ -450,7 +450,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                                   animationsMap['imageOnPageLoadAnimation2']!),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                child: TextFormField(
+                                child:  TextFormField( style: const TextStyle(color: Colors.black),
                                   key: _dateToConferenceKey,
                                   focusNode: _dateToConferenceFocusNode,
                                   keyboardType: TextInputType.text,
@@ -502,7 +502,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _gstConferenceKey,
                         focusNode: _gstConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -541,7 +541,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _nameVenueConferenceKey,
                         focusNode: _nameVenueConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -580,7 +580,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: addressVenueConferenceKey,
                         focusNode: addressVenueConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -619,7 +619,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: organizationNameConferenceKey,
                         focusNode: organizationNameConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -658,7 +658,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: contactPersoneConferenceKey,
                         focusNode: contactPersoneConferenceFocusNode,
                         keyboardType: TextInputType.name,
@@ -697,7 +697,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _mobileKey,
                         focusNode: _mobileFocusNode,
                         keyboardType: TextInputType.number,
@@ -733,7 +733,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Text("${Constants.emailLabel}", style: FTextStyle.SubHeadingTxtStyle),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _emailConferenceKey,
                         focusNode: _emailConferenceFocusNode,
                         keyboardType: TextInputType.emailAddress,
@@ -765,7 +765,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         keyboardType: TextInputType.visiblePassword,
                         key: _passwordConferenceKey,
                         focusNode: _passwordConferenceFocusNode,
@@ -891,7 +891,7 @@ class _MyConferenceOrganizerEditState extends State<MyConferenceOrganizerEdit>  
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
+                      child:  TextFormField( style: const TextStyle(color: Colors.black),
                         key: _websiteNumberConferenceKey,
                         focusNode: _websiteNumberConferenceFocusNode,
                         keyboardType: TextInputType.name,

@@ -73,6 +73,15 @@ static void setRoleSelection(String value) {
     return int.tryParse(value ?? '') ?? 0;
   }
 
+  static void setConferenceListCache(String jsonString) {
+    Prefs.prefs?.setString(SharedPrefsKeys.conferenceListCacheKey, jsonString);
+  }
+
+  static String getConferenceListCache() {
+    final String? value = Prefs.prefs?.getString(SharedPrefsKeys.conferenceListCacheKey);
+    return value ?? '';
+  }
+
 }
 
 class SharedPrefsKeys {
@@ -84,4 +93,5 @@ class SharedPrefsKeys {
   static const userEmailLogin = 'userEmailLogin';
   static const isLogin = 'isLogin';
   static const userId = 'userId';
+  static const conferenceListCacheKey = 'conferenceListCache';
 }

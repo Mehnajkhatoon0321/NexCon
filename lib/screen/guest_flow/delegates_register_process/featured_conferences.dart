@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nexcon/api_services/all_module_role/commons_api/auth_flow/auth_flow_bloc.dart';
+import 'package:nexcon/api_services/all_module_role/delegates_api_services/all_delegates/all_delegates_bloc.dart';
 
 import 'package:nexcon/screen/authFlow/delegate_register.dart';
 import 'package:nexcon/screen/delegates_section/nab_bar/my_conference_delegates/my_conference_delegates_view.dart';
@@ -572,10 +575,13 @@ class _FeaturedConferencesState extends State<FeaturedConferences> {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => DelegateRegister(
+                                                  builder: (context) => BlocProvider(
+  create: (context) => AuthFlowBloc(),
+  child: DelegateRegister(
                                                     title: conference["title"],
                                                     selectedRole: widget.selectedRole,
                                                   ),
+),
                                                 ),
                                               );
                                             },

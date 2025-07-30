@@ -69,7 +69,7 @@ class _SideMenuScreenState extends State<SideMenuScreen>
     {'icon': Icons.price_change, 'subtitle': 'Plans & Pricing'},
 
     {'icon': Icons.contact_mail, 'subtitle': 'Contact'},
-    {'icon': Icons.contact_mail, 'subtitle': 'Disclaimer'},
+    {'icon': Icons.security, 'subtitle': 'Disclaimer'},
     // {'icon': Icons.password, 'subtitle': 'Change Password'},
     {'icon': Icons.login, 'subtitle': 'Login'},
 

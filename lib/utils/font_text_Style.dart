@@ -156,7 +156,31 @@ class FTextStyle {
      fontWeight: FontWeight.w400,
     color: Colors.white,
   );
+  static TextStyle cardTitleBlack = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.black87,
+  );
 
+  // Black subtitle / secondary text
+  static TextStyle cardSubtitleBlack = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Colors.black54,
+  );
+
+  // Optional: White variants if you use dark background cards
+  static TextStyle cardTitleWhite = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+
+  static TextStyle cardSubtitleWhite = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Colors.white70,
+  );
   static TextStyle emailProfile = TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 14.sp,

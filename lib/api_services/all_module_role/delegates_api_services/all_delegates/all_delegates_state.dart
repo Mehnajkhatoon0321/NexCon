@@ -28,12 +28,26 @@ final class AllDelegatesExceptionFailure extends AllDelegatesState {
 
 }
 
+
+
 // My Conference List
+class ConferenceSuccess extends AllDelegatesState {
+  final dynamic logResponse;
+  final bool isCachedData;
 
-final class ConferenceSuccess extends AllDelegatesState {
-  final Map<String ,dynamic> logResponse;
-  ConferenceSuccess(this.logResponse);
+  ConferenceSuccess(this.logResponse, {this.isCachedData = false});
+}
 
+//Inactive Conference
+
+class ConferenceInActive extends AllDelegatesState{
+  final dynamic inActiveConference;
+  ConferenceInActive(this.inActiveConference);
+}
+
+final class AllInActiveFailure extends AllDelegatesState{
+  final String error;
+  AllInActiveFailure(this.error);
 }
 
 

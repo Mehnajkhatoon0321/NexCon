@@ -75,5 +75,66 @@ class AuthFlowBloc extends Bloc<AuthFlowEvent, AuthFlowState> {
         developer.log("Error during login: $e");
       }
     });
+   //delegates register
+    on<RegisterDelegateEventHandler>((event, emit) async {
+      if (await ConnectivityService.isConnected()) {
+        emit(AuthFlowLoading());
+        try {
+          developer.log("Requesting create: ${Uri.parse(APIEndPoints.delegatesRegister)}");
+
+          final requestData = json.encode({
+            "conference_id": event.conferenceId,
+            "title": event.title,
+            "name": event.name,
+            "last_name": event.lastName,
+            "delegate_category_id": event.delegateCategoryId,
+            "mobile": event.mobile,
+            "email": event.email,
+            "dob": event.dob,
+            "gender": event.gender,
+            "password": event.password,
+            "password_confirmation": event.passwordConfirmation,
+            "role_id": event.roleId,
+            "country": event.country,
+            "city": event.city,
+          });
+
+          final response = await http.post(
+            Uri.parse(APIEndPoints.delegatesRegister),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: requestData,
+          );
+
+          if (response.statusCode == 200) {
+            final responseData = jsonDecode(response.body);
+            emit(DelegatesRegisterSuccess(responseData));
+            developer.log("Delegate registration successful: $responseData");
+          } else {
+            String errorMessage = "Registration failed";
+
+            try {
+              final errorData = jsonDecode(response.body);
+              errorMessage = errorData["message"] ?? errorMessage;
+            } catch (_) {}
+
+            emit(DelegatesRegisterFailure(errorMessage));
+            developer.log("Registration failed: ${response.statusCode}, message: $errorMessage");
+          }
+        } on SocketException catch (e) {
+          emit(AuthServerFailure("Network Error: ${e.message}"));
+          developer.log("Network error: ${e.message}");
+        } catch (e) {
+          emit(AuthServerFailure("Unexpected Error: $e"));
+          developer.log("General error: $e");
+        }
+      } else {
+        emit(CheckNetworkLoginConnection("No internet connection"));
+      }
+    });
+
+
+
   }
 }

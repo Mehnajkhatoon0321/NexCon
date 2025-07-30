@@ -72,6 +72,7 @@ class MyApp extends StatelessWidget {
               bodyLarge: FTextStyle.body,
               titleMedium: FTextStyle.subheading,
               bodySmall: FTextStyle.label,
+
             ),
             inputDecorationTheme: InputDecorationTheme(
               filled: true,
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
                 borderSide: const BorderSide(color: AppColors.formFieldBorderColour),
               ),
               hintStyle: FTextStyle.formhintTxtStyle,
+
               errorStyle: FTextStyle.formErrorTxtStyle,
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(

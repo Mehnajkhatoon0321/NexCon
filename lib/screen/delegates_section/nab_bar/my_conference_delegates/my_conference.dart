@@ -67,6 +67,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
 
 
   Timer? _debounce;
+  bool _hasFetchedInitialData = false;
 
   void _onSearchChanged(String value) {
     setState(() {
@@ -95,11 +96,14 @@ class _MyConferencePageState extends State<MyConferencePage> {
       });
     });
 
-    BlocProvider.of<AllDelegatesBloc>(context)
-        .add(ConferenceListHandler("", pageNo, pageSize));
+    // BlocProvider.of<AllDelegatesBloc>(context)
+    //     .add(ConferenceListHandler("", pageNo, pageSize));
     paginationCall();
   }
-  void paginationCall() {
+
+  void paginationCall()
+
+  {
     controller.addListener(() {
       if (controller.position.pixels == controller.position.maxScrollExtent) {
         if (!isLoading && hasMoreData) {
@@ -280,7 +284,8 @@ class _MyConferencePageState extends State<MyConferencePage> {
                     isInitialLoading = true;
 
                   });
-                } else if (state is ConferenceSuccess) {
+                }
+                else if (state is ConferenceSuccess) {
                   setState(() {
                     var responseData = state.logResponse['list'];
                     int totalItemCount = responseData["total"];
@@ -299,7 +304,11 @@ class _MyConferencePageState extends State<MyConferencePage> {
                       hasMoreData = false;
                     }
                   });
-                } else if (state is CheckNetworkConnection) {
+                }
+
+
+
+                else if (state is CheckNetworkConnection) {
 
 
                   setState(() {
@@ -390,6 +399,7 @@ class _MyConferencePageState extends State<MyConferencePage> {
     if (checkInternetAvailable != null && checkInternetAvailable!.isNotEmpty) {
       return NoNetworkWidget();
           }
+
     if (errorMessage != null || errorServerMessage.isNotEmpty) {
       return CustomErrorWidget(message: errorMessage ?? errorMessage);
     }

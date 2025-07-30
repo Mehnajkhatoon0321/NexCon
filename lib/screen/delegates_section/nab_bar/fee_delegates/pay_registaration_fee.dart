@@ -627,57 +627,60 @@ class _PayRegistrationFeeState extends State<PayRegistrationFee> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: "I accept ",
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                      fontSize: 13, color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: "Terms & Conditions",
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                      fontSize: 13, color: Colors.red),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const TermCondition(),
-                                        ),
-                                      );
-                                    },
-                                ),
-                                TextSpan(
-                                  text: " and ",
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                      fontSize: 13, color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: "Privacy Policy",
-                                  style: FTextStyle.listTitleSub.copyWith(
-                                      fontSize: 13, color: Colors.red),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      // Action to view registration fee
-                                      // For example, navigate to another page or open a link
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const PrivacyPolicy(),
-                                        ),
-                                      );
-                                    },
-                                ),
-                              ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: Expanded(
+                          child: Container(
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "I accept ",
+                                    style: FTextStyle.listTitleSub.copyWith(
+                                        fontSize: 13, color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: "Terms & Conditions",
+                                    style: FTextStyle.listTitleSub.copyWith(
+                                        fontSize: 13, color: Colors.red),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const TermCondition(),
+                                          ),
+                                        );
+                                      },
+                                  ),
+                                  TextSpan(
+                                    text: " and ",
+                                    style: FTextStyle.listTitleSub.copyWith(
+                                        fontSize: 13, color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: "Privacy Policy",
+                                    style: FTextStyle.listTitleSub.copyWith(
+                                        fontSize: 13, color: Colors.red),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        // Action to view registration fee
+                                        // For example, navigate to another page or open a link
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const PrivacyPolicy(),
+                                          ),
+                                        );
+                                      },
+                                  ),
+                                ],
+                              ),
+                            ).animateOnPageLoad(
+                              animationsMap['imageOnPageLoadAnimation2']!,
                             ),
-                          ).animateOnPageLoad(
-                            animationsMap['imageOnPageLoadAnimation2']!,
                           ),
                         ),
                       ),

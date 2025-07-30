@@ -179,7 +179,7 @@ class _MyOrderState extends State<MyOrder> {
               ),
             ],
           ),
-          child: TextFormField(
+          child:  TextFormField( style: const TextStyle(color: Colors.black),
             controller: controllerText,
             decoration: InputDecoration(
               hintText: 'Search',

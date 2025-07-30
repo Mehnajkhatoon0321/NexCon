@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexcon/utils/colours.dart';
 
 import '../../../../utils/font_text_Style.dart' show FTextStyle;
 class Disclaimer extends StatefulWidget {
@@ -42,6 +43,17 @@ Some external links may produce information that you may find objectionable, ina
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: AppColors.appSky,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 28,
+          ), // Menu icon
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title:  Text("Disclaimer",  style: FTextStyle.HeadingTxtWhiteStyle,), centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -51,8 +63,8 @@ Some external links may produce information that you may find objectionable, ina
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Services We Offer", style: FTextStyle.headingMiddle),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text("Services We Offer", style: FTextStyle.HeadingTxtStyle),
             ),
             Text(
               disclaimerText,

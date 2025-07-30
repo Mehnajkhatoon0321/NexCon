@@ -345,7 +345,7 @@ class _HomePageState extends State<HomePage>
           },
         ),
         title: Text(
-          'Home Page',
+          'Home',
           style: FTextStyle.HeadingTxtWhiteStyle,
         ),
         // Title of the app bar

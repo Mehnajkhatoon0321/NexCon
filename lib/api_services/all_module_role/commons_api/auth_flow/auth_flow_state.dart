@@ -32,3 +32,18 @@ class CheckNetworkLoginConnection extends AuthFlowState {
   final String errorMessage;
   CheckNetworkLoginConnection(this.errorMessage);
 }
+//Delegates Register
+final class DelegatesRegisterSuccess extends AuthFlowState {
+  final Map<String ,dynamic> delegatesRegisterSuccess;
+
+
+  DelegatesRegisterSuccess(this.delegatesRegisterSuccess);
+
+}
+
+final class DelegatesRegisterFailure extends AuthFlowState {
+
+  final String failureMessage;
+  DelegatesRegisterFailure(this.failureMessage);
+
+}
