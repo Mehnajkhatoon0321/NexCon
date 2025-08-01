@@ -261,6 +261,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               }
               }
+
             }
 
           else if (state is LogFailure) {
