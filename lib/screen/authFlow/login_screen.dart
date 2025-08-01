@@ -267,7 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
           else if (state is LogFailure) {
             setState(() {
               isLoading = false;
-            });
+            });c
 
             CommonPopups.showCustomPopup(context, state.failureMessage);
 
